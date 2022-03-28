@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class MemberController {
+public class BoardController {
 	
-	@RequestMapping(value = "/main/main", method = RequestMethod.GET)
-	public String main() {
-		return "main/main";
+	@RequestMapping(value = "/findboard/list", method = RequestMethod.GET)
+	public String findBoard() {
+		return "findboard/list";
 	}
-	
 }

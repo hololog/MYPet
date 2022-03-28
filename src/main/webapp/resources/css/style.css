@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+body {
+    padding-top: 135px;
+	background-color:  #f8f9fa !important; 
+	
+}
+a {
+    text-decoration: none !important;
+    color: #3f51b5 !important;
+}
+.sub-title{
+    margin: 80px auto;
+    color: #3f51b5;
+    font-weight: bold;
+    text-align: center;
+}
+#divider {
+    color: #3f51b5;
+}
+/* 네비게이션 바 그림자 */
+header > nav {
+    /* background-color: mediumpurple; */
+    box-shadow: 0 1px 3px #3f51b5;
+}
+#footer {
+    background-color: #3f51b5;
+    height: 350px;
+    padding-top: 70px;
+}
+.title {
+    color: #3f51b5;
+}
+/* -------------------------------------------------------------- */
+/* find_board */
+#find-board {
+    /* border: 2px solid #3f51b5; */
+    /* box-shadow: 1px 1px 8px #3f51b5; */
+}
+#finder-photo {
+    box-shadow: 1px 1px 8px #3f51b5;
+}
+#btn_eh { 
+    background-color: #3f51b5;
+    color: aliceblue;
+}
+#find-info-ksk li{
+  list-style: none;
+}
+.float_eh {
+    float:right;
+}
+/* 지도 크기 조절 */
+#map-ksk{
+  /* display: none; */
+  width: 100%;
+  height: 790px;
+}
+#map-frame-ksk{
+  position: sticky;
+  top: 133px;
+}
+@media screen and (max-width: 768px){
+  #map-ksk{ 
+    display: none;
+    /* width: 100%;
+    height: 200px;     */
+  }
+}
+@media screen and (max-width: 990px){
+  #map-ksk{ 
+    width: 100%;
+    height: 350px;  
+    padding: 0%;  
+  }
+}  
+@media screen and (max-width: 990px){
+  #map-ksk{ 
+    width: 100%;
+    height: 350px;  
+    padding: 0%;  
+  }
+} 
+
