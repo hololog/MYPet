@@ -47,6 +47,6 @@
       </div>
     </div>
   </div>
-  <p class="p-3 text-center">Copyright &copy; PetFinder 2022</p>
+  <p class="p-3 text-center">Copyright &copy; MyPet 2022</p>
 </footer>
 <!-- footer 종료 -->

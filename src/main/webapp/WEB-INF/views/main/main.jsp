@@ -29,7 +29,7 @@
     <!-- header 종료 -->
 
     <!-- ------------------------------- -->
-    <!-- 본문 시작-->
+    <!-- 본문 시작 -->
     <!-- ------------------------------- -->
     <!-- 이미지 슬라이드 시작 -->
     <section id="slider" class="carousel slide" data-bs-ride="carousel">
@@ -106,13 +106,12 @@
 
     <!-- 갤러리 -->
     <section class="container">
-      <div class="py-5">
-<!--         <h1 class="title text-center m-3 p-3">최근 공고</h1> -->
-        <h1 class="sub-title">최근 공고</h1>
+      <div>
+        <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1>
         <div class="d-flex justify-content-end">
           <a href="find_borad.html">더보기</a> 
         </div>
-        <hr id="divider" />
+        <hr>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
           <div class="col">
             <div class="card">
@@ -236,7 +235,7 @@
     <!-- 갤러리 끝 -->
 
     <!-- 중간 캠페인 시작-->
-    <section class="campaign my-5">
+    <section class="campaign" style="margin: 80px auto;">
       <p class="campaign-text">
         거리의 <br>
         동물들에게 <br>  
@@ -248,10 +247,8 @@
 
     <!-- 공동구매 소개 시작 -->
     <section class="container py-3">
-<!--       <h1 class="title text-start mt-3 p-3">진행중인 공동구매</h1> -->
-      <h1 class="sub-title">진행중인 공동구매</h1>
-      
-      <hr class="d-sm-block" id="divider" />
+      <h1 class="title text-start mt-3 p-3">진행중인 공동구매</h1>
+      <hr class="my-5">
       <div class="row">
         <!-- 가로 12등분 -->
         <div class="col-sm-5">
@@ -287,9 +284,8 @@
 
     <!-- ABOUT US -->
     <section class="container py-3" id="main-about-ksk">
-<!--       <h1 class="title text-end mt-3 p-3">ABOUT US</h1> -->
-      <h1 class="sub-title">ABOUT US</h1>
-      <hr class="d-sm-block" id="divider" />
+      <h1 class="title text-end mt-3 p-3">ABOUT US</h1>
+      <hr class="my-5">
       <div class="row">
         <div class="col-sm-8">
           <p>

@@ -14,8 +14,8 @@
       </h1>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-      <a class="p-1 btn" href="#">LOGIN</a>
-      <a class="p-1 btn" href="#">SIGN UP</a>
+      <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
+      <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">SIGN UP</a>
     </div>
   </div>
   <!-- 네이게이션바 -->
@@ -34,10 +34,20 @@
           style="justify-content: space-evenly">
           <div class="navbar-nav px-5 col-md-12 nav justify-content-around">
               <a class="nav-link" id="nav-fboard-ksk" href="${pageContext.request.contextPath }/findboard/list">실종공고</a>
-              <a class="nav-link" id="nav-freeboard-ksk" href="#">자유게시판</a>
+              <!-- 드롭다운메뉴 시작 -->
+              <div class="dropdown">
+                <a class="nav-link dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                  게시판
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                  <li><a class="dropdown-item" href="#">자유/나눔게시판</a></li>
+                  <li><a class="dropdown-item" href="#">꿀팁/입양후기</a></li>
+                </ul>
+              </div>
+              <!-- 드롭다운메뉴 종료 -->
               <a class="nav-link" id="nav-buy-ksk" href="#">공동구매</a>
-              <a class="nav-link" id="nav-event-ksk" href="#">공지</a>
-              <a class="nav-link" id="nav-about-ksk" href="main.html#main-about-ksk">ABOUT US</a>
+              <a class="nav-link" id="nav-event-ksk" href="#">공지사항</a>
+              <a class="nav-link" id="nav-about-ksk" href="${pageContext.request.contextPath }/main/main#main-about-ksk">ABOUT US</a>
           </div>
       </div>
     </div>
