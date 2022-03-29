@@ -40,13 +40,10 @@
                   게시판
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-<<<<<<< Updated upstream
-                  <li><a class="dropdown-item" href="#">자유/나눔게시판</a></li>
-                  <li><a class="dropdown-item" href="#">꿀팁/입양후기</a></li>
-=======
+
                   <li><a class="dropdown-item" href="${pageContext.request.contextPath }/freeboard/free_jau">자유/나눔게시판</a></li>
                   <li><a class="dropdown-item" href="${pageContext.request.contextPath }/freeboard/free_tip">꿀팁/입양후기</a></li>
->>>>>>> Stashed changes
+
                 </ul>
               </div>
               <!-- 드롭다운메뉴 종료 -->
