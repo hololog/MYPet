@@ -40,8 +40,8 @@
                   게시판
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                  <li><a class="dropdown-item" href="#">자유/나눔게시판</a></li>
-                  <li><a class="dropdown-item" href="#">꿀팁/입양후기</a></li>
+                  <li><a class="dropdown-item" href="../freeboard/free_jau.html">자유/나눔게시판</a></li>
+                  <li><a class="dropdown-item" href="../freeboard/free_tip.html">꿀팁/입양후기</a></li>
                 </ul>
               </div>
               <!-- 드롭다운메뉴 종료 -->
