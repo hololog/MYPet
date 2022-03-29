@@ -11,4 +11,19 @@ public class BoardController {
 	public String findBoard() {
 		return "findboard/list";
 	}
+	//세히
+	@RequestMapping(value = "/freeboard/free_jau", method = RequestMethod.GET)
+	public String freeBoard() {
+		return "freeboard/free_jau";
+	}
+	//세히
+	@RequestMapping(value = "/freeboard/free_tip", method = RequestMethod.GET)
+	public String freeTipBoard() {
+		return "freeboard/free_tip";
+	}
+	//세히
+		@RequestMapping(value = "/gongji/gongji", method = RequestMethod.GET)
+		public String gongjiBoard() {
+			return "gongji/gongji";
+		}
 }
