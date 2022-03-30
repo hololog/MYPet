@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>write_find</title>
+
+	<title>write_find</title>
     <!-- css스타일 적용 -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/main.css" />
@@ -12,107 +13,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- 부트스트랩 아이콘 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-   
-    <!-- 파일 드래그&드롭 관련 라이브러리-->
-    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
-    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <style>
-        .dn{display:none;}
-        .db{display:block;overflow:hidden}
-        .previewImg{width:110px; height: 110px; margin-left:5px; border: solid 1px;}
-        .imgClass{width: 110px;float:left;margin-right:10px }
-        .imgDelBtn{width: 110px; margin-left: 5px; margin-bottom: 5px;}
-    </style>
-    <!-- 파일 드래그&드롭 관련 라이브러리 끝-->
-    
-    <script>
-        $(function (){
-            fileDropDown();    // 함수 실행
-        });
-
-    function fileDropDown(){
-        
-           var dropZone = $("#dropZone");
-           
-        dropZone.on('dragenter',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            dropZone.css('background-color','#E3F2FC');
-        });
-        dropZone.on('dragleave',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            dropZone.css('background-color','#FFFFFF');
-        });
-        dropZone.on('dragover',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            dropZone.css('background-color','#E3F2FC');
-        }); 
-        dropZone.on('drop',function(e){
-            e.preventDefault();
-            dropZone.css('background-color','#FFFFFF');
-            var files = e.originalEvent.dataTransfer.files;	//fileList객체 (file drop시 생성되는 파일 리스트)
-        });
-      }
-      </script>
 
 </head>
   <body  class="bg-light">
             <!-- header 시작-->
-            <header class="fixed-top bg-white">
-                <!-- 로고 + 로그인/회원가입 버튼 -->
-                <div class="row py-3 mx-3">
-                    <div class="col-4"></div>
-                    <div class="col-4 d-flex justify-content-center align-items-center">
-                        <h1>
-                           <a href="main.html"><i class="bi bi-emoji-smile" style="color: #3f51b5;">Logo</i></a> 
-                        </h1>
-                    </div>
-                    <div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                        <a class="p-1 btn" style="color: #3f51b5;" href="#">LOGIN</a>
-                        <a class="p-1 btn" style="color: #3f51b5;" href="#">SIGN UP</a>
-                    </div>
-                </div>
-                <!-- 네이게이션바 -->
-                    <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
-                        <div class="container-fluid">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
-                                <!-- <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" aria-current="page" href="#">실종공고</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#">자유게시판</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#">공동구매</a>
-                                    </li>   
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#">이벤트</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="#">ABOUT US</a>
-                                    </li>
-                                </ul> -->
-                                <div class="navbar-nav px-5">
-                                    <a class="nav-link" href="find_borad.html">실종공고</a>
-                                    <a class="nav-link" href="#">자유게시판</a>
-                                    <a class="nav-link" href="#">공동구매</a>
-                                    <a class="nav-link" href="#">이벤트</a>
-                                    <a class="nav-link" href="#">ABOUT US</a>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>                
-            </header> 
+          
             <!-- header 종료 -->
             <!-- ------------------------------- -->
-            <!-- 본문 시작-->
+            <!-- 본문 시작 -->
             <!-- ------------------------------- -->
             
             <div class="container p-5">
@@ -128,19 +36,10 @@
                     <input type="hidden" value="date">
 
                     <div class="row g-5">
-                        <!--파일 미리보기 img-->
-                        <!-- <hr>
-                        <div class="col-sm-12 col-md-12 col-lg-6 order-lg-last p-5">
-                            <h6 class="text-center p-3"><i>*반려동물의 사진을 첨부해주세요</i></h6> -->
-                            <!--첨부 파일 이미지 미리보기. 업로드 전 no image 보여주기-->
-                            <!-- <img src="img/dog1.jpg" class="img-thumbnail mb-3" alt="파일미리보기"> -->
-                            <!--다중 파일 첨부-->
-                            <!-- <div class="mb-3">
-                                <label for="multipleFile_eh">*파일첨부는 최대 xx장까지 가능합니다.</label>
-                                <input type="file" class="form-control mb-3" id="multipleFile_eh" multiple>
-                            </div> -->
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6 p-5">
+                         <!--왼쪽여백-->
+                        <div class="col-md-1 col-lg-3"></div>
+                        <!--작성 form-->
+                        <div class="col-md-10 col-lg-6">
                             <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
                             <div class="row">
                                 <div class="col form-check form-switch mb-3" id="switch_eh">
@@ -243,14 +142,15 @@
                                 <div id="imgDiv" class="dn"></div>
                                 <small style="color: gray; font-size: 13px;">업로드 가능 이미지 확장자 ( gif, jpeg, jpg, png, bmp )</small>
                             </div>
-                          
-                        
+
                             <!--submit 버튼-->
                             <div class="text-center p-2">
                                 <input type="submit" id="btn_eh" name="submit"> 
                                 <input type="button" id="btn_eh" name="cancel" value="cancel"> <!--클릭시 메인으로-->
                             </div>
                         </div>
+                        <!--오른쪽여백-->
+                        <div class="col-md-1 col-lg-3"></div>
                     </div>
                 </form>
             </div>

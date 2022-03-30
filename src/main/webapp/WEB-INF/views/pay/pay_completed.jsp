@@ -8,289 +8,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>결제 페이지</title>
     <!-- css스타일 적용 -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
     <!-- 부트스트랩 적용 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- 부트스트랩 아이콘 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
   </head>
-  <body class="bg-light">
+  <body>
     <div>
       <!-- header 시작 -->
-      <header class="fixed-top bg-white">
-        <!-- 로고 + 로그인/회원가입 버튼 -->
-        <div class="row py-3 mx-3">
-          <div class="col-4"></div>
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <h1>
-              <a href="main.html"><i class="bi bi-emoji-smile" style="color: #3f51b5;">Logo</i></a>
-            </h1>
-          </div>
-          <div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-            <a class="p-1 btn" style="color: #3f51b5;" href="#">LOGIN</a>
-            <a class="p-1 btn" style="color: #3f51b5;" href="#">SIGN UP</a>
-          </div>
-        </div>
-        <!-- 네이게이션바 -->
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <div class="navbar-nav px-5">
-                <a class="nav-link" href="find_borad.html">실종공고</a>
-                <a class="nav-link" href="#">자유게시판</a>
-                <a class="nav-link" href="#">공동구매</a>
-                <a class="nav-link" href="#">이벤트</a>
-                <a class="nav-link" href="#">ABOUT US</a>
-              </div>
+	  <jsp:include page="../inc/top.jsp"></jsp:include>
+   	  <!-- header 종료 -->
+   	 
+
+      <div class="container">
+                <div class="container-fluid" style="text-align: center; font-family:fantasy;">
+                    <table class="table table-responsive ">
+                       		<br>
+                            <div class="sub-title" style="color: #3f51b5;">
+                                <h3>결제가 완료되었습니다.</h3>
+                            </div>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container-fluid" style="text-align: center;">
+                    <table class="table table-responsive ">
+                        <tr>
+                            <div style="color: #3f51b5;">
+                                <h5>주문 내용</h5>
+                            </div>
+                        </tr>
+                    </table>
+                    <table class="table table-responsive col-4">
+                        <tr >
+                            <td>주문번호</td>
+                            <td>20220324001</td>
+                            <!--주문날짜 + 001~ -->
+                        </tr>
+                        <tr>
+                            <td>주문날짜</td>
+                            <td>20220324</td>
+                        </tr>
+                        <tr>
+                            <td>상품번호</td>
+                            <td>1a</td>
+                        </tr>
+                    </table>
+                   <a href="${pageContext.request.contextPath }/main/main">
+                        <button type="button" class="btn btn-outline-secondary">
+                            메인페이지로
+                        </button>
+                   </a>
+                </div>
             </div>
-          </div>
-        </nav>
-      </header>
-      <!-- header 종료 -->
-
-
-
-      <div class="container-fluid">
-      <div style="text-align: center; font-family:fantasy;">
-        
-        <table class="table table-responsive border border-2" style="text-align: left;">
-          <br>
-          <br>
-          <br>
-          <tr>
-            <h3 style= "color: #3f51b5;">배송정보</h3> 
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>수령인</td>    
-            <td><input type="text"></textarea></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>상품명</td>   
-            <td>양말</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>주문수량</td>
-            <td>2</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>주문금액</td>
-            <td>30,000원</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>주소</td>
-            <td><input type="text" name="" id="" readonly><input type="button" value="주소찾기"></td>
-            <td></td>
-            <td></td>
-
-           </tr>
-          <tr>            
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>상세주소 </td>
-            <td><input type="text" name="" id="" ></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>전화번호</td>
-            <td><input type="text" name="" id="" ></td>
-            <td></td>
-            <td></td>
-          </tr>
-
-        </table>
-      </div>
       
-    
-    </div>  
-      <br>
-      <br>
-      <br>
-      <br>
-
-          <!-- 결제방식 선택 -->
-        <div class="" style="text-align: center;" >
-          <div>
-            <button type="button" name="pay_now" class="btn btn-success"> 구매하기 </button>
-             <a href="Pay_Accept_Before.html"><button type="button" class="btn" style="background-color: red;"> 취소하기 </button> </a> 
-          </div>
-        </div>
-        <br>
-       
-      
-      <!-- footer 시작 -->
-      <footer class="text-white mt-5" id="footer">
-        <div class="container-fluid d-flex justify-content-around">
-          <div class="widget">
-            <div class="widget-header">
-              <h3><strong>Info</strong> </h3>
-            </div>
-            <div class="widget-body">
-              <ul>
-                <li>이용약관</li>
-                <li>상호명 : </li>
-                <li>주소 : </li>
-              </ul>
-            </div>
-          </div>
-            <div class="widget">
-              <div class="widget-header">
-                <h3><strong>Contact Us</strong> </h3>
-              </div>
-              <div class="widget-body">
-                <ul>
-                  <li>문의전화</li>
-                  <li>080-1234-4567</li>
-                  <li></li>
-                </ul>
-              </div>
-            </div>
-            <div class="widget">
-              <div class="widget-header">
-                <h3><strong>Follow Us</strong> </h3>
-              </div>
-              <div class="widget-body">
-                <ul>
-                  <li>페이스북</li>
-                  <li>인스타</li>
-                  <li>트위터</li>
-                </ul>
-              </div>
-            </div>
-        </div>
-        <p class="p-3 text-center">Copyright &copy; PetFinder 2022</p>
-      </footer>
+     
+ 	 <!-- footer 시작 -->
+  	<jsp:include page="../inc/bottom.jsp"></jsp:include>
     <!-- footer 종료 -->
-    </div>
+    
+ 	 </div>	
 
     <!--스크립트 적용 -->
     <script src="js/main.js"></script>

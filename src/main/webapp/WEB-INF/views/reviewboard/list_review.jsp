@@ -334,7 +334,7 @@
                   </div>
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='write.html'">글쓰기</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button>
                   </div>
                   <!-- 다음버튼 -->
                   <div class="text-center">
