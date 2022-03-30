@@ -27,13 +27,21 @@
             <br>
             <br>
             <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <div style="font-family:fantasy; text-align: center;">
                 <h1>창경야옹실록 양말</h1>
             </div>
             <div style="font-family:fantasy; text-align: center; color: #3f51b5; ">
                 <h2>공동구매 진행중!(1/100)</h2>
             </div>
-            <div>
+            
                 <br>
                 <br>
                 <br>
@@ -45,9 +53,10 @@
                         <div class="col-6">
                             <div>
                                 <img
-                                    src="img/1060dbe08b937cbbe29cf6c9b1bfe278.png"
+                               		
+                                    src="${pageContext.request.contextPath }/resources/img/1060dbe08b937cbbe29cf6c9b1bfe278.png"
                                     class="img-responsive"
-                                    alt="sea"
+                                    alt="product"
                                     style="max-width: 100%;height: auto; float: left;">
                             </div>
                         </div>
@@ -106,15 +115,15 @@
                     <h1 style="text-align: center;">상세 페이지 영역</h1>
                     <div class="col-12" style="text-align: center;">
                         <img
-                            src="img/1060dbe08b937cbbe29cf6c9b1bfe278.png"
+                            src="${pageContext.request.contextPath }/resources/img/1060dbe08b937cbbe29cf6c9b1bfe278.png"
                             class="img-responsive"
-                            alt="sea">
+                            alt="product_details">
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>
+    
 
       
       
