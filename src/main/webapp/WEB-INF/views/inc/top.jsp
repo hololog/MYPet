@@ -14,7 +14,8 @@
       </h1>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-      <a class="p-1 btn" href="/member/loginmodal.jsp" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
+      <a class="p-1 btn" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
+<%--       <a class="p-1 btn" onclick="fnloginmodal('${test.id }')">LOGIN</a> --%>
       <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">SIGN UP</a>
     </div>
   </div>
@@ -56,9 +57,23 @@
   </nav>
 </header>
 
+<script>
+	$(window).scroll(fuction(){
+// 		let value =  window.scrollY;
+// 		console.log("scrollY", value);
+		$(#login-modal).modal()
+	});
+	
+	window.addEventListener("scroll", function(){
+		let value = window.scrollY;
+		console.log("스크롤", value);
+	});
+</script>
+
+
 <!-- 모달창 시작 -->
     <!-- 로그인 -->
-    <div class="modal py-5" tabindex="-1" role="dialog" id="login-modal">
+    <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
           <!-- Modal Header -->
