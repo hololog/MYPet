@@ -27,10 +27,8 @@
       <div class="container">
                 <div class="container-fluid" style="text-align: center; font-family:fantasy;">
                     <table class="table table-responsive ">
-                        <br>
-                        <br>
-                        <tr>
-                            <div style="color: #3f51b5;">
+                       		<br>
+                            <div class="sub-title" style="color: #3f51b5;">
                                 <h3>결제가 완료되었습니다.</h3>
                             </div>
                         </tr>
