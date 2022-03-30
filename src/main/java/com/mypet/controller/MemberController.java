@@ -12,4 +12,10 @@ public class MemberController {
 		return "main/main";
 	}
 	
+//	@RequestMapping(value = "/loginmodal", method = RequestMethod.GET)
+//	public String test() {
+//		return "member/loginmodal";
+//	}
+	
+
 }
