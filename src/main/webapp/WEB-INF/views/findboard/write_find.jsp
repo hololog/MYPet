@@ -13,52 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- 부트스트랩 아이콘 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-   
-    <!-- 파일 드래그&드롭 관련 라이브러리-->
-    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
-    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <style>
-        .dn{display:none;}
-        .db{display:block;overflow:hidden}
-        .previewImg{width:110px; height: 110px; margin-left:5px; border: solid 1px;}
-        .imgClass{width: 110px;float:left;margin-right:10px }
-        .imgDelBtn{width: 110px; margin-left: 5px; margin-bottom: 5px;}
-    </style>
-    <!-- 파일 드래그&드롭 관련 라이브러리 끝-->
-    
-    <script>
-        $(function (){
-            fileDropDown();    // 함수 실행
-        });
-
-    function fileDropDown(){
-        
-           var dropZone = $("#dropZone");
-           
-        dropZone.on('dragenter',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            dropZone.css('background-color','#E3F2FC');
-        });
-        dropZone.on('dragleave',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            dropZone.css('background-color','#FFFFFF');
-        });
-        dropZone.on('dragover',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            dropZone.css('background-color','#E3F2FC');
-        }); 
-        dropZone.on('drop',function(e){
-            e.preventDefault();
-            dropZone.css('background-color','#FFFFFF');
-            var files = e.originalEvent.dataTransfer.files;	//fileList객체 (file drop시 생성되는 파일 리스트)
-            
-        });
-      }
-      </script>
+ 
 
 </head>
   <body  class="bg-light">
