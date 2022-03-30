@@ -41,14 +41,14 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
 
-                  <li><a class="dropdown-item" href="${pageContext.request.contextPath }/freeboard/free_jau">자유/나눔게시판</a></li>
-                  <li><a class="dropdown-item" href="${pageContext.request.contextPath }/freeboard/free_tip">꿀팁/입양후기</a></li>
+                  <li><a class="dropdown-item" href="${pageContext.request.contextPath }/freeboard/list_free">자유/나눔게시판</a></li>
+                  <li><a class="dropdown-item" href="${pageContext.request.contextPath }/reviewboard/list_review">꿀팁/입양후기</a></li>
 
                 </ul>
               </div>
               <!-- 드롭다운메뉴 종료 -->
               <a class="nav-link" id="nav-buy-ksk" href="#">공동구매</a>
-              <a class="nav-link" id="nav-event-ksk" href="${pageContext.request.contextPath }/gongji/gongji">공지사항</a>
+              <a class="nav-link" id="nav-event-ksk" href="${pageContext.request.contextPath }/notice/list_notice">공지사항</a>
               <a class="nav-link" id="nav-about-ksk" href="${pageContext.request.contextPath }/main/main#main-about-ksk">ABOUT US</a>
           </div>
       </div>
