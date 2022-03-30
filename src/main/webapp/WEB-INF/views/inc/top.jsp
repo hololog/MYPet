@@ -14,7 +14,7 @@
       </h1>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-      <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
+      <a class="p-1 btn" href="/member/loginmodal.jsp" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
       <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">SIGN UP</a>
     </div>
   </div>
