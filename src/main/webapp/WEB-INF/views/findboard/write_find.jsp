@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
     <title>write_find</title>
     <!-- css스타일 적용 -->
     <link rel="stylesheet" href="css/style.css" />
@@ -55,7 +54,6 @@
             e.preventDefault();
             dropZone.css('background-color','#FFFFFF');
             var files = e.originalEvent.dataTransfer.files;	//fileList객체 (file drop시 생성되는 파일 리스트)
-            
         });
       }
       </script>
@@ -124,7 +122,6 @@
             <div class="container p-2">
                 <!--파일첨부 포함된 form 태그이므로 enctype=multipart/form-data -->
                 <form action="" method="post" enctype="multipart/form-data">
-
                     <!--작성자 닉네임 가져오기.....필요한가?-->
                     <input type="hidden" value="" name="nickname">
                     <!--작성 date 가져오기 timestamp-->
@@ -264,13 +261,12 @@
             <!-- footer 시작 -->
 
 	         <!-- footer 종료 -->
-       
+      
 
         <!--스크립트 적용 -->
         <script src="js/main.js"></script>
         <!-- 부트스트랩 스크립트 적용 -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 
 </body>
 </html>
