@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PayController {
 	
 	@RequestMapping(value = "/pay/product_details", method = RequestMethod.GET)
-	public String main() {
+	public String product_details() {
 		return "pay/product_details";
 	}
 	
+	@RequestMapping(value = "/pay/pay_processing", method = RequestMethod.GET)
+	public String pay_processing() {
+		return "pay/pay_processing";
+	}
+	
+	@RequestMapping(value = "/pay/pay_completed", method = RequestMethod.GET)
+	public String pay_completed() {
+		return "pay/pay_completed";
+	}
 }
 

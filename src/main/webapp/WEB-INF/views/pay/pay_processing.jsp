@@ -21,102 +21,60 @@
 	<jsp:include page="../inc/top.jsp"></jsp:include>
    	  <!-- header 종료 -->
 
+			<br><br><br><br>
+     		<br><br><br><br>
+            <div class="container">
+                <div style="text-align: center; font-family:fantasy;">
 
+                    <table class="table table-responsive" style="text-align: right;">
 
-      <!-- 제품이미지 -->
-            <br>
-            <br>
-            <br>
-            <br>
-            <div style="font-family:fantasy; text-align: center;">
-                <h1>창경야옹실록 양말</h1>
-            </div>
-            <div style="font-family:fantasy; text-align: center; color: #3f51b5; ">
-                <h2>공동구매 진행중!(1/100)</h2>
-            </div>
-            <div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="container border">
-                    <div class="row">
-                        <div class="col-6">
-                            <div>
-                                <img
-                                    src="img/1060dbe08b937cbbe29cf6c9b1bfe278.png"
-                                    class="img-responsive"
-                                    alt="sea"
-                                    style="max-width: 100%;height: auto; float: left;">
-                            </div>
-                        </div>
-                        <div class="col-6" style="text-align: left;">
-                            <table >
-                                <tr>
-                                    <td>제품명 :
-                                    </td>
-                                    <td>창경야옹실록 양말
-                                    </td>
-                                    <tr>
-                                        <td>판매가 :
-                                        </td>
-                                        <td>15,000원</td>
-                                    </tr>
-                                    <tr>
-                                        <td>배송비 :
-                                        </td>
-                                        <td>3,000원(50,000원 이상 구매 시 무료)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>수량(최소주문수량 1개 이상) :
-                                        </td>
-                                        <td>
-                                            <input type="text" name="QTY" value="1" style="border:none; text-align:right;">개
-                                            <button onclick='count("plus")' class="btn btn-default btn-sm">+</button>
-                                            <button onclick='count("minus")' class="btn btn-default btn-sm">-</button>
-                                        </td>
+                        <tr>
+                            <h3 style="color: #3f51b5;">배송정보</h3>
+                        </tr>
+                        <tr>
+                            <td>수령인</td>
+                            <td style="text-align: center;"><input type="text"></td>
+                            <td></td>
 
-                                    </tr>
-                                </div>
-                                <tr>
-                                    <td>총 상품금액 :
-                                    </td>
-                                    <td><input
-                                        type="text"
-                                        name=""
-                                        value="15,000"
-                                        readonly="readonly"
-                                        style="border:none; text-align:right;">원</td>
-
-                                </tr>
-                            </tr>
-                        </table>
-                        <!-- 결제방식 선택 -->
-                        <div class="row" style="text-align: center;">
-                            <div>
-                                <button type="button" name="pay_now" class="btn btn-success">
-                                    구매하기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 상세페이지 영역! -->
-                    <!-- 더미데이터-->
-                    <h1 style="text-align: center;">상세 페이지 영역</h1>
-                    <div class="col-12" style="text-align: center;">
-                        <img
-                            src="img/1060dbe08b937cbbe29cf6c9b1bfe278.png"
-                            class="img-responsive"
-                            alt="sea">
-                    </div>
+                        </tr>
+                        <tr>
+                            <td>상품명</td>
+                            <td style="text-align: center;">양말</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>주문수량</td>
+                            <td style="text-align: center;">2</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>주문금액</td>
+                            <td style="text-align: center;">30,000원</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>주소</td>
+                            <td style="text-align: center;"><input type="text" name="" id="" readonly="readonly"></td>
+                            <td style="text-align: left;"><input type="button" value="주소찾기"></td>
+                        </tr>
+                        <tr>
+                            <td>상세주소</td>
+                            <td style="text-align: center;"><input type="text" name="" id=""></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>전화번호</td>
+                            <td style="text-align: center;"><input type="text" name="" id=""></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
 
-        </div>
-    </div>
-       
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
       
       
 	<!-- footer 시작 -->

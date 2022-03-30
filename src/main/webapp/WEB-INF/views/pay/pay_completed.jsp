@@ -20,7 +20,7 @@
       <!-- header 시작 -->
 	<jsp:include page="../inc/top.jsp"></jsp:include>
    	  <!-- header 종료 -->
-
+		<br><br><br><br><br><br>
 
 
       <div class="container">
