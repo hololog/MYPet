@@ -9,12 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>결제 페이지</title>
     <!-- css스타일 적용 -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
     <!-- 부트스트랩 적용 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- 부트스트랩 아이콘 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+    
   </head>
   <body>
     <div>

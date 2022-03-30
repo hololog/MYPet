@@ -8,21 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>결제 페이지</title>
     <!-- css스타일 적용 -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
     <!-- 부트스트랩 적용 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- 부트스트랩 아이콘 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+    
+    
   </head>
   <body>
     <div>
       <!-- header 시작 -->
 	<jsp:include page="../inc/top.jsp"></jsp:include>
    	  <!-- header 종료 -->
-
-			<br><br><br><br>
-     		<br><br><br><br>
+		<br>
             <div class="container">
                 <div style="text-align: center; font-family:fantasy;">
 
@@ -71,11 +73,22 @@
                 </div>
 
             </div>
+           
             <br>
+      	 <!-- 결제방식 선택 -->
+            <div class="" style="text-align: center;">
+                <div>
+                    <button type="button" name="pay_now" class="btn btn-success">
+                        구매하기
+                    </button>
+                    <a href="Pay_Accept_Before.html">
+                        <button type="button" class="btn">
+                            취소하기
+                        </button>
+                    </a>
+                </div>
+            </div>
             <br>
-            <br>
-            <br>
-      
       
 	<!-- footer 시작 -->
   	<jsp:include page="../inc/bottom.jsp"></jsp:include>
