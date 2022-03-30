@@ -11,6 +11,7 @@ public class BoardDTO {
 	private String content;
 	private int readcount;
 	private Timestamp date;
+	private int like_count;
 	//첨부파일
 	private String file;
 		
@@ -62,6 +63,12 @@ public class BoardDTO {
 	}
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+	public int getLike_count() {
+		return like_count;
+	}
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
 	}
 	
 }

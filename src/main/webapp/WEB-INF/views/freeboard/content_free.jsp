@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,18 +55,25 @@
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+            
+            <c:if test="${ ! empty sessionScope.id }">
+
+				<c:if test="${sessionScope.id eq boardDTO.name}">
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">수정</button>
+                onclick="location.href='${pageContext.request.contextPath }/freeboard/listUpdate_free?num=${boardDTO.num}'">수정</button>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">삭제</button>
+                onclick="location.href='${pageContext.request.contextPath }/freeboard/listdelete_free?num=${boardDTO.num}'">삭제</button>
+                </c:if>
+	
+			</c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">목록</button>
+                onclick="location.href='${pageContext.request.contextPath }/freeboard/list_free'">목록</button>
         </div>
         <!-- 수정삭제 목록 버튼 끝 -->
 
@@ -185,22 +193,17 @@
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum leo
-                    risus, nec efficitur ipsum congue sed. Cras congue aliquet purus, in mattis nunc
-                    varius sed. Suspendisse augue risus, porta in lectus eu, facilisis gravida eros.
-                    Nulla efficitur purus quis convallis maximus. In tempor lacinia dolor a
-                    malesuada. Quisque magna mauris, lobortis non urna nec, rutrum accumsan massa.
-                    Praesent sapien mauris, dictum id ultricies quis, vulputate at quam. Integer eu
-                    iaculis urna, id imperdiet sapien. Vivamus dolor purus, tincidunt non volutpat
-                    sed, maximus ullamcorper augue. Aliquam et consectetur justo, non ornare diam.
-                    Proin quis urna erat. Mauris sodales, diam sed maximus cursus, justo enim
-                    rhoncus ipsum, sit amet ultrices libero lorem sed odio. Ut nec sem fermentum,
-                    posuere lectus a, tincidunt enim. Donec elementum nisl vel nibh rhoncus
-                    eleifend. Aliquam ut auctor diam. Quisque in mauris pulvinar, iaculis magna vel,
-                    imperdiet lectus. Nam eu porttitor erat. Curabitur et euismod risus, a rhoncus
-                    libero. Curabitur blandit accumsan tortor a scelerisque.
-                </p>
+                <table id="notice">
+				<tr><td>글번호</td><td>${boardDTO.num}</td>
+				     <td>글쓴날짜</td><td>${boardDTO.date}</td></tr>
+				<tr><td>글쓴이</td><td>${boardDTO.name}</td>
+				    <td>조회수</td><td>${boardDTO.readcount}</td></tr>
+				<tr><td>글제목</td><td colspan="3">${boardDTO.subject}</td></tr>
+				<tr><td>파일</td><td colspan="3">
+				<a href="${pageContext.request.contextPath }/resources/upload/${boardDTO.file}" download>
+				${boardDTO.file}</a></td></tr>
+				<tr><td>글내용</td><td colspan="3">${boardDTO.content}</td></tr>
+				</table>
             </div>
         </div>
         <!-- 글끝 -->
@@ -211,10 +214,32 @@
                 class="btn btn-primary"
                 role="button"
                 style="color: white"
+                 data-toggle="modal"
+                 data-target="#exampleModal"
                 onclick="report()">제보하기</span>
             <p class="arrow_box">연락수단 확인하고 글쓴이에게 제보하기!</p>
         </div>
         <!-- 제보버튼 끝 -->
+        <!-- Modal -->
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
         <!-- <div class="row">-->
         <!-- <div class="col-md-12 col-xl-8">-->
