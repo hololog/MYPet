@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
      <!-- font awesome -->
   <script src="https://kit.fontawesome.com/203a25fbbd.js" crossorigin="anonymous"></script>
-    <title>자유게시판/리스트</title>
+    <title>공지사항</title>
 
     
     
@@ -33,7 +33,7 @@
 	
         <!-- 제목 시작 -->
        <div class="container">
-            <h1 class="sub-title">자유</h1>
+            <h1 class="sub-title">공지사항</h1>
             <hr>
         </div>
        <!-- 제목 종료 -->
@@ -333,8 +333,9 @@
                     </div>
                   </div>
                   <!-- 글쓰기버튼 -->
+                  
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='write.html'">글쓰기</button>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
                   <!-- 다음버튼 -->
                   <div class="text-center">
