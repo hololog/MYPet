@@ -27,11 +27,7 @@
    	  
       <!-- 제품이미지 -->
             
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+           
             <br>
             <br>
             <div style="font-family:fantasy; text-align: center;">
@@ -41,10 +37,7 @@
                 <h2>공동구매 진행중!(1/100)</h2>
             </div>
             
-                <br>
-                <br>
-                <br>
-                <br>
+               
                 <br>
                 <br>
                 <div class="container">

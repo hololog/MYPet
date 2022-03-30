@@ -81,7 +81,7 @@
                     <button type="button" name="pay_now" class="btn btn-success">
                         구매하기
                     </button>
-                    <a href="Pay_Accept_Before.html">
+                    <a href="${pageContext.request.contextPath }/pay/product_details">
                         <button type="button" class="btn">
                             취소하기
                         </button>
