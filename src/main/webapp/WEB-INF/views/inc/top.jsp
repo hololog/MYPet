@@ -40,7 +40,7 @@
                   게시판
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-
+                  
                   <li><a class="dropdown-item" href="${pageContext.request.contextPath }/freeboard/list_free">자유/나눔게시판</a></li>
                   <li><a class="dropdown-item" href="${pageContext.request.contextPath }/reviewboard/list_review">꿀팁/입양후기</a></li>
 
