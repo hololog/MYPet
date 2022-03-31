@@ -20,4 +20,6 @@ public interface BoardService {
 	public void updateBoard(BoardDTO boardDTO);
 	
 	public void deleteBoard(int num);
+	
+	public void insert_findboard(BoardDTO boardDTO);
 }
