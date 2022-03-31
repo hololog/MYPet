@@ -17,7 +17,7 @@ public class BoardDAOImpl implements BoardDAO{
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace="com.mypet.mappers.boardMapper";
+	private static final String namespace="com.mypet.mappers.freeboardMapper";
 
 	@Override
 	public void write_freeBoard(BoardDTO boardDTO) {
