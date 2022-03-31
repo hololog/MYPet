@@ -13,7 +13,7 @@
 		select max(num) from freeboard
 	</select>
 	
-	<select id="getfreeBoardList" resultType="com.itwillbs.domain.BoardDTO">
+	<select id="getfreeBoardList" resultType="com.mypet.domain.BoardDTO">
 		select * from freeboard order by num desc limit #{startRow},#{pageSize}
 	</select>
 	
@@ -21,7 +21,7 @@
 		select count(*) from freeboard
 	</select>
 	
-	<select id="getfreeBoard" resultType="com.itwillbs.domain.BoardDTO">
+	<select id="getfreeBoard" resultType="com.mypet.domain.BoardDTO">
 		select * from freeboard where num=#{num}
 	</select>
 	
