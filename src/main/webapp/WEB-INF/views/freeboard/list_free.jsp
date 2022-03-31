@@ -96,15 +96,15 @@
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
                             <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}"><li class="page-item"><a class="page-link" href="#">◁</a></li></a>
+							<a ><li class="page-item"><a class="page-link" href="href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}"">◁</a></li></a>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${i}"> <li class="page-item"><a class="page-link" href="#">${i}</a></li></a>
+							<a> <li class="page-item"><a class="page-link" href=" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${i}"">${i}</a></li></a>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> <li class="page-item"><a class="page-link" href="#">▷</a></li></a>
+							<a > <li class="page-item"><a class="page-link" href="href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"">▷</a></li></a>
 							</c:if>
                         </ul>
                   </div>

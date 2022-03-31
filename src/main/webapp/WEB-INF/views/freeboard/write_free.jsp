@@ -89,7 +89,8 @@
         <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
           등   록          
         </button>
-        <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;  ">
+        <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;  "
+        onclick="location.href='${pageContext.request.contextPath }/freeboard/list_free'">
           목록가기         
         </button>
       </div> 

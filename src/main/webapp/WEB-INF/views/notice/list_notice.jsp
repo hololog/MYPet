@@ -94,16 +94,21 @@
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
                   </c:if>
-                  <!-- 다음버튼 -->
+                 <!-- 다음버튼 -->
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
-                            <li class="page-item"><a class="page-link" href="#">◁</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">▷</a></li>
+                            
+                            <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}"><li class="page-item"><a class="page-link" href="#">◁</a></li></a>
+							</c:if>
+							
+							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${i}"> <li class="page-item"><a class="page-link" href="#">${i}</a></li></a>
+							</c:forEach>
+							
+							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> <li class="page-item"><a class="page-link" href="#">▷</a></li></a>
+							</c:if>
                         </ul>
                   </div>
                </div>
