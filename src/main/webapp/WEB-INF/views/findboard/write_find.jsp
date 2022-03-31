@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 	<title>write_find</title>
 	<!-- css스타일 적용 -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" />
@@ -21,17 +22,20 @@
             <!-- ------------------------------- -->
             <!-- 본문 시작 -->
             <!-- ------------------------------- -->
+           <!-- 제목 시작 -->
+			<div class="container">
+			  <h1 class="sub-title">실종공고</h1>
+			  <hr>
+			</div>
+			<!-- 제목 종료 -->
             <div class="container p-5">
-                    <h1 class="title text-center p-3"><b>실종공고</b></h1>
-                    <!-- <h6 class="text-center">실종 동물의 정보를 입력해 주세요</h6> -->
-                </div>
-            <div class="container p-2">
+            
                 <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" enctype="multipart/form-data">
-                    <!--작성자 닉네임 가져오기.....필요한가?-->
-                    <input type="hidden" value="" name="nickname">
+                    <!--작성자 닉네임 가져오기-->
+                    <input type="hidden" name="nickname" value="${sessionScope.id}">
                     <!--작성 date 가져오기 timestamp-->
                     <input type="hidden" value="date">
-
+                    
                     <div class="row g-5">
                          <!--왼쪽여백-->
                         <div class="col-md-1 col-lg-3"></div>
@@ -156,7 +160,7 @@
             <!-- 본문 종료-->
             <!-- ------------------------------- -->
             <!-- footer 시작 -->
-
+       	  <jsp:include page="../inc/bottom.jsp"></jsp:include>
 	         <!-- footer 종료 -->
       
 

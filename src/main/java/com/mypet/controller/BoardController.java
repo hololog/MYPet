@@ -224,7 +224,7 @@ public class BoardController {
 	public String write_findBoard() {
 		return "findboard/write_find";
 	}
-	@RequestMapping(value = "/findboard/writePro", method = RequestMethod.POST)
+	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
 	public String write_find(BoardDTO boardDTO) {
 		boardService.insert_findboard(boardDTO);
 		return "findboard/write_find";

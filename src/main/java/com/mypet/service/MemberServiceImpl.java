@@ -8,10 +8,8 @@ import com.mypet.dao.MemberDAO;
 import com.mypet.domain.MemberDTO;
 
 @Service
-<<<<<<< Updated upstream
 public class MemberServiceImpl implements MemberService{
-=======
-public class MemberServiceImpl implements MemberService {
+
 
 	@Inject
 	private MemberDAO memberDAO;
@@ -22,6 +20,5 @@ public class MemberServiceImpl implements MemberService {
 		//등록일은 DB에서?
 		
 	}
->>>>>>> Stashed changes
 
 }
