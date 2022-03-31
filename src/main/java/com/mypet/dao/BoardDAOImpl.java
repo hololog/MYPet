@@ -20,7 +20,7 @@ public class BoardDAOImpl implements BoardDAO{
 	private static final String namespace="com.itwillbs.mappers.boardMapper";
 
 	@Override
-	public void writeBoard(BoardDTO boardDTO) {
+	public void write_freeBoard(BoardDTO boardDTO) {
 		sqlSession.insert(namespace+".writeBoard", boardDTO);
 		
 	}

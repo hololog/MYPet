@@ -8,7 +8,7 @@ import com.mypet.domain.PageDTO;
 
 public interface BoardDAO {
 
-	public void writeBoard(BoardDTO boardDTO);
+	public void write_freeBoard(BoardDTO boardDTO);
 
 	public Integer getMaxNum();
 	

@@ -7,7 +7,7 @@ import com.mypet.domain.PageDTO;
 
 public interface BoardService {
 	
-	public void writeBoard(BoardDTO boardDTO);
+	public void write_freeBoard(BoardDTO boardDTO);
 	
 	public List<BoardDTO> getBoardList(PageDTO pageDTO);
 	

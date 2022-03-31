@@ -19,9 +19,9 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 
 	@Override
-	public void writeBoard(BoardDTO boardDTO) {
+	public void write_freeBoard(BoardDTO boardDTO) {
 		boardDTO.setDate(new Timestamp(System.currentTimeMillis()));
-		boardDAO.writeBoard(boardDTO);
+		boardDAO.write_freeBoard(boardDTO);
 	}
 	
 	@Override
