@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mypet.domain.MemberDTO;
 import com.mypet.service.MemberService;
 
 @Controller
@@ -25,7 +26,16 @@ public class MemberController {
 //	}
 	
 	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
-	public String loginPro() {
+	public String loginPro(MemberDTO memberDTO, HttpSession session) {
+		MemberDTO userCheckDTO = memberService.userCheck(memberDTO);
+		
+		return "redirect:/main/main";
+	}
+
+	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
+	public String insertMemberPro(MemberDTO memberDTO) {
+		
+		memberService.insertMember(memberDTO);
 		return "redirect:/main/main";
 	}
 
