@@ -1,5 +1,5 @@
 package com.mypet.service;
 
-public class MemberService {
+public interface MemberService {
 
 }
