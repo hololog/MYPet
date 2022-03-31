@@ -1,5 +1,18 @@
 package com.mypet.dao;
 
-public class MemberDAO {
+import com.mypet.domain.MemberDTO;
+<<<<<<< Updated upstream
 
+public interface MemberDAO {
+	
+	public void login(MemberDTO memberDTO);
+	
+	
+=======
+>>>>>>> Stashed changes
+
+public interface MemberDAO {
+	
+	public void insertMember(MemberDTO memberDTO);
+	
 }

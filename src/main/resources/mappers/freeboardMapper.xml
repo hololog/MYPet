@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.mypet.mappers.freeboardMapper">
+	<insert id="writefreeBoard">
+		insert into freeboard(num,pass,name,subject,content,readcount,date,file) 
+		values(#{num},#{pass},#{name},#{subject},#{content},#{readcount},#{date},#{file})
+	</insert>
+	
+	<select id="getfreeMaxNum" resultType="java.lang.Integer">
+		select max(num) from freeboard
+	</select>
+	
+	<select id="getfreeBoardList" resultType="com.mypet.domain.BoardDTO">
+		select * from freeboard order by num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getfreeBoardCount" resultType="java.lang.Integer">
+		select count(*) from freeboard
+	</select>
+	
+	<select id="getfreeBoard" resultType="com.mypet.domain.BoardDTO">
+		select * from freeboard where num=#{num}
+	</select>
+	
+	<update id="updatefreeReadcount">
+		update freeboard set readcount=readcount+1 where num=#{num}
+	</update>
+	
+	<update id="updatefreeBoard">
+		update freeboard set subject=#{subject}, content=#{content} where num=#{num}
+	</update>
+	
+	<delete id="deletefreeBoard">
+		delete from freeboard where num=#{num}
+	</delete>
+</mapper>

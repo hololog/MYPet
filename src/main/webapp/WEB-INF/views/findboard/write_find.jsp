@@ -26,7 +26,6 @@
                     <!-- <h6 class="text-center">실종 동물의 정보를 입력해 주세요</h6> -->
                 </div>
             <div class="container p-2">
-                <!--파일첨부 포함된 form 태그이므로 enctype=multipart/form-data -->
                 <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" enctype="multipart/form-data">
                     <!--작성자 닉네임 가져오기.....필요한가?-->
                     <input type="hidden" value="" name="nickname">

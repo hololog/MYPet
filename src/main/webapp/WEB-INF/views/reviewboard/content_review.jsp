@@ -54,6 +54,9 @@
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+            <c:if test="${ ! empty sessionScope.id }">
+
+		<c:if test="${sessionScope.id eq boardDTO.name}">
             <button
                 type="button"
                 class="btn btn-outline-primary "
@@ -62,6 +65,8 @@
                 type="button"
                 class="btn btn-outline-primary "
                 onclick="location.href=''">삭제</button>
+                </c:if>
+                </c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "

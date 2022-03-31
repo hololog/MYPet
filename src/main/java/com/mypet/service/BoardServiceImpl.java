@@ -19,13 +19,13 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 
 	@Override
-	public void writeBoard(BoardDTO boardDTO) {
+	public void write_freeBoard(BoardDTO boardDTO) {
 		boardDTO.setDate(new Timestamp(System.currentTimeMillis()));
-		boardDAO.writeBoard(boardDTO);
+		boardDAO.write_freeBoard(boardDTO);
 	}
 	
 	@Override
-	public List<BoardDTO> getBoardList(PageDTO pageDTO) {
+	public List<BoardDTO> getfreeBoardList(PageDTO pageDTO) {
 		
 		int currentPage=Integer.parseInt(pageDTO.getPageNum());
 		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
@@ -37,33 +37,42 @@ public class BoardServiceImpl implements BoardService {
 		
 		pageDTO.setStartRow(startRow-1);
 		
-		return boardDAO.getBoardList(pageDTO);
+		return boardDAO.getfreeBoardList(pageDTO);
 	}
 
 	@Override
-	public int getBoardCount() {
-		return boardDAO.getBoardCount();
+	public int getfreeBoardCount() {
+		return boardDAO.getfreeBoardCount();
 	}
 
 	@Override
-	public BoardDTO getBoard(int num) {
-		return boardDAO.getBoard(num);
+	public BoardDTO getfreeBoard(int num) {
+		return boardDAO.getfreeBoard(num);
 	}
 
 	@Override
-	public void updateReadcount(int num) {
-		boardDAO.updateReadcount(num);
+	public void updatefreeReadcount(int num) {
+		boardDAO.updatefreeReadcount(num);
 	}
 
 	@Override
-	public void updateBoard(BoardDTO boardDTO) {
-		boardDAO.updateBoard(boardDTO);
+	public void updatefreeBoard(BoardDTO boardDTO) {
+		boardDAO.updatefreeBoard(boardDTO);
 	}
 
 	@Override
-	public void deleteBoard(int num) {
-		boardDAO.deleteBoard(num);
+	public void deletefreeBoard(int num) {
+		boardDAO.deletefreeBoard(num);
 	}
+
+	@Override
+	public void insert_findboard(BoardDTO boardDTO) {
+		boardDAO.insert_findboard(boardDTO);
+	}
+
+	
+	
+	
 
 	
 

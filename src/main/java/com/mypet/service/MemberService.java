@@ -1,5 +1,9 @@
 package com.mypet.service;
 
-public class MemberService {
+import com.mypet.domain.MemberDTO;
+
+public interface MemberService {
+	
+	public void insertMember(MemberDTO memberDTO);
 
 }

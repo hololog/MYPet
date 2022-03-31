@@ -8,21 +8,22 @@ import com.mypet.domain.PageDTO;
 
 public interface BoardDAO {
 
-	public void writeBoard(BoardDTO boardDTO);
+	public void write_freeBoard(BoardDTO boardDTO);
 
-	public Integer getMaxNum();
+	public Integer getfreeMaxNum();
 	
-	public List<BoardDTO> getBoardList(PageDTO pageDTO);
+	public List<BoardDTO> getfreeBoardList(PageDTO pageDTO);
 	
-	public int getBoardCount();
+	public int getfreeBoardCount();
 	
-	public BoardDTO getBoard(int num);
+	public BoardDTO getfreeBoard(int num);
 	
-	public void updateReadcount(int num);
+	public void updatefreeReadcount(int num);
 	
-	public void updateBoard(BoardDTO boardDTO);
+	public void updatefreeBoard(BoardDTO boardDTO);
 	
-	public void deleteBoard(int num);
+	public void deletefreeBoard(int num);
 	
+	public void insert_findboard(BoardDTO boardDTO);
 	
 }
