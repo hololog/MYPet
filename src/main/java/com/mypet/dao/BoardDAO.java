@@ -24,5 +24,6 @@ public interface BoardDAO {
 	
 	public void deleteBoard(int num);
 	
+	public void insert_findboard(BoardDTO boardDTO);
 	
 }

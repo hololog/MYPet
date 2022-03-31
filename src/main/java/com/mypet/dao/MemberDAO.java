@@ -1,5 +1,5 @@
 package com.mypet.dao;
 
-public class MemberDAO {
+public interface MemberDAO {
 
 }

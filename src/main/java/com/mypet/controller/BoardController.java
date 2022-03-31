@@ -219,4 +219,14 @@ public class BoardController {
 		return "freeboard/content_free";
 	}
 	
+	//은혜
+	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)
+	public String write_findBoard() {
+		return "findboard/write_find";
+	}
+	@RequestMapping(value = "/findboard/writePro", method = RequestMethod.POST)
+	public String write_find(BoardDTO boardDTO) {
+		boardService.insert_findboard(boardDTO);
+		return "findboard/write_find";
+	}
 }

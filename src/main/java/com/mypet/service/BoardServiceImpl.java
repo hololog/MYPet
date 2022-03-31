@@ -65,6 +65,13 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deleteBoard(num);
 	}
 
+	@Override
+	public void insert_findboard(BoardDTO boardDTO) {
+		boardDAO.insert_findboard(boardDTO);
+	}
+	
+	
+
 	
 
 }

@@ -37,8 +37,8 @@ public class HomeController {
 //	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main() {
-		return "main/main";
+	public String home() {
+		return "redirect:/main/main";
 	}
 	
 }
