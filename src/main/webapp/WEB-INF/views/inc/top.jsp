@@ -58,16 +58,22 @@
 </header>
 
 <script>
+$(document).ready(function(){
 	$(window).scroll(fuction(){
+		let value =  window.scrollY;
+		console.log("scrollY", value);
+	});
+});
+// 	$(window).scroll(fuction(){
 // 		let value =  window.scrollY;
 // 		console.log("scrollY", value);
-		$(#login-modal).modal()
-	});
+// 		$(#login-modal).modal()
+// 	});
 	
-	window.addEventListener("scroll", function(){
-		let value = window.scrollY;
-		console.log("스크롤", value);
-	});
+// 	window.addEventListener("scroll", function(){
+// 		let value = window.scrollY;
+// 		console.log("스크롤", value);
+// 	});
 </script>
 
 

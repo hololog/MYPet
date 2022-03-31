@@ -12,7 +12,7 @@ import com.mypet.service.MemberService;
 public class MemberController {
 	
 	@Inject
-	private MemberService memberService;
+//	private MemberService memberService;
 	
 	@RequestMapping(value = "/main/main", method = RequestMethod.GET)
 	public String main() {
@@ -24,5 +24,9 @@ public class MemberController {
 //		return "member/loginmodal";
 //	}
 	
+	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
+	public String loginPro() {
+		return "redirect:/main/main";
+	}
 
 }
