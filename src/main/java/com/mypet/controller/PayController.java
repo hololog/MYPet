@@ -21,5 +21,7 @@ public class PayController {
 	public String pay_completed() {
 		return "pay/pay_completed";
 	}
+	
+	
 }
 
