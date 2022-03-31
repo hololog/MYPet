@@ -12,7 +12,7 @@ import com.mypet.service.MemberService;
 public class MemberController {
 	
 	@Inject
-//	private MemberService memberService;
+	private MemberService memberService;
 	
 	@RequestMapping(value = "/main/main", method = RequestMethod.GET)
 	public String main() {
