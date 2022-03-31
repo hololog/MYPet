@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -60,268 +61,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                        <td>1</td>
+                     <c:forEach var="bDTO" items="${boardList }">
+                    <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?num=${bDTO.num}'">
+                        <td>${bDTO.num}</td>
                         <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
-                        <td style="text-align: start;">title1</td>
+                        <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
                           <i class="fa-regular fa-comment-dots"> 1 </i>
-                          <i class="fa-regular fa-eye"> 12 </i>
+                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
-                        <td>id1</td>
-                        <td style="text-align: start;">2022.03.25</td>
+                        <td>${bDTO.name}</td>
+                        <td style="text-align: start;"><fmt:formatDate value="${bDTO.date}" pattern="yyyy.MM.dd"/> </td>
+   							
                     </tr>
-
-                    <tr>
-                      <td>2</td>
-                        <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
-                      <td style="text-align: start;">title2</td>
-                      <td style="text-align:end"><div>
-                        <!-- 댓글수, 조회수 아이콘 -->
-                        <i class="fa-regular fa-comment-dots"> 1 </i>
-                        <i class="fa-regular fa-eye"> 12 </i>
-                      </div></td>
-                      <td>id2</td>
-                      <td style="text-align: start;">2022.03.25</td>
-                    </tr>
-
-                    <tr>
-                      <td>3</td>
-                      <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
-                        <td style="text-align: start;">title3</td>
-                        <td style="text-align:end"><div>
-                          <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots"> 1 </i>
-                          <i class="fa-regular fa-eye"> 12 </i>
-                        </div></td>
-                        <td>id3</td>
-                        <td style="text-align: start;">2022.03.25</td>
-                    </tr>
-
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                        <td style="text-align: start;">title4</td>
-                        <td style="text-align:end"><div>
-                          <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots"> 1 </i>
-                          <i class="fa-regular fa-eye"> 12 </i>
-                        </div></td>
-                        <td>id4</td>
-                        <td style="text-align: start;">2022.03.25</td>
-                    </tr>
-
-                    <tr>
-                        <td>5</td>
-                        <td></td>
-                        <td style="text-align: start;">title5</td>
-                        <td style="text-align:end"><div>
-                          <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots"> 1 </i>
-                          <i class="fa-regular fa-eye"> 12 </i>
-                        </div></td>
-                        <td>id5</td>
-                        <td style="text-align: start;">2022.03.25</td>
-                    </tr>
-        
-                    <tr>
-                      <td>6</td>
-                      <td></td>
-                      <td style="text-align: start;">title6</td>
-                      <td style="text-align:end"><div>
-                        <!-- 댓글수, 조회수 아이콘 -->
-                        <i class="fa-regular fa-comment-dots"> 1 </i>
-                        <i class="fa-regular fa-eye"> 12 </i>
-                      </div></td>
-                      <td>id6</td>
-                      <td style="text-align: start;">2022.03.25</td>
-                  </tr>
-        
-                  <tr>
-                    <td>7</td>
-                    <td></td>
-                    <td style="text-align: start;">title47</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id7</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                </tr>
-        
-                  <tr>
-                    <td>8</td>
-                    <td></td>
-                    <td style="text-align: start;">title8</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id8</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                </tr>
-        
-                 <tr>
-                    <td>9</td>
-                    <td></td>
-                    <td style="text-align: start;">title9</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id9</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                </tr>
-        
-                 <tr>
-                    <td>10</td>
-                    <td></td>
-                    <td style="text-align: start;">title10</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id10</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                </tr>
-        
-        
-                 <tr>
-                    <td>11</td>
-                    <td></td>
-                    <td style="text-align: start;">title11</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id11</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                </tr>
-        
-                  <tr>
-                    <td>12</td>
-                    <td></td>
-                    <td style="text-align: start;">title12</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id12</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                  </tr>
-        
-                  <tr>
-                    <td>13</td>
-                    <td></td>
-                    <td style="text-align: start;">title13</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id13</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                  </tr>
-        
-                 <tr>
-                    <td>14</td>
-                    <td></td>
-                    <td style="text-align: start;">title14</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id14</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                  </tr>
-        
-                 <tr>
-                    <td>15</td>
-                    <td></td>
-                    <td style="text-align: start;">title15</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id15</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                 </tr>
-        
-        
-                 <tr>
-                    <td>16</td>
-                    <td></td>
-                    <td style="text-align: start;">title16</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id16</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                 </tr>
-        
-                  <tr>
-                    <td>17</td>
-                    <td></td>
-                    <td style="text-align: start;">title17</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id17</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                  </tr>
-        
-                  <tr>
-                    <td>18</td>
-                    <td></td>
-                    <td style="text-align: start;">title18</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id18</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                 </tr>
-        
-        
-                 <tr>
-                    <td>19</td>
-                    <td></td>
-                    <td style="text-align: start;">title19</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id19</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                 </tr>
-        
-                  <tr>
-                    <td>20</td>
-                    <td></td>
-                    <td style="text-align: start;">title20</td>
-                    <td style="text-align:end"><div>
-                      <!-- 댓글수, 조회수 아이콘 -->
-                      <i class="fa-regular fa-comment-dots"> 1 </i>
-                      <i class="fa-regular fa-eye"> 12 </i>
-                    </div></td>
-                    <td>id20</td>
-                    <td style="text-align: start;">2022.03.25</td>
-                  </tr>
+					</c:forEach> 
+                    
                     </tbody>
                   </table>
                   <hr/>
