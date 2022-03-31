@@ -59,4 +59,11 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.delete(namespace+".deleteBoard", num);
 	}
 	
+	@Override
+	public void insert_findboard(BoardDTO boardDTO) {
+		sqlSession.insert(namespace+".insert_findboard");
+	}
+	
+	
+	
 }//

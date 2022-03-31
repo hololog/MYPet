@@ -17,9 +17,9 @@ public class FindboardDTO {
 	private String pet_gender;
 	private String address;
 	private String address2;
+	private String detail_address;
 	private String status;
 	private String insert_date;
 	private String delete_date;
-	private String detail_address;
 	private int reward;
 }
