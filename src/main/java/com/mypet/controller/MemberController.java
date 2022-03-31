@@ -25,12 +25,12 @@ public class MemberController {
 //		return "member/loginmodal";
 //	}
 	
-	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
-	public String loginPro(MemberDTO memberDTO, HttpSession session) {
-		MemberDTO userCheckDTO = memberService.userCheck(memberDTO);
-		
-		return "redirect:/main/main";
-	}
+//	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
+//	public String loginPro(MemberDTO memberDTO, HttpSession session) {
+//		MemberDTO userCheckDTO = memberService.userCheck(memberDTO);
+//		
+//		return "redirect:/main/main";
+//	}
 
 	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
 	public String insertMemberPro(MemberDTO memberDTO) {

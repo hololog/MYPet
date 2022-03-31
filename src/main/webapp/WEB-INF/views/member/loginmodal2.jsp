@@ -12,11 +12,11 @@
 <div class="modal-body p-5 pt-0">
   <form action="${pageContext.request.contextPath }/member/loginPro" method="post">
     <div class="form-floating mb-3">
-      <input type="email" class="form-control rounded-4" name="email" id="floatingInput" placeholder="name@example.com">
+      <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating mb-3">
-      <input type="password" class="form-control rounded-4" name="pass" id="floatingPassword" placeholder="Password">
+      <input type="password" name="pass" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
     <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Login</button>

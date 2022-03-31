@@ -8,13 +8,11 @@ import org.springframework.stereotype.Repository;
 import com.mypet.domain.MemberDTO;
 
 @Repository
-<<<<<<< Updated upstream
 public class MemberDAOImpl implements MemberDAO{
-=======
-public class MemberDAOImpl implements MemberDAO {
 
 	@Inject
 	private SqlSession sqlSession;
+	
 	
 	private static final String namespace = "com.mypet.mappers.memberMapper";
 	
@@ -23,6 +21,12 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("MemberDAOImpl insertMember");
 		sqlSession.insert(namespace + ".insertMember", memberDTO);
 	}
->>>>>>> Stashed changes
+
+	@Override
+	public void login(MemberDTO memberDTO) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
