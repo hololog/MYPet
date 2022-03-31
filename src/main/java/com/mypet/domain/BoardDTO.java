@@ -4,25 +4,20 @@ import java.sql.Timestamp;
 
 public class BoardDTO {
 
-	private int free_board_num;
+	private String free_board_num;
+	private char board_code;
 	private String nickname;
-	private String pass;
 	private String subject;
 	private String content;
 	private int readcount;
 	private Timestamp insert_date;
 	private Timestamp update_date;
 	private int like_count;
-	//첨부파일
 	
 	
 	
-	public String getPass() {
-		return pass;
-	}
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
+	
+
 	public String getSubject() {
 		return subject;
 	}
@@ -47,10 +42,10 @@ public class BoardDTO {
 	public void setLike_count(int like_count) {
 		this.like_count = like_count;
 	}
-	public int getFree_board_num() {
+	public String getFree_board_num() {
 		return free_board_num;
 	}
-	public void setFree_board_num(int free_board_num) {
+	public void setFree_board_num(String free_board_num) {
 		this.free_board_num = free_board_num;
 	}
 	public String getNickname() {
@@ -70,6 +65,12 @@ public class BoardDTO {
 	}
 	public void setUpdate_date(Timestamp update_date) {
 		this.update_date = update_date;
+	}
+	public char getBoard_code() {
+		return board_code;
+	}
+	public void setBoard_code(char board_code) {
+		this.board_code = board_code;
 	}
 	
 }

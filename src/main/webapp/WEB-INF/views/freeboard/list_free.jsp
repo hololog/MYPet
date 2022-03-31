@@ -34,7 +34,7 @@
 
         <!-- 제목 시작 -->
        <div class="container">
-            <h1 class="sub-title">꿀팁 & 입양후기</h1>
+            <h1 class="sub-title">자유게시판</h1>
             <hr>
         </div>
        <!-- 제목 종료 -->
