@@ -36,7 +36,12 @@
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
 
-     <input type="text"name="nickname"id="nicename">
+     <form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
+    <div class="container py-5"name="board_code">
+      <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
+        글작성</h3>
+        <br>
+	<input type="text"name="nickname"id="nicename">
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
@@ -68,21 +73,21 @@
        <textarea  class="ckeditor" name="content" id="editor" ></textarea>
          
       </div>
+      </div>
 
       
      <br>
      <br>
-	<form action="${pageContext.request.contextPath }/reviewboard/write_reviewPro" method="post">
-      <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
-        <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
+	
+     <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
+        <button type="submit"  class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
           등   록          
         </button>
-        <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold; 
-         "onclick="location.href='${pageContext.request.contextPath }/reviewboard/list_review'">
+        <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;  "
+        onclick="location.href='${pageContext.request.contextPath }/freeboard/list_free'">
           목록가기         
         </button>
       </div> 
-      </form>
     
     <script>
         ClassicEditor
@@ -91,7 +96,7 @@
                 console.error( error );
             } );
     </script>
-   
+   </form>
        <!-- 게시판 끝 -->
         
     <!-- ------------------------------- -->
