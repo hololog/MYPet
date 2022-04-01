@@ -20,4 +20,9 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public MemberDTO memberCheck(MemberDTO memberDTO) {
+		return memberDAO.memberCheck(memberDTO);
+	}
+
 }

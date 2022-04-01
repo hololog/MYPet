@@ -9,4 +9,6 @@ public interface MemberDAO {
 	
 	public void insertMember(MemberDTO memberDTO);
 	
+	public MemberDTO memberCheck(MemberDTO memberDTO);
+	
 }

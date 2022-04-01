@@ -20,7 +20,7 @@
 <script src="https://kit.fontawesome.com/203a25fbbd.js" crossorigin="anonymous"></script>
 <!-- JQuery -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+<script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>
 </head>
 <body>
 	<div>
