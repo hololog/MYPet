@@ -41,4 +41,11 @@ public class HomeController {
 		return "redirect:/main";
 	}
 	
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	public String content() {
+		return "findboard/content";
+	}
+	
+	
+	
 }
