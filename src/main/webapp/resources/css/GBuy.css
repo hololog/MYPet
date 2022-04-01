@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+.LK_EG {
+    -moz-box-shadow: -2px 0 16px #4d454d;
+    -webkit-box-shadow: -2px 0 16px #4d454d;
+    box-shadow: -2px 0 16px #4d454d;
+    padding: 2%;
+    position: relative;
+}
+.LK_ba {
+    background-color: rgb(16, 55, 90);
+    width: 100%;
+    height: 30px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: rgb(20, 3, 3);
+}
+.LK_BF{
+    position: absolute;
+    clear: left;
+    float: left;
+    bottom: 0;
+    width: 90%;
+}
+#LK_ba {
+    height: 30px;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+#LK_row {
+    position: relative;
+    background-color: rgb(187, 197, 206);
+    margin-right: 0;
+    margin-bottom: 0;
+}
+.LK_end {
+    position: absolute;
+    height: 100%;
+    background-color: rgba(175, 149, 173, 0.3);
+    background: rgba(175, 149, 173, 0.3);
+    color: rgba(175, 149, 173, 0.3);
+    z-index: 2;
+}
+.LK_end2 {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform: translateX(-50%);
+    color: #000;
+    font-size: 50px;
+    z-index: 1;
+}
