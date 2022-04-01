@@ -89,25 +89,28 @@
                     </div>
                   </div>
                   <!-- 글쓰기버튼 -->
-                  <c:if test="">
+                 <c:if test="${! empty sessionScope.user_id }">
+					<c:if test="${sessionScope.user_id  ne 'admin'}">
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
+                  </c:if>
                   </c:if>
                  <!-- 다음버튼 -->
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
-                            <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<a href="${pageContext.request.contextPath }/noticeboard/list_notice?pageNum=${pageDTO.startPage-pageDTO.pageBlock}"><li class="page-item"><a class="page-link" href="#">◁</a></li></a>
+                           
+					  <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/list_notice?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<a href="${pageContext.request.contextPath }/noticeboard/list_notice?pageNum=${i}"> <li class="page-item"><a class="page-link" href="#">${i}</a></li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/list_notice?pageNum=${i}"> ${i}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<a href="${pageContext.request.contextPath }/noticeboard/list_notice?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> <li class="page-item"><a class="page-link" href="#">▷</a></li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/list_notice?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
 							</c:if>
                         </ul>
                   </div>

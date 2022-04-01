@@ -96,15 +96,15 @@
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
                             <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage-pageDTO.pageBlock}"><li class="page-item">◁</li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${i}"> <li class="page-item">${i}</li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${i}"> ${i}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> <li class="page-item">▷</li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
 							</c:if>
                         </ul>
                   </div>

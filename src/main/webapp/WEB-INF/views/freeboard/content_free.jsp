@@ -56,17 +56,17 @@
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
             
-            <c:if test="${ ! empty sessionScope.id }">
+            <c:if test="${ ! empty sessionScope.user_id }">
 
-				<c:if test="${sessionScope.id eq boardDTO.name}">
+				<c:if test="${sessionScope.user_id eq boardDTO.nickname}">
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/freeboard/listUpdate_free?num=${boardDTO.num}'">수정</button>
+                onclick="location.href='${pageContext.request.contextPath }/freeboard/listUpdate_free?num=${boardDTO.free_board_num}'">수정</button>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/freeboard/listdelete_free?num=${boardDTO.num}'">삭제</button>
+                onclick="location.href='${pageContext.request.contextPath }/freeboard/listdelete_free?num=${boardDTO.free_board_num}'">삭제</button>
                 </c:if>
 	
 			</c:if>
@@ -113,95 +113,96 @@
         <!-- SNS버튼 끝 -->
         <br>
 
-        <!-- 이미지 슬라이드 시작 -->
-        <div >
-            <!-- <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                style="width: 1500px; "
-                > -->
-            <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                >
-                <div class="carousel-indicators">
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true"
-                        aria-label="Slide 1"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img
-                            src="img/dog1.jpg"
-                            class="d-block w-50  img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img
-                            src="img/dog2.jpg"
-                            class="d-block w-50 img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img
-                            src="img/dog3.jpg"
-                            class="d-block w-50 img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                </div>
+<!--         이미지 슬라이드 시작 -->
+<!--         <div > -->
+<!--             <div
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 style="width: 1500px; " -->
+<!--                 > --> -->
+<!--             <div -->
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 > -->
+<!--                 <div class="carousel-indicators"> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="0" -->
+<!--                         class="active" -->
+<!--                         aria-current="true" -->
+<!--                         aria-label="Slide 1"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="1" -->
+<!--                         aria-label="Slide 2"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="2" -->
+<!--                         aria-label="Slide 3"></button> -->
+<!--                 </div> -->
+<!--                 <div class="carousel-inner"> -->
+<!--                     <div class="carousel-item active"> -->
+<!--                         <img -->
+<!--                             src="img/dog1.jpg" -->
+<!--                             class="d-block w-50  img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                     <div class="carousel-item"> -->
+<!--                         <img -->
+<!--                             src="img/dog2.jpg" -->
+<!--                             class="d-block w-50 img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                     <div class="carousel-item"> -->
+<!--                         <img -->
+<!--                             src="img/dog3.jpg" -->
+<!--                             class="d-block w-50 img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
-                <button
-                    class="carousel-control-prev carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                    class="carousel-control-next carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!--                 <button -->
+<!--                     class="carousel-control-prev carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="prev"> -->
+<!--                     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Previous</span> -->
+<!--                 </button> -->
+<!--                 <button -->
+<!--                     class="carousel-control-next carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="next"> -->
+<!--                     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Next</span> -->
+<!--                 </button> -->
 
-            </div>
-        </div>
-        <!-- 슬라이드 쇼 끝 -->
+<!--             </div> -->
+<!--         </div> -->
+<!--         슬라이드 쇼 끝 -->
+
         <!-- 글 -->
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
                 <table id="notice">
-				<tr><td>글번호</td><td>${boardDTO.num}</td>
+				<tr><td>글번호</td><td>${boardDTO.user_num}</td>
 				     <td>글쓴날짜</td><td>${boardDTO.date}</td></tr>
-				<tr><td>글쓴이</td><td>${boardDTO.name}</td>
+				<tr><td>글쓴이</td><td>${boardDTO.nickname}</td>
 				    <td>조회수</td><td>${boardDTO.readcount}</td></tr>
 				<tr><td>글제목</td><td colspan="3">${boardDTO.subject}</td></tr>
 				<tr><td>파일</td><td colspan="3">
-				<a href="${pageContext.request.contextPath }/resources/upload/${boardDTO.file}" download>
-				${boardDTO.file}</a></td></tr>
+<%-- 				<a href="${pageContext.request.contextPath }/resources/upload/${boardDTO.file}" download> --%>
+<%-- 				${boardDTO.file}</a></td></tr> --%>
 				<tr><td>글내용</td><td colspan="3">${boardDTO.content}</td></tr>
 				</table>
             </div>
@@ -294,20 +295,17 @@
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
-                <!-- 댓글수, 조회수 아이콘 -->
-                <i class="bi bi-star-fill"></i>
-                1
-                <i class="bi bi-chat-dots"></i>
-                0
-                <i class="bi bi-eye-fill"></i>
-                1
+                
+                 <!-- 댓글수, 조회수 아이콘 -->
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                 <div class="in-line-kj">
 
                     <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
                     <button
                         type="button"
                         class="btn btn-outline-primary "
-                        onclick="location.href=''">등록</button>
+                        onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free'">등록</button>
                 </div>
                 <!-- <div class="input-group mb-3"> <input type="text" class="form-control"
                 placeholder="Recipient's username" aria-label="Recipient's username"

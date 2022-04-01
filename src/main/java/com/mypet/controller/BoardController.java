@@ -2,6 +2,7 @@ package com.mypet.controller;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -219,6 +220,50 @@ public class BoardController {
 		
 		return "freeboard/content_free";
 	}
+	//세히
+//	//댓글 작성
+//		@RequestMapping(value="/replyWrite", method = RequestMethod.POST)
+//		public String replyWrite(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+//			logger.info("reply Write");
+//			
+//			replyService.writeReply(vo);
+//			
+//			rttr.addAttribute("bno", vo.getBno());
+//			rttr.addAttribute("page", scri.getPage());
+//			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//			rttr.addAttribute("searchType", scri.getSearchType());
+//			rttr.addAttribute("keyword", scri.getKeyword());
+//			
+//			return "redirect:/board/readView";
+//		}
+//	//세히
+//	//댓글 수정 GET
+//		@RequestMapping(value="/replyUpdateView", method = RequestMethod.GET)
+//		public String replyUpdateView(ReplyVO vo, SearchCriteria scri, Model model) throws Exception {
+//			logger.info("reply Write");
+//			
+//			model.addAttribute("replyUpdate", replyService.selectReply(vo.getRno()));
+//			model.addAttribute("scri", scri);
+//			
+//			return "board/replyUpdateView";
+//		}
+//		//세히
+//		//댓글 수정 POST
+//		@RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
+//		public String replyUpdate(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+//			logger.info("reply Write");
+//			
+//			replyService.updateReply(vo);
+//			
+//			rttr.addAttribute("bno", vo.getBno());
+//			rttr.addAttribute("page", scri.getPage());
+//			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//			rttr.addAttribute("searchType", scri.getSearchType());
+//			rttr.addAttribute("keyword", scri.getKeyword());
+//			
+//			return "redirect:/board/readView";
+//		}
+
 	
 	//은혜
 	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)
