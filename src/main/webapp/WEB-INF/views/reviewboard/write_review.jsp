@@ -36,32 +36,18 @@
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
 
-    <div class="container py-5">
-      <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
-        글작성</h3>
-        <br>
-
+     <input type="text"name="nickname"id="nicename">
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text ">제목</label>
             </div>            
-            <input type="text" class="form-control">              
+            <input type="text" class="form-control"name="subject">              
           </div>
-          <!-- 글종류 선택 -->
+          
         </div>
-        <div class="col-sm-3">
-            <div class="input-group mb-3">
-                <select class="custom-select" id="inputGroupSelect03">
-                 <option selected>글종류</option>
-                  <option value="1">자유</option>
-                  <option value="2">꿀팁</option>
-                  <option value="3">입양후기</option>
-                  <option value="4">공지</option>
-                </select>  
-            </div>
-        </div> 
+       
       </div>
       
       <hr>
@@ -78,7 +64,9 @@
       </div>
 
       <div class="col-12" id="editor">
-        <p>내용</p>
+        <label for="content">내용</label>
+       <textarea  class="ckeditor" name="content" id="editor" ></textarea>
+         
       </div>
 
       
@@ -95,7 +83,7 @@
         </button>
       </div> 
       </form>
-    </div>
+    
     <script>
         ClassicEditor
             .create( document.querySelector( '#editor' ))

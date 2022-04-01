@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- 클래식 CK에디터 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+    </head>
     <!-- 에디터 넓이 높이 조절 -->
     <style>
       .ck.ck-editor {
@@ -35,12 +36,12 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+	<form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
     <div class="container py-5"name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
-	<input type="text"name="nickname">
+	<input type="text"name="nickname"id="nicename">
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
@@ -69,14 +70,15 @@
 
       <div class="col-12" id="editor">
         <label for="content">내용</label>
-        <textarea name="contents" id="editor" class="form-control"></textarea>
+       <textarea  class="ckeditor" name="content" id="editor" ></textarea>
          
+      </div>
       </div>
 
       
      <br>
      <br>
-	<form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
+	
       <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
         <button type="submit"  class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
           등   록          
@@ -86,16 +88,17 @@
           목록가기         
         </button>
       </div> 
-    </form>  
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ))
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
-    </div>
+    <script type='text/javascript'>
    
+         ClassicEditor
+             .create( document.querySelector( '#editor' ))
+             .catch( error => {
+                 console.error( error );
+           } );
+   </script> 
+   
+    </div>
+   </form>
    
       <!-- 게시판 끝 -->
         

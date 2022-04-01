@@ -25,14 +25,11 @@ public class BoardServiceImpl implements BoardService {
 		boardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
 		
 		if(boardDAO.getfreeMaxNum()!=null) {
-			int num=boardDAO.getfreeMaxNum()+1;
-			String i=Integer.toString(num);
-//			boardDTO.setFree_board_num(Integer.toString().);
-		}else {
-			boardDTO.setFree_board_num(Integer.toString(1));
-
-			
-		}
+	        int num=boardDAO.getfreeMaxNum()+1;
+	        boardDTO.setFree_board_num(num+"");
+	      }else {
+	        boardDTO.setFree_board_num(1+"");
+	      }
 		boardDAO.write_freeBoard(boardDTO);
 	}
 	

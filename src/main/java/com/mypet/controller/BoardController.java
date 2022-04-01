@@ -210,7 +210,7 @@ public class BoardController {
 	@RequestMapping(value = "/freeboard/content_free", method = RequestMethod.GET)
 	public String freeContent(HttpServletRequest request, Model model) {
 		
-		int num=Integer.parseInt(request.getParameter("num"));
+		int num=Integer.parseInt(request.getParameter("free_board_num"));
 		boardService.updatefreeReadcount(num);
 		
 		BoardDTO boardDTO=boardService.getfreeBoard(num);

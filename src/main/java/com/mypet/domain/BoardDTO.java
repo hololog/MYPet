@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 public class BoardDTO {
 
 	private String free_board_num;
+	private String tip_board_num;
+	private String notice_num;
 	private char board_code;
 	private String nickname;
 	private String subject;
@@ -71,6 +73,18 @@ public class BoardDTO {
 	}
 	public void setBoard_code(char board_code) {
 		this.board_code = board_code;
+	}
+	public String getTip_board_num() {
+		return tip_board_num;
+	}
+	public void setTip_board_num(String tip_board_num) {
+		this.tip_board_num = tip_board_num;
+	}
+	public String getNotice_num() {
+		return notice_num;
+	}
+	public void setNotice_num(String notice_num) {
+		this.notice_num = notice_num;
 	}
 	
 }
