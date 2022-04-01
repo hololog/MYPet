@@ -84,17 +84,17 @@
       
      <br>
      <br>
-
+	<form action="${pageContext.request.contextPath }/notice/write_noticePro" method="post">
       <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
         <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
           등   록          
         </button>
         <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;  "
-        onclick="location.href='${pageContext.request.contextPath }/reviewboard/list_notice'">
+        onclick="location.href='${pageContext.request.contextPath }/notice/list_notice'">
           목록가기         
         </button>
       </div> 
-      
+      </form>
     </div>
     <script>
         ClassicEditor

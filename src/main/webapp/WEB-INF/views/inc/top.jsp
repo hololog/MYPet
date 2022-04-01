@@ -70,10 +70,10 @@ $(document).ready(function(){
 // 		$(#login-modal).modal()
 // 	});
 	
-// 	window.addEventListener("scroll", function(){
-// 		let value = window.scrollY;
-// 		console.log("스크롤", value);
-// 	});
+	window.addEventListener("scroll", function(){
+		let value = window.scrollY;
+		console.log("스크롤", value);
+	});
 </script>
 
 
@@ -89,13 +89,13 @@ $(document).ready(function(){
           </div>
           <!-- Modal body -->
           <div class="modal-body p-5 pt-0">
-            <form class="">
+            <form action="${pageContext.request.contextPath }/member/loginPro" method="post">
               <div class="form-floating mb-3">
-                <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
+                <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+                <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
               </div>
               <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Login</button>
@@ -131,13 +131,13 @@ $(document).ready(function(){
           </div>
           <!-- Modal body -->
           <div class="modal-body p-5 pt-0">
-            <form class="">
+            <form action="${pageContext.request.contextPath }/member/joinPro" method="post">
               <div class="form-floating mb-3">
-                <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
+                <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+                <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
               </div>
               <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">sign up</button>

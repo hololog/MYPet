@@ -27,78 +27,78 @@ public class BoardController {
 	//세히
 	@RequestMapping(value = "/freeboard/list_free", method = RequestMethod.GET)
 	public String freeList(HttpServletRequest request, Model model) {
-//		int pageSize=20;
-//		
-//		String pageNum=request.getParameter("pageNum");
-//		if(pageNum==null) {
-//			pageNum="1";
-//		}
-//		
-//		
-//		PageDTO pageDTO=new PageDTO();
-//		pageDTO.setPageSize(pageSize);
-//		pageDTO.setPageNum(pageNum);
-//		
-//		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
-//		
-//		int count=boardService.getBoardCount();
-//		
-//		int currentPage=Integer.parseInt(pageNum);
-//		int pageBlock=10;
-//		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//		int endPage=startPage+pageBlock-1;
-//		int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
-//		if(endPage > pageCount){
-//			endPage = pageCount;
-//		}
-//		
-//		pageDTO.setCount(count);
-//		pageDTO.setPageBlock(pageBlock);
-//		pageDTO.setStartPage(startPage);
-//		pageDTO.setEndPage(endPage);
-//		pageDTO.setPageCount(pageCount);
-//		
-//		model.addAttribute("boardList", boardList);
-//		model.addAttribute("pageDTO", pageDTO);
+		int pageSize=20;
+		
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		
+		List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
+		
+		int count=boardService.getfreeBoardCount();
+		
+		int currentPage=Integer.parseInt(pageNum);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
+		if(endPage > pageCount){
+			endPage = pageCount;
+		}
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageDTO", pageDTO);
 		
 		return "freeboard/list_free";
 	}
 	//세히
 	@RequestMapping(value = "/reviewboard/list_review", method = RequestMethod.GET)
 	public String reviewList(HttpServletRequest request, Model model) {
-//		int pageSize=20;
-//		
-//		String pageNum=request.getParameter("pageNum");
-//		if(pageNum==null) {
-//			pageNum="1";
-//		}
-//		
-//		
-//		PageDTO pageDTO=new PageDTO();
-//		pageDTO.setPageSize(pageSize);
-//		pageDTO.setPageNum(pageNum);
-//		
-//		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
-//		
-//		int count=boardService.getBoardCount();
-//		
-//		int currentPage=Integer.parseInt(pageNum);
-//		int pageBlock=10;
-//		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//		int endPage=startPage+pageBlock-1;
-//		int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
-//		if(endPage > pageCount){
-//			endPage = pageCount;
-//		}
-//		
-//		pageDTO.setCount(count);
-//		pageDTO.setPageBlock(pageBlock);
-//		pageDTO.setStartPage(startPage);
-//		pageDTO.setEndPage(endPage);
-//		pageDTO.setPageCount(pageCount);
+		int pageSize=20;
 		
-//		model.addAttribute("boardList", boardList);
-//		model.addAttribute("pageDTO", pageDTO);
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		
+		List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
+		
+		int count=boardService.getfreeBoardCount();
+		
+		int currentPage=Integer.parseInt(pageNum);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
+		if(endPage > pageCount){
+			endPage = pageCount;
+		}
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageDTO", pageDTO);
 		
 		
 		return "reviewboard/list_review";
@@ -106,39 +106,39 @@ public class BoardController {
 	//세히
 	@RequestMapping(value = "/notice/list_notice", method = RequestMethod.GET)
 	public String noticeList(HttpServletRequest request, Model model) {
-//		int pageSize=20;
-//		
-//		String pageNum=request.getParameter("pageNum");
-//		if(pageNum==null) {
-//			pageNum="1";
-//		}
-//		
-//		
-//		PageDTO pageDTO=new PageDTO();
-//		pageDTO.setPageSize(pageSize);
-//		pageDTO.setPageNum(pageNum);
-//		
-//		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
-//		
-//		int count=boardService.getBoardCount();
-//		
-//		int currentPage=Integer.parseInt(pageNum);
-//		int pageBlock=10;
-//		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-//		int endPage=startPage+pageBlock-1;
-//		int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
-//		if(endPage > pageCount){
-//			endPage = pageCount;
-//		}
-//		
-//		pageDTO.setCount(count);
-//		pageDTO.setPageBlock(pageBlock);
-//		pageDTO.setStartPage(startPage);
-//		pageDTO.setEndPage(endPage);
-//		pageDTO.setPageCount(pageCount);
-//		
-//		model.addAttribute("boardList", boardList);
-//		model.addAttribute("pageDTO", pageDTO);
+		int pageSize=20;
+		
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		
+		List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
+		
+		int count=boardService.getfreeBoardCount();
+		
+		int currentPage=Integer.parseInt(pageNum);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
+		if(endPage > pageCount){
+			endPage = pageCount;
+		}
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageDTO", pageDTO);
 		return "notice/list_notice";
 	}
 	//세히
@@ -181,12 +181,13 @@ public class BoardController {
 			
 		return "redirect:/reviewboard/list_review";
 	}
+	//세히
 	@RequestMapping(value = "/reviewboard/content", method = RequestMethod.GET)
 	public String reivewboardContent(HttpServletRequest request, Model model) {
 		int num=Integer.parseInt(request.getParameter("num"));
-		boardService.updateReadcount(num);
+		boardService.updatefreeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getBoard(num);
+		BoardDTO boardDTO=boardService.getfreeBoard(num);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
@@ -197,9 +198,9 @@ public class BoardController {
 	public String noticeContent(HttpServletRequest request, Model model) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
-		boardService.updateReadcount(num);
+		boardService.updatefreeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getBoard(num);
+		BoardDTO boardDTO=boardService.getfreeBoard(num);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
@@ -210,9 +211,9 @@ public class BoardController {
 	public String freeContent(HttpServletRequest request, Model model) {
 		
 		int num=Integer.parseInt(request.getParameter("num"));
-		boardService.updateReadcount(num);
+		boardService.updatefreeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getBoard(num);
+		BoardDTO boardDTO=boardService.getfreeBoard(num);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
@@ -224,7 +225,7 @@ public class BoardController {
 	public String write_findBoard() {
 		return "findboard/write_find";
 	}
-	@RequestMapping(value = "/findboard/writePro", method = RequestMethod.POST)
+	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
 	public String write_find(BoardDTO boardDTO) {
 		boardService.insert_findboard(boardDTO);
 		return "findboard/write_find";

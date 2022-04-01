@@ -17,46 +17,46 @@ public class BoardDAOImpl implements BoardDAO{
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace="com.mypet.mappers.boardMapper";
+	private static final String namespace="com.mypet.mappers.freeboardMapper";
 
 	@Override
 	public void write_freeBoard(BoardDTO boardDTO) {
-		sqlSession.insert(namespace+".writeBoard", boardDTO);
+		sqlSession.insert(namespace+".writefreeBoard", boardDTO);
 		
 	}
 	@Override
-	public Integer getMaxNum() {
-		return sqlSession.selectOne(namespace+".getMaxNum");
+	public Integer getfreeMaxNum() {
+		return sqlSession.selectOne(namespace+".getfreeMaxNum");
 	}
 
 	@Override
-	public List<BoardDTO> getBoardList(PageDTO pageDTO) {
-		return sqlSession.selectList(namespace+".getBoardList", pageDTO);
+	public List<BoardDTO> getfreeBoardList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getfreeBoardList", pageDTO);
 	}
 
 	@Override
-	public int getBoardCount() {
-		return sqlSession.selectOne(namespace+".getBoardCount");
+	public int getfreeBoardCount() {
+		return sqlSession.selectOne(namespace+".getfreeBoardCount");
 	}
 
 	@Override
-	public BoardDTO getBoard(int num) {
-		return sqlSession.selectOne(namespace+".getBoard", num);
+	public BoardDTO getfreeBoard(int num) {
+		return sqlSession.selectOne(namespace+".getfreeBoard", num);
 	}
 
 	@Override
-	public void updateReadcount(int num) {
-		sqlSession.update(namespace+".updateReadcount", num);
+	public void updatefreeReadcount(int num) {
+		sqlSession.update(namespace+".updatefreeReadcount", num);
 	}
 
 	@Override
-	public void updateBoard(BoardDTO boardDTO) {
-		sqlSession.update(namespace+".updateBoard", boardDTO);
+	public void updatefreeBoard(BoardDTO boardDTO) {
+		sqlSession.update(namespace+".updatefreeBoard", boardDTO);
 	}
 
 	@Override
-	public void deleteBoard(int num) {
-		sqlSession.delete(namespace+".deleteBoard", num);
+	public void deletefreeBoard(int num) {
+		sqlSession.delete(namespace+".deletefreeBoard", num);
 	}
 
 	@Override
