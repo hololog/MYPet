@@ -78,7 +78,7 @@ public class BoardController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		
-		List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
+		List<BoardDTO> boardList=boardService.getreviewBoardList(pageDTO);
 		
 		int count=boardService.getfreeBoardCount();
 		
@@ -118,7 +118,7 @@ public class BoardController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		
-		List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
+		List<BoardDTO> boardList=boardService.getnoticeBoardList(pageDTO);
 		
 		int count=boardService.getfreeBoardCount();
 		
@@ -150,7 +150,7 @@ public class BoardController {
 	@RequestMapping(value = "/notice/write_noticePro", method = RequestMethod.POST)
 	public String writeNoticePro(BoardDTO boardDTO) {
 		
-		boardService.write_freeBoard(boardDTO);
+		boardService.write_noticeBoard(boardDTO);
 		
 		return "redirect:/notice/list_notice";
 	}
@@ -177,17 +177,17 @@ public class BoardController {
 	@RequestMapping(value = "/reviewboard/write_reviewPro", method = RequestMethod.POST)
 	public String writeReviewPro(BoardDTO boardDTO) {
 			
-		boardService.write_freeBoard(boardDTO);
+		boardService.write_reviewBoard(boardDTO);
 			
 		return "redirect:/reviewboard/list_review";
 	}
 	//세히
 	@RequestMapping(value = "/reviewboard/content", method = RequestMethod.GET)
 	public String reivewboardContent(HttpServletRequest request, Model model) {
-		int num=Integer.parseInt(request.getParameter("num"));
-		boardService.updatefreeReadcount(num);
+		int num=Integer.parseInt(request.getParameter("tip_board_num"));
+		boardService.updatereviewReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		BoardDTO boardDTO=boardService.getreviewBoard(num);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
@@ -197,10 +197,10 @@ public class BoardController {
 	@RequestMapping(value = "/notice/content_notice", method = RequestMethod.GET)
 	public String noticeContent(HttpServletRequest request, Model model) {
 		
-		int num=Integer.parseInt(request.getParameter("num"));
-		boardService.updatefreeReadcount(num);
+		int num=Integer.parseInt(request.getParameter("notice_num"));
+		boardService.updatenoticeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		BoardDTO boardDTO=boardService.getnoticeBoard(num);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		

@@ -36,7 +36,7 @@
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
 
-     <form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
+     <form action="${pageContext.request.contextPath }/reviewboard/write_reviewPro" method="post">
     <div class="container py-5"name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
@@ -84,7 +84,7 @@
           등   록          
         </button>
         <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;  "
-        onclick="location.href='${pageContext.request.contextPath }/freeboard/list_free'">
+        onclick="location.href='${pageContext.request.contextPath }/reviewboard/list_review'">
           목록가기         
         </button>
       </div> 

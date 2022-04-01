@@ -87,10 +87,29 @@
                         <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
                     </div>
                   </div>
+                  <!-- 아이디 없을때 -->
+                  <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+                    <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
+                  	<script>
+
+						function login() {
+						
+						  alert("로그인해라");
+						
+						  location.href = "${pageContext.request.contextPath }/main/main";
+						
+						}
+						
+						</script>
+                  </c:if>
+                  
+                  
+                  <!-- 아이디 있을때 -->
+                  <c:if test="${!empty user_id }">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/freeboard/write_free'">글쓰기</button>
-                  </div>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/freeboard/write_free'">글쓰기</button> </div>
+                  </c:if>
                   <!-- 다음버튼 -->
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
