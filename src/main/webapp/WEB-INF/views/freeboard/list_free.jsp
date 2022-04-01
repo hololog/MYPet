@@ -62,8 +62,8 @@
                   </thead>
                   <tbody>
                   <c:forEach var="bDTO" items="${boardList }">
-                    <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?num=${bDTO.num}'">
-                        <td>${bDTO.num}</td>
+                    <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
+                        <td>${bDTO.free_board_num}</td>
                         <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -71,8 +71,8 @@
                           <i class="fa-regular fa-comment-dots"> 1 </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
-                        <td>${bDTO.name}</td>
-                        <td style="text-align: start;"><fmt:formatDate value="${bDTO.date}" pattern="yyyy.MM.dd"/> </td>
+                        <td>${bDTO.nickname}</td>
+                        <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
 					</c:forEach> 

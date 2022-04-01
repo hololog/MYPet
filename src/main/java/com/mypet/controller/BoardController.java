@@ -181,6 +181,7 @@ public class BoardController {
 			
 		return "redirect:/reviewboard/list_review";
 	}
+	//세히
 	@RequestMapping(value = "/reviewboard/content", method = RequestMethod.GET)
 	public String reivewboardContent(HttpServletRequest request, Model model) {
 		int num=Integer.parseInt(request.getParameter("num"));

@@ -21,17 +21,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void write_freeBoard(BoardDTO boardDTO) {
 		
-//		boardDTO.setReadcount(0);
-//		boardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
-//		int boardNum=Integer.getInteger(boardDTO.getFree_board_num());
-//		if(boardDAO.getfreeMaxNum()!=null) {
-//			boardDTO.setFree_board_num(boardDAO.getfreeMaxNum()+1);
-//			
-//		}else {
-//			int intValue1 = Integer.parseInt(boardDTO.setFree_board_num(1));
-//
-//			
-//		}
+		boardDTO.setReadcount(0);
+		boardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
+		
+		if(boardDAO.getfreeMaxNum()!=null) {
+			int num=boardDAO.getfreeMaxNum()+1;
+			String i=Integer.toString(num);
+//			boardDTO.setFree_board_num(Integer.toString().);
+		}else {
+			boardDTO.setFree_board_num(Integer.toString(1));
+
+			
+		}
 		boardDAO.write_freeBoard(boardDTO);
 	}
 	
