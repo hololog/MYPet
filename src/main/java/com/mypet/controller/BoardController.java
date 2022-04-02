@@ -183,7 +183,7 @@ public class BoardController {
 		return "redirect:/reviewboard/list_review";
 	}
 	//세히
-	@RequestMapping(value = "/reviewboard/content", method = RequestMethod.GET)
+	@RequestMapping(value = "/reviewboard/content_review", method = RequestMethod.GET)
 	public String reivewboardContent(HttpServletRequest request, Model model) {
 		int num=Integer.parseInt(request.getParameter("tip_board_num"));
 		boardService.updatereviewReadcount(num);
@@ -192,8 +192,9 @@ public class BoardController {
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
-		return "reviewboard/content";
+		return "reviewboard/content_review";
 	}
+	
 	//세히
 	@RequestMapping(value = "/notice/content_notice", method = RequestMethod.GET)
 	public String noticeContent(HttpServletRequest request, Model model) {
@@ -205,7 +206,7 @@ public class BoardController {
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
-		return "reviewboard/content";
+		return "notice/content_notice";
 	}
 	//세히
 	@RequestMapping(value = "/freeboard/content_free", method = RequestMethod.GET)

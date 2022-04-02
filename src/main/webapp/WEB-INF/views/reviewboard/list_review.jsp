@@ -62,7 +62,7 @@
                   </thead>
                   <tbody>
                     <c:forEach var="bDTO" items="${boardList }">
-                    <tr onclick="location.href='${pageContext.request.contextPath }/reciewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
+                    <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
                         <td>${bDTO.tip_board_num}</td>
                         <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
                         <td style="text-align: start;">${bDTO.subject}</td>

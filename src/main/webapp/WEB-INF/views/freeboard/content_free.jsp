@@ -195,7 +195,7 @@
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
                 <table id="notice">
-				<tr><td>글번호</td><td>${boardDTO.user_num}</td>
+				<tr><td>글번호</td><td>${boardDTO.free_board_num}</td>
 				     <td>글쓴날짜</td><td>${boardDTO.date}</td></tr>
 				<tr><td>글쓴이</td><td>${boardDTO.nickname}</td>
 				    <td>조회수</td><td>${boardDTO.readcount}</td></tr>
@@ -221,26 +221,26 @@
             <p class="arrow_box">연락수단 확인하고 글쓴이에게 제보하기!</p>
         </div>
         <!-- 제보버튼 끝 -->
-        <!-- Modal -->
-		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        ...
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+<!--         Modal -->
+<!-- 		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> -->
+<!-- 		  <div class="modal-dialog" role="document"> -->
+<!-- 		    <div class="modal-content"> -->
+<!-- 		      <div class="modal-header"> -->
+<!-- 		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+<!-- 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+<!-- 		          <span aria-hidden="true">&times;</span> -->
+<!-- 		        </button> -->
+<!-- 		      </div> -->
+<!-- 		      <div class="modal-body"> -->
+<!-- 		        ... -->
+<!-- 		      </div> -->
+<!-- 		      <div class="modal-footer"> -->
+<!-- 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+<!-- 		        <button type="button" class="btn btn-primary">Save changes</button> -->
+<!-- 		      </div> -->
+<!-- 		    </div> -->
+<!-- 		  </div> -->
+<!-- 		</div> -->
 
         <!-- <div class="row">-->
         <!-- <div class="col-md-12 col-xl-8">-->

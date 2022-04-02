@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,23 +55,23 @@
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-            <c:if test="${ ! empty sessionScope.id }">
+           <c:if test="${ ! empty sessionScope.id }"> 
 
-		<c:if test="${sessionScope.id eq boardDTO.name}">
+				<c:if test="${sessionScope.id eq boardDTO.name}"> 
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick="location.href=''">수정</button>
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick="location.href=''">삭제</button>
+     		      </c:if>
+		       </c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">수정</button>
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick="location.href=''">삭제</button>
-                </c:if>
-                </c:if>
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick="location.href=''">목록</button>
+                onclick="location.href='${pageContext.request.contextPath }/reviewboard/list_review'">목록</button>
         </div>
         <!-- 수정삭제 목록 버튼 끝 -->
 
@@ -110,102 +111,94 @@
         <!-- SNS버튼 끝 -->
         <br>
 
-        <!-- 이미지 슬라이드 시작 -->
-        <div >
-            <!-- <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                style="width: 1500px; "
-                > -->
-            <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                >
-                <div class="carousel-indicators">
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true"
-                        aria-label="Slide 1"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img
-                            src="img/dog1.jpg"
-                            class="d-block w-50  img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img
-                            src="img/dog2.jpg"
-                            class="d-block w-50 img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img
-                            src="img/dog3.jpg"
-                            class="d-block w-50 img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                </div>
+<!--         이미지 슬라이드 시작 -->
+<!--         <div > -->
+<!--             <div
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 style="width: 1500px; " -->
+<!--                 > --> 
+<!--             <div -->
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 > -->
+<!--                 <div class="carousel-indicators"> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="0" -->
+<!--                         class="active" -->
+<!--                         aria-current="true" -->
+<!--                         aria-label="Slide 1"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="1" -->
+<!--                         aria-label="Slide 2"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="2" -->
+<!--                         aria-label="Slide 3"></button> -->
+<!--                 </div> -->
+<!--                 <div class="carousel-inner"> -->
+<!--                     <div class="carousel-item active"> -->
+<!--                         <img -->
+<!--                             src="img/dog1.jpg" -->
+<!--                             class="d-block w-50  img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                     <div class="carousel-item"> -->
+<!--                         <img -->
+<!--                             src="img/dog2.jpg" -->
+<!--                             class="d-block w-50 img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                     <div class="carousel-item"> -->
+<!--                         <img -->
+<!--                             src="img/dog3.jpg" -->
+<!--                             class="d-block w-50 img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
-                <button
-                    class="carousel-control-prev carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                    class="carousel-control-next carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!--                 <button -->
+<!--                     class="carousel-control-prev carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="prev"> -->
+<!--                     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Previous</span> -->
+<!--                 </button> -->
+<!--                 <button -->
+<!--                     class="carousel-control-next carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="next"> -->
+<!--                     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Next</span> -->
+<!--                 </button> -->
 
-            </div>
-        </div>
+<!--             </div> -->
+<!--         </div> -->
         <!-- 슬라이드 쇼 끝 -->
-        <!-- 글 -->
+         <!-- 글 -->
+         <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum leo
-                    risus, nec efficitur ipsum congue sed. Cras congue aliquet purus, in mattis nunc
-                    varius sed. Suspendisse augue risus, porta in lectus eu, facilisis gravida eros.
-                    Nulla efficitur purus quis convallis maximus. In tempor lacinia dolor a
-                    malesuada. Quisque magna mauris, lobortis non urna nec, rutrum accumsan massa.
-                    Praesent sapien mauris, dictum id ultricies quis, vulputate at quam. Integer eu
-                    iaculis urna, id imperdiet sapien. Vivamus dolor purus, tincidunt non volutpat
-                    sed, maximus ullamcorper augue. Aliquam et consectetur justo, non ornare diam.
-                    Proin quis urna erat. Mauris sodales, diam sed maximus cursus, justo enim
-                    rhoncus ipsum, sit amet ultrices libero lorem sed odio. Ut nec sem fermentum,
-                    posuere lectus a, tincidunt enim. Donec elementum nisl vel nibh rhoncus
-                    eleifend. Aliquam ut auctor diam. Quisque in mauris pulvinar, iaculis magna vel,
-                    imperdiet lectus. Nam eu porttitor erat. Curabitur et euismod risus, a rhoncus
-                    libero. Curabitur blandit accumsan tortor a scelerisque.
-                </p>
+               <table id="notice text-center">
+				<tr><td>글번호</td><td>${boardDTO.tip_board_num}</td></tr>
+				    <tr> <td>글쓴날짜</td><td>${boardDTO.insert_date}</td></tr>
+				<tr><td>글쓴이</td><td>${boardDTO.nickname}</td></tr>
+				
+				<tr><td>글내용</td><td>${bDTO.content}</td></tr>
+				</table>
             </div>
         </div>
         <!-- 글끝 -->
@@ -259,7 +252,7 @@
         <!-- -->
         <!-- </div>-->
         <!-- </div>-->
-    </div>
+<!--     </div> -->
     <!-- <div id="form-commentInfo-kj">-->
     <!-- <div id="comment-count-kj">댓글 <span id="count-kj">0</span></div>-->
     <!-- <input id="comment-input-kj" placeholder="댓글을 입력해 주세요.">-->
@@ -275,19 +268,15 @@
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
-                <i class="bi bi-star-fill"></i>
-                1
-                <i class="bi bi-chat-dots"></i>
-                0
-                <i class="bi bi-eye-fill"></i>
-                1
+                          <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>
+                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">
 
                     <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
                     <button
                         type="button"
                         class="btn btn-outline-primary "
-                        onclick="location.href=''">등록</button>
+                        onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review'">등록</button>
                 </div>
                 <!-- <div class="input-group mb-3"> <input type="text" class="form-control"
                 placeholder="Recipient's username" aria-label="Recipient's username"
@@ -343,59 +332,8 @@
         </div>
     </section>
 
-    <!-- <div class="container mt-5">-->
-    <!-- <div class="row">-->
-    <!-- <div class="col-sm-4">-->
-    <!-- <h2>About Me</h2>-->
-    <!-- <h5>Photo of me:</h5>-->
-    <!-- <div class="fakeimg">Fake Image</div>-->
-    <!-- <p>Some text about me in culpa qui officia deserunt mollit anim..</p>-->
-    <!-- <hr class="d-sm">-->
+    
 
-    <!-- <h3 class="mt-4">참고 링크</h3>-->
-
-    <!-- <p>Lorem ipsum dolor sit ame.</p>-->
-    <!-- <ul class="nav nav-pills flex-column">-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- </ul>-->
-
-    <!-- </div>-->
-    <!-- <div class="col-sm-8">-->
-    <!-- <h2>실종시 대처방법 </h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-
-    <!-- <h2 class="mt-5">구조시 대처방법</h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-    <!-- </div>-->
-    <!-- </div>-->
-    <!-- </div>-->
-
-</div>
-
-</div>
  <!-- 게시판 끝 -->
         
     <!-- ------------------------------- -->

@@ -46,11 +46,7 @@
             </div>
             <!-- 제목 종료 -->
             <hr>
-            <!-- 검색창 시작 -->
-            <form action="" method="get"></form>
-
-        </div>
-        <!-- 검색창 종료-->
+            
 
         <!-- 수정 삭제 목록 -->
         <div
@@ -71,7 +67,7 @@
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">목록</button>
+                onclick="location.href='${pageContext.request.contextPath }/noticew/list_notice'">목록</button>
         </div>
         <!-- 수정삭제 목록 버튼 끝 -->
 
