@@ -14,8 +14,7 @@
       </h1>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-      <a class="p-1 btn" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
-<%--       <a class="p-1 btn" onclick="fnloginmodal('${test.id }')">LOGIN</a> --%>
+      <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
       <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">SIGN UP</a>
     </div>
   </div>
@@ -59,27 +58,28 @@
 
 <script>
 $(document).ready(function(){
-	$(window).scroll(fuction(){
-		let value =  window.scrollY;
-		console.log("scrollY", value);
+	//스크롤 좌표에 따라 모달창 실행
+	$(window).scroll(function(){
+		if($(window).scrollTop()==900){
+			$("#login-modal").modal('show');
+		}
 	});
-});
-// 	$(window).scroll(fuction(){
-// 		let value =  window.scrollY;
-// 		console.log("scrollY", value);
-// 		$(#login-modal).modal()
-// 	});
 	
-	window.addEventListener("scroll", function(){
-		let value = window.scrollY;
-		console.log("스크롤", value);
-	});
+// 	$('#login-email').focusout(function(){
+// 		$.ajax({
+// 			url:"${pageContext.request.contextPath }/member/memberCheck2",
+// 			data:{"email":$('#email').val()},
+// 			success:function(){
+// 				}
+// 			}
+			
+// 	});
+});
 </script>
-
 
 <!-- 모달창 시작 -->
     <!-- 로그인 -->
-    <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal">
+    <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal" style="transition: opacity 0.5s linear;">
       <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
           <!-- Modal Header -->
@@ -123,7 +123,7 @@ $(document).ready(function(){
     </div>
       
     <!-- 회원가입 -->
-    <div class="modal modal-signin py-5" tabindex="-1" role="dialog" id="signup-modal">
+    <div class="modal fade modal-signin py-5" tabindex="-1" role="dialog" id="signup-modal" style="transition: opacity 0.5s linear;">
       <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
           <!-- Modal Header -->
