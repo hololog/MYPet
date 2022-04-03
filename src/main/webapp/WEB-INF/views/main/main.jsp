@@ -85,15 +85,15 @@
         <form action="" method="get">
           <div class="d-flex justify-content-around">
             <div class="s-box1 p-2">
-              <input type="text" class="search-box1" id="" placeholder="시/도" />
+              <input type="text" class="search-box1" placeholder="시/도" />
             </div>
             <div class="vr"></div>
             <div class="s-box2 p-2">
-              <input type="text" class="search-box2" id="" placeholder="시/군/구" />
+              <input type="text" class="search-box2" placeholder="시/군/구" />
             </div>
             <div class="vr"></div>
             <div class="s-box3 p-2">
-              <input type="text" class="search-box3" id="" placeholder="읍/면/동" />
+              <input type="text" class="search-box3" placeholder="읍/면/동" />
             </div>
             <button type="submit" class="btn text-white" style="background-color: #3f51b5">
               <i class="bi bi-search"></i>
