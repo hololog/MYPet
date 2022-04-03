@@ -74,7 +74,5 @@ public interface BoardDAO {
 
 	
 	
-	
-	public void insert_findboard(BoardDTO boardDTO);
-	
+
 }

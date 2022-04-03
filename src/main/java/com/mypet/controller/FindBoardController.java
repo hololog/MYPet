@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.service.FindboardService;
 
@@ -27,5 +28,16 @@ public class FindBoardController {
 		model.addAttribute("findboardDTO", findboardDTO);
 		
 		return "findboard/content";
+	}
+	
+	//은혜
+	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)
+	public String write_findBoard() {
+		return "findboard/write_find";
+	}
+	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
+	public String write_find(FindboardDTO findboardDTO) {
+		findboardService.insert_findboard(findboardDTO);
+		return "redirect:/findboard/write_find";
 	}
 }

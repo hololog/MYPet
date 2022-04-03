@@ -31,13 +31,8 @@
 			<!-- 제목 종료 -->
 			<!-- 본문 시작 -->
             <div class="container p-5">
-
+            
                 <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" enctype="multipart/form-data">
-                    <!--작성자 닉네임 가져오기-->
-<%--                     <input type="hidden" name="nickname" value="${sessionScope.id}"> --%>
-                    <!--작성 date 가져오기 timestamp-->
-<%--                     <input type="hidden" value="${}" > --%>
-                    
                     <div class="row g-5">
                          <!--왼쪽여백-->
                         <div class="col-md-1 col-lg-3"></div>
@@ -46,13 +41,13 @@
                             <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
                             <div class="row">
                                 <div class="col form-check form-switch mb-3" id="switch_eh">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="미해결" name="${result}">
                                     <label class="form-check-label" for="switch_eh">미해결</label>
                                 </div>
                             <!--사례금 유무-->
                                 <div class="col input-group mb-3">
                                     <label class="input-group-text">사례금</label>
-                                    <input type="text" class="form-control" placeholder="만원">
+                                    <input type="text" class="form-control" placeholder="만원" name="${reward}">
                                 </div>
                             </div>
                             <!--동물 종류 select -->
@@ -72,10 +67,10 @@
                             </div>
                             <div class="input-group mb-3">
                                 <label class="input-group-text"> 동물 나이 </label>
-                                <input type="text" class="form-control" placeholder="숫자만 입력"  name="${pet_age}">
+                                <input type="text" class="form-control" placeholder="숫자만 입력" value="${pet_age}">
                                 <select class="form-select">
-                                    <option>개월</option>
-                                    <option>년(세)</option>
+                                    <option value="${pet_age}">개월</option>
+                                    <option value="${pet_age}">년(세)</option>
                                 </select>
                             </div>
                             <!--동물 성별 체크 radio-->
@@ -104,38 +99,38 @@
                             <!--실종지역 select (JQuery or API 적용 예정)-->
                             <div class="input-group">
                                 <label class="input-group-text">실종 지역</label>
-                                    <select class="form-select">
+                                    <select class="form-select" name="${adress}">
                                         <option selected>시</option>
-                                        <option value="">부산광역시</option>
-                                        <option value="">서울특별시</option>
-                                        <option value="">광주광역시</option>
+                                        <option value="busan">부산광역시</option>
+                                        <option value="seoul">서울특별시</option>
+                                        <option value="gwangju">광주광역시</option>
                                     </select>
-                                    <select class="form-select">
+                                    <select class="form-select" name="${address2}">
                                         <option selected>구</option>
-                                        <option>수영구</option>
-                                        <option>부산진구</option>
+                                        <option value="suyoeng-gu">수영구</option>
+                                        <option value="jin-gu">부산진구</option>
                                     </select>
                                     <select class="form-select">
                                         <option selected>동</option>
-                                        <option>광안동</option>
-                                        <option>망미동</option>
+                                        <option value="gwangan-dong">광안동</option>
+                                        <option value="mangmi-dong">망미동</option>
                                     </select>
                             </div>
                             <!--실종지역 상세 위치-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">상세 위치</label>
-                                <input type="text" class="form-control" placeholder="OO초등학교 인근">
+                                <input type="text" class="form-control" placeholder="OO초등학교 인근" name="${detail_address }">
                             </div>
                             <!--기타 특징-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="ta_eh">기타 특징</label>
                                 <textarea rows="4" class="form-control" aria-label="With textarea" id="ta_eh"
-                                placeholder="중성화 유무, 자주가는 산책길, 좋아하는 음식 등 동물에 대한 상세정보"></textarea>
+                                placeholder="중성화 유무, 자주가는 산책길, 좋아하는 음식 등 동물에 대한 상세정보" name="${content}"></textarea>
                             </div>
                             <!--연락가능 수단-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">연락 가능 수단</label>
-                                <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등">
+                                <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact_db추가하기">
                             </div>
                             <!--file 드래그앤드롭-->
                             <div class="dropzone mb-5" id="dropZone">
@@ -148,8 +143,9 @@
 
                             <!--submit 버튼-->
                             <div class="text-center p-2">
-                                <input type="submit" id="btn_eh" name="submit"> 
-                                <input type="button" id="btn_eh" name="cancel" value="cancel"> <!--클릭시 메인으로-->
+                                <input type="submit" id="btn_eh" value="글쓰기"> 
+                                <input type="button" id="btn_eh" value="취소" 
+                                onclick="location.href='${pageContext.request.contextPath}/findboard/list'">
                             </div>
                         </div>
                         <!--오른쪽여백-->
