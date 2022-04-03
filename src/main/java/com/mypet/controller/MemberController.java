@@ -40,7 +40,7 @@ public class MemberController {
 	public String insertMemberPro(MemberDTO memberDTO) {
 		
 		memberService.insertMember(memberDTO);
-		return "redirect:/main/main";
+		return "redirect:/main";
 	}
 
 }
