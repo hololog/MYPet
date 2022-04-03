@@ -33,5 +33,10 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.selectOne(namespace + ".memberCheck", memberDTO);
 	}
 
+	@Override
+	public MemberDTO getMember(String email) {
+		return sqlSession.selectOne(namespace + ".getMember", email); 
+	}
+
 
 }

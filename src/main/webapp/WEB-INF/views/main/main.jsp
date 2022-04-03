@@ -85,15 +85,15 @@
         <form action="" method="get">
           <div class="d-flex justify-content-around">
             <div class="s-box1 p-2">
-              <input type="text" class="search-box1" id="" placeholder="시/도" />
+              <input type="text" class="search-box1" placeholder="시/도" />
             </div>
             <div class="vr"></div>
             <div class="s-box2 p-2">
-              <input type="text" class="search-box2" id="" placeholder="시/군/구" />
+              <input type="text" class="search-box2" placeholder="시/군/구" />
             </div>
             <div class="vr"></div>
             <div class="s-box3 p-2">
-              <input type="text" class="search-box3" id="" placeholder="읍/면/동" />
+              <input type="text" class="search-box3" placeholder="읍/면/동" />
             </div>
             <button type="submit" class="btn text-white" style="background-color: #3f51b5">
               <i class="bi bi-search"></i>
@@ -109,7 +109,7 @@
       <div>
         <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1>
         <div class="d-flex justify-content-end">
-          <a href="find_borad.html">더보기</a> 
+          <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
         </div>
         <hr>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
@@ -226,7 +226,7 @@
           </div>
         </div>
         <div class="d-flex mt-1 justify-content-end">
-          <a href="find_borad.html">더보기</a> 
+           <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
         </div>
         <hr id="divider" />
       </div>
@@ -273,6 +273,7 @@
           <button type="button" class="btn text-white" style="background-color: #3f51b5">
             구매하러가기
           </button>
+          <a href="${pageContext.request.contextPath }/pay/product_details" class="btn">구매하러가기</a>
         </div>
       </div>
     </section>

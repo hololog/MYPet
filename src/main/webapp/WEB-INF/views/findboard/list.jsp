@@ -47,7 +47,7 @@
 	<!-- 신고글쓰기버튼 -->
 	<div class="row p-3">
 	    <div class="col-12">
-	        <a href="글작성주소" class="btn float-end" style="border-color: #3f51b5;">실종신고</a>
+	        <a href="${pageContext.request.contextPath }/findboard/write" class="btn float-end" style="border-color: #3f51b5;">실종신고</a>
 	    </div>
 	</div>
 	<!-- 메인 -->
