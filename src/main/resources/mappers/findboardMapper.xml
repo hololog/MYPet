@@ -6,10 +6,10 @@
 <mapper namespace="com.mypet.mappers.findboardMapper">
 	<insert id="insert_findboard">
 		insert into find_board
-		values (#{find_board_num},#{board_code},#{nickname},#{subject},
-				#{content},#{pet_type},#{missing_date},
-				#{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},#{detail_address},
-				#{result},#{insert_date},#{delete_date},#{reward})
+		values (#{find_board_num},#{board_code},#{nickname},#{title},
+				#{content},#{pet_type},#{readcount},#{pet_type},#{missing_date},
+				#{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},
+				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward})
 	</insert>
 	
 	<select id="getMaxNum" resultType="java.lang.Integer">

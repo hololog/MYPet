@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class FindboardDTO {
-	private String find_board_num;
+	private int find_board_num;
 	private String board_code;
 	private String nickname;
 	private String title;
@@ -26,10 +26,10 @@ public class FindboardDTO {
 	private int reward;
 	
 	
-	public String getFind_board_num() {
+	public int getFind_board_num() {
 		return find_board_num;
 	}
-	public void setFind_board_num(String find_board_num) {
+	public void setFind_board_num(int find_board_num) {
 		this.find_board_num = find_board_num;
 	}
 	public String getBoard_code() {

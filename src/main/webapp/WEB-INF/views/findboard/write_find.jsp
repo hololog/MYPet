@@ -21,8 +21,6 @@
        	  <jsp:include page="../inc/top.jsp"></jsp:include> 
             <!-- header 종료 -->
             <!-- ------------------------------- -->
-            <!-- 본문 시작 -->
-            <!-- ------------------------------- -->
            <!-- 제목 시작 -->
 			<div class="container">
 			  <h1 class="sub-title">실종공고</h1>
