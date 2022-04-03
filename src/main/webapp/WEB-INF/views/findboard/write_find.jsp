@@ -14,10 +14,11 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+	
 </head>
   <body class="bg-light">
             <!-- header 시작-->
-       	  <jsp:include page="../inc/top.jsp"></jsp:include>   
+       	  <jsp:include page="../inc/top.jsp"></jsp:include> 
             <!-- header 종료 -->
             <!-- ------------------------------- -->
             <!-- 본문 시작 -->
@@ -28,13 +29,14 @@
 			  <hr>
 			</div>
 			<!-- 제목 종료 -->
+			<!-- 본문 시작 -->
             <div class="container p-5">
-            
+
                 <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" enctype="multipart/form-data">
                     <!--작성자 닉네임 가져오기-->
-                    <input type="hidden" name="nickname" value="${sessionScope.id}">
+<%--                     <input type="hidden" name="nickname" value="${sessionScope.id}"> --%>
                     <!--작성 date 가져오기 timestamp-->
-                    <input type="hidden" value="date">
+<%--                     <input type="hidden" value="${}" > --%>
                     
                     <div class="row g-5">
                          <!--왼쪽여백-->
@@ -56,7 +58,7 @@
                             <!--동물 종류 select -->
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="animal_sort_eh">동물 종류</label>
-                                    <select class="form-select" id="animal_sort_eh" name="animal_category">
+                                    <select class="form-select" id="animal_sort_eh" name="${pet_type}">
                                         <option selected>선택해주세요</option>
                                         <option name="dog" value="0">개</option>
                                         <option name="cat" value="1">고양이</option>                
@@ -66,11 +68,11 @@
                             <!--동물 이름, 동물 나이 text-->  
                             <div class="input-group mb-3">
                                 <label class="input-group-text"> 동물 이름 </label>
-                                <input type="text" class="form-control" placeholder="이름">
+                                <input type="text" class="form-control" placeholder="이름" name="${pet_name}">
                             </div>
                             <div class="input-group mb-3">
                                 <label class="input-group-text"> 동물 나이 </label>
-                                <input type="text" class="form-control" placeholder="숫자만 입력">
+                                <input type="text" class="form-control" placeholder="숫자만 입력"  name="${pet_age}">
                                 <select class="form-select">
                                     <option>개월</option>
                                     <option>년(세)</option>
@@ -81,15 +83,15 @@
                                 <div class="input-group-text">동물 성별</div>
                                 <div class="form-control">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="ra1_eh" value="0">
+                                        <input class="form-check-input" type="radio" name="sex" id="ra1_eh" value="0" name="${pet_gender}">
                                         <label class="form-check-label" for="ra1_eh">암컷</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="ra2_eh" value="1">
+                                        <input class="form-check-input" type="radio" name="sex" id="ra2_eh" value="1" name="${pet_gender}">
                                         <label class="form-check-label" for="ra2_eh">수컷</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="ra3_eh" value="2">
+                                        <input class="form-check-input" type="radio" name="sex" id="ra3_eh" value="2" name="${pet_gender}">
                                         <label class="form-check-label" for="ra3_eh">모름</label>
                                     </div>
                                 </div>
@@ -97,7 +99,7 @@
                             <!--실종날짜-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">실종 날짜</label>
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" name="${missing_date}">
                             </div>
                             <!--실종지역 select (JQuery or API 적용 예정)-->
                             <div class="input-group">
