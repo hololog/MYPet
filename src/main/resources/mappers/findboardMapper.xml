@@ -12,7 +12,7 @@
 				#{result},#{insert_date},#{delete_date},#{reward})
 	</insert>
 	
-	<select id="getMaxNum" resultType="java.Lang.Integer">
+	<select id="getMaxNum" resultType="java.lang.Integer">
 		select max(find_board_num) from find_board 
 	</select>
 	
