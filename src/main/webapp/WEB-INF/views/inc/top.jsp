@@ -65,15 +65,21 @@ $(document).ready(function(){
 		}
 	});
 	
-// 	$('#login-email').focusout(function(){
-// 		$.ajax({
-// 			url:"${pageContext.request.contextPath }/member/memberCheck2",
-// 			data:{"email":$('#email').val()},
-// 			success:function(){
-// 				}
-// 			}
+	$('#floatingInput-signupEmail').focusout(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath }/member/memberCheck2",
+			data:{"email":$('#floatingInput-signupEmail').val()},
+			success:function(rdata){
+				if(rdata=='emailOk'){
+					rdata = "사용가능한 이메일입니다.";
+				} else {
+					rdata = "이미 가입한 이메일입니다.";
+				}
+				$('#join-email').html(rdata);
+			}
+		});
 			
-// 	});
+	});
 });
 </script>
 
@@ -92,8 +98,8 @@ $(document).ready(function(){
             <form action="${pageContext.request.contextPath }/member/loginPro" method="post">
               <div class="form-floating mb-3">
 <!--                 <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com"> -->
-                <input type="email" name="email" class="form-control rounded-4" id="login-email" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="email" name="email" class="form-control rounded-4" id="floatingInput-loginEmail" placeholder="name@example.com">
+                <label for="floatingInput-loginEmail" id="login-email">Email address</label>
               </div>
               <div class="form-floating mb-3">
 <!--                 <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password"> -->
@@ -123,7 +129,7 @@ $(document).ready(function(){
     </div>
       
     <!-- 회원가입 -->
-    <div class="modal fade modal-signin py-5" tabindex="-1" role="dialog" id="signup-modal" style="transition: opacity 0.5s linear;">
+    <div class="modal fade py-5" tabindex="-1" role="dialog" id="signup-modal" style="transition: opacity 0.5s linear;">
       <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
           <!-- Modal Header -->
@@ -135,8 +141,8 @@ $(document).ready(function(){
           <div class="modal-body p-5 pt-0">
             <form action="${pageContext.request.contextPath }/member/joinPro" method="post">
               <div class="form-floating mb-3">
-                <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="email" name="email" class="form-control rounded-4" id="floatingInput-signupEmail" placeholder="name@example.com">
+                <label for="floatingInput-signupEmail" id="join-email">Email address</label>
               </div>
               <div class="form-floating mb-3">
                 <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">

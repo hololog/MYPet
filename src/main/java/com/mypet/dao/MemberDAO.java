@@ -11,4 +11,6 @@ public interface MemberDAO {
 	
 	public MemberDTO memberCheck(MemberDTO memberDTO);
 	
+	public MemberDTO getMember(String email);
+	
 }
