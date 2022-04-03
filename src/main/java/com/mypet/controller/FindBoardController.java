@@ -35,6 +35,7 @@ public class FindBoardController {
 	public String write_findBoard() {
 		return "findboard/write_find";
 	}
+	//은혜
 	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
 	public String write_find(FindboardDTO findboardDTO) {
 		findboardService.insert_findboard(findboardDTO);
