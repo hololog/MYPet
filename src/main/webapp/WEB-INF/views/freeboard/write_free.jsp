@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- 클래식 CK에디터 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
-    </head>
     <!-- 에디터 넓이 높이 조절 -->
     <style>
       .ck.ck-editor {
@@ -36,8 +35,9 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-	<form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
-    <div class="container py-5"name="board_code">
+
+     <form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
+    <div class="container py-5" name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
@@ -68,9 +68,10 @@
         </div>
       </div>
 
-      <div class="col-12" id="editor">
+      <div class="col-12" id="">
         <label for="content">내용</label>
-       <textarea  class="ckeditor" name="content" id="editor" ></textarea>
+       <textarea  class="form-control h-25 " name="content" rows="15"></textarea>
+     
          
       </div>
       </div>
@@ -79,7 +80,7 @@
      <br>
      <br>
 	
-      <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
+     <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
         <button type="submit"  class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
           등   록          
         </button>
@@ -88,19 +89,10 @@
           목록가기         
         </button>
       </div> 
-    <script type='text/javascript'>
-   
-         ClassicEditor
-             .create( document.querySelector( '#editor' ))
-             .catch( error => {
-                 console.error( error );
-           } );
-   </script> 
-   
+    
     
    </form>
-   
-      <!-- 게시판 끝 -->
+       <!-- 게시판 끝 -->
         
     <!-- ------------------------------- -->
     <!-- 본문 종료-->
@@ -109,7 +101,8 @@
          <!-- footer 시작 -->
   	<jsp:include page="../inc/bottom.jsp"></jsp:include>
     <!-- footer 종료 -->
-  
+ 
+
     <!--스크립트 적용 -->
     <script src="js/main.js"></script>
     <!-- 부트스트랩 스크립트 적용 -->

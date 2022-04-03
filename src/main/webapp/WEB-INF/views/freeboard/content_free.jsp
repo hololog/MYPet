@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="css/slick-theme.css" />
 
 
-    </head>
+   </head>
   <body>
 	<div>
     <!-- header 시작 -->
@@ -55,21 +55,19 @@
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-            
-            <c:if test="${ ! empty sessionScope.user_id }">
+           <c:if test="${ ! empty sessionScope.id }"> 
 
-				<c:if test="${sessionScope.user_id eq boardDTO.nickname}">
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/freeboard/listUpdate_free?num=${boardDTO.free_board_num}'">수정</button>
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/freeboard/listdelete_free?num=${boardDTO.free_board_num}'">삭제</button>
-                </c:if>
-	
-			</c:if>
+				<c:if test="${sessionScope.id eq boardDTO.name}"> 
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick="location.href=''">수정</button>
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick="location.href=''">삭제</button>
+     		      </c:if>
+		       </c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "
@@ -120,7 +118,7 @@
 <!--                 class="carousel slide" -->
 <!--                 data-bs-ride="carousel" -->
 <!--                 style="width: 1500px; " -->
-<!--                 > --> -->
+<!--                 > --> 
 <!--             <div -->
 <!--                 id="carouselExampleIndicators" -->
 <!--                 class="carousel slide" -->
@@ -188,23 +186,22 @@
 
 <!--             </div> -->
 <!--         </div> -->
-<!--         슬라이드 쇼 끝 -->
-
-        <!-- 글 -->
+        <!-- 슬라이드 쇼 끝 -->
+         <!-- 글 -->
+         <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
-                <table id="notice">
-				<tr><td>글번호</td><td>${boardDTO.free_board_num}</td>
-				     <td>글쓴날짜</td><td>${boardDTO.date}</td></tr>
-				<tr><td>글쓴이</td><td>${boardDTO.nickname}</td>
-				    <td>조회수</td><td>${boardDTO.readcount}</td></tr>
-				<tr><td>글제목</td><td colspan="3">${boardDTO.subject}</td></tr>
-				<tr><td>파일</td><td colspan="3">
-<%-- 				<a href="${pageContext.request.contextPath }/resources/upload/${boardDTO.file}" download> --%>
-<%-- 				${boardDTO.file}</a></td></tr> --%>
-				<tr><td>글내용</td><td colspan="3">${boardDTO.content}</td></tr>
+               <table id="notice text-center border">
+				<tr><td>글번호 : </td><td> ${boardDTO.free_board_num}</td></tr>
+				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-8"></td> <td>작성일 : </td><td> ${boardDTO.insert_date}</td></tr>
 				</table>
+				<br>
+				<br>
+				<div>글내용</div>
+				<br><br>
+				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br><br>
             </div>
         </div>
         <!-- 글끝 -->
@@ -215,32 +212,10 @@
                 class="btn btn-primary"
                 role="button"
                 style="color: white"
-                 data-toggle="modal"
-                 data-target="#exampleModal"
                 onclick="report()">제보하기</span>
             <p class="arrow_box">연락수단 확인하고 글쓴이에게 제보하기!</p>
         </div>
         <!-- 제보버튼 끝 -->
-<!--         Modal -->
-<!-- 		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> -->
-<!-- 		  <div class="modal-dialog" role="document"> -->
-<!-- 		    <div class="modal-content"> -->
-<!-- 		      <div class="modal-header"> -->
-<!-- 		        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-<!-- 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-<!-- 		          <span aria-hidden="true">&times;</span> -->
-<!-- 		        </button> -->
-<!-- 		      </div> -->
-<!-- 		      <div class="modal-body"> -->
-<!-- 		        ... -->
-<!-- 		      </div> -->
-<!-- 		      <div class="modal-footer"> -->
-<!-- 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-<!-- 		        <button type="button" class="btn btn-primary">Save changes</button> -->
-<!-- 		      </div> -->
-<!-- 		    </div> -->
-<!-- 		  </div> -->
-<!-- 		</div> -->
 
         <!-- <div class="row">-->
         <!-- <div class="col-md-12 col-xl-8">-->
@@ -280,7 +255,7 @@
         <!-- -->
         <!-- </div>-->
         <!-- </div>-->
-    </div>
+<!--     </div> -->
     <!-- <div id="form-commentInfo-kj">-->
     <!-- <div id="comment-count-kj">댓글 <span id="count-kj">0</span></div>-->
     <!-- <input id="comment-input-kj" placeholder="댓글을 입력해 주세요.">-->
@@ -295,10 +270,9 @@
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
-                
-                 <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${like_count} </i>
-                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
+                <!-- 댓글수, 조회수 아이콘 -->
+                          <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>
+                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">
 
                     <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
@@ -361,58 +335,7 @@
         </div>
     </section>
 
-    <!-- <div class="container mt-5">-->
-    <!-- <div class="row">-->
-    <!-- <div class="col-sm-4">-->
-    <!-- <h2>About Me</h2>-->
-    <!-- <h5>Photo of me:</h5>-->
-    <!-- <div class="fakeimg">Fake Image</div>-->
-    <!-- <p>Some text about me in culpa qui officia deserunt mollit anim..</p>-->
-    <!-- <hr class="d-sm">-->
-
-    <!-- <h3 class="mt-4">참고 링크</h3>-->
-
-    <!-- <p>Lorem ipsum dolor sit ame.</p>-->
-    <!-- <ul class="nav nav-pills flex-column">-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- </ul>-->
-
-    <!-- </div>-->
-    <!-- <div class="col-sm-8">-->
-    <!-- <h2>실종시 대처방법 </h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-
-    <!-- <h2 class="mt-5">구조시 대처방법</h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-    <!-- </div>-->
-    <!-- </div>-->
-    <!-- </div>-->
-
-
-
+    
 
  <!-- 게시판 끝 -->
         

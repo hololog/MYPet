@@ -192,13 +192,16 @@
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
-               <table id="notice text-center">
-				<tr><td>글번호</td><td>${boardDTO.tip_board_num}</td></tr>
-				    <tr> <td>글쓴날짜</td><td>${boardDTO.insert_date}</td></tr>
-				<tr><td>글쓴이</td><td>${boardDTO.nickname}</td></tr>
-				
-				<tr><td>글내용</td><td>${bDTO.content}</td></tr>
+               <table id="notice text-center border">
+				<tr><td>글번호 : </td><td> ${boardDTO.tip_board_num}</td></tr>
+				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-8"></td> <td>작성일 : </td><td> ${boardDTO.insert_date}</td></tr>
 				</table>
+				<br>
+				<br>
+				<div>글내용</div>
+				<br><br>
+				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br><br>
             </div>
         </div>
         <!-- 글끝 -->

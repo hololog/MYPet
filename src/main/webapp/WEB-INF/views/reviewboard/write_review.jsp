@@ -37,7 +37,7 @@
         <!-- ------------------------------- -->
 
      <form action="${pageContext.request.contextPath }/reviewboard/write_reviewPro" method="post">
-    <div class="container py-5"name="board_code">
+    <div class="container py-5" name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
@@ -68,9 +68,10 @@
         </div>
       </div>
 
-      <div class="col-12" id="editor">
+      <div class="col-12" id="">
         <label for="content">내용</label>
-       <textarea  class="ckeditor" name="content" id="editor" ></textarea>
+       <textarea  class="form-control h-25 " name="content" rows="15"></textarea>
+     
          
       </div>
       </div>
@@ -89,13 +90,7 @@
         </button>
       </div> 
     
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ))
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
+    
    </form>
        <!-- 게시판 끝 -->
         
