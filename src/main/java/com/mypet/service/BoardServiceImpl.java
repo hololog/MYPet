@@ -26,10 +26,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
 		
 		if(boardDAO.getfreeMaxNum()!=null) {
-	        int num=boardDAO.getfreeMaxNum()+1;
-	        boardDTO.setFree_board_num(num+"");
-	      }else {
-	        boardDTO.setFree_board_num(1+"");
+			 boardDTO.setFree_board_num(boardDAO.getfreeMaxNum()+1);	      
+			 }else {
+	        boardDTO.setFree_board_num(1);
 	      }
 		boardDAO.write_freeBoard(boardDTO);
 	}
@@ -39,12 +38,10 @@ public class BoardServiceImpl implements BoardService {
 		
 		boardDTO.setReadcount(0);
 		boardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
-		
 		if(boardDAO.getnoticeMaxNum()!=null) {
-	        int num=boardDAO.getnoticeMaxNum()+1;
-	        boardDTO.setNotice_num(num+"");
+	        boardDTO.setNotice_num(boardDAO.getnoticeMaxNum()+1);
 	      }else {
-	        boardDTO.setNotice_num(1+"");
+	        boardDTO.setNotice_num(1);
 	      }
 		boardDAO.write_noticeBoard(boardDTO);
 	}
@@ -56,10 +53,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
 		
 		if(boardDAO.getreviewMaxNum()!=null) {
-	        int num=boardDAO.getreviewMaxNum()+1;
-	        boardDTO.setTip_board_num(num+"");
+	        boardDTO.setTip_board_num(boardDAO.getreviewMaxNum()+1);
 	      }else {
-	        boardDTO.setTip_board_num(1+"");
+	        boardDTO.setTip_board_num(1);
 	      }
 		boardDAO.write_reviewBoard(boardDTO);
 	}
