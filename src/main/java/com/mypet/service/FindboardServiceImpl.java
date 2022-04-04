@@ -26,6 +26,9 @@ public class FindboardServiceImpl implements FindboardService {
 		// nickname 구하기 (임시)
 		findboardDTO.setNickname("임시저장");
 		//find_board_num 구하기
+//		if(findboardDAO.getMaxNum() != null) findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
+		findboardDTO.setFind_board_num(1); // INT 변경시 수정예정 
+		//readcount, insertdate 설정
 		if(findboardDAO.getMaxNum() != null) findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
 		else findboardDTO.setFind_board_num(1);
 		//readcount, insertdate, boardnum 설정

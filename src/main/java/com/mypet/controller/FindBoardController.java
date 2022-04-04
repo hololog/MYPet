@@ -1,5 +1,7 @@
 package com.mypet.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,9 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FindboardDTO;
+import com.mypet.domain.FindcommentDTO;
 import com.mypet.service.FindboardService;
+import com.mypet.service.FindcommentService;
 
 @Controller
 public class FindBoardController {
@@ -18,14 +21,18 @@ public class FindBoardController {
 	@Inject
 	public  FindboardService findboardService;
 	
+	@Inject
+	public FindcommentService findcommentService;
+	
 	// 경진
 	@RequestMapping(value = "/find/content", method = RequestMethod.GET)
-	public String content_find(HttpServletRequest request, Model model) {
+	public String content_find(HttpServletRequest request, Model model) throws Exception {
 		int num=Integer.parseInt(request.getParameter("find_board_num"));
-		
 		FindboardDTO findboardDTO=findboardService.getfindBoard(num);
-		
 		model.addAttribute("findboardDTO", findboardDTO);
+		
+		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
+		model.addAttribute("replyList", replyList);
 		
 		return "findboard/content";
 	}
