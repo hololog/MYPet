@@ -52,10 +52,10 @@
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="animal_sort_eh">동물 종류</label>
                                     <select class="form-select" id="animal_sort_eh" name="pet_type">
-                                        <option name="pet_type" value="" selected>선택해주세요</option>
-                                        <option name="pet_type" value="0">개</option>
-                                        <option name="pet_type" value="1">고양이</option>                
-                                        <option name="pet_type" value="2">기타</option>                
+                                        <option value="" selected>선택해주세요</option>
+                                        <option value="0">개</option>
+                                        <option value="1">고양이</option>                
+                                        <option value="2">기타</option>                
                                     </select>
                             </div>
                             <!--동물 이름, 동물 나이 text-->  
@@ -161,7 +161,7 @@
       
 
         <!--스크립트 적용 -->
-        <script src="js/main.js"></script>
+        <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>
         <!-- 부트스트랩 스크립트 적용 -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

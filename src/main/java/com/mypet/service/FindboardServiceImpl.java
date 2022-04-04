@@ -23,6 +23,8 @@ public class FindboardServiceImpl implements FindboardService {
 	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
+		// nickname 구하기 (임시)
+		findboardDTO.setNickname("임시저장");
 		//find_board_num 구하기
 		if(findboardDAO.getMaxNum() != null) findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
 		else findboardDTO.setFind_board_num(1);
