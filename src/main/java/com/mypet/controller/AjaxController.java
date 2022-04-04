@@ -18,8 +18,8 @@ public class AjaxController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value = "/member/memberCheck2", method = RequestMethod.GET)
-	public ResponseEntity<String> memberCheck2(HttpServletRequest request){
+	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
+	public ResponseEntity<String> memberCheck(HttpServletRequest request){
 		String result="";
 		String email = request.getParameter("email");
 		MemberDTO memberDTO = memberService.getMember(email);
@@ -34,4 +34,6 @@ public class AjaxController {
 		
 		return entity;
 	}
+	
+	
 }

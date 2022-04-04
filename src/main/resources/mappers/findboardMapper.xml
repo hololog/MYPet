@@ -5,12 +5,16 @@
   
 <mapper namespace="com.mypet.mappers.findboardMapper">
 	<insert id="insert_findboard">
-		INSERT INTO 	find_board 
-		VALUES 			(#{find_board_num},#{board_code},#{nickname},#{subject},
-						 #{content},#{readcount},#{pet_type},#{missing_date},
-						 #{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},#{detail_address},
-						 #{status},#{insert_date},#{delete_date},#{reward})
+		insert into find_board
+		values (#{find_board_num},#{board_code},#{nickname},#{title},
+				#{content},#{pet_type},#{readcount},#{pet_type},#{missing_date},
+				#{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},
+				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward})
 	</insert>
+	
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(find_board_num) from find_board 
+	</select>
 	
 
 	<select id="getfindBoard" resultType="com.mypet.domain.FindboardDTO">

@@ -64,5 +64,5 @@ public interface BoardService {
 		public void deletereviewBoard(int num);
 	//Delete end
 	
-	public void insert_findboard(BoardDTO boardDTO);
+
 }

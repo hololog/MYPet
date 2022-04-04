@@ -265,15 +265,5 @@ public class BoardController {
 //			return "redirect:/board/readView";
 //		}
 
-	
-	//은혜
-	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)
-	public String write_findBoard() {
-		return "findboard/write_find";
-	}
-	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
-	public String write_find(BoardDTO boardDTO) {
-		boardService.insert_findboard(boardDTO);
-		return "redirect:/findboard/write_find";
-	}
+
 }
