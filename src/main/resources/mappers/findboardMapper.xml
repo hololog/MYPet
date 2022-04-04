@@ -5,9 +5,11 @@
   
 <mapper namespace="com.mypet.mappers.findboardMapper">
 	<insert id="insert_findboard">
-		insert into find_board
-		values (#{find_board_num},#{board_code},#{nickname},#{title},
-				#{content},#{pet_type},#{readcount},#{pet_type},#{missing_date},
+		insert into find_board(find_board_num, board_code, nickname, title, content, readcount, pet_type,
+								missing_date, pet_name, pet_age, pet_gender,address, address2, result, 
+								insert_date, delete_date, detail_address, reward)
+		values (#{find_board_num},'f',#{nickname},"title",
+				#{content},#{readcount},#{pet_type},#{missing_date},
 				#{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},
 				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward})
 	</insert>
@@ -16,7 +18,6 @@
 		select max(find_board_num) from find_board 
 	</select>
 	
-
 	<select id="getfindBoard" resultType="com.mypet.domain.FindboardDTO">
 		select * from find_board where find_board_num=#{find_board_num}
 	</select>

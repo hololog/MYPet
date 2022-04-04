@@ -47,6 +47,6 @@ public class FindBoardController {
 	public String write_find(FindboardDTO findboardDTO) {
 		findboardService.insert_findboard(findboardDTO);
 		System.out.println("insert_findboard 메서드 실행");
-		return "redirect:/findboard/write";
+		return "redirect:/findboard/list";
 	}
 }

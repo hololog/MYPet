@@ -14,7 +14,53 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-	
+	<!-- JQuery -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$('#f_eh').submit(function(){				
+				if($('#animal_sort_eh').val()==""){
+					alert("동물 종류를 선택해 주세요");
+					return false;
+				}
+				if($('#pet_name').val()==""){
+					alert("동물 이름을 입력해 주세요");
+					$('#pet_name').focus();
+					return false;
+				}
+				if($('#pet_age').val()==""){
+					alert("동물 나이를 입력해 주세요");
+					$('#pet_age').focus();
+					return false;
+				}
+				if($('#pet_gender').val()==""){
+					alert("동물 성별을 체크해 주세요");
+					return false;
+				}
+				if($('#missing_date').val()==""){
+					alert("실종날짜를 선택해 주세요");
+					return false;
+				}
+				if($('#address').val() || $('#address2').val() || $('#detail_address').val()==""){
+					alert("실종지역을 기입해 주세요");
+					return false;
+				}
+				if($('#content').val()==""){
+					alert("상세 설명을 추가해 주세요");
+					$('#content').focus();
+					return false;
+				}
+				if($('#contact').val()==""){
+					alert("연락수단을 추가해 주세요");
+					$('#contact').focus();
+					return false;
+				}
+ 			});//
+
+ 		});//		
+ 		
+ 	});//
+	</script>
 </head>
   <body class="bg-light">
             <!-- header 시작-->
@@ -30,7 +76,8 @@
 			<!-- 본문 시작 -->
             <div class="container p-5">
             
-                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post"> <!--  enctype="multipart/form-data" -->
+                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh"> <!--  enctype="multipart/form-data" -->
+                   <input type="hidden" value="${sessionScope.nickname}" name="nickname">
                     <div class="row g-5">
                          <!--왼쪽여백-->
                         <div class="col-md-1 col-lg-3"></div>
@@ -39,13 +86,13 @@
                             <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
                             <div class="row">
                                 <div class="col form-check form-switch mb-3" id="switch_eh">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="미해결" name="result">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="0" name="result">
                                     <label class="form-check-label" for="switch_eh">미해결</label>
                                 </div>
                             <!--사례금 유무-->
                                 <div class="col input-group mb-3">
                                     <label class="input-group-text">사례금</label>
-                                    <input type="text" class="form-control" placeholder="만원" name="reward">
+                                    <input type="text" class="form-control" placeholder="만원" id="reward" name="reward">
                                 </div>
                             </div>
                             <!--동물 종류 select -->
@@ -65,7 +112,7 @@
                             </div>
                             <div class="input-group mb-3">
                                 <label class="input-group-text"> 동물 나이 </label>
-                                <input type="text" class="form-control" placeholder="숫자만 입력" value="pet_age">
+                                <input type="text" class="form-control" placeholder="숫자만 입력" name="pet_age">
                                 <select class="form-select">
                                     <option>개월</option>
                                     <option>년(세)</option>
@@ -76,15 +123,15 @@
                                 <div class="input-group-text">동물 성별</div>
                                 <div class="form-control">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="ra1_eh" value="0" name="pet_gender">
+                                        <input class="form-check-input" type="radio" id="ra1_eh" value="0" name="pet_gender">
                                         <label class="form-check-label" for="ra1_eh">암컷</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="ra2_eh" value="1" name="pet_gender">
+                                        <input class="form-check-input" type="radio" id="ra2_eh" value="1" name="pet_gender">
                                         <label class="form-check-label" for="ra2_eh">수컷</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sex" id="ra3_eh" value="2" name="pet_gender">
+                                        <input class="form-check-input" type="radio" id="ra3_eh" value="2" name="pet_gender">
                                         <label class="form-check-label" for="ra3_eh">모름</label>
                                     </div>
                                 </div>
@@ -128,7 +175,7 @@
                             <!--연락가능 수단-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">연락 가능 수단</label>
-                                <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등">
+                                <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact">
                             </div>
                             <!--file 드래그앤드롭-->
                             <div class="dropzone mb-5" id="dropZone">
@@ -151,14 +198,12 @@
                     </div>
                 </form>
             </div>
-            
             <!-- ------------------------------- -->
             <!-- 본문 종료-->
             <!-- ------------------------------- -->
             <!-- footer 시작 -->
        	  <jsp:include page="../inc/bottom.jsp"></jsp:include>
 	         <!-- footer 종료 -->
-      
 
         <!--스크립트 적용 -->
         <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>

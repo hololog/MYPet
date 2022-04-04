@@ -29,8 +29,8 @@ public class MemberController {
 		MemberDTO memberCheckDTO = memberService.memberCheck(memberDTO);
 
 		if (memberCheckDTO != null) {
-			session.setAttribute("email", memberDTO.getEmail());
-			session.setAttribute("nickname", memberDTO.getNickname());
+			session.setAttribute("email", memberCheckDTO.getEmail());
+			session.setAttribute("nickname", memberCheckDTO.getNickname());
 			return "redirect:/main";
 		} else {
 			return "member/msg";
