@@ -55,19 +55,16 @@
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-           <c:if test="${ ! empty sessionScope.id }"> 
-
-				<c:if test="${sessionScope.id eq boardDTO.name}"> 
+          
 		            <button
 		                type="button"
 		                class="btn btn-outline-primary "
-		                onclick="location.href=''">수정</button>
+		                onclick="location.href='${pageContext.request.contextPath }/freeboard/update_free?free_board_num=${boardDTO.free_board_num}'">수정</button>
 		            <button
 		                type="button"
 		                class="btn btn-outline-primary "
-		                onclick="location.href=''">삭제</button>
-     		      </c:if>
-		       </c:if>
+		                onclick="location.href='${pageContext.request.contextPath }/freeboard/delete_free?free_board_num=${boardDTO.free_board_num}'">삭제</button>
+     		     
             <button
                 type="button"
                 class="btn btn-outline-primary "

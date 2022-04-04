@@ -63,7 +63,11 @@
                   <tbody>
                     <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
-                        <td>${bDTO.tip_board_num}</td>
+                        <td><c:forEach var="list" items="${list}" varStatus="status" >
+
+   						<td>${(pageDTO.pageBlock - status.index) - ( (pageDTO.currentPage - 1)  *  pageDTO.pageNum ) } </td>
+
+							</c:forEach></td>
                         <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -74,9 +78,8 @@
                         <td>${bDTO.nickname}</td>
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
-                    </tr>
-					</c:forEach> 
-                    
+                   </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
                   <hr/>
@@ -87,13 +90,33 @@
                         <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
                     </div>
                   </div>
+                  <!-- 아이디 없을때 -->
+<%--                   <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"> --%>
+<!--                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div> -->
+<!--                   	<script> -->
+
+<!-- // 						function login() { -->
+						
+<!-- // 						  alert("로그인해라"); -->
+						
+<%-- // 						  location.href = "${pageContext.request.contextPath }/main/main"; --%>
+						
+<!-- // 						} -->
+						
+<!-- 						</script> -->
+<%--                   </c:if> --%>
+                  
+                  
+<!--                   아이디 있을때 -->
+<%--                   <c:if test="${!empty user_id }"> --%>
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button>
                   </div>
+<%--                   </c:if> --%>
                   <!-- 다음버튼 -->
-                  <div class="text-center">
-                        <ul class="pagination justify-content-center" style="margin:20px 0">
+                  <div class="text-center clear">
+                        <div class="pagination justify-content-center" style="margin:20px 0">
                             
                             <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
 							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
@@ -106,10 +129,10 @@
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
 							</c:if>
-                        </ul>
+                       
                   </div>
                </div>
-           
+           </div>
         
 
 

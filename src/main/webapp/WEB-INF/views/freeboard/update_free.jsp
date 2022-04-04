@@ -36,19 +36,20 @@
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
 
-     <form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
+     <form action="${pageContext.request.contextPath }/freeboard/updatePro_free" method="post">
+     <input type="hidden" name="free_board_num" value="${boardDTO.free_board_num }">
     <div class="container py-5" name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
-        글작성</h3>
+        글수정</h3>
         <br>
-	<input type="text"name="nickname"id="nicename">
+	<input type="text"name="nickname"id="nicename" >
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text ">제목</label>
             </div>            
-            <input type="text" class="form-control"name="subject">              
+            <input type="text" class="form-control"name="subject" value="${boardDTO.subject }">              
           </div>
           
         </div>
@@ -70,8 +71,8 @@
 
        <div class="col-12" id="editor">
         
-       <textarea name="content" id="summernote" placeholder="내용을 입력해주세요." >
-      
+       <textarea name="content"  id="summernote" placeholder="내용을 입력해주세요." >
+      ${boardDTO.content }
 
        </textarea>
           
@@ -84,7 +85,7 @@
 	
      <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
         <button type="submit"  class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
-          등   록          
+          글 수정           
         </button>
         <button type="button" class="btn btn-outline-primary" style="width: 20%; font-weight: bold;  "
         onclick="location.href='${pageContext.request.contextPath }/freeboard/list_free'">
@@ -95,7 +96,7 @@
      <script>
     $(document).ready(function() {
     	 $('#summernote').summernote({
-    	        placeholder: '글을 입력해주세요',
+    	        placeholder: '',
     	        tabsize: 2,
     	        height: 500
     	      });

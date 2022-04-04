@@ -24,7 +24,7 @@ public class FindboardDAOImpl implements FindboardDAO {
 	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
-		sqlSession.insert(namespace+".insert_findboard");
+		sqlSession.insert(namespace+".insert_findboard", findboardDTO);
 	}
 
 	@Override
