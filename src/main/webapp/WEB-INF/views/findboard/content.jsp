@@ -79,8 +79,8 @@
 		<!-- 제목 시작 -->
 		<div class="container">
 			<h1 class="sub-title">
-			<b>${findboardDTO.title}</b>
-			<a>(</a><a>${findboardDTO.address}</b>&nbsp;<b>${findboardDTO.address2}</b><a>)</a></h1>
+				<b>${findboardDTO.title}</b> <a>(</a><a>${findboardDTO.address}</b>&nbsp;<b>${findboardDTO.address2}</b><a>)</a>
+			</h1>
 			<hr>
 		</div>
 
@@ -211,7 +211,7 @@
 															장소</td>
 														<td width="" style="padding-left: 10px"><b>${findboardDTO.address}</b>&nbsp;<b>${findboardDTO.address2}</b>&nbsp;<b>${findboardDTO.detail_address}</b></td>
 														<td width="113"
-															style="background-color: #919ced;  padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
+															style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
 															날짜</td>
 														<td width="" style="text-align: center"><b> <fmt:formatDate
 																	value="${findboardDTO.missing_date}"
@@ -293,33 +293,21 @@
 								<img class="rounded-circle"
 									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
 							</div>
-							<div class="ms-3">
-								<div class="fw-bold">익명1</div>
-								꼭 찾으셧으면 좋겟어요 ㅠㅠ
-
-								<div class="d-flex mt-4">
-									<div class="flex-shrink-0">
-										<img class="rounded-circle"
-											src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-											alt="...">
-									</div>
-									<div class="ms-3">
-										<div class="fw-bold">익명2</div>
-										그러게요 ㅠㅠ
-									</div>
-								</div>
-								<!-- Child comment 2-->
-								<div class="d-flex mt-4">
-									<div class="flex-shrink-0">
-										<img class="rounded-circle"
-											src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-											alt="...">
-									</div>
-									<div class="ms-3">
-										<div class="fw-bold">익명3</div>
-										33
-									</div>
-								</div>
+							<div class="ms-3" id="commentList">
+						
+									<div class="fw-bold"></div>
+									<c:forEach items="${replyList}" var="commentList">
+									<p>${commentList.c_nik}</p> 
+									<p>${commentList.c_content}</p>
+									<div class="d-flex mt-4">
+										<div class="flex-shrink-0">
+											<img class="rounded-circle"
+												src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+												alt="...">
+										</div>
+										</div>
+										</c:forEach>
+							
 							</div>
 						</div>
 						<!-- Single comment-->
@@ -329,7 +317,7 @@
 									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
 							</div>
 							<div class="ms-3">
-								<div class="fw-bold">글작성자</div>
+								<div class="fw-bold">${commentList.c_nik}</div>
 								찾았습니다!! 감사합니다!!
 							</div>
 						</div>
@@ -352,7 +340,7 @@
 	<jsp:include page="../inc/bottom.jsp"></jsp:include>
 
 	<!-- footer 종료 -->
-	<script src="js/main.js"></script>
+<!-- 	<script src="js/main.js"></script> -->
 	<!-- 부트스트랩 스크립트 적용 -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

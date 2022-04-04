@@ -20,4 +20,11 @@
 	<select id="getfindBoard" resultType="com.mypet.domain.FindboardDTO">
 		select * from find_board where find_board_num=#{find_board_num}
 	</select>
+	
+	<!-- 댓글조회 -->
+	<select id="readComment" resultType="com.mypet.domain.FindcommentDTO">
+		SELECT * FROM find_comment
+		where find_board_num = #{find_board_num}
+	</select>
+
 </mapper>
