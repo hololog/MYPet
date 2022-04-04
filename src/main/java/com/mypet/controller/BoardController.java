@@ -221,6 +221,88 @@ public class BoardController {
 		
 		return "freeboard/content_free";
 	}
+	@RequestMapping(value = "/freeboard/update_free", method = RequestMethod.GET)
+	public String update_free(HttpServletRequest request, Model model) {
+		int num=Integer.parseInt(request.getParameter("free_board_num"));
+		
+		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		
+		model.addAttribute("boardDTO", boardDTO);
+		
+		return "freeboard/update_free";
+	}
+	@RequestMapping(value = "/freeboard/updatePro_free", method = RequestMethod.POST)
+	public String updatePro_free(BoardDTO boardDTO) {
+		boardService.updatefreeBoard(boardDTO);
+		
+		return "redirect:/freeboard/list_free";
+	}
+	@RequestMapping(value = "/freeboard/delete_free", method = RequestMethod.GET)
+	public String free_delete(HttpServletRequest request) {
+		int num=Integer.parseInt(request.getParameter("free_board_num"));
+		
+		boardService.deletefreeBoard(num);
+		
+		
+		return "redirect:/freeboard/list_free";
+	}
+	//
+	
+	
+	@RequestMapping(value = "/reviewboard/update_review", method = RequestMethod.GET)
+	public String update_review(HttpServletRequest request, Model model) {
+		int num=Integer.parseInt(request.getParameter("tip_board_num"));
+		
+		BoardDTO boardDTO=boardService.getreviewBoard(num);
+		
+		model.addAttribute("boardDTO", boardDTO);
+		
+		return "reviewboard/update_review";
+	}
+	@RequestMapping(value = "/reviewboard/updatePro_review", method = RequestMethod.POST)
+	public String updatePro_review(BoardDTO boardDTO) {
+		boardService.updatereviewBoard(boardDTO);
+		
+		return "redirect:/reviewboard/list_review";
+	}
+	@RequestMapping(value = "/reviewboard/delete_review", method = RequestMethod.GET)
+	public String delete_review(HttpServletRequest request) {
+		int num=Integer.parseInt(request.getParameter("tip_board_num"));
+		
+		boardService.deletereviewBoard(num);
+		
+		
+		return "redirect:/reviewboard/list_review";
+	}
+	//
+	
+	
+	
+	@RequestMapping(value = "/notice/update_notice", method = RequestMethod.GET)
+	public String update_notice(HttpServletRequest request, Model model) {
+		int num=Integer.parseInt(request.getParameter("notice_num"));
+		
+		BoardDTO boardDTO=boardService.getnoticeBoard(num);
+		
+		model.addAttribute("boardDTO", boardDTO);
+		
+		return "notice/update_notice";
+	}
+	@RequestMapping(value = "/notice/updatePro_notice", method = RequestMethod.POST)
+	public String updatePro_notice(BoardDTO boardDTO) {
+		boardService.updatenoticeBoard(boardDTO);
+		
+		return "redirect:/notice/list_notice";
+	}
+	@RequestMapping(value = "/notice/delete_notice", method = RequestMethod.GET)
+	public String delete_notice(HttpServletRequest request) {
+		int num=Integer.parseInt(request.getParameter("notice_num"));
+		
+		boardService.deletenoticeBoard(num);
+		
+		
+		return "redirect:/notice/list_notice";
+	}
 	//세히
 //	//댓글 작성
 //		@RequestMapping(value="/replyWrite", method = RequestMethod.POST)

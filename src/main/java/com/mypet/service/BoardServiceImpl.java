@@ -184,7 +184,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	@Override
 	public void deletereviewBoard(int num) {
-		boardDAO.deletefreeBoard(num);
+		boardDAO.deletereviewBoard(num);
 	}
 //delete end
 	

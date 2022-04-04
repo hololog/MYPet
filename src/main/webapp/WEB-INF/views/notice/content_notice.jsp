@@ -53,15 +53,15 @@
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
             <c:if test="${ ! empty sessionScope.id }">
 
-		<c:if test="${sessionScope.id eq boardDTO.name}">
+		<c:if test="${sessionScope.id eq boardDTO.nickname}">
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">수정</button>
+                onclick="location.href='${pageContext.request.contextPath }/notice/update_notice?nitice_num=${boardDTO.notice_num}'">수정</button>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">삭제</button>
+                onclick="location.href='${pageContext.request.contextPath }/notice/delete_notice?nitice_num=${boardDTO.nitice_num}'">삭제</button>
                 </c:if>
                 </c:if>
             <button
