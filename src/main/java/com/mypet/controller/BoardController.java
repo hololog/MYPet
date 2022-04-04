@@ -67,7 +67,7 @@ public class BoardController {
 	//세히
 	@RequestMapping(value = "/reviewboard/list_review", method = RequestMethod.GET)
 	public String reviewList(HttpServletRequest request, Model model) {
-		int pageSize=20;
+		int pageSize=15;
 		
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
@@ -81,7 +81,7 @@ public class BoardController {
 		
 		List<BoardDTO> boardList=boardService.getreviewBoardList(pageDTO);
 		
-		int count=boardService.getfreeBoardCount();
+		int count=boardService.getreviewBoardCount();
 		
 		int currentPage=Integer.parseInt(pageNum);
 		int pageBlock=10;
@@ -121,7 +121,7 @@ public class BoardController {
 		
 		List<BoardDTO> boardList=boardService.getnoticeBoardList(pageDTO);
 		
-		int count=boardService.getfreeBoardCount();
+		int count=boardService.getnoticeBoardCount();
 		
 		int currentPage=Integer.parseInt(pageNum);
 		int pageBlock=10;

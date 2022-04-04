@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 
 public class BoardDTO {
 
-	private String free_board_num;
-	private String tip_board_num;
-	private String notice_num;
+	private int free_board_num;
+	private int tip_board_num;
+	private int notice_num;
 	private char board_code;
 	private String nickname;
 	private String subject;
@@ -44,10 +44,10 @@ public class BoardDTO {
 	public void setLike_count(int like_count) {
 		this.like_count = like_count;
 	}
-	public String getFree_board_num() {
+	public int getFree_board_num() {
 		return free_board_num;
 	}
-	public void setFree_board_num(String free_board_num) {
+	public void setFree_board_num(int free_board_num) {
 		this.free_board_num = free_board_num;
 	}
 	public String getNickname() {
@@ -74,16 +74,16 @@ public class BoardDTO {
 	public void setBoard_code(char board_code) {
 		this.board_code = board_code;
 	}
-	public String getTip_board_num() {
+	public int getTip_board_num() {
 		return tip_board_num;
 	}
-	public void setTip_board_num(String tip_board_num) {
+	public void setTip_board_num(int tip_board_num) {
 		this.tip_board_num = tip_board_num;
 	}
-	public String getNotice_num() {
+	public int getNotice_num() {
 		return notice_num;
 	}
-	public void setNotice_num(String notice_num) {
+	public void setNotice_num(int notice_num) {
 		this.notice_num = notice_num;
 	}
 	
