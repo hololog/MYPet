@@ -23,7 +23,7 @@
 		</c:when>
 		<c:otherwise>
 			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage">MY PAGE</a>
+	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/myinfo">MY PAGE</a>
 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">LOGOUT</a>
 		 	</div>
 		</c:otherwise>
