@@ -29,6 +29,7 @@
 	   if(type === 'plus') {
 	     number = parseInt(number) + 1;
 	   }else if(type === 'minus')  {
+		   if(number > 2){
 			   number = parseInt(number) - 1;
 		   }
 		   else{
@@ -89,16 +90,16 @@
                                     <tr>
                                         <td>판매가 :
                                         </td>
-                                        <td>15,000원</td>
+                                        <td id='each_price'>15,000원</td>
                                     </tr>
                                     <tr>
-                                        <td>배송비 :
+                                        <td id='del_fee'>배송비 :
                                         </td>
                                         <td>3,000원</td>
                                     </tr>
                                     <tr>
                                     
-                                        <td>수량(최소주문수량 1개 이상) :
+                                        <td> <input type="hidden" name="sell_price" >수량(최소주문수량 1개 이상) :
                                         </td>
                                         <td>
                                         	<div>
@@ -127,7 +128,7 @@
                                     </td>
                                     <td><input
                                         type="text"
-                                        name=""
+                                        id='total_price'
                                         value="15,000"
                                         readonly="readonly"
                                         style="border:none; text-align:right;">원</td>
