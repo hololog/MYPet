@@ -40,4 +40,11 @@ public class HomeController {
 	public String home() {
 		return "redirect:/main";
 	}
+	
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	public String sample() {
+		return "redirect:/main/sample";
+	}
+	
+	
 }

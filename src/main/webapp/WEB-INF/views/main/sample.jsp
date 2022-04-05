@@ -20,6 +20,7 @@
 <!-- JQuery -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=11bumly2ej"></script>
 </head>
 <body>
 	<div>
@@ -36,8 +37,18 @@
       <hr>
     </div>
     <!-- 제목 종료 -->
-  
-	  
+    
+  	<div id="map" style="width:100%;height:400px;"></div>
+	
+	<script>
+	var mapOptions = {
+	    center: new naver.maps.LatLng(37.3595704, 127.105399),
+	    zoom: 10
+	};
+	
+	var map = new naver.maps.Map('map', mapOptions);
+	</script>
+		  
   
 
     <!-- ------------------------------- -->
