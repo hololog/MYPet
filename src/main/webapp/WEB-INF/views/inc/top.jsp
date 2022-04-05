@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <!-- header 시작 -->
 <header class="fixed-top bg-white">
   <!-- 로고 + 로그인/회원가입 버튼 -->
@@ -8,16 +8,27 @@
     <div class="col-4"></div>
     <div class="col-4 d-flex justify-content-center align-items-center">
       <h1>
-        <a href="${pageContext.request.contextPath }/main/main">
+        <a href="${pageContext.request.contextPath }/main">
           <i class="bi bi-emoji-smile">MyPet</i>
         </a>
       </h1>
     </div>
-    <div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-      <a class="p-1 btn" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
-<%--       <a class="p-1 btn" onclick="fnloginmodal('${test.id }')">LOGIN</a> --%>
-      <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">SIGN UP</a>
-    </div>
+    <!-- 로그인시 메뉴변화 -->
+	<c:choose>
+		<c:when test="${ empty sessionScope.email}">
+			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
+	     		<a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#login-modal">LOGIN</a>
+	     		<a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">SIGN UP</a>
+		 	</div>
+		</c:when>
+		<c:otherwise>
+			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
+	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage">MY PAGE</a>
+	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">LOGOUT</a>
+		 	</div>
+		</c:otherwise>
+	</c:choose>    
+	
   </div>
   <!-- 네이게이션바 -->
   <nav class="navbar navbar-expand-lg navbar-light">
@@ -59,27 +70,34 @@
 
 <script>
 $(document).ready(function(){
-	$(window).scroll(fuction(){
-		let value =  window.scrollY;
-		console.log("scrollY", value);
+	//스크롤 좌표에 따라 모달창 실행
+	$(window).scroll(function(){
+		if($(window).scrollTop()==900){
+			$("#login-modal").modal('show');
+		}
+	});
+	
+	$('#floatingInput-signupEmail').focusout(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath }/member/memberCheck",
+			data:{"email":$('#floatingInput-signupEmail').val()},
+			success:function(rdata){
+				if(rdata=='emailOk'){
+					rdata = "사용가능한 이메일입니다.";
+				} else {
+					rdata = "이미 가입한 이메일입니다.";
+				}
+				$('.valid-email').html(rdata);
+			}
+		});
+			
 	});
 });
-// 	$(window).scroll(fuction(){
-// 		let value =  window.scrollY;
-// 		console.log("scrollY", value);
-// 		$(#login-modal).modal()
-// 	});
-	
-	window.addEventListener("scroll", function(){
-		let value = window.scrollY;
-		console.log("스크롤", value);
-	});
 </script>
-
 
 <!-- 모달창 시작 -->
     <!-- 로그인 -->
-    <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal">
+    <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal" style="transition: opacity 0.5s linear;">
       <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
           <!-- Modal Header -->
@@ -91,11 +109,13 @@ $(document).ready(function(){
           <div class="modal-body p-5 pt-0">
             <form action="${pageContext.request.contextPath }/member/loginPro" method="post">
               <div class="form-floating mb-3">
-                <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+<!--                 <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com"> -->
+                <input type="email" name="email" class="form-control rounded-4" id="floatingInput-loginEmail" placeholder="name@example.com">
+                <label for="floatingInput-loginEmail" id="login-email">Email address</label>
               </div>
               <div class="form-floating mb-3">
-                <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+<!--                 <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password"> -->
+                <input type="password" name="password" class="form-control rounded-4" id="login-pass" placeholder="Password">
                 <label for="floatingPassword">Password</label>
               </div>
               <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Login</button>
@@ -121,7 +141,7 @@ $(document).ready(function(){
     </div>
       
     <!-- 회원가입 -->
-    <div class="modal modal-signin py-5" tabindex="-1" role="dialog" id="signup-modal">
+    <div class="modal fade py-5" tabindex="-1" role="dialog" id="signup-modal" style="transition: opacity 0.5s linear;">
       <div class="modal-dialog" role="document">
         <div class="modal-content rounded-5 shadow">
           <!-- Modal Header -->
@@ -133,8 +153,13 @@ $(document).ready(function(){
           <div class="modal-body p-5 pt-0">
             <form action="${pageContext.request.contextPath }/member/joinPro" method="post">
               <div class="form-floating mb-3">
-                <input type="email" name="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="email" name="email" class="form-control rounded-4" id="floatingInput-signupEmail" placeholder="name@example.com">
+                <label for="floatingInput-signupEmail" id="join-email">Email address</label>
+                <div class="valid-email" style="color: red"></div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" name="nickname" class="form-control rounded-4" id="floatingInput-nick" placeholder="nickname">
+                <label for="floatingInput-nick" id="join-nick">Nickname</label>
               </div>
               <div class="form-floating mb-3">
                 <input type="password" name="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">

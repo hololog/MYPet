@@ -1,5 +1,7 @@
 package com.mypet.service;
 
+import java.sql.Timestamp;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -15,9 +17,24 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public void insertMember(MemberDTO memberDTO) {
-		memberDAO.insertMember(memberDTO);
-		//등록일은 DB에서?
 		
+		if(memberDAO.getUserMaxNum() != null) {
+			memberDTO.setUser_id((memberDAO.getUserMaxNum() + 1) + "");
+		} else {
+			memberDTO.setUser_id(1 + "");
+		}
+		memberDTO.setJoin_date(new Timestamp(System.currentTimeMillis()));
+		memberDAO.insertMember(memberDTO);
+	}
+
+	@Override
+	public MemberDTO memberCheck(MemberDTO memberDTO) {
+		return memberDAO.memberCheck(memberDTO);
+	}
+
+	@Override
+	public MemberDTO getMember(String email) {
+		return memberDAO.getMember(email);
 	}
 
 }

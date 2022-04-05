@@ -5,7 +5,20 @@
   
 <mapper namespace="com.mypet.mappers.memberMapper">
 	<insert id="insertMember">
-		insert into user(email, password) values(#{email}, #{password})
+		insert into user(user_id, email, nickname, password, join_date) 
+				  values(#{user_id}, #{email}, #{nickname}, #{password}, #{join_date})
 	</insert>
+	
+	<select id="memberCheck" resultType="com.mypet.domain.MemberDTO">
+		select * from user where email=#{email} and password=#{password}
+	</select>
+	
+	<select id="getMember" resultType="com.mypet.domain.MemberDTO">
+		select * from user where email=#{email}
+	</select>
+	
+	<select id="getUserMaxNum" resultType="java.lang.Integer">
+		select max(user_id) from user
+	</select>
 
 </mapper>

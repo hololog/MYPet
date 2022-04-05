@@ -2,6 +2,7 @@ package com.mypet.controller;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,7 +28,7 @@ public class BoardController {
 	//세히
 	@RequestMapping(value = "/freeboard/list_free", method = RequestMethod.GET)
 	public String freeList(HttpServletRequest request, Model model) {
-		int pageSize=20;
+		int pageSize=15;
 		
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
@@ -66,7 +67,7 @@ public class BoardController {
 	//세히
 	@RequestMapping(value = "/reviewboard/list_review", method = RequestMethod.GET)
 	public String reviewList(HttpServletRequest request, Model model) {
-		int pageSize=20;
+		int pageSize=15;
 		
 		String pageNum=request.getParameter("pageNum");
 		if(pageNum==null) {
@@ -78,9 +79,9 @@ public class BoardController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		
-		List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
+		List<BoardDTO> boardList=boardService.getreviewBoardList(pageDTO);
 		
-		int count=boardService.getfreeBoardCount();
+		int count=boardService.getreviewBoardCount();
 		
 		int currentPage=Integer.parseInt(pageNum);
 		int pageBlock=10;
@@ -118,9 +119,9 @@ public class BoardController {
 		pageDTO.setPageSize(pageSize);
 		pageDTO.setPageNum(pageNum);
 		
-		List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
+		List<BoardDTO> boardList=boardService.getnoticeBoardList(pageDTO);
 		
-		int count=boardService.getfreeBoardCount();
+		int count=boardService.getnoticeBoardCount();
 		
 		int currentPage=Integer.parseInt(pageNum);
 		int pageBlock=10;
@@ -150,7 +151,7 @@ public class BoardController {
 	@RequestMapping(value = "/notice/write_noticePro", method = RequestMethod.POST)
 	public String writeNoticePro(BoardDTO boardDTO) {
 		
-		boardService.write_freeBoard(boardDTO);
+		boardService.write_noticeBoard(boardDTO);
 		
 		return "redirect:/notice/list_notice";
 	}
@@ -177,40 +178,41 @@ public class BoardController {
 	@RequestMapping(value = "/reviewboard/write_reviewPro", method = RequestMethod.POST)
 	public String writeReviewPro(BoardDTO boardDTO) {
 			
-		boardService.write_freeBoard(boardDTO);
+		boardService.write_reviewBoard(boardDTO);
 			
 		return "redirect:/reviewboard/list_review";
 	}
 	//세히
-	@RequestMapping(value = "/reviewboard/content", method = RequestMethod.GET)
+	@RequestMapping(value = "/reviewboard/content_review", method = RequestMethod.GET)
 	public String reivewboardContent(HttpServletRequest request, Model model) {
-		int num=Integer.parseInt(request.getParameter("num"));
-		boardService.updatefreeReadcount(num);
+		int num=Integer.parseInt(request.getParameter("tip_board_num"));
+		boardService.updatereviewReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		BoardDTO boardDTO=boardService.getreviewBoard(num);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
-		return "reviewboard/content";
+		return "reviewboard/content_review";
 	}
+	
 	//세히
 	@RequestMapping(value = "/notice/content_notice", method = RequestMethod.GET)
 	public String noticeContent(HttpServletRequest request, Model model) {
 		
-		int num=Integer.parseInt(request.getParameter("num"));
-		boardService.updatefreeReadcount(num);
+		int num=Integer.parseInt(request.getParameter("notice_num"));
+		boardService.updatenoticeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		BoardDTO boardDTO=boardService.getnoticeBoard(num);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
-		return "reviewboard/content";
+		return "notice/content_notice";
 	}
 	//세히
 	@RequestMapping(value = "/freeboard/content_free", method = RequestMethod.GET)
 	public String freeContent(HttpServletRequest request, Model model) {
 		
-		int num=Integer.parseInt(request.getParameter("num"));
+		int num=Integer.parseInt(request.getParameter("free_board_num"));
 		boardService.updatefreeReadcount(num);
 		
 		BoardDTO boardDTO=boardService.getfreeBoard(num);
@@ -219,15 +221,131 @@ public class BoardController {
 		
 		return "freeboard/content_free";
 	}
+	@RequestMapping(value = "/freeboard/update_free", method = RequestMethod.GET)
+	public String update_free(HttpServletRequest request, Model model) {
+		int num=Integer.parseInt(request.getParameter("free_board_num"));
+		
+		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		
+		model.addAttribute("boardDTO", boardDTO);
+		
+		return "freeboard/update_free";
+	}
+	@RequestMapping(value = "/freeboard/updatePro_free", method = RequestMethod.POST)
+	public String updatePro_free(BoardDTO boardDTO) {
+		boardService.updatefreeBoard(boardDTO);
+		
+		return "redirect:/freeboard/list_free";
+	}
+	@RequestMapping(value = "/freeboard/delete_free", method = RequestMethod.GET)
+	public String free_delete(HttpServletRequest request) {
+		int num=Integer.parseInt(request.getParameter("free_board_num"));
+		
+		boardService.deletefreeBoard(num);
+		
+		
+		return "redirect:/freeboard/list_free";
+	}
+	//
 	
-	//은혜
-	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)
-	public String write_findBoard() {
-		return "findboard/write_find";
+	
+	@RequestMapping(value = "/reviewboard/update_review", method = RequestMethod.GET)
+	public String update_review(HttpServletRequest request, Model model) {
+		int num=Integer.parseInt(request.getParameter("tip_board_num"));
+		
+		BoardDTO boardDTO=boardService.getreviewBoard(num);
+		
+		model.addAttribute("boardDTO", boardDTO);
+		
+		return "reviewboard/update_review";
 	}
-	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
-	public String write_find(BoardDTO boardDTO) {
-		boardService.insert_findboard(boardDTO);
-		return "findboard/write_find";
+	@RequestMapping(value = "/reviewboard/updatePro_review", method = RequestMethod.POST)
+	public String updatePro_review(BoardDTO boardDTO) {
+		boardService.updatereviewBoard(boardDTO);
+		
+		return "redirect:/reviewboard/list_review";
 	}
+	@RequestMapping(value = "/reviewboard/delete_review", method = RequestMethod.GET)
+	public String delete_review(HttpServletRequest request) {
+		int num=Integer.parseInt(request.getParameter("tip_board_num"));
+		
+		boardService.deletereviewBoard(num);
+		
+		
+		return "redirect:/reviewboard/list_review";
+	}
+	//
+	
+	
+	
+	@RequestMapping(value = "/notice/update_notice", method = RequestMethod.GET)
+	public String update_notice(HttpServletRequest request, Model model) {
+		int num=Integer.parseInt(request.getParameter("notice_num"));
+		
+		BoardDTO boardDTO=boardService.getnoticeBoard(num);
+		
+		model.addAttribute("boardDTO", boardDTO);
+		
+		return "notice/update_notice";
+	}
+	@RequestMapping(value = "/notice/updatePro_notice", method = RequestMethod.POST)
+	public String updatePro_notice(BoardDTO boardDTO) {
+		boardService.updatenoticeBoard(boardDTO);
+		
+		return "redirect:/notice/list_notice";
+	}
+	@RequestMapping(value = "/notice/delete_notice", method = RequestMethod.GET)
+	public String delete_notice(HttpServletRequest request) {
+		int num=Integer.parseInt(request.getParameter("notice_num"));
+		
+		boardService.deletenoticeBoard(num);
+		
+		
+		return "redirect:/notice/list_notice";
+	}
+	//세히
+//	//댓글 작성
+//		@RequestMapping(value="/replyWrite", method = RequestMethod.POST)
+//		public String replyWrite(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+//			logger.info("reply Write");
+//			
+//			replyService.writeReply(vo);
+//			
+//			rttr.addAttribute("bno", vo.getBno());
+//			rttr.addAttribute("page", scri.getPage());
+//			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//			rttr.addAttribute("searchType", scri.getSearchType());
+//			rttr.addAttribute("keyword", scri.getKeyword());
+//			
+//			return "redirect:/board/readView";
+//		}
+//	//세히
+//	//댓글 수정 GET
+//		@RequestMapping(value="/replyUpdateView", method = RequestMethod.GET)
+//		public String replyUpdateView(ReplyVO vo, SearchCriteria scri, Model model) throws Exception {
+//			logger.info("reply Write");
+//			
+//			model.addAttribute("replyUpdate", replyService.selectReply(vo.getRno()));
+//			model.addAttribute("scri", scri);
+//			
+//			return "board/replyUpdateView";
+//		}
+//		//세히
+//		//댓글 수정 POST
+//		@RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
+//		public String replyUpdate(ReplyVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+//			logger.info("reply Write");
+//			
+//			replyService.updateReply(vo);
+//			
+//			rttr.addAttribute("bno", vo.getBno());
+//			rttr.addAttribute("page", scri.getPage());
+//			rttr.addAttribute("perPageNum", scri.getPerPageNum());
+//			rttr.addAttribute("searchType", scri.getSearchType());
+//			rttr.addAttribute("keyword", scri.getKeyword());
+//			
+//			return "redirect:/board/readView";
+//		}
+
+
 }

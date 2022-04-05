@@ -1,25 +1,31 @@
 package com.mypet.domain;
 
+import java.sql.Timestamp;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
 public class FindboardDTO {
-	private String find_board_num;
-	private String board_code;
+	private int find_board_num;
+	private char board_code;
 	private String nickname;
-	private String subject;
+	private String title;
 	private String content;
 	private int readcount;
 	private String pet_type;
-	private String missing_date;
+	@DateTimeFormat(pattern = "mm/dd/yyyy")
+	private Timestamp missing_date;
 	private String pet_name;
 	private int pet_age;
 	private String pet_gender;
 	private String address;
 	private String address2;
 	private String detail_address;
-	private String status;
-	private String insert_date;
-	private String delete_date;
+	private String result;
+	private Timestamp insert_date;
+	private Timestamp delete_date;
 	private int reward;
+  
 }

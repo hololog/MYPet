@@ -6,5 +6,8 @@ public interface MemberService {
 	
 	public void insertMember(MemberDTO memberDTO);
 	
+	public MemberDTO memberCheck(MemberDTO memberDTO);
+	
+	public MemberDTO getMember(String email);
 
 }

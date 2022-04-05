@@ -4,37 +4,123 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.mypet.mappers.freeboardMapper">
+<!-- insert start -->
 	<insert id="writefreeBoard">
-		insert into member_board (free_board_num, board_code, subject, content, nickname,insert_date) values
+		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date) values
         ( #{free_board_num},'r', #{subject}, #{content}, #{nickname}, #{insert_date}  )
  
 	</insert>
 	
+	<insert id="writenoticeBoard">
+		insert into notice (notice_num, board_code, subject, content,insert_date) values
+        ( #{notice_num},'n', #{subject}, #{content},  #{insert_date}  )
+ 
+	</insert>
+	
+	<insert id="writereviewBoard">
+		insert into tip_board (tip_board_num, board_code, subject, content, nickname,insert_date) values
+        ( #{tip_board_num},'v', #{subject}, #{content}, #{nickname}, #{insert_date}  )
+ 
+	</insert>
+<!-- write insert end -->
+
+<!-- MaxNum select start -->
 	<select id="getfreeMaxNum" resultType="java.lang.Integer">
 		select max(free_board_num) from free_board
 	</select>
 	
+	<select id="getnoticeMaxNum" resultType="java.lang.Integer">
+		select max(notice_num) from notice
+	</select>
+	
+	<select id="getreviewMaxNum" resultType="java.lang.Integer">
+		select max(tip_board_num) from tip_board
+	</select>
+<!-- MaxNum select end -->	
+
+<!-- BoardList start -->
 	<select id="getfreeBoardList" resultType="com.mypet.domain.BoardDTO">
 		select * from free_board order by free_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
+	<select id="getnoticeBoardList" resultType="com.mypet.domain.BoardDTO">
+		select * from notice order by notice_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getreviewBoardList" resultType="com.mypet.domain.BoardDTO">
+		select * from tip_board order by tip_board_num desc limit #{startRow},#{pageSize}
+	</select>
+<!-- BoardList end -->
+
+<!-- boardCount start -->
 	<select id="getfreeBoardCount" resultType="java.lang.Integer">
 		select count(*) from free_board
 	</select>
 	
+	<select id="getnoticeBoardCount" resultType="java.lang.Integer">
+		select count(*) from notice
+	</select>
+	
+	<select id="getreviewBoardCount" resultType="java.lang.Integer">
+		select count(*) from tip_board
+	</select>
+<!-- boardCount end -->	
+	
+<!-- Board start -->	
 	<select id="getfreeBoard" resultType="com.mypet.domain.BoardDTO">
 		select * from free_board where free_board_num=#{free_board_num}
 	</select>
 	
+	<select id="getnoticeBoard" resultType="com.mypet.domain.BoardDTO">
+		select * from notice where notice_num=#{notice_num}
+	</select>
+	
+	<select id="getreviewBoard" resultType="com.mypet.domain.BoardDTO">
+		select * from tip_board where tip_board_num=#{tip_board_num}
+	</select>
+<!-- Board end -->	
+
+<!-- Readcount start -->
 	<update id="updatefreeReadcount">
 		update free_board set readcount=readcount+1 where free_board_num=#{free_board_num}
 	</update>
 	
+	<update id="updatenoticeReadcount">
+		update notice set readcount=readcount+1 where notice_num=#{notice_num}
+	</update>
+	
+	<update id="updatereviewReadcount">
+		update tip_board set readcount=readcount+1 where tip_board_num=#{tip_board_num}
+	</update>
+<!-- Readcount end -->	
+
+<!-- Update start -->
 	<update id="updatefreeBoard">
 		update free_board set subject=#{subject}, content=#{content} where free_board_num=#{free_board_num}
 	</update>
 	
+	<update id="updatenoticeBoard">
+		update notice set subject=#{subject}, content=#{content} where notice_num=#{notice_num}
+	</update>
+	
+	<update id="updatereviewBoard">
+		update tip_board set subject=#{subject}, content=#{content} where tip_board_num=#{tip_board_num}
+	</update>
+<!-- Update end -->	
+
+<!-- Delete start -->
 	<delete id="deletefreeBoard">
 		delete from free_board where free_board_num=#{free_board_num}
 	</delete>
+	
+	<delete id="deletenoticeBoard">
+		delete from notice where notice_num=#{notice_num}
+	</delete>
+	
+	<delete id="deletereviewBoard">
+		delete from tip_board where tip_board_num=#{tip_board_num}
+	</delete>
+<!-- Delete end -->
+
+
 </mapper>

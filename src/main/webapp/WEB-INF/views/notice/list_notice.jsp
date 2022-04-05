@@ -23,7 +23,7 @@
     
   </head>
   <body>
-	<div>
+	
     <!-- header 시작 -->
 	<jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- header 종료 -->
@@ -61,18 +61,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                     <c:forEach var="bDTO" items="${boardList }">
-                    <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?num=${bDTO.num}'">
-                        <td>${bDTO.num}</td>
+                    <c:forEach var="bDTO" items="${boardList }">
+                    <tr onclick="location.href='${pageContext.request.contextPath }/notice/content_notice?notice_num=${bDTO.notice_num}'">
+                        <td>${bDTO.notice_num}</td>
                         <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots"> 1 </i>
+                          <i class="fa-regular fa-comment-dots"> ${bDTO.like_count} </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
-                        <td>${bDTO.name}</td>
-                        <td style="text-align: start;"><fmt:formatDate value="${bDTO.date}" pattern="yyyy.MM.dd"/> </td>
+                        <td>${bDTO.nickname}</td>
+                        <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
 					</c:forEach> 
@@ -89,25 +89,28 @@
                     </div>
                   </div>
                   <!-- 글쓰기버튼 -->
-                  <c:if test="">
+                 <c:if test="${! empty sessionScope.user_id }">
+					<c:if test="${sessionScope.user_id  ne 'admin'}">
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
+                  </c:if>
                   </c:if>
                  <!-- 다음버튼 -->
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
-                            <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}"><li class="page-item"><a class="page-link" href="#">◁</a></li></a>
+                           
+					  <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/list_notice?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${i}"> <li class="page-item"><a class="page-link" href="#">${i}</a></li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/list_notice?pageNum=${i}"> ${i}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<a href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> <li class="page-item"><a class="page-link" href="#">▷</a></li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/list_notice?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
 							</c:if>
                         </ul>
                   </div>

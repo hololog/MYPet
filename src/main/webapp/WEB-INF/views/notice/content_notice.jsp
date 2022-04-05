@@ -46,32 +46,28 @@
             </div>
             <!-- 제목 종료 -->
             <hr>
-            <!-- 검색창 시작 -->
-            <form action="" method="get"></form>
-
-        </div>
-        <!-- 검색창 종료-->
+            
 
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
             <c:if test="${ ! empty sessionScope.id }">
 
-		<c:if test="${sessionScope.id eq boardDTO.name}">
+		<c:if test="${sessionScope.id eq boardDTO.nickname}">
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">수정</button>
+                onclick="location.href='${pageContext.request.contextPath }/notice/update_notice?nitice_num=${boardDTO.notice_num}'">수정</button>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">삭제</button>
+                onclick="location.href='${pageContext.request.contextPath }/notice/delete_notice?nitice_num=${boardDTO.nitice_num}'">삭제</button>
                 </c:if>
                 </c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href=''">목록</button>
+                onclick="location.href='${pageContext.request.contextPath }/noticew/list_notice'">목록</button>
         </div>
         <!-- 수정삭제 목록 버튼 끝 -->
 

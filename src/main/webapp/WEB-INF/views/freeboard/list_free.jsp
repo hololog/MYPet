@@ -64,11 +64,14 @@
                   <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
                         <td>${bDTO.free_board_num}</td>
-                        <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
+                        <td style="text-align: start;">
+                        
+                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
+                        </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots"> 1 </i>
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
                         <td>${bDTO.nickname}</td>
@@ -87,24 +90,43 @@
                         <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
                     </div>
                   </div>
+                 <!-- 아이디 없을때 -->
+                  <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+                    <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
+                  	<script>
+
+						function login() {
+						
+						  alert("로그인해라");
+						
+						  location.href = "${pageContext.request.contextPath }/main/main";
+						
+						}
+						
+						</script>
+                  </c:if>
+                  
+                  
+                  <!-- 아이디 있을때 -->
+                  <c:if test="${!empty user_id }">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/freeboard/write_free'">글쓰기</button>
-                  </div>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/freeboard/write_free'">글쓰기</button> </div>
+                  </c:if>
                   <!-- 다음버튼 -->
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
-                            <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<a ><li class="page-item"><a class="page-link" href="href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}"">◁</a></li></a>
+                               <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<a> <li class="page-item"><a class="page-link" href=" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${i}"">${i}</a></li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${i}"> ${i}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<a > <li class="page-item"><a class="page-link" href="href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"">▷</a></li></a>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
 							</c:if>
                         </ul>
                   </div>

@@ -1,6 +1,8 @@
 package com.mypet.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,28 +17,38 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
-	@RequestMapping(value = "/main/main", method = RequestMethod.GET)
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
 		return "main/main";
 	}
 	
-//	@RequestMapping(value = "/loginmodal", method = RequestMethod.GET)
-//	public String test() {
-//		return "member/loginmodal";
-//	}
-	
-//	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
-//	public String loginPro(MemberDTO memberDTO, HttpSession session) {
-//		MemberDTO userCheckDTO = memberService.userCheck(memberDTO);
-//		
-//		return "redirect:/main/main";
-//	}
+	//로그인
+	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
+	public String loginPro(MemberDTO memberDTO, HttpSession session) {
+		
+		MemberDTO memberCheckDTO = memberService.memberCheck(memberDTO);
 
+		if (memberCheckDTO != null) {
+			session.setAttribute("email", memberCheckDTO.getEmail());
+			session.setAttribute("nickname", memberCheckDTO.getNickname());
+			return "redirect:/main";
+		} else {
+			return "member/msg";
+		}
+	}
+	
+	//회원가입
 	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
 	public String insertMemberPro(MemberDTO memberDTO) {
 		
 		memberService.insertMember(memberDTO);
-		return "redirect:/main/main";
+		return "redirect:/main";
 	}
-
+	
+	//로그아웃
+	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/main";
+	}
 }
