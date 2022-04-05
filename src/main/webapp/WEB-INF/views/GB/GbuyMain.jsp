@@ -51,14 +51,15 @@
 	<!-- 제목 종료 -->
 	<!--상품정보-->
 	<!-- 글쓰기버튼 -->
-
 	<div class="container" style="border: 1px solid red;">
-	
 		<div class="LK_rt text-lg-end" style="border: 1px solid red;">
+			<%String id=(String)session.getAttribute("id");	//세션값 가져오기
+			if(id!=null){// 세션값이 있으면 글쓰기 버튼 보이기
+			%>			
 			<input type="button" value="글쓰기" class="btnbtn-outline-primary" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'">	
+			<%}%>
 		</div>
 		<!--상품-->
-		
 		<c:forEach var="GDTO" items="${GbuyboardList}">
 		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 			<c:if test="${GDTO.gbuy_count == 0 }"><div class="LK_end"></div></c:if>
@@ -69,7 +70,6 @@
 				<p>가격 : ${GDTO.gbuy_price}</p>
 				<p>재고수량 : ${GDTO.gbuy_count}</p>
 				<br>
-				
 				<p>
 				<button class="btn btn-primary btn-lg" type="button"
 						onclick="location.href='${pageContext.request.contextPath }/GB/결제페이지?num='">
@@ -78,7 +78,6 @@
 						onclick="location.href='${pageContext.request.contextPath }/GB/상품상세페이지?num='">
 						상세정보</button>
 				</p>
-
 				<div class="col-md-8">
 					<div class="LK_ba">
 						<div class="progress-bar" id="LK_ba" role="progressbar"
@@ -98,19 +97,21 @@
                 </svg>
 			</div>
 		</div>
-		
  	</c:forEach>
-
-		<div>
-			<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }"><a href="${pageContext.request.contextPath }/GB/GbuyMain?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">이전</a></c:if>
-			<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1"><a href="${pageContext.request.contextPath }/GB/GbuyMain?pageNum=${i}">${i} </a></c:forEach>
-			<c:if test="${pageDTO.endPage < pageDTO.pageCount }"><a href="${pageContext.request.contextPath }/GB/GbuyMain?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">다음</a></c:if>
+    	<div class="text-center">
+			<ul class="pagination justify-content-center" style="margin:20px 0">
+	        	<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+				<a><li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/GB/GbuyMain?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li></a></c:if>
+				<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
+				<a><li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/GB/GbuyMain?pageNum=${i}">${i}</a></li></a></c:forEach>
+				<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+				<a><li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/GB/GbuyMain?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">▷</a></li></a></c:if>
+			</ul>
 		</div>
 	</div>
 	<!-- ------------------------------- -->
 	<!-- 본문 종료-->
 	<!-- ------------------------------- -->
-
 	<div>
 		<!-- footer 시작 -->
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
@@ -121,7 +122,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous">
-		
 	</script>
 </body>
 </html>

@@ -51,3 +51,14 @@
     font-size: 50px;
     z-index: 1;
 }
+.LK_Pnum{
+font-size: 30px;
+letter-spacing: 15px;
+word-spacing: nullpx;
+color: #000000;
+font-weight: bold;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: none;
+}

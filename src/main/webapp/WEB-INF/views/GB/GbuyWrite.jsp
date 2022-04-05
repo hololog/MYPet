@@ -21,6 +21,32 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
 </head>
+<!-- 메인이미지1 미리보기 스크립트 -->
+<script>
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('.preview')
+      .attr('src', e.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
+<!--  상세이미지2 미리보기 스크리브 -->
+<script>
+function readURL2(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('.preview2')
+      .attr('src', e.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
 <body>
 	<div>
 	<!-- 본문 시작-->
@@ -39,11 +65,11 @@
                 <div class="row g-5">
                     <!--파일 미리보기 img-->
                     <!-- <hr> -->
-                    <div class="col-sm-12 col-md-12 col-lg-6 order-lg-last p-5">
-                        <h6 class="text-center p-3">
-						 <img style="width: 300px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-    					 <input style="display: block;" type="file" id="input-image" name="Gbuy_file">
-                    </div>
+                   	<div class="col-sm-12 col-md-12 col-lg-6 order-lg-last p-5">
+       				 <h6 class="text-center p-3">
+        				 <img style="width: 300px;" class="preview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+      					   <input style="display: block;" type="file" name="Gbuy_file" onchange="readURL(this);">
+    				</div>
                     <div class="col-sm-12 col-md-12 col-lg-6 p-5">
                         <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
                         <div class="row">
@@ -68,8 +94,8 @@
                         </div>
                         <!--상세설명-이미지파일--->
                         <div>
- 							<img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-   							<input style="display: block;" type="file" id="input-image" name="Gbuy_file2">
+ 							<img style="width: 900px;" class="preview2" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+   							<input style="display: block;" type="file" name="Gbuy_file2" onchange="readURL2(this);" >
                         </div>
                         <br>
                         <!--상품등록 결정 버튼-->
@@ -77,7 +103,6 @@
                         	<input type="submit" value="판매등록" class="btn btn-primary btn-lg">
 							<input type="button" value="취소" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain'">
                         </p>
-                       
                     </div>
                 </div>
             </div>
