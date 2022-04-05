@@ -17,8 +17,6 @@ public class BoardDTO {
 	private int like_count;
 	
 	
-	
-	
 
 	public String getSubject() {
 		return subject;
@@ -85,6 +83,14 @@ public class BoardDTO {
 	}
 	public void setNotice_num(int notice_num) {
 		this.notice_num = notice_num;
+	}
+
+	public String getSearch() {
+		return Search;
+	}
+
+	public void setSearch(String search) {
+		Search = search;
 	}
 	
 }

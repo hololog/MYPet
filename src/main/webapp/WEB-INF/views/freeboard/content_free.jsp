@@ -191,7 +191,7 @@
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
                <table id="notice text-center border">
 				<tr><td>글번호 : </td><td> ${boardDTO.free_board_num}</td></tr>
-				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-8"></td> <td>작성일 : </td><td> ${boardDTO.insert_date}</td></tr>
+				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td> <td>작성일 : </td><td> ${boardDTO.insert_date}</td></tr>
 				</table>
 				<br>
 				<br>

@@ -2,8 +2,11 @@ package com.mypet.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.PageDTO;
+
 
 
 public interface BoardDAO {
@@ -70,9 +73,12 @@ public interface BoardDAO {
 	
 	public void deletereviewBoard(int num);
 //Delete end	
-	
 
-	
-	
+//search start	
+	public int searchCount(String searchType, String keyword) throws Exception;
+
+	//search end
+
+
 
 }

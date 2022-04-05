@@ -1,9 +1,12 @@
 package com.mypet.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -188,8 +191,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 //delete end
 	
+//search start	
+	@Override
+	public int searchCount(String searchType, String keyword) throws Exception {
+	 return boardDAO.searchCount(searchType, keyword);
+	}
 	
-
 	
 
 }

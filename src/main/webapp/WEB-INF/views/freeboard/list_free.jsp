@@ -61,9 +61,10 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
                   <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
-                        <td>${bDTO.free_board_num}</td>
+                        <td>${num }</td>
                         <td style="text-align: start;">
                         
                         <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
@@ -78,18 +79,27 @@
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
+                    <c:set var="num" value="${num-1 }"/>
 					</c:forEach> 
                    
                     </tbody>
                   </table>
                   <hr/>
                   <!-- 검색 -->
+                  <form action="${pageContext.request.contextPath }/freeboard/searchList_free" method="get">
                   <div class="container w-50 ">
                     <div class="d-flex align-items-center justify-content-center ">
-                        <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
-                        <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+
+                        <input id="search"value="${pageDTO.keyword}" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                        <button varlue="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+                       
+
+
+
+
                     </div>
                   </div>
+                  </form>
                  <!-- 아이디 없을때 -->
                   <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
@@ -113,7 +123,36 @@
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/freeboard/write_free'">글쓰기</button> </div>
                   </c:if>
+                  
+                  
+                  
                   <!-- 다음버튼 -->
+                  <c:if test="">
+                  	<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+						 <span> <a href="/freeboard/listPageSearch?num=${pageDTO.startPage - 1}${pageDTO.searchTypeKeyword}">◁</a> </span>
+						</c:if>
+						
+						<c:forEach begin="${pageDTO.startPage}" end="${pageDTO.endPage}" var="num">
+						 <span>
+						 
+						  <c:if test="${select != pageNum}">
+						   <a href="/freeboard/listPageSearch?num=${num}${pageDTO.searchTypeKeyword}">${pageNum}</a>
+						  </c:if>    
+						  
+						  <c:if test="${select == pageNum}">
+						   <b>${pageNum}</b>
+						  </c:if>
+						    
+						 </span>
+						</c:forEach>
+						
+						<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+						 <span> <a href="/freeboard/listPageSearch?num=${pageDTO.endPage + 1}${pageDTO.searchTypeKeyword}">▷</a> </span>
+						</c:if>
+						
+						
+						
+                  </c:if>
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             

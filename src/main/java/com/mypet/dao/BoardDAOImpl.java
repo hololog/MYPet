@@ -1,8 +1,10 @@
 package com.mypet.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -152,7 +154,25 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.delete(namespace+".deletereviewBoard", num);
 	}
 //delete end
+
+	@Override
+	public int searchCount(String searchType, String keyword) throws Exception {
+	 
+	 HashMap data = new HashMap();
+	 
+	 data.put("searchType", searchType);
+	 data.put("keyword", keyword);
+	 
+	 return sqlSession.selectOne(namespace + ".searchCount", data); 
 	
+	}
+
+	
+	
+
+	
+
+
 	
 	
 	

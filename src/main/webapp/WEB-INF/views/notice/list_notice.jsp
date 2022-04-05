@@ -86,8 +86,10 @@
                     <div class="d-flex align-items-center justify-content-center ">
                         <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
                         <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+                        
                     </div>
                   </div>
+                  
                   <!-- 글쓰기버튼 -->
                  <c:if test="${! empty sessionScope.user_id }">
 					<c:if test="${sessionScope.user_id  ne 'admin'}">

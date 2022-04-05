@@ -122,5 +122,23 @@
 	</delete>
 <!-- Delete end -->
 
+<!-- search start -->
+	<select id="searchCount" parameterType="hashMap"	 resultType="com.mypet.domain.BoardDTO">
+		select free_board_num, subject, nickname, content 
+		from free_board
+		<if test='searchType.equals("subject")'>
+		where subject like concat('%', #{keyword}, '%')
+		</if>
+		<if test='searchType.equals("nickname")'>
+		where nickname like concat('%', #{keyword}, '%')
+		</if>
+		<if test='searchType.equals("content")'>
+		where content like concat('%', #{keyword}, '%')
+		</if>
+		order by free_board_num desc
+		    limit #{startRow},#{pageSize}
+	</select>
+
+<!-- search end -->
 
 </mapper>
