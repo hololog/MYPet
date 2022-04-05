@@ -29,7 +29,11 @@
 	   if(type === 'plus') {
 	     number = parseInt(number) + 1;
 	   }else if(type === 'minus')  {
-	     number = parseInt(number) - 1;
+			   number = parseInt(number) - 1;
+		   }
+		   else{
+			   number = 1;
+		   }	
 	   }
 	   
 	   // 결과 출력
@@ -90,7 +94,7 @@
                                     <tr>
                                         <td>배송비 :
                                         </td>
-                                        <td>3,000원(50,000원 이상 구매 시 무료)</td>
+                                        <td>3,000원</td>
                                     </tr>
                                     <tr>
                                     
@@ -98,9 +102,9 @@
                                         </td>
                                         <td>
                                         	<div>
-                                        	<input type="text" value="1" id='result'>
-<!--                                             <div id='result'>1</div>개 -->
-                                            </div>
+<!--                                         	<input type="number" value="1" id="result"> -->
+                                            <div id='result'>1</div>
+                                            
                                             <div>
                                             <input type='button'
      											   onclick='count("plus")'
@@ -112,6 +116,7 @@
 								       			   value='-'
 								       			   class="btn btn-default btn-sm"/
 								       			   >
+                                            </div>
                                             </div>
                                         <td>
 
