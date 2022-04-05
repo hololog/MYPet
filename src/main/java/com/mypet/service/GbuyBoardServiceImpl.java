@@ -75,7 +75,7 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 	}
 	@Override
 	public GbuyBoardDTO getBoard1(int num) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	@Override
