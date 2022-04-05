@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
   <head>
@@ -34,7 +35,7 @@
 	<!-- jQuery -->
   	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
  	 <!-- iamport.payment.js -->
-  	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-{SDK-Version 1.1.8}.js"></script>	
+  	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>	
   	
   	
   	
@@ -129,12 +130,12 @@
                         </tr>
                         <tr>
                             <td>주문수량</td>
-                            <td style="text-align: center;">2</td>
+                            <td style="text-align: center;" id="product_count">2</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>주문금액</td>
-                            <td style="text-align: center;">30,000원</td>
+                            <td style="text-align: center;" id="product_total_amount">30,000원</td>
                             <td></td>
                         </tr>
                         <tr>
@@ -175,7 +176,7 @@
       	 <!-- 결제방식 선택 -->
             <div class="" style="text-align: center;">
                 <div>
-                    <button type="button" name="pay_now" class="btn btn-success">
+                    <button type="button" name="pay_now" class="btn btn-success" onclick="requestPay()">
                        바로 구매하기
                     </button>
                     <a href="javascript:history.back();">
@@ -217,15 +218,23 @@
                 </div>
             </div>
 
-	<button onclick="requestPay()">결제하기</button>
+
+
+
+
+
+
+
+
 
 	<!-- 결제 준비하기 IMP 객체 초기화 -->
 	<script type="text/javascript">
     var IMP = window.IMP; // 생략 가능
-    IMP.init("{imp82814328}"); // 예: imp00000000
-	
+    IMP.init("imp82814328"); // 예: imp00000000
+
+    
     function requestPay() {
-      IMP.request_pay(param, callback) //결제창 호출
+     // IMP.request_pay(param, callback) //결제창 호출
       IMP.request_pay({ // param
           pg: "html5_inicis",
           pay_method: "card",
@@ -239,18 +248,18 @@
           buyer_postcode: "01181"
       }, function (rsp) { // callback
           if (rsp.success) {
-              ...,
+             
               // 결제 성공 시 로직,
-              ...
+             
           } else {
-              ...,
+             
               // 결제 실패 시 로직,
-              ...
+              
           }
       });
     }
-  </script>
 	
+  </script>
 	
 	
 

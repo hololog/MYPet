@@ -22,43 +22,45 @@
 					alert("동물 종류를 선택해 주세요");
 					return false;
 				}
-				if($('#pet_name').val()==""){
+				if($('input[name=pet_name]').val()==""){
 					alert("동물 이름을 입력해 주세요");
-					$('#pet_name').focus();
+					$("input[name=content]").focus();
 					return false;
 				}
-				if($('#pet_age').val()==""){
-					alert("동물 나이를 입력해 주세요");
-					$('#pet_age').focus();
-					return false;
-				}
-				if($('#pet_gender').val()==""){
+// 				if($("input[name=pet_age]").val()==""){
+// 					alert("동물 나이를 입력해 주세요");
+// 					$('#pet_age').focus();
+// 					return false;
+// 				}
+				if($("input:radio[name=pet_gender]").is('checked')==false){
 					alert("동물 성별을 체크해 주세요");
 					return false;
 				}
-				if($('#missing_date').val()==""){
+				if($("input[name=missing_date]").val()==""){
 					alert("실종날짜를 선택해 주세요");
 					return false;
 				}
-				if($('#address').val() || $('#address2').val() || $('#detail_address').val()==""){
+				if(
+					$("input[name=address]").val() || 
+					$("input[name=address2]").val() || 
+					$("input[name=detail_address]").val()==""){
 					alert("실종지역을 기입해 주세요");
 					return false;
 				}
-				if($('#content').val()==""){
+				if($("input[name=content]").val()==""){
 					alert("상세 설명을 추가해 주세요");
-					$('#content').focus();
+					$("input[name=content]").focus();
 					return false;
 				}
-				if($('#contact').val()==""){
+				if($("input[name=contact]").val()==""){
 					alert("연락수단을 추가해 주세요");
-					$('#contact').focus();
+					$("input[name=contact]").focus();
 					return false;
 				}
  			});//
 
  		});//		
- 		
- 	});//
+
 	</script>
 </head>
   <body class="bg-light">
@@ -91,7 +93,7 @@
                             <!--사례금 유무-->
                                 <div class="col input-group mb-3">
                                     <label class="input-group-text">사례금</label>
-                                    <input type="text" class="form-control" placeholder="만원" id="reward" name="reward">
+                                    <input type="text" class="form-control" placeholder="만원" name="reward">
                                 </div>
                             </div>
                             <!--동물 종류 select -->
