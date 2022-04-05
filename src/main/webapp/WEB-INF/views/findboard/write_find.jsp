@@ -78,6 +78,7 @@
             <div class="container p-5">
             
                 <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh"> <!--  enctype="multipart/form-data" -->
+                   <!-- nickname 받기 -->
                    <input type="hidden" value="${sessionScope.nickname}" name="nickname">
                     <div class="row g-5">
                          <!--왼쪽여백-->
@@ -140,7 +141,7 @@
                             <!--실종날짜-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">실종 날짜</label>
-                                <input type="date" class="form-control" name="missing_date">
+<!--                                 <input type="date" class="form-control" name="missing_date"> -->
                             </div>
                             <!--실종지역 select (JQuery or API 적용 예정)-->
                             <div class="input-group">
@@ -186,7 +187,7 @@
                                 <div id="imgDiv" class="dn"></div>
                                 <small style="color: gray; font-size: 13px;">업로드 가능 이미지 확장자 ( gif, jpeg, jpg, png, bmp )</small>
                             </div>
-
+								
                             <!--submit 버튼-->
                             <div class="text-center p-2">
                                 <input type="submit" id="btn_eh" value="글쓰기"> 
