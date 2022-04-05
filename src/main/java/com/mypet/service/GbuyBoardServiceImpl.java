@@ -30,47 +30,47 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 		pageDTO.setStartRow(startRow);
 		pageDTO.setEndRow(endRow);
 		pageDTO.setStartRow(startRow-1);
-		return boardDAO.getBoardList(pageDTO);
+		return boardDAO.getGbuyBoardList(pageDTO);
 	}
 	@Override
 	public int getBoardCount() {
-		return boardDAO.getBoardCount();
+		return boardDAO.getGbuy_BoardCount();
 	}
 	@Override
 	public GbuyBoardDTO getBoard(int num) {
-		return boardDAO.getBoard(num);
+		return boardDAO.getGbuy_Board(num);
 	}
 	@Override
 	public void updateReadcount(int num) {
-		boardDAO.updateReadcount(num);
+		boardDAO.updateGbuy_Readcount(num);
 	}
 	@Override
 	public void updateBoard(GbuyBoardDTO boardDTO) {
-		boardDAO.updateBoard(boardDTO);
+		boardDAO.updateGbuy_Board(boardDTO);
 	}
 	@Override
 	public void deleteBoard(int num) {
-		boardDAO.deleteBoard(num);
+		boardDAO.deleteGbuy_Board(num);
 	}
 	@Override
 	public void writeBoard(GbuyBoardDTO boardDTO) {
 		// name,subject,content 폼에서 입력해서 옴
 		//num,pass,readcount,date
-		boardDTO.setPass("1111");
-		boardDTO.setRedcount(0);
-		boardDTO.setDate(new Timestamp(System.currentTimeMillis()));
+		boardDTO.setGbuy_pass("1111");
+		boardDTO.setGbuy_readcount(0);
+		boardDTO.setGbuy_date(new Timestamp(System.currentTimeMillis()));
 		
 		// 글번호 :  디비에 저장된 최대번호 구해서 +1 
-		if(boardDAO.getMaxNum()!=null) {
+		if(boardDAO.getGbuy_MaxNum()!=null) {
 			// 글이 있는 경우 
-			boardDTO.setNum(boardDAO.getMaxNum()+1);
+			boardDTO.setGbuy_num(boardDAO.getGbuy_MaxNum()+1);
 		}else {
 			// 글이 없는 경우 
-			boardDTO.setNum(1);
+			boardDTO.setGbuy_num(1);
 		}
 		
 		
-		boardDAO.writeBoard1(boardDTO);
+		boardDAO.Gbuy_writeBoard(boardDTO);
 		
 	}
 	@Override

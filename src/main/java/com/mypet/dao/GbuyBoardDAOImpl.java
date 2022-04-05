@@ -17,46 +17,46 @@ public class GbuyBoardDAOImpl implements GbuyBoardDAO{
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace="com.mypet.mappers.boardMapper";
+	private static final String namespace="com.mypet.mappers.GbuyboardMapper";
 
 	@Override
-	public void writeBoard1(GbuyBoardDTO boardDTO) {
-		sqlSession.insert(namespace+".writeBoard", boardDTO);
+	public void Gbuy_writeBoard(GbuyBoardDTO gbuyBoardDTO) {
+		sqlSession.insert(namespace+".Gbuy_writeBoard", gbuyBoardDTO);
 		
 	}
 	@Override
-	public Integer getMaxNum() {
-		return sqlSession.selectOne(namespace+".getMaxNum");
+	public Integer getGbuy_MaxNum() {
+		return sqlSession.selectOne(namespace+".getGbuy_MaxNum");
 	}
 
 	@Override
-	public List<GbuyBoardDTO> getBoardList(PageDTO pageDTO) {
-		return sqlSession.selectList(namespace+".getBoardList", pageDTO);
+	public List<GbuyBoardDTO> getGbuyBoardList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getGbuyBoardList", pageDTO);
 	}
 
 	@Override
-	public int getBoardCount() {
-		return sqlSession.selectOne(namespace+".getBoardCount");
+	public int getGbuy_BoardCount() {
+		return sqlSession.selectOne(namespace+".getGbuy_BoardCount");
 	}
 
 	@Override
-	public GbuyBoardDTO getBoard(int num) {
+	public GbuyBoardDTO getGbuy_Board(int num) {
 		return sqlSession.selectOne(namespace+".getBoard", num);
 	}
 
 	@Override
-	public void updateReadcount(int num) {
-		sqlSession.update(namespace+".updateReadcount", num);
+	public void updateGbuy_Readcount(int num) {
+		sqlSession.update(namespace+".updateGbuy_Readcount", num);
 	}
 
 	@Override
-	public void updateBoard(GbuyBoardDTO boardDTO) {
-		sqlSession.update(namespace+".updateBoard", boardDTO);
+	public void updateGbuy_Board(GbuyBoardDTO boardDTO) {
+		sqlSession.update(namespace+".updateGbuy_Board", boardDTO);
 	}
 
 	@Override
-	public void deleteBoard(int num) {
-		sqlSession.delete(namespace+".deleteBoard", num);
+	public void deleteGbuy_Board(int num) {
+		sqlSession.delete(namespace+".deleteGbuy_Board", num);
 	}
 
 }//

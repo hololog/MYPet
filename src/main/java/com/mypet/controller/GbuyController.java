@@ -22,22 +22,57 @@ public class GbuyController {
 	//가상주소 GB/GbuyMain
 	@RequestMapping(value = "/GB/GbuyWrite", method = RequestMethod.GET)
 	public String GbuyWtrite() {
-		System.out.println("BoardController update() ");
+		System.out.println("BoardController write() ");
+		
 		return "GB/GbuyWrite";
 	}
-	@RequestMapping(value = "/GB/GbuyWritePro", method = RequestMethod.GET)
+	@RequestMapping(value = "/GB/GbuyWritePro", method = RequestMethod.POST)
 	public String writePro(GbuyBoardDTO boardDTO) {
-		System.out.println("");
-		
+		System.out.println("GbuyWritePro");
 		boardService.writeBoard(boardDTO);
-		
 		// /WEB-INF/views/center/write.jsp 이동(주소줄에 주소가 안바뀌면서 이동)
 		return "redirect:/GB/GbuyMain";
 	}
 	@RequestMapping(value = "/GB/GbuyMain", method = RequestMethod.GET)
-	public String GMain() {
-		System.out.println("BoardController list() ");
-
+	public String GMain(HttpServletRequest request, Model model) {
+		System.out.println("BoardController list(1) ");
+		// 한화면에 보여줄 글개수 설정
+		int pageSize=6;
+		// pageNum 파라미터값 가져오기 => 없으면 1페이지 설정
+		String pageNum=request.getParameter("pageNum");
+		if(pageNum==null) {
+			pageNum="1";
+		}
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		List<GbuyBoardDTO> GbuyboardList=boardService.getBoardList1(pageDTO);
+		//전체 글개수 구하기 => 디비에서 가져오기
+		//int  리턴할형  getBoardCount() 메서드 정의
+		//select count(*) from board
+		// int count=bDAO.getBoardCount();
+		int count=boardService.getBoardCount();
+		
+		int currentPage=Integer.parseInt(pageNum);
+		int pageBlock=10;
+		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+		int endPage=startPage+pageBlock-1;
+		int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
+		if(endPage > pageCount){
+			endPage = pageCount;
+		}
+		
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		// 디비에서 가져온 글을 model 담아서 notice.jsp 전달
+		model.addAttribute("GbuyboardList", GbuyboardList);
+		model.addAttribute("pageDTO", pageDTO);
+		
+		// /WEB-INF/views/center/notice.jsp 이동(주소줄에 주소가 안바뀌면서 이동)
 		return "GB/GbuyMain";
 	}
 	// 가상주소 GB/상세페이지?num=1
@@ -47,8 +82,7 @@ public class GbuyController {
 			int num=Integer.parseInt(request.getParameter("num"));
 			boardService.updateReadcount(num);
 			// num에 대한 글 가져오기
-			GbuyBoardDTO boardDTO=boardService.getBoard1(num);
-			// 디비에서 가져온 글을 model 담아서 content.jsp 전달
+			GbuyBoardDTO boardDTO=boardService.getBoard1(num);			// 디비에서 가져온 글을 model 담아서 content.jsp 전달
 			model.addAttribute("boardDTO", boardDTO);
 			// /WEB-INF/views/center/content.jsp 이동(주소줄에 주소가 안바뀌면서 이동)
 			return "GB/contetn";

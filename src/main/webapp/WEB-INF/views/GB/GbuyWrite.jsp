@@ -34,44 +34,42 @@
                 <hr>
             </div>
             <!-- 제목 종료 -->
-<form action="${pageContext.request.contextPath }/GB/GBuywritePro" method="post">
+<form action="${pageContext.request.contextPath }/GB/GbuyWritePro" method="post">
             <div class="container p-2" style="border: 1px solid red;">
                 <div class="row g-5">
                     <!--파일 미리보기 img-->
                     <!-- <hr> -->
                     <div class="col-sm-12 col-md-12 col-lg-6 order-lg-last p-5">
                         <h6 class="text-center p-3">
-                            <i>메인이미지</i>
-                        </h6>
-                        <!--첨부 파일 이미지 미리보기. 업로드 전 no image 보여주기-->
-                        <img src="img/dog1.jpg" class="img-thumbnail mb-3" alt="파일미리보기">
-                        <input type="file" name="file" class="form-control mb-3">
+						 <img style="width: 300px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+    					 <input style="display: block;" type="file" id="input-image" name="Gbuy_file">
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-6 p-5">
                         <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
                         <div class="row">
                             <!--상품명-->
                             <div class="col input-group mb-3">
-                                <input type="text" name="" class="form-control" placeholder="상풍명">
+                                <input type="text" name="Gbuy_subject" class="form-control" placeholder="상풍명">
                             </div>
                         </div>
                         <!--상품간략설명-->
                         <div class="input-group mb-3">
-                            <textarea rows="2" name="" class="form-control" aria-label="With textarea" placeholder="상품간략소개"></textarea>
+                            <textarea rows="2" name="Gbuy_content" class="form-control" aria-label="With textarea" placeholder="상품간략소개"></textarea>
                         </div>
                         <!--가격-->
                         <div class="input-group mb-5">
-                            <input type="text" name="" class="form-control" placeholder="가격">
+                            <input type="text" name="Gbuy_price" class="form-control" placeholder="가격">
                         </div>
                         <div class="input-group mb-5">
-                            <input type="text" name="" class="form-control" placeholder="목표수">
+                            <input type="text" name="Gbuy_tcount" class="form-control" placeholder="목표수">
                         </div>
                         <div class="input-group mb-5">
-                            <input type="text" name="" class="form-control" placeholder="재고수">
+                            <input type="text" name="Gbuy_count" class="form-control" placeholder="재고수">
                         </div>
                         <!--상세설명-이미지파일--->
                         <div>
-                            <input type="file" name="file2">
+ 							<img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+   							<input style="display: block;" type="file" id="input-image" name="Gbuy_file2">
                         </div>
                         <br>
                         <!--상품등록 결정 버튼-->

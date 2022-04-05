@@ -3,100 +3,91 @@ package com.mypet.domain;
 import java.sql.Timestamp;
 
 public class GbuyBoardDTO {
-	private int num;		//계시글번호
-	private String name;	//아이디
-	private String pass;	//비밀번호
-	private String subject; //상품명
-	private String content;	//보조설명
-	private int price;		//가격
-	private int count;		//보유수량
-	private int tcount;		//목표수량	
-	private int readcount;		//목표수량	
-	private Timestamp date; //등록일자
-	private String file; 	//메인이미지
-	private String file2;	//이미지상세
+	private int Gbuy_num;			//계시글번호
+	private String Gbuy_name;		//아이디
+	private String Gbuy_pass;		//비밀번호
+	private String Gbuy_subject;	//상품명
+	private String Gbuy_content;	//보조설명
+	private int Gbuy_price;			//가격
+	private int Gbuy_count;			//보유수량
+	private int Gbuy_tcount;		//목표수량	
+	private int Gbuy_readcount;		//목표수량	
+	private Timestamp Gbuy_date;	//등록일자
+	private String Gbuy_file; 		//메인이미지
+	private String Gbuy_file2;		//상품상세이미지
 	
 	
-	public int getRedcount() {
-		return readcount;
+	public int getGbuy_num() {
+		return Gbuy_num;
 	}
-	public void setRedcount(int redcount) {
-		this.readcount = redcount;
+	public void setGbuy_num(int gbuy_num) {
+		this.Gbuy_num = gbuy_num;
 	}
-	public int getTcount() {
-		return tcount;
+	public String getGbuy_name() {
+		return Gbuy_name;
 	}
-	public void setTcount(int tcount) {
-		this.tcount = tcount;
+	public void setGbuy_name(String gbuy_name) {
+		this.Gbuy_name = gbuy_name;
 	}
-	public int getPrice() {
-		return price;
+	public String getGbuy_pass() {
+		return Gbuy_pass;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setGbuy_pass(String gbuy_pass) {
+		this.Gbuy_pass = gbuy_pass;
 	}
-	public int getCount() {
-		return count;
+	public String getGbuy_subject() {
+		return Gbuy_subject;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setGbuy_subject(String gbuy_subject) {
+		this.Gbuy_subject = gbuy_subject;
 	}
-	public String getFile() {
-		return file;
+	public String getGbuy_content() {
+		return Gbuy_content;
 	}
-	public void setFile(String file) {
-		this.file = file;
+	public void setGbuy_content(String gbuy_content) {
+		this.Gbuy_content = gbuy_content;
 	}
-	
-	public String getFile2() {
-		return file2;
+	public int getGbuy_price() {
+		return Gbuy_price;
 	}
-	public void setFile2(String file2) {
-		this.file2 = file2;
+	public void setGbuy_price(int gbuy_price) {
+		this.Gbuy_price = gbuy_price;
 	}
-	
-	public int getNum() {
-		return num;
+	public int getGbuy_count() {
+		return Gbuy_count;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setGbuy_count(int gbuy_count) {
+		this.Gbuy_count = gbuy_count;
 	}
-	public String getName() {
-		return name;
+	public int getGbuy_tcount() {
+		return Gbuy_tcount;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setGbuy_tcount(int gbuy_tcount) {
+		this.Gbuy_tcount = gbuy_tcount;
 	}
-	public String getPass() {
-		return pass;
+	public int getGbuy_readcount() {
+		return Gbuy_readcount;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setGbuy_readcount(int gbuy_readcount) {
+		this.Gbuy_readcount = gbuy_readcount;
 	}
-	public String getSubject() {
-		return subject;
+	public Timestamp getGbuy_date() {
+		return Gbuy_date;
 	}
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setGbuy_date(Timestamp gbuy_date) {
+		this.Gbuy_date = gbuy_date;
 	}
-	public String getContent() {
-		return content;
+	public String getGbuy_file() {
+		return Gbuy_file;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setGbuy_file(String gbuy_file) {
+		this.Gbuy_file = gbuy_file;
 	}
-	public int getcount() {
-		return count;
+	public String getGbuy_file2() {
+		return Gbuy_file2;
 	}
-	public void setcount(int count) {
-		this.count = count;
-	}
-	public Timestamp getDate() {
-		return date;
-	}
-	public void setDate(Timestamp date) {
-		this.date = date;
-	}
-	
-	
+	public void setGbuy_file2(String gbuy_file2) {
+		this.Gbuy_file2 = gbuy_file2;
+	}	//이미지상세
 }
+	

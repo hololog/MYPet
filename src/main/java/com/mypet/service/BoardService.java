@@ -3,6 +3,7 @@ package com.mypet.service;
 import java.util.List;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.GbuyBoardDTO;
 import com.mypet.domain.PageDTO;
 
 public interface BoardService {

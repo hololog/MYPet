@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.mypet.mappers.GbuyboardMapper">
+
+	<insert id="Gbuy_writeBoard">
+		insert into Gbuy_board(Gbuy_num,Gbuy_pass,Gbuy_name,Gbuy_subject,Gbuy_price,Gbuy_count,Gbuy_tcount,Gbuy_content,Gbuy_readcount,Gbuy_date,Gbuy_file,Gbuy_file2) 
+		values(#{Gbuy_num},#{Gbuy_pass},#{Gbuy_name},#{Gbuy_subject},#{Gbuy_price},#{Gbuy_count},#{Gbuy_tcount},#{Gbuy_content},#{Gbuy_readcount},#{Gbuy_date},#{Gbuy_file},#{Gbuy_file2})
+	</insert>
+
+	<select id="getGbuy_MaxNum" resultType="java.lang.Integer">
+		select max(Gbuy_num) from Gbuy_board
+	</select>
+	
+	<select id="getGbuyBoardList" resultType="com.mypet.domain.GbuyBoardDTO">
+		select * from Gbuy_board order by Gbuy_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getGbuy_BoardCount" resultType="java.lang.Integer">
+		select count(*) from Gbuy_board
+	</select>
+	
+	<select id="getGbuy_Board" resultType="com.mypet.domain.GbuyBoardDTO">
+		select * from Gbuy_board where Gbuy_num=#{Gbuy_num}
+	</select>
+	
+	<update id="updateGbuy_Readcount">
+		update Gbuy_board set Gbuy_readcount=Gbuy_readcount+1 where Gbuy_num=#{Gbuy_num}
+	</update>
+	
+	<update id="updateGbuy_Board">
+		update Gbuy_board set Gbuy_subject=#{Gbuy_subject}, Gbuy_content=#{Gbuy_content} where Gbuy_num=#{Gbuy_num}
+	</update>
+	
+	<delete id="deleteGbuy_Board">
+		delete from Gbuy_board where Gbuy_num=#{Gbuy_num}
+	</delete>
+	
+</mapper>
