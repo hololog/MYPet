@@ -17,6 +17,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+   <script>
+   function count(type)  {
+	   // 결과를 표시할 element
+	   const resultElement = document.getElementById('result');
+	   
+	   // 현재 화면에 표시된 값
+	   let number = resultElement.innerText;
+	   
+	   // 더하기/빼기
+	   if(type === 'plus') {
+	     number = parseInt(number) + 1;
+	   }else if(type === 'minus')  {
+	     number = parseInt(number) - 1;
+	   }
+	   
+	   // 결과 출력
+	   resultElement.innerText = number;
+	 }
+   </script>
+    
     
   </head>
   <body>
@@ -25,8 +45,11 @@
 	<jsp:include page="../inc/top.jsp"></jsp:include>
    	  <!-- header 종료 -->
    	  
+   	  
       <!-- 제품이미지 -->
+      		
             
+			
            
             <br>
             <br>
@@ -70,13 +93,27 @@
                                         <td>3,000원(50,000원 이상 구매 시 무료)</td>
                                     </tr>
                                     <tr>
+                                    
                                         <td>수량(최소주문수량 1개 이상) :
                                         </td>
                                         <td>
-                                            <input type="text" name="QTY" value="1" style="border:none; text-align:right;">개
-                                            <button onclick='count("plus")' class="btn btn-default btn-sm">+</button>
-                                            <button onclick='count("minus")' class="btn btn-default btn-sm">-</button>
-                                        </td>
+                                        	<div>
+                                        	<input type="text" value="1" id='result'>
+<!--                                             <div id='result'>1</div>개 -->
+                                            </div>
+                                            <div>
+                                            <input type='button'
+     											   onclick='count("plus")'
+								      			   value='+'
+								      			   class="btn btn-default btn-sm"/
+								      			   >
+											<input type='button'
+								     			   onclick='count("minus")'
+								       			   value='-'
+								       			   class="btn btn-default btn-sm"/
+								       			   >
+                                            </div>
+                                        <td>
 
                                     </tr>
                                 </div>
