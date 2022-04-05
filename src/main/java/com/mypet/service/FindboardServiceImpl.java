@@ -30,7 +30,6 @@ public class FindboardServiceImpl implements FindboardService {
 		else findboardDTO.setFind_board_num(1);
 		//readcount, insertdate, boardnum 설정
 		findboardDTO.setReadcount(0);
-		findboardDTO.setMissing_date(new Timestamp(System.currentTimeMillis())); // 추후수정
 		findboardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
 		
 		findboardDAO.insert_findboard(findboardDTO);

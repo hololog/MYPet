@@ -14,6 +14,8 @@
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 	<!-- JQuery -->
+<!-- 
+
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
  	$(document).ready(function(){
@@ -62,6 +64,7 @@
  		});//		
 
 	</script>
+ -->
 </head>
   <body class="bg-light">
             <!-- header 시작-->
@@ -84,11 +87,11 @@
                         <div class="col-md-1 col-lg-3"></div>
                         <!--작성 form-->
                         <div class="col-md-10 col-lg-6">
-                            <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
+                           <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
                             <div class="row">
-                                <div class="col form-check form-switch mb-3" id="switch_eh">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="0" name="result">
-                                    <label class="form-check-label" for="switch_eh">미해결</label>
+                                <div class="col">
+<!--                                     <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="0" name="result"> -->
+<!--                                     <label class="form-check-label" for="switch_eh">미해결</label> -->
                                 </div>
                             <!--사례금 유무-->
                                 <div class="col input-group mb-3">
@@ -186,7 +189,6 @@
                                 <div id="imgDiv" class="dn"></div>
                                 <small style="color: gray; font-size: 13px;">업로드 가능 이미지 확장자 ( gif, jpeg, jpg, png, bmp )</small>
                             </div>
-
                             <!--submit 버튼-->
                             <div class="text-center p-2">
                                 <input type="submit" id="btn_eh" value="글쓰기"> 

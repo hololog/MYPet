@@ -1,11 +1,15 @@
 package com.mypet.controller;
 
 import java.util.List;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -47,15 +51,13 @@ public class FindBoardController {
 	}
 	//은혜
 	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
-	public String write_find(FindboardDTO findboardDTO) {
+	public String write_find(FindboardDTO findboardDTO, HttpServletRequest request) {
+//		String missing_date3 = request.getParameter("missing_date2");
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		format.parse(missing_date3);
 		findboardService.insert_findboard(findboardDTO);
 		System.out.println("insert_findboard 메서드 실행");
 		return "redirect:/findboard/list";
 	}
-	
-//	@InitBinder
-//	public void InitBinder(WebDataBinder binder) {
-//		SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-mm-dd");
-//		
-//	}
+
 }
