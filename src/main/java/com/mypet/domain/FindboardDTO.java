@@ -1,5 +1,6 @@
 package com.mypet.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,7 +17,7 @@ public class FindboardDTO {
 	private int readcount;
 	private String pet_type;
 	@DateTimeFormat(pattern = "mm/dd/yyyy")
-	private Timestamp missing_date;
+	private Date missing_date;
 	private String pet_name;
 	private int pet_age;
 	private String pet_gender;
