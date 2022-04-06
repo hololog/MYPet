@@ -75,8 +75,7 @@ public interface BoardDAO {
 //Delete end	
 
 //search start	
-	public int searchCount(String searchType, String keyword) throws Exception;
-
+	public List<BoardDTO> getfreeSearch(PageDTO pageDTO);
 	//search end
 
 

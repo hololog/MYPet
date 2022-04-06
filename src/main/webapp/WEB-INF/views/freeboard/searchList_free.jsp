@@ -62,7 +62,7 @@
                   </thead>
                   <tbody>
                   <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
-                  <c:forEach var="bDTO" items="${boardList }">
+                  <c:forEach var="bDTO" items="${keyword }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
                         <td>${num }</td>
                         <td style="text-align: start;">
@@ -86,14 +86,17 @@
                   </table>
                   <hr/>
                   <!-- 검색 -->
-                  
-                  <form action="location.href ='${pageContext.request.contextPath }/freeboard/searchList_free?content=${keyword}'" method="get">
+                  <form action="${pageContext.request.contextPath }/freeboard/searchList_free?search=${pageDTO.search}" method="get">
                   <div class="container w-50 ">
                     <div class="d-flex align-items-center justify-content-center ">
 
-                        <input id="keyword" name="Keyword" value="${pageDTO.keyword}" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
-                        <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
-                      
+                        <input id="search"value="${pageDTO.search}" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                        <button varlue="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+                       
+
+
+
+
                     </div>
                   </div>
                   </form>
@@ -124,24 +127,22 @@
                   
                   
                   <!-- 다음버튼 -->
-
-                  <div class="text-center">
+                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
                                <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/searchList_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${i}"> ${i}</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/searchList_free?pageNum=${i}"> ${i}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/list_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/searchList_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
 							</c:if>
                         </ul>
                   </div>
-               </div>
            
         
 

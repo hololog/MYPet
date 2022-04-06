@@ -308,10 +308,10 @@ public class BoardController {
 	//세히
 		@RequestMapping(value = "/freeboard/searchList_free", method = RequestMethod.GET)
 		public String searchList_free(HttpServletRequest request, Model model) {
-			int pageSize=15;
+			int pageSize=20;
 			
 			String pageNum=request.getParameter("pageNum");
-			String search=request.getParameter("search");
+			String keyword=request.getParameter("keyword");
 			if(pageNum==null) {
 				pageNum="1";
 			}
@@ -324,7 +324,7 @@ public class BoardController {
 			List<BoardDTO> boardList=boardService.getfreeBoardList(pageDTO);
 			
 			int count=boardService.getreviewBoardCount();
-			
+			boardService.getfreeSearch(pageDTO);
 			int currentPage=Integer.parseInt(pageNum);
 			int pageBlock=10;
 			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
@@ -339,11 +339,11 @@ public class BoardController {
 			pageDTO.setStartPage(startPage);
 			pageDTO.setEndPage(endPage);
 			pageDTO.setPageCount(pageCount);
-			pageDTO.setSearch(search);
+			pageDTO.setKeyword(keyword);
 			
 			model.addAttribute("boardList", boardList);
 			model.addAttribute("pageDTO", pageDTO);
-			
+			model.addAttribute("keyword", keyword);
 			
 			return "freeboard/searchList_free";
 		}

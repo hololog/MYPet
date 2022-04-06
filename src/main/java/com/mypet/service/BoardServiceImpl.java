@@ -192,9 +192,12 @@ public class BoardServiceImpl implements BoardService {
 //delete end
 	
 //search start	
+	
+
 	@Override
-	public int searchCount(String searchType, String keyword) throws Exception {
-	 return boardDAO.searchCount(searchType, keyword);
+	public List<BoardDTO> getfreeSearch(PageDTO pageDTO) {
+		return boardDAO.getfreeSearch(pageDTO);
+		
 	}
 	
 	

@@ -85,12 +85,6 @@ public class BoardDTO {
 		this.notice_num = notice_num;
 	}
 
-	public String getSearch() {
-		return Search;
-	}
-
-	public void setSearch(String search) {
-		Search = search;
-	}
+	
 	
 }

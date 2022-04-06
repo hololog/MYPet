@@ -64,7 +64,7 @@ public interface BoardService {
 		
 		public void deletereviewBoard(int num);
 	//Delete end
-		public int searchCount(String searchType, String keyword) throws Exception;
-	
+		
+		public List<BoardDTO> getfreeSearch(PageDTO pageDTO);
 
 }

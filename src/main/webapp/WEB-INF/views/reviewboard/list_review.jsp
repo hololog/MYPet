@@ -60,14 +60,12 @@
                         <th width="10%" style="text-align: start;">날짜</th>
                     </tr>
                   </thead>
+                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
+                 
                   <tbody>
                     <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
-                        <td><c:forEach var="list" items="${list}" varStatus="status" >
-
-   						<td>${(pageDTO.pageBlock - status.index) - ( (pageDTO.currentPage - 1)  *  pageDTO.pageNum ) } </td>
-
-							</c:forEach></td>
+                         <td>${num }</td>
                         <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -79,6 +77,7 @@
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                    </tr>
+                    <c:set var="num" value="${num-1 }"/>
                     </c:forEach>
                     </tbody>
                   </table>

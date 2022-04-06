@@ -26,8 +26,7 @@
   <!-- Slick CSS -->
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css" />
-
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    </head>
   <body>
 	<div>
@@ -262,12 +261,44 @@
 
     <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
-            <div class="card-body">
+           <script>
+           jQuery(function($) {
+        	   $('#swapHeart').on('click', function() {
+        	     var $el = $(this),
+        	       textNode = this.lastChild;
+        	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
+        	     $el.toggleClass('swap');
+        	   });
+        	 });
+           </script>
+				
+				
+
+			
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
+                 <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
+						 
+						
+						    <script>
+						
+						        var i = 0;
+						        $('i').on('click',function(){
+						            if(i==0){
+						                $(this).attr('class','bi-heart-fill');
+						                i++;
+						            }else if(i==1){
+						                $(this).attr('class','bi-heart');
+						                i--;
+						            }
+						
+						        });
+						
+						    </script>
+                		
                           <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>
                           <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">

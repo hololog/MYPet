@@ -203,16 +203,7 @@
         </div>
         <!-- 글끝 -->
 
-        <!-- 제보 버튼 -->
-        <div style="text-align: center; margin-bottom: 10px">
-            <span
-                class="btn btn-primary"
-                role="button"
-                style="color: white"
-                onclick="report()">제보하기</span>
-            <p class="arrow_box">연락수단 확인하고 글쓴이에게 제보하기!</p>
-        </div>
-        <!-- 제보버튼 끝 -->
+       
 
         <!-- <div class="row">-->
         <!-- <div class="col-md-12 col-xl-8">-->
