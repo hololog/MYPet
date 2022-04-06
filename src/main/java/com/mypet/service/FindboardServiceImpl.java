@@ -1,6 +1,7 @@
 package com.mypet.service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,4 +35,16 @@ public class FindboardServiceImpl implements FindboardService {
 		
 		findboardDAO.insert_findboard(findboardDTO);
 	}
+
+	@Override
+	public List<String> getProvinceList() {
+		return findboardDAO.getProvinceList();
+	}
+	
+//	@Override
+//	public List<String> getcityname(String province) {
+//		return findboardDAO.getcityname(province);
+//	}
+	
+	
 }
