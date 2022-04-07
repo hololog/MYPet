@@ -44,7 +44,7 @@ public class AjaxController {
 	}
 	
 	//은혜
-	@RequestMapping(value= "/findboard/provinceSelect", method = RequestMethod.POST)
+	@RequestMapping(value= "/findboard/provinceSelect", method = RequestMethod.GET)
 	public ResponseEntity<List<String>> provinceSelect(){
 		List<String> provinceList = new ArrayList<String>();
 		provinceList = findboardService.getProvinceList();

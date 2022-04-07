@@ -18,16 +18,19 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
 	// 시/도 select
-	function provinceSelect(){
+	$(document).ready(function(){
 		$.ajax({
-			type:"POST",
+// 			traditional: true,
 			url: "{pageContext.request.contextPath}/findboard/provinceSelect",
 			dataType: "json",
 			success: function(rdata){
 				$.each(rdata, function(i){
 					$('#province').append("<option value='"+rdata[i]+"'>" + rdata[i]+ "</option>")
 				});
-			}
+			}, 
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert("오류발생");
+				}
 		}); //ajax closed
 	} // function closed
 	
@@ -182,7 +185,6 @@
                                 <label class="input-group-text">실종 지역</label>
                                     <select class="form-select" name="address1" id="province">
                                         <option value="">지역</option>
-                                        
                                     </select>
                                     <select class="form-select" name="address2" id="city" onchange="citySelect(this.value);">
                                         <option selected>시</option>
