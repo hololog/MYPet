@@ -1,6 +1,7 @@
 package com.mypet.dao;
 
-import com.mypet.domain.BoardDTO;
+import java.util.List;
+
 import com.mypet.domain.FindboardDTO;
 
 public interface FindboardDAO {
@@ -13,5 +14,8 @@ public interface FindboardDAO {
 	
 	public Integer getMaxNum();
 	
+	public List<String> getProvinceList();
+
+//	public List<String> getcityname(String province);
 }
 

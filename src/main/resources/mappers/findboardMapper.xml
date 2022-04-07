@@ -27,5 +27,13 @@
 		SELECT * FROM find_comment
 		where find_board_num = #{find_board_num}
 	</select>
+	
+	<select id="getProvinceList" resultType="java.util.ArrayList">
+		select distinct address1 from address
+	</select>
+
+<!-- 	<select id="getcityname" resultType="java.util.ArrayList"> -->
+<!-- 		select distinct address2 from address where address1 = #{province} -->
+<!-- 	</select> -->
 
 </mapper>
