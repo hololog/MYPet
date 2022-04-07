@@ -124,9 +124,19 @@
 
 <!-- search start -->
 	
-<select id="getfreeSearch" resultType="com.mypet.domain.PageDTO">
-		select content from free_board where content like concat('%',#{keyword},'%')
+	<select id="freeListsearch" resultType="com.mypet.domain.BoardDTO">
+		select * from free_board where subject like #{search} order by free_board_num desc limit #{startRow},#{pageSize}
 	</select>
+	
+	<select id="getfreeBoardCountSearch"  resultType="java.lang.Integer">
+		select count(*) from free_board where subject like #{search} 
+	</select>
+	
 <!-- search end -->
+
+
+	<select id="bestfree" resultType="com.mypet.domain.BoardDTO">
+	 	select * from free_board order by readcount desc limit 3
+	</select>
 
 </mapper>

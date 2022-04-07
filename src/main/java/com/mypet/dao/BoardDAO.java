@@ -75,9 +75,16 @@ public interface BoardDAO {
 //Delete end	
 
 //search start	
-	public List<BoardDTO> getfreeSearch(PageDTO pageDTO);
+	public List<BoardDTO> freeListsearch(PageDTO pageDTO);
+	
+	public int getfreeBoardCountSearch(PageDTO pageDTO);
 	//search end
+	
+	//likebest start
+	public List<BoardDTO> bestfree(PageDTO pageDTO);
+	
+	
+	
 
-
-
+   
 }

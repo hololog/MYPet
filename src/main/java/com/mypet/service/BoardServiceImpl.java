@@ -192,14 +192,35 @@ public class BoardServiceImpl implements BoardService {
 //delete end
 	
 //search start	
+	@Override
+	public List<BoardDTO> freeListsearch(PageDTO pageDTO) {
+		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		pageDTO.setStartRow(startRow-1);
+		
+		
+		return boardDAO.freeListsearch(pageDTO);
+	}
+
+	@Override
+	public int getfreeBoardCountSearch(PageDTO pageDTO) {
+		return boardDAO.getfreeBoardCountSearch(pageDTO);
+	}
+
+	
 	
 
 	@Override
-	public List<BoardDTO> getfreeSearch(PageDTO pageDTO) {
-		return boardDAO.getfreeSearch(pageDTO);
+	public List<BoardDTO> bestfree(PageDTO pageDTO) {
 		
+		return boardDAO.bestfree(pageDTO);
 	}
-	
-	
+
 
 }

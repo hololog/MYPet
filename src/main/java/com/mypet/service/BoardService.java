@@ -65,6 +65,17 @@ public interface BoardService {
 		public void deletereviewBoard(int num);
 	//Delete end
 		
-		public List<BoardDTO> getfreeSearch(PageDTO pageDTO);
-
+	//search start	
+		public List<BoardDTO> freeListsearch(PageDTO pageDTO);
+		
+		public int getfreeBoardCountSearch(PageDTO pageDTO);
+	//search end	
+		
+		//best start
+		public List<BoardDTO> bestfree(PageDTO pageDTO);
+		
+		
+	//like start	
+		
+		
 }

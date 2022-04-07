@@ -189,9 +189,11 @@
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
+           
                <table id="notice text-center border">
 				<tr><td>글번호 : </td><td> ${boardDTO.free_board_num}</td></tr>
-				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td> <td>작성일 : </td><td> ${boardDTO.insert_date}</td></tr>
+				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td>
+				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
 				<br>
 				<br>
@@ -203,8 +205,77 @@
         </div>
         <!-- 글끝 -->
 
-       
+     
+				
+	
+<%-- 		 <c:if test="${empty user_id  }"> --%>
+<!-- 		 <button onclick="nolike()"> -->
+<!-- 		 <i class="bi-heart " style="font-size:3rem; color: red; cursor: pointer;"></i></button> -->
+  			
+<!-- 			<script> -->
 
+<!-- // 					function nolike() {  -->
+						
+<!-- // 					  alert("로그인해라"); -->
+						
+<%-- // 				  location.href = "${pageContext.request.contextPath }/main/main"; --%>
+						
+<!-- // 						} -->
+						
+<!-- 	</script> -->
+<%-- 		</c:if>			 --%>
+<%-- 		 <c:if test="${!empty user_id }"> --%>
+<%-- 		 <button  onclick="location.href='${pageContext.request.contextPath }/freeboard/like_free'"> --%>
+<!-- 		 <i class="bi-heart" style="font-size:3rem; color: red; cursor: pointer;"></i></button> -->
+<!--   			<p style="color: red;"><p>			 -->
+<!--     		<script> -->
+	
+<!-- //         var i = 0; -->
+<!-- //         $('i').on('click',function(){ -->
+<!-- //             if(i==0){ -->
+<!-- //                 $(this).attr('class','bi-heart-fill'); -->
+<!-- //                 i++; -->
+<!-- //             }else if(i==1){ -->
+<!-- //                 $(this).attr('class','bi-heart'); -->
+<!-- //                 i--; -->
+<!-- //             } -->
+
+<!-- //         }); -->
+
+<!--     </script> -->
+<%--     </c:if> --%>
+<!-- 		<script type="text/javascript"> -->
+<!-- // 		$(function(){ -->
+<!-- // 			// 추천버튼 클릭시(추천 추가 또는 추천 제거) -->
+<!-- // 			$("#rec_update").click(function(){ -->
+<!-- // 				$.ajax({ -->
+<!-- // 					url: "/free_board/like", -->
+<!-- // 	                type: "POST", -->
+<!-- // 	                data: { -->
+<%-- // 	                    no: ${content.board_no}, --%>
+<%-- // 	                    id: '${id}' --%>
+<!-- // 	                }, -->
+<!-- // 	                success: function () { -->
+<!-- // 				        recCount(); -->
+<!-- // 	                }, -->
+<!-- // 				}) -->
+<!-- // 			}) -->
+			
+<!-- // 			// 게시글 추천수 -->
+<!-- // 		    function recCount() { -->
+<!-- // 				$.ajax({ -->
+<!-- // 					url: "/expro/RecCount.do", -->
+<!-- // 	                type: "POST", -->
+<!-- // 	                data: { -->
+<%-- // 	                    no: ${content.board_no} --%>
+<!-- // 	                }, -->
+<!-- // 	                success: function (count) { -->
+<!-- // 	                	$(".rec_count").html(count); -->
+<!-- // 	                }, -->
+<!-- // 				}) -->
+<!-- // 		    }; -->
+<!-- // 		    recCount(); -->
+<!-- 		</script> -->
         <!-- <div class="row">-->
         <!-- <div class="col-md-12 col-xl-8">-->
         <!-- <img class="img-fluid rounded" src="/sample/img/dog2.jpg" alt="">-->

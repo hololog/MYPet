@@ -8,7 +8,7 @@ public class PageDTO {
 	private int startRow;
 	private int endRow;
 	
-	private String keyword;	
+	private String search;	
 
 
 
@@ -18,14 +18,7 @@ public class PageDTO {
 	private int count;
 	private int pageCount;
 
-	public String getKeyword() {
-		return keyword;
-	}
 	
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-
 	
 	
 	public int getPageSize() {
@@ -87,6 +80,12 @@ public class PageDTO {
 	}
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 

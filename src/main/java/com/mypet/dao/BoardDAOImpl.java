@@ -153,16 +153,32 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 //delete end
 
-	
+	@Override
+	public List<BoardDTO> freeListsearch(PageDTO pageDTO) {
+		
+		return sqlSession.selectList(namespace+".freeListsearch", pageDTO);
+	}
 
 	@Override
-	public List<BoardDTO> getfreeSearch(PageDTO pageDTO) {
-		
-		return sqlSession.selectList(namespace+".getfreeSearch", pageDTO);
-		
+	public int getfreeBoardCountSearch(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getfreeBoardCountSearch", pageDTO);
 	}
 
 	
+	
+
+    
+
+	@Override
+	public List<BoardDTO> bestfree(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".bestfree", pageDTO);
+	}
+
+	
+
+	
+
+   
 	
 
 	
