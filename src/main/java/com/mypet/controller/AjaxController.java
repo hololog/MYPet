@@ -67,4 +67,49 @@ public class AjaxController {
 //		return entity;
 //	}
 	
+	//다슬
+	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
+	public ResponseEntity<String> memberCheck(HttpServletRequest request){
+		String result="";
+		String id=request.getParameter("id");
+		MemberDTO memberDTO=memberService.getMember(id);
+		if(memberDTO!=null) {
+			result="iddup";
+		}else {
+			result="idok";
+		}
+		ResponseEntity<String> entity=new ResponseEntity<String>(result, HttpStatus.OK);
+		
+		return entity;
+		
+		@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
+		public ResponseEntity<String> memberCheck(HttpServletRequest request){
+			String result="";
+			String email=request.getParameter("email");
+			MemberDTO memberDTO=memberService.getMemberEmail(email);
+			if(memberDTO!=null) {
+				//이메일 있음 =>  이메일 중복
+				result="emaildup";
+			}else {
+				//이메일 없음 => 이메일 사용가능
+				result="emailok";
+			}
+			ResponseEntity<String> entity=new ResponseEntity<String>(result, HttpStatus.OK);
+			
+			return entity;
+		}
+		
+		// 가상주소 http://localhost:8080/FunWeb/test/ajaxtestmember'
+		@RequestMapping(value = "/test/ajaxtestmember", method = RequestMethod.GET)
+		public ResponseEntity<List<MemberDTO>> memberjson(HttpServletRequest request){
+			
+			List<MemberDTO> memberList=memberService.getMemberList();
+			
+	ResponseEntity<List<MemberDTO>> entity=new ResponseEntity<List<MemberDTO>>(memberList , HttpStatus.OK);
+			
+			return entity;
+		}
+		
+		
+	}
 }
