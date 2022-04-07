@@ -1,5 +1,7 @@
 package com.mypet.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,6 +33,16 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public Integer getMaxNum() {
 		return sqlSession.selectOne(namespace+".getMaxNum");
 	}
+	
+	@Override
+	public List<String> getProvinceList() {
+		return sqlSession.selectList(namespace+".getProvinceList");
+	}
+	
+//	@Override
+//	public List<String> getcityname(String province) {
+//		return sqlSession.selectList(namespace+".getcityname", province);
+//	}
 	
 	
 }

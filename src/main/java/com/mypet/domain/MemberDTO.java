@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class MemberDTO {
-	private String user_id;
+	private int user_id;
 	private String email;
 	private String nickname;
 	private String password;
