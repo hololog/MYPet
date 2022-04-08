@@ -19,10 +19,11 @@ public class MemberServiceImpl implements MemberService{
 	public void insertMember(MemberDTO memberDTO) {
 		
 		if(memberDAO.getUserMaxNum() != null) {
-			memberDTO.setUser_id((memberDAO.getUserMaxNum() + 1) + "");
+			memberDTO.setUser_id(memberDAO.getUserMaxNum()+1);
 		} else {
-			memberDTO.setUser_id(1 + "");
+			memberDTO.setUser_id(1);
 		}
+		
 		memberDTO.setJoin_date(new Timestamp(System.currentTimeMillis()));
 		memberDAO.insertMember(memberDTO);
 	}

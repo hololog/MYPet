@@ -13,11 +13,48 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-	<!-- JQuery -->
-<!-- 
-
+	
+	<!-- 실종지역 selectbox 동적 JQuery -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
+	// 시/도 select
+	$(document).ready(function(){
+		$.ajax({
+// 			traditional: true,
+			url: "{pageContext.request.contextPath}/findboard/provinceSelect",
+			dataType: "json",
+			success: function(rdata){
+				$.each(rdata, function(i){
+					$('#province').append("<option value='"+rdata[i]+"'>" + rdata[i]+ "</option>")
+				});
+			}, 
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert("오류발생");
+				}
+		}); //ajax closed
+	} // function closed
+	
+	// 시/도 클릭 후 구 select  
+// 	function citySelect(province){
+// 		$.ajax({
+// 				type: "POST",
+// 				url: "{pageContext.request.contextPath}/findboard/citySelect",
+// 				dataType: "json",
+// 				data: {param:province},
+// 				success: function(rdata){
+// 					$('#address').find('option').remove().end().append('<option value=""></option>');
+// 					$.each(rdata, function(i){
+// 						$('#address').append("<option value='"+result[i]+"'>" + rdata[i] + "</option>")
+// 					});
+// 				}, // success closed
+// 				error: function(jqXHR, textStatus, errorThrown) {
+// 					alert("오류발생");
+// 				}
+// 			});	// ajax closed
+	} // function closed
+	</script>
+	<!-- 유효성 검사 -->
+<!-- 
  	$(document).ready(function(){
  		$('#f_eh').submit(function(){				
 				if($('#animal_sort_eh').val()==""){
@@ -60,9 +97,7 @@
 					return false;
 				}
  			});//
-
  		});//		
-
 	</script>
  -->
 </head>
@@ -145,19 +180,15 @@
                                 <label class="input-group-text">실종 날짜</label>
                                 <input type="date" class="form-control" name="missing_date">
                             </div>
-                            <!--실종지역 select (JQuery or API 적용 예정)-->
+                            <!--실종지역 selectbox -->
                             <div class="input-group">
                                 <label class="input-group-text">실종 지역</label>
-                                    <select class="form-select" name="address">
-                                        <option selected>시</option>
-                                        <option value="busan">부산광역시</option>
-                                        <option value="seoul">서울특별시</option>
-                                        <option value="gwangju">광주광역시</option>
+                                    <select class="form-select" name="address1" id="province">
+                                        <option value="">지역</option>
                                     </select>
-                                    <select class="form-select" name="address2">
-                                        <option selected>구</option>
-                                        <option value="suyoeng-gu">수영구</option>
-                                        <option value="jin-gu">부산진구</option>
+                                    <select class="form-select" name="address2" id="city" onchange="citySelect(this.value);">
+                                        <option selected>시</option>
+                                        <option value="">수영구</option>
                                     </select>
                                     <select class="form-select">
                                         <option selected>동</option>

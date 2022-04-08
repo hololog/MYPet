@@ -63,7 +63,28 @@ public interface BoardService {
 		
 		public void deletereviewBoard(int num);
 	//Delete end
-		public int searchCount(String searchType, String keyword) throws Exception;
-	
-
+		
+	//search start	
+		public List<BoardDTO> freeListsearch(PageDTO pageDTO);
+		
+		public int getfreeBoardCountSearch(PageDTO pageDTO);
+		
+		public List<BoardDTO> noticeListsearch(PageDTO pageDTO);
+		
+		public int getnoticeBoardCountSearch(PageDTO pageDTO);
+		
+		public List<BoardDTO> reviewListsearch(PageDTO pageDTO);
+		
+		public int getreviewBoardCountSearch(PageDTO pageDTO);
+	//search end	
+		
+		//best start
+		public List<BoardDTO> bestfree(PageDTO pageDTO);
+		
+		public List<BoardDTO> bestnotice(PageDTO pageDTO);
+		
+		public List<BoardDTO> bestreview(PageDTO pageDTO);
+	//like start	
+		
+		
 }

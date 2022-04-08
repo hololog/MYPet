@@ -3,6 +3,7 @@ package com.mypet.service;
 
 import java.util.List;
 
+
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.PageDTO;
@@ -19,4 +20,8 @@ public interface FindboardService {
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
 	public void insert_findboard(FindboardDTO findboardDTO);
+	
+	public List<String> getProvinceList();
+	
+//	public List<String> getcityname(String province);
 }

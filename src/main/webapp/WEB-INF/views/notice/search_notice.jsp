@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -23,7 +23,7 @@
     
   </head>
   <body>
-	<div>
+	
     <!-- header 시작 -->
 	<jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- header 종료 -->
@@ -34,7 +34,8 @@
 
         <!-- 제목 시작 -->
        <div class="container">
-            <h1 class="sub-title">꿀팁 & 입양후기</h1>
+            <h1 class="sub-title">공지사항</h1>
+             <p>검색결과</p>
             <hr>
         </div>
        <!-- 제목 종료 -->
@@ -47,7 +48,7 @@
               <div>
                
                 <!-- 게시판 -->
-                 <div class="container mt-3">
+                <div class="container mt-3">
                     
                   <table class="table table-hover text-center  " >
                     <thead>
@@ -60,14 +61,13 @@
                         <th width="10%" style="text-align: start;">날짜</th>
                     </tr>
                   </thead>
-                <tbody>
-                  <c:forEach var="bDTO" items="${bestreview }">
-						 <c:set var="numbest" value="${numbest + 1}"/>
-                    <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
-                        <td>${numbest}</td>
-                        <td style="text-align: start;">
+                  <tbody>
+                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
+                  <c:forEach var="bDTO" items="${boardList }">
+                    <tr onclick="location.href='${pageContext.request.contextPath }/notice/content_notice?notice_num=${bDTO.notice_num}'">
+                        <td>${num }</td>
+                        <td >
                         
-                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
                         </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -79,35 +79,6 @@
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
-                   
-					</c:forEach>                   
-                  </tbody>
-                  </table>
-                 
-                  <hr>
-                <!-- 게시판 -->
-                <div class="container mt-3">
-                    
-                  <table class="table table-hover text-center  " >
-                    
-                 
-                  <tbody>
-                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
-                  <c:forEach var="bDTO" items="${boardList }">
-                    <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
-                        <td  width="4%">${num }</td>
-                        <td  width="3%"></td>
-                        
-                        <td width="30%" style="text-align: start;">${bDTO.subject}</td>
-                        <td style="text-align:end"><div>
-                          <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${like_count} </i>
-                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
-                        </div></td>
-                        <td width="10%">${bDTO.nickname}</td>
-                        <td  width="10%" style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
-   							
-                    </tr>
                     <c:set var="num" value="${num-1 }"/>
 					</c:forEach> 
                    
@@ -115,63 +86,52 @@
                   </table>
                   <hr/>
                   <!-- 검색 -->
-                  <form action="${pageContext.request.contextPath }/reviewboard/search_review" method="get">
+                  <form action="${pageContext.request.contextPath }/notice/search_notice" method="get">
                   <div class="container w-50 ">
                     <div class="d-flex align-items-center justify-content-center ">
 
                         <input name="search" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
                         <button value="search" id="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
                       
+
                     </div>
                   </div>
                   </form>
-                  <!-- 아이디 없을때 -->
-<%--                   <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"> --%>
-<!--                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div> -->
-<!--                   	<script> -->
-
-<!-- // 						function login() { -->
-						
-<!-- // 						  alert("로그인해라"); -->
-						
-<%-- // 						  location.href = "${pageContext.request.contextPath }/main/main"; --%>
-						
-<!-- // 						} -->
-						
-<!-- 						</script> -->
-<%--                   </c:if> --%>
+                 
                   
                   
-<!--                   아이디 있을때 -->
-<%--                   <c:if test="${!empty user_id }"> --%>
+                  <!-- 아이디 있을때 -->
+                 <c:if test="${! empty sessionScope.user_id }">
+					<c:if test="${sessionScope.user_id  ne 'admin'}">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button>
-                  </div>
-<%--                   </c:if> --%>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button> </div>
+                  </c:if>
+                  </c:if>
+                  
+                  
+                  
                   <!-- 다음버튼 -->
-                  <div class="text-center clear">
-                        <div class="pagination justify-content-center" style="margin:20px 0">
+                   <div class="text-center">
+                        <ul class="pagination justify-content-center" style="margin:20px 0">
                             
-                            <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
+                               <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/search_notice?pageNum=${pageDTO.startPage-pageDTO.pageBlock}%search=${pageDTO.search}">◁</a></li>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${i}"> ${i}</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/search_notice?pageNum=${i}%search=${pageDTO.search}"> ${i}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/reviewboard/list_review?pageNum=${pageDTO.startPage+pageDTO.pageBlock}"> ▷</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/notice/search_notice?pageNum=${pageDTO.startPage+pageDTO.pageBlock}%search=${pageDTO.search}"> ▷</a></li>
 							</c:if>
-                       
+                        </ul>
                   </div>
-               </div>
-           </div>
+           
+        </div>
         
 
-</div>
-</div>
 
         <!-- 게시판 끝 -->
         

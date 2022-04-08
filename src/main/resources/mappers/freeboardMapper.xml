@@ -123,22 +123,44 @@
 <!-- Delete end -->
 
 <!-- search start -->
-	<select id="searchCount" parameterType="hashMap"	 resultType="com.mypet.domain.BoardDTO">
-		select free_board_num, subject, nickname, content 
-		from free_board
-		<if test='searchType.equals("subject")'>
-		where subject like concat('%', #{keyword}, '%')
-		</if>
-		<if test='searchType.equals("nickname")'>
-		where nickname like concat('%', #{keyword}, '%')
-		</if>
-		<if test='searchType.equals("content")'>
-		where content like concat('%', #{keyword}, '%')
-		</if>
-		order by free_board_num desc
-		    limit #{startRow},#{pageSize}
+	
+	<select id="freeListsearch" resultType="com.mypet.domain.BoardDTO">
+		select * from free_board where subject like #{search} order by free_board_num desc limit #{startRow},#{pageSize}
 	</select>
-
+	
+	<select id="getfreeBoardCountSearch"  resultType="java.lang.Integer">
+		select count(*) from free_board where subject like #{search} 
+	</select>
+	
+	<select id="noticeListsearch" resultType="com.mypet.domain.BoardDTO">
+		select * from notice where subject like #{search} order by notice_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getnoticeBoardCountSearch"  resultType="java.lang.Integer">
+		select count(*) from notice where subject like #{search} 
+	</select>
+	
+	<select id="reviewListsearch" resultType="com.mypet.domain.BoardDTO">
+		select * from tip_board where subject like #{search} order by tip_board_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getreviewBoardCountSearch"  resultType="java.lang.Integer">
+		select count(*) from tip_board where subject like #{search} 
+	</select>
+	
 <!-- search end -->
+
+
+	<select id="bestfree" resultType="com.mypet.domain.BoardDTO">
+	 	select * from free_board order by readcount desc limit 3
+	</select>
+	
+	<select id="bestnotice" resultType="com.mypet.domain.BoardDTO">
+	 	select * from notice order by readcount desc limit 3
+	</select>
+	
+	<select id="bestreview" resultType="com.mypet.domain.BoardDTO">
+	 	select * from tip_board order by readcount desc limit 3
+	</select>
 
 </mapper>

@@ -40,14 +40,9 @@
        <!-- 제목 종료 -->
         
         
-            
-       
-       
               <br>
-              <div>
-               
-                <!-- 게시판 -->
-                <div class="container mt-3">
+           
+               <div class="container mt-3">
                     
                   <table class="table table-hover text-center  " >
                     <thead>
@@ -60,11 +55,11 @@
                         <th width="10%" style="text-align: start;">날짜</th>
                     </tr>
                   </thead>
-                  <tbody>
-                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
-                  <c:forEach var="bDTO" items="${boardList }">
+                <tbody>
+                  <c:forEach var="bDTO" items="${bestfree }">
+						 <c:set var="numbest" value="${numbest + 1}"/>
                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
-                        <td>${num }</td>
+                        <td>${numbest}</td>
                         <td style="text-align: start;">
                         
                         <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
@@ -79,6 +74,35 @@
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
+                   
+					</c:forEach>                   
+                  </tbody>
+                  </table>
+                 
+                  <hr>
+                <!-- 게시판 -->
+                <div class="container mt-3">
+                    
+                  <table class="table table-hover text-center  " >
+                    
+                 
+                  <tbody>
+                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
+                  <c:forEach var="bDTO" items="${boardList }">
+                    <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
+                        <td  width="4%">${num }</td>
+                        <td  width="3%"></td>
+                        
+                        <td width="30%" style="text-align: start;">${bDTO.subject}</td>
+                        <td style="text-align:end"><div>
+                          <!-- 댓글수, 조회수 아이콘 -->
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
+                        </div></td>
+                        <td width="10%">${bDTO.nickname}</td>
+                        <td  width="10%" style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
+   							
+                    </tr>
                     <c:set var="num" value="${num-1 }"/>
 					</c:forEach> 
                    
@@ -86,17 +110,14 @@
                   </table>
                   <hr/>
                   <!-- 검색 -->
-                  <form action="${pageContext.request.contextPath }/freeboard/searchList_free" method="get">
+                  
+                  <form action="${pageContext.request.contextPath }/freeboard/search_free" method="get">
                   <div class="container w-50 ">
                     <div class="d-flex align-items-center justify-content-center ">
 
-                        <input id="search"value="${pageDTO.keyword}" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
-                        <button varlue="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
-                       
-
-
-
-
+                        <input name="search" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                        <button value="search" id="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+                      
                     </div>
                   </div>
                   </form>
@@ -127,32 +148,7 @@
                   
                   
                   <!-- 다음버튼 -->
-                  <c:if test="">
-                  	<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-						 <span> <a href="/freeboard/listPageSearch?num=${pageDTO.startPage - 1}${pageDTO.searchTypeKeyword}">◁</a> </span>
-						</c:if>
-						
-						<c:forEach begin="${pageDTO.startPage}" end="${pageDTO.endPage}" var="num">
-						 <span>
-						 
-						  <c:if test="${select != pageNum}">
-						   <a href="/freeboard/listPageSearch?num=${num}${pageDTO.searchTypeKeyword}">${pageNum}</a>
-						  </c:if>    
-						  
-						  <c:if test="${select == pageNum}">
-						   <b>${pageNum}</b>
-						  </c:if>
-						    
-						 </span>
-						</c:forEach>
-						
-						<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-						 <span> <a href="/freeboard/listPageSearch?num=${pageDTO.endPage + 1}${pageDTO.searchTypeKeyword}">▷</a> </span>
-						</c:if>
-						
-						
-						
-                  </c:if>
+
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
@@ -171,7 +167,7 @@
                   </div>
                </div>
            
-        
+        </div>
 
 
         <!-- 게시판 끝 -->

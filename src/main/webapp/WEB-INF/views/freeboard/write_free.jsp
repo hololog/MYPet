@@ -81,7 +81,7 @@
       
      <br>
      <br>
-	
+	<button type="button" onclick="<span class='bi bi-heart-fill'></span>"><span class='bi bi-heart' style='color: red'></span></button>
      <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
         <button type="submit"  class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
           등   록          

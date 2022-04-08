@@ -3,6 +3,8 @@ package com.mypet.controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+//import javax.websocket.Session;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,13 @@ public class MemberController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
 		return "main/main";
+	}
+	
+	
+	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
+	public String login(MemberDTO memberDTO) {
+		
+		return "member/login";
 	}
 	
 	//로그인

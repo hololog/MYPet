@@ -44,6 +44,15 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace+".getfindBoardList", pageDTO);
 }
+	public List<String> getProvinceList() {
+		return sqlSession.selectList(namespace+".getProvinceList");
+	}
+	
+//	@Override
+//	public List<String> getcityname(String province) {
+//		return sqlSession.selectList(namespace+".getcityname", province);
+//	}
+	
 	
 	@Override
 	public int getfindBoardCount() {

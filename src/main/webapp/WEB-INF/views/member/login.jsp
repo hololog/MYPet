@@ -12,10 +12,10 @@
 
     <title>login</title>
     <!-- css스타일 적용 -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
     
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modal.css" />
-    <link rel="stylesheet" href=".${pageContext.request.contextPath }/resources/css/main.css"  />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css"  />
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/modals/">
 
         <!-- Bootstrap core CSS -->
@@ -41,13 +41,13 @@
                     </div>
                             
                     <div class="modal-body p-5 pt-0">
-                        <form class="whole_modal">
+                        <form action="${pageContext.request.contextPath }/member/loginPro" class="whole_modal" method="post">
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com" name="email">
                             <label for="floatingInput">E-mail</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+                            <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password" name="password">
                             <label for="floatingPassword">Password</label>
                           </div>
                           <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">로그인</button>

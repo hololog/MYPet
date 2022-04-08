@@ -65,4 +65,15 @@ public class FindboardServiceImpl implements FindboardService {
 		findboardDAO.insert_findboard(findboardDTO);
 	}
 	
+
+
+	@Override
+	public List<String> getProvinceList() {
+		return findboardDAO.getProvinceList();
+	}
+
+//	@Override
+//	public List<String> getcityname(String province) {
+//		return findboardDAO.getcityname(province);
+//	}
 }

@@ -28,6 +28,7 @@
 		where find_board_num = #{find_board_num}
 	</select>
 	
+
 	<!-- 게시글 가져오기(모달용) -->
 	<select id="bringfindBoard" resultType="com.mypet.domain.FindboardDTO">
 		SELECT * FROM find_board
@@ -40,5 +41,14 @@
 		<select id="getfindBoardCount" resultType="java.lang.Integer">
 		select count(*) from find_board
 	</select>
+
+	<select id="getProvinceList" resultType="java.util.ArrayList">
+		select distinct address1 from address
+	</select>
+
+<!-- 	<select id="getcityname" resultType="java.util.ArrayList"> -->
+<!-- 		select distinct address2 from address where address1 = #{province} -->
+<!-- 	</select> -->
+
 
 </mapper>
