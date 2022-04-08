@@ -163,6 +163,26 @@ public class BoardDAOImpl implements BoardDAO{
 	public int getfreeBoardCountSearch(PageDTO pageDTO) {
 		return sqlSession.selectOne(namespace+".getfreeBoardCountSearch", pageDTO);
 	}
+	@Override
+	public List<BoardDTO> noticeListsearch(PageDTO pageDTO) {
+		
+		return sqlSession.selectList(namespace+".noticeListsearch", pageDTO);
+	}
+
+	@Override
+	public int getnoticeBoardCountSearch(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getnoticeBoardCountSearch", pageDTO);
+	}
+	@Override
+	public List<BoardDTO> reviewListsearch(PageDTO pageDTO) {
+		
+		return sqlSession.selectList(namespace+".reviewListsearch", pageDTO);
+	}
+
+	@Override
+	public int getreviewBoardCountSearch(PageDTO pageDTO) {
+		return sqlSession.selectOne(namespace+".getreviewBoardCountSearch", pageDTO);
+	}
 
 	
 	
@@ -174,7 +194,15 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectList(namespace+".bestfree", pageDTO);
 	}
 
+	@Override
+	public List<BoardDTO> bestnotice(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".bestnotice", pageDTO);
+	}
 	
+	@Override
+	public List<BoardDTO> bestreview(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".bestreview", pageDTO);
+	}
 
 	
 

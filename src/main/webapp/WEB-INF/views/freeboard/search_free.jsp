@@ -35,6 +35,7 @@
         <!-- 제목 시작 -->
        <div class="container">
             <h1 class="sub-title">자유게시판</h1>
+            <p>검색결과</p>
             <hr>
         </div>
        <!-- 제목 종료 -->
@@ -128,19 +129,20 @@
                         <ul class="pagination justify-content-center" style="margin:20px 0">
                             
                                <c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/searchList_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}%search=${pageDTO.search}">◁</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/search_free?pageNum=${pageDTO.startPage-pageDTO.pageBlock}%search=${pageDTO.search}">◁</a></li>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pageDTO.startPage }" end="${pageDTO.endPage }" step="1">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/searchList_free?pageNum=${i}%search=${pageDTO.search}"> ${i}</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/search_free?pageNum=${i}%search=${pageDTO.search}"> ${i}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/searchList_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}%search=${pageDTO.search}"> ▷</a></li>
+							<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath }/freeboard/search_free?pageNum=${pageDTO.startPage+pageDTO.pageBlock}%search=${pageDTO.search}"> ▷</a></li>
 							</c:if>
                         </ul>
                   </div>
            
+        </div>
         
 
 

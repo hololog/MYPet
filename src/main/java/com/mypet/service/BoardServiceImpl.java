@@ -212,15 +212,70 @@ public class BoardServiceImpl implements BoardService {
 	public int getfreeBoardCountSearch(PageDTO pageDTO) {
 		return boardDAO.getfreeBoardCountSearch(pageDTO);
 	}
-
 	
-	
+	@Override
+	public List<BoardDTO> noticeListsearch(PageDTO pageDTO) {
+		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		pageDTO.setStartRow(startRow-1);
+		
+		
+		return boardDAO.noticeListsearch(pageDTO);
+	}
 
+	@Override
+	public int getnoticeBoardCountSearch(PageDTO pageDTO) {
+		return boardDAO.getnoticeBoardCountSearch(pageDTO);
+	}
+	
+	@Override
+	public List<BoardDTO> reviewListsearch(PageDTO pageDTO) {
+		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		pageDTO.setStartRow(startRow-1);
+		
+		
+		return boardDAO.reviewListsearch(pageDTO);
+	}
+
+	@Override
+	public int getreviewBoardCountSearch(PageDTO pageDTO) {
+		return boardDAO.getreviewBoardCountSearch(pageDTO);
+	}
+	
 	@Override
 	public List<BoardDTO> bestfree(PageDTO pageDTO) {
 		
 		return boardDAO.bestfree(pageDTO);
 	}
+	@Override
+	public List<BoardDTO> bestnotice(PageDTO pageDTO) {
+		
+		return boardDAO.bestnotice(pageDTO);
+	}
+	@Override
+	public List<BoardDTO> bestreview(PageDTO pageDTO) {
+		
+		return boardDAO.bestreview(pageDTO);
+	}
+	
+	
+	
 
+
+
+	
 
 }

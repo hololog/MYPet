@@ -90,7 +90,7 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 		
 		List<BoardDTO> boardList=boardService.getreviewBoardList(pageDTO);
-		
+		List<BoardDTO> bestreview=boardService.bestreview(pageDTO);
 		int count=boardService.getreviewBoardCount();
 		
 		int currentPage=Integer.parseInt(pageNum);
@@ -110,6 +110,7 @@ public class BoardController {
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("bestreview", bestreview);
 		
 		
 		return "reviewboard/list_review";
@@ -131,7 +132,7 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 		
 		List<BoardDTO> boardList=boardService.getnoticeBoardList(pageDTO);
-		
+		List<BoardDTO> bestnotice=boardService.bestnotice(pageDTO);
 		int count=boardService.getnoticeBoardCount();
 		
 		int currentPage=Integer.parseInt(pageNum);
@@ -152,6 +153,7 @@ public class BoardController {
 		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("bestnotice", bestnotice);
 		return "notice/list_notice";
 	}
 	//세히
@@ -366,8 +368,97 @@ public class BoardController {
 			
 			
 	//세히
-		
+		@RequestMapping(value = "/notice/search_notice", method = RequestMethod.GET)
+		public String search_notice(HttpServletRequest request, Model model) {
+			
+			String search=request.getParameter("search");
+			String search2="%"+search+"%";
+			
+			int pageSize=20;
+			
+			String pageNum=request.getParameter("pageNum");
+			
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setSearch(search2);
+			
+			List<BoardDTO> boardList=boardService.noticeListsearch(pageDTO);
+			
+			int count=boardService.getnoticeBoardCountSearch(pageDTO);
+			
+			int currentPage=Integer.parseInt(pageNum);
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
+			if(endPage > pageCount){
+				endPage = pageCount;
+			}
+			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			pageDTO.setSearch(search);
+			
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("pageDTO", pageDTO);
+			
+			return "notice/search_notice";
+		}	
 	
-
+		//세희
+		@RequestMapping(value = "/reviewboard/search_review", method = RequestMethod.GET)
+		public String search_review(HttpServletRequest request, Model model) {
+			
+			String search=request.getParameter("search");
+			String search2="%"+search+"%";
+			
+			int pageSize=20;
+			
+			String pageNum=request.getParameter("pageNum");
+			
+			if(pageNum==null) {
+				pageNum="1";
+			}
+			
+			
+			PageDTO pageDTO=new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setSearch(search2);
+			
+			List<BoardDTO> boardList=boardService.reviewListsearch(pageDTO);
+			
+			int count=boardService.getreviewBoardCountSearch(pageDTO);
+			
+			int currentPage=Integer.parseInt(pageNum);
+			int pageBlock=10;
+			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
+			int endPage=startPage+pageBlock-1;
+			int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
+			if(endPage > pageCount){
+				endPage = pageCount;
+			}
+			
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			pageDTO.setSearch(search);
+			
+			model.addAttribute("boardList", boardList);
+			model.addAttribute("pageDTO", pageDTO);
+			
+			return "reviewboard/search_review";
+		}
 
 }
