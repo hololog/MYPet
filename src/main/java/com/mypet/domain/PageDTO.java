@@ -1,5 +1,6 @@
 package com.mypet.domain;
 
+
 public class PageDTO {
 	private int pageSize;
 	private String pageNum;
@@ -7,11 +8,17 @@ public class PageDTO {
 	private int startRow;
 	private int endRow;
 	
+	private String search;	
+
+
+
 	private int pageBlock;
 	private int startPage;
 	private int endPage;
 	private int count;
 	private int pageCount;
+
+	
 	
 	
 	public int getPageSize() {
@@ -74,7 +81,18 @@ public class PageDTO {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+
+
 	
-	
+
+
 	
 }
+

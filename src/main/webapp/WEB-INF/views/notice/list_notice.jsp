@@ -60,34 +60,72 @@
                         <th width="10%" style="text-align: start;">날짜</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <c:forEach var="bDTO" items="${boardList }">
+                <tbody>
+                  <c:forEach var="bDTO" items="${bestnotice }">
+						 <c:set var="numbest" value="${numbest + 1}"/>
                     <tr onclick="location.href='${pageContext.request.contextPath }/notice/content_notice?notice_num=${bDTO.notice_num}'">
-                        <td>${bDTO.notice_num}</td>
-                        <td style="text-align: start;"><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
+                        <td>${numbest}</td>
+                        <td style="text-align: start;">
+                        
+                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
+                        </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots"> ${bDTO.like_count} </i>
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
                         <td>${bDTO.nickname}</td>
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
-					</c:forEach> 
-
+                   
+					</c:forEach>                   
+                  </tbody>
+                  </table>
+                 
+                  <hr>
+                <!-- 게시판 -->
+                <div class="container mt-3">
                     
+                  <table class="table table-hover text-center  " >
+                    
+                 
+                  <tbody>
+                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
+                  <c:forEach var="bDTO" items="${boardList }">
+                    <tr onclick="location.href='${pageContext.request.contextPath }/notice/content_notice?notice_num=${bDTO.notice_num}'">
+                        <td  width="4%">${num }</td>
+                        <td  width="3%"></td>
+                        
+                        <td width="30%" style="text-align: start;">${bDTO.subject}</td>
+                        <td style="text-align:end"><div>
+                          <!-- 댓글수, 조회수 아이콘 -->
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
+                        </div></td>
+                        <td width="10%">${bDTO.nickname}</td>
+                        <td  width="10%" style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
+   							
+                    </tr>
+                    <c:set var="num" value="${num-1 }"/>
+					</c:forEach> 
+                   
                     </tbody>
                   </table>
                   <hr/>
                   <!-- 검색 -->
+                  <form action="${pageContext.request.contextPath }/notice/search_notice" method="get">
                   <div class="container w-50 ">
                     <div class="d-flex align-items-center justify-content-center ">
-                        <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
-                        <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+
+                        <input name="search" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                        <button value="search" id="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+                      
                     </div>
                   </div>
+                  </form>
+                  
                   <!-- 글쓰기버튼 -->
                  <c:if test="${! empty sessionScope.user_id }">
 					<c:if test="${sessionScope.user_id  ne 'admin'}">
@@ -116,6 +154,7 @@
                   </div>
                </div>
            
+        </div>
         
 
 

@@ -2,8 +2,11 @@ package com.mypet.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.PageDTO;
+
 
 
 public interface BoardDAO {
@@ -70,9 +73,26 @@ public interface BoardDAO {
 	
 	public void deletereviewBoard(int num);
 //Delete end	
-	
 
+//search start	
+	public List<BoardDTO> freeListsearch(PageDTO pageDTO);
 	
+	public int getfreeBoardCountSearch(PageDTO pageDTO);
 	
-
+	public List<BoardDTO> noticeListsearch(PageDTO pageDTO);
+	
+	public int getnoticeBoardCountSearch(PageDTO pageDTO);
+	
+	public List<BoardDTO> reviewListsearch(PageDTO pageDTO);
+	
+	public int getreviewBoardCountSearch(PageDTO pageDTO);
+	//search end
+	
+	//likebest start
+	public List<BoardDTO> bestfree(PageDTO pageDTO);
+	
+	public List<BoardDTO> bestnotice(PageDTO pageDTO);
+	
+	public List<BoardDTO> bestreview(PageDTO pageDTO);
+   
 }

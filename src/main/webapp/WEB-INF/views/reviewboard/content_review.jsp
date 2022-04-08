@@ -26,8 +26,7 @@
   <!-- Slick CSS -->
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css" />
-
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    </head>
   <body>
 	<div>
@@ -191,7 +190,8 @@
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
                <table id="notice text-center border">
 				<tr><td>글번호 : </td><td> ${boardDTO.tip_board_num}</td></tr>
-				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-8"></td> <td>작성일 : </td><td> ${boardDTO.insert_date}</td></tr>
+				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td>
+				     <td>작성일 : </td><td><fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
 				<br>
 				<br>
@@ -262,12 +262,44 @@
 
     <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
-            <div class="card-body">
+           <script>
+           jQuery(function($) {
+        	   $('#swapHeart').on('click', function() {
+        	     var $el = $(this),
+        	       textNode = this.lastChild;
+        	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
+        	     $el.toggleClass('swap');
+        	   });
+        	 });
+           </script>
+				
+				
+
+			
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
+                 <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
+						 
+						
+						    <script>
+						
+						        var i = 0;
+						        $('i').on('click',function(){
+						            if(i==0){
+						                $(this).attr('class','bi-heart-fill');
+						                i++;
+						            }else if(i==1){
+						                $(this).attr('class','bi-heart');
+						                i--;
+						            }
+						
+						        });
+						
+						    </script>
+                		
                           <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>
                           <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">

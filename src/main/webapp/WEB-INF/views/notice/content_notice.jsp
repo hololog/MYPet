@@ -183,26 +183,22 @@
             </div>
         </div>
         <!-- 슬라이드 쇼 끝 -->
-        <!-- 글 -->
+          <!-- 글 -->
+         <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum leo
-                    risus, nec efficitur ipsum congue sed. Cras congue aliquet purus, in mattis nunc
-                    varius sed. Suspendisse augue risus, porta in lectus eu, facilisis gravida eros.
-                    Nulla efficitur purus quis convallis maximus. In tempor lacinia dolor a
-                    malesuada. Quisque magna mauris, lobortis non urna nec, rutrum accumsan massa.
-                    Praesent sapien mauris, dictum id ultricies quis, vulputate at quam. Integer eu
-                    iaculis urna, id imperdiet sapien. Vivamus dolor purus, tincidunt non volutpat
-                    sed, maximus ullamcorper augue. Aliquam et consectetur justo, non ornare diam.
-                    Proin quis urna erat. Mauris sodales, diam sed maximus cursus, justo enim
-                    rhoncus ipsum, sit amet ultrices libero lorem sed odio. Ut nec sem fermentum,
-                    posuere lectus a, tincidunt enim. Donec elementum nisl vel nibh rhoncus
-                    eleifend. Aliquam ut auctor diam. Quisque in mauris pulvinar, iaculis magna vel,
-                    imperdiet lectus. Nam eu porttitor erat. Curabitur et euismod risus, a rhoncus
-                    libero. Curabitur blandit accumsan tortor a scelerisque.
-                </p>
+               <table id="notice text-center border">
+				<tr><td>글번호 : </td><td> ${boardDTO.notice_num}</td></tr>
+				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-7"></td>
+				     <td>작성일 : </td><td><fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
+				</table>
+				<br>
+				<br>
+				<div>글내용</div>
+				<br><br>
+				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br><br>
             </div>
         </div>
         <!-- 글끝 -->
@@ -272,12 +268,8 @@
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
-                <i class="bi bi-star-fill"></i>
-                1
-                <i class="bi bi-chat-dots"></i>
-                0
-                <i class="bi bi-eye-fill"></i>
-                1
+                          <i class="fa-regular fa-comment-dots"> ${bDTO.like_count} </i>
+                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                 <div class="in-line-kj">
 
                     <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
