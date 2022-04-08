@@ -2,7 +2,6 @@ package com.mypet.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

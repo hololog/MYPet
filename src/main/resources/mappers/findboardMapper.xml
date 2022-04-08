@@ -27,5 +27,18 @@
 		SELECT * FROM find_comment
 		where find_board_num = #{find_board_num}
 	</select>
+	
+	<!-- 게시글 가져오기(모달용) -->
+	<select id="bringfindBoard" resultType="com.mypet.domain.FindboardDTO">
+		SELECT * FROM find_board
+	</select>
+	
+	<select id="getfindBoardList" resultType="com.mypet.domain.FindboardDTO">
+		select * from find_board order by find_board_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+		<select id="getfindBoardCount" resultType="java.lang.Integer">
+		select count(*) from find_board
+	</select>
 
 </mapper>
