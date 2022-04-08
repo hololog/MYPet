@@ -27,10 +27,9 @@ public class AjaxController {
 
 	@Autowired
 	private FindboardService findboardService;
-
 	
-	@Inject
-	private FindboardService findboardService;
+//	@Inject
+//	private FindboardService findboardService;
 	
 	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
 	public ResponseEntity<String> memberCheck(HttpServletRequest request) {
