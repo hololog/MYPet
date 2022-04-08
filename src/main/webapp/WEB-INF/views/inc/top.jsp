@@ -59,7 +59,7 @@
                 </ul>
               </div>
               <!-- 드롭다운메뉴 종료 -->
-              <a class="nav-link" id="nav-buy-ksk" href="${pageContext.request.contextPath }/GB/GbuyWrite">공동구매</a>
+              <a class="nav-link" id="nav-buy-ksk" href="${pageContext.request.contextPath }/GB/GbuyMain">공동구매</a>
               <a class="nav-link" id="nav-event-ksk" href="${pageContext.request.contextPath }/notice/list_notice">공지사항</a>
               <a class="nav-link" id="nav-about-ksk" href="${pageContext.request.contextPath }/main/main#main-about-ksk">ABOUT US</a>
           </div>

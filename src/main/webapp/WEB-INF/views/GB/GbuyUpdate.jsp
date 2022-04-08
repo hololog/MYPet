@@ -54,14 +54,14 @@ function readURL2(input) {
     <!-- header 시작 -->
 	<jsp:include page="../inc/top.jsp"></jsp:include>
     <!-- header 종료 -->
-    
-   			 <!-- 제목 시작 -->
-            <div class="container" >
-                <h1 class="sub-title">판매등록</h1>
-                <hr>
-            </div>
-            <!-- 제목 종료 -->
-<form action="${pageContext.request.contextPath }/GB/GbuyWritePro" method="post">
+		<!-- 제목 시작 -->
+        <div class="container" >
+			<h1 class="sub-title">판매등록</h1>
+            <hr>
+        </div>
+    	<!-- 제목 종료 -->
+<form action="${pageContext.request.contextPath }/GB/GbuyUpdatePro">
+<input type="hidden" name="gbuy_num" value="${boardDTO.gbuy_num}">
             <div class="container p-2" style="border: 1px solid red;">
                 <div class="container col-md-10">
                 <div class="container row col-md-12">
@@ -71,52 +71,41 @@ function readURL2(input) {
                             <br><br>
                             <div class="col input-group mb-3 ">
                            		<label class="input-group-text">상품이름</label>
-                                <input type="text" name="Gbuy_subject" class="form-control" placeholder="상풍명">
+                                <input type="text" name="Gbuy_subject" class="form-control" value="${boardDTO.gbuy_subject}">
                             </div>
                         <!--가격-->
                             <div class="col input-group mb-3 ">
                            		<label class="input-group-text">상품가격</label>
-                            <input type="text" name="Gbuy_price" class="form-control" placeholder="가격" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                             		<label class="input-group-text">원</label>
-                        </div>
+                            	<input type="text" name="Gbuy_price" class="form-control" value="${boardDTO.gbuy_price}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                             	<label class="input-group-text">원</label>
+                        	</div>
                             <div class="col input-group mb-3 ">
                            		<label class="input-group-text">목표수량</label>
-                            <input type="text" id="b" name="Gbuy_tcount" class="form-control" placeholder="목표수" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                        </div>
+                            	<input type="text" id="b" name="Gbuy_tcount" class="form-control" value="${boardDTO.gbuy_tcount}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                        	</div>
                             <div class="col input-group mb-3 ">
                            		<label class="input-group-text">재고수량</label>
-                            <input type="text" id="a" name="Gbuy_count" class="form-control" placeholder="재고수" readonly="readonly">
-                        </div>
-                       </div>
+                            	<input type="text" id="a" name="Gbuy_count" class="form-control" value="${boardDTO.gbuy_count}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                       		</div>
+                    </div>
                     <div class="col-md-6 btn text-lg-end ">
-             			<img style="width: 300px;" class="preview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+             			<img style="width: 300px;" class="preview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image" >
       					<input type="file" name="Gbuy_file" onchange="readURL(this);">
     				</div>
-<!--재고수 목표수 동시입력-->
-						<script>
-						    $("#b").keydown(function(){
-						        $('#a').val($(this).val());
-						    });
-						    $("#b").change(function(){
-						        $('#a').val($(this).val());
-						    });
-						</script>
-
                         <br>
                         <!--상품등록 결정 버튼-->
                         <p>
-                        	<input type="submit" value="판매등록" class="btn btn-primary btn-lg">
-							<input type="button" value="취소" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain'">
+                        	<input type="submit" value="수정완료" class="btn btn-primary btn-lg">
+							<input type="button" value="수정취소" class="btn btn-primary btn-lg" onclick="history.back(-1);">
                         </p>
-                    </div>
-                	</div>
                 </div>
-            
-                                    <!--상세설명-이미지파일--->
-                        <div class="col12"style="text-align: center;">
- 							<img style="width: 1000px;" class="preview2" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-   							<input style="display: block;" type="file" name="Gbuy_file2" onchange="readURL2(this);" >
-                        </div>
+               	</div>
+           </div>
+						<!--상세설명-이미지파일--->
+                <div class="col12"style="text-align: center;">
+					<img style="width: 1000px;" class="preview2" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+					<input style="display: block;" type="file" name="Gbuy_file2" onchange="readURL2(this);" >
+                </div>
 </form>
     <!-- 공동구매끝 -->
 	<!-- 본문종료 종료 -->  

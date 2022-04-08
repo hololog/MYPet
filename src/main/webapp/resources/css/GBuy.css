@@ -7,12 +7,39 @@
     padding: 2%;
     position: relative;
 }
+#tx1{
+	font-size: 30px;
+	padding-left: 5%;
+}
+.tx1{
+	font-size: 30px; 
+	font-weight : 500; 
+	margin: 3%;
+}
+.tx2{
+	font-size: 40px;
+	font-weight : 900; 
+	margin: 2%;
+}
+
+.PT{
+	bottom: 100px;
+}
+/* 게이지바탕색 */
 .LK_ba {
-    background-color: rgb(16, 55, 90);
-    width: 100%;
-    height: 30px;
+	position:absolute;
+	bottom:20px;
+    background-color: white;
+    border: 1px solid black;
+    width: 45%;
     border-radius: 10px 10px 10px 10px;
-    background-color: rgb(20, 3, 3);
+}
+/* 게이지색상 */
+#LK_ba {
+    height: 30px;
+    background-color: blue;
+    width: 100%;
+    border-radius: 0.5rem;
 }
 .LK_BF{
     position: absolute;
@@ -21,11 +48,7 @@
     bottom: 0;
     width: 90%;
 }
-#LK_ba {
-    height: 30px;
-    width: 100%;
-    border-radius: 0.5rem;
-}
+
 
 #LK_row {
     position: relative;
@@ -62,3 +85,18 @@ font-style: normal;
 font-variant: normal;
 text-transform: none;
 }
+
+
+#PM{
+	font-size:30px;
+}
+.btn_GB{
+	padding: 10px 25px;
+	font-size: 20px;
+	font-weight: 500;
+	background: #fff;
+	color: #5256ad;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
