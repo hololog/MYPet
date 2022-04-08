@@ -58,4 +58,9 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public int getfindBoardCount() {
 		return sqlSession.selectOne(namespace+".getfindBoardCount");
 	}
+
+	@Override
+	public List<String> getCityList(String province) {
+		return sqlSession.selectList(namespace + ".getCityList", province);
+	}
 }

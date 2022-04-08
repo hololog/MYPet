@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mypet.domain.AddressDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.service.FindboardService;
@@ -61,6 +62,8 @@ public class AjaxController {
 	//은혜
 	@RequestMapping(value= "/findboard/provinceSelect", method = RequestMethod.GET)
 	public ResponseEntity<List<String>> provinceSelect(){
+		System.out.println("AjaxController provinceSelect()");//실행되는지 체크
+		
 		List<String> provinceList = new ArrayList<String>();
 		provinceList = findboardService.getProvinceList();
 		
@@ -69,6 +72,23 @@ public class AjaxController {
 		
 		return entity;
 	}
+
+	//은혜
+	@RequestMapping(value= "/findboard/citySelect", method = RequestMethod.GET)
+	public ResponseEntity<List<String>> citySelect(HttpServletRequest request){
+		String province = request.getParameter("province");//같이 보낸 요처 파마리터값 가져오기
+		System.out.println("address1" + province);//province 값을 가져오는지 체크
+		
+		List<String> cityList = new ArrayList<String>();
+		cityList = findboardService.getCityList(province);
+		
+		ResponseEntity<List<String>> entity = 
+				new ResponseEntity<List<String>>(cityList, HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	
 	//은혜
 //	@RequestMapping(value= "/findboard/citySelect", method = RequestMethod.POST)
 //	public ResponseEntity<List<String>> citySelect(HttpServletRequest request,String param){

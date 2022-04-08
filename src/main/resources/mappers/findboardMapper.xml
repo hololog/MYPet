@@ -42,8 +42,16 @@
 		select count(*) from find_board
 	</select>
 
-	<select id="getProvinceList" resultType="java.util.ArrayList">
+	<select id="getProvinceList" resultType="Hashmap">
 		select distinct address1 from address
+	</select>
+	
+<!-- 	<select id="getCityList" resultType="com.mypet.domain.AddressDTO"> -->
+<!-- 		select distinct address2 from address where address1=#{province} -->
+<!-- 	</select> -->
+	
+	<select id="getCityList" resultType="Hashmap">
+		select distinct address2 from address where address1=#{province}
 	</select>
 
 <!-- 	<select id="getcityname" resultType="java.util.ArrayList"> -->

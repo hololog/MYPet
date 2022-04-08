@@ -22,6 +22,8 @@ public interface FindboardService {
 	public void insert_findboard(FindboardDTO findboardDTO);
 	
 	public List<String> getProvinceList();
+
+	public List<String> getCityList(String province);
 	
 //	public List<String> getcityname(String province);
 }
