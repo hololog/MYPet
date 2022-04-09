@@ -80,6 +80,82 @@ public class BoardController {
 		return "findboard/list";
 	}
 	
+	@RequestMapping(value = "/findboard/listM", method = RequestMethod.GET)
+	public String findmissboard(HttpServletRequest request, Model model) throws Exception {
+		int pageSize = 5;
+
+		String pageNum = request.getParameter("pageNum");
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+
+		List<FindboardDTO> findmissboardList = findboardService.getfindMissBoardList(pageDTO);
+
+		int count = findboardService.getfindMissBoardCount();
+
+		int currentPage = Integer.parseInt(pageNum);
+		int pageBlock = 10;
+		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+		int endPage = startPage + pageBlock - 1;
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		if (endPage > pageCount) {
+			endPage = pageCount;
+		}
+
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		model.addAttribute("findmissboardList", findmissboardList);
+		model.addAttribute("pageDTO", pageDTO);
+		
+		FindboardDTO findboardDTO = findboardService.getfindBoard(1);
+		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
+		model.addAttribute("replyList", replyList);
+		
+		return "findboard/listM";
+	}
+//	public String find_photo(HttpServletRequest request, Model model) throws Exception {
+//		int pageSize = 5;
+//
+//		String pageNum = request.getParameter("pageNum");
+//		if (pageNum == null) {
+//			pageNum = "1";
+//		}
+//
+//		PageDTO pageDTO = new PageDTO();
+//		pageDTO.setPageSize(pageSize);
+//		pageDTO.setPageNum(pageNum);
+//
+//		List<FindboardDTO> findboardList = findboardService.getfindBoardList(pageDTO);
+//
+//		int count = findboardService.getfindBoardCount();
+//
+//		int currentPage = Integer.parseInt(pageNum);
+//		int pageBlock = 10;
+//		int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+//		int endPage = startPage + pageBlock - 1;
+//		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+//		if (endPage > pageCount) {
+//			endPage = pageCount;
+//		}
+//
+//		pageDTO.setCount(count);
+//		pageDTO.setPageBlock(pageBlock);
+//		pageDTO.setStartPage(startPage);
+//		pageDTO.setEndPage(endPage);
+//		pageDTO.setPageCount(pageCount);
+//		
+//		model.addAttribute("findboardList", findboardList);
+//		model.addAttribute("pageDTO", pageDTO);
+//	}
+	
 	//세히
 	@RequestMapping(value = "/freeboard/list_free", method = RequestMethod.GET)
 	public String freeList(HttpServletRequest request, Model model) {

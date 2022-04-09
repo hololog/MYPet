@@ -16,8 +16,12 @@ public interface FindboardService {
 //	public FindboardDTO bringfindBoard(int num);
 	
 	public int getfindBoardCount();
+	
+	public int getfindMissBoardCount();
 
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
+	
+	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
 	public void insert_findboard(FindboardDTO findboardDTO);
 	

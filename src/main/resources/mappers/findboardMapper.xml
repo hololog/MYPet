@@ -38,8 +38,16 @@
 		select * from find_board order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
+	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
+		select * from find_board where result = "1" order by find_board_num desc limit #{startRow},#{pageSize}
+	</select>
+	
 		<select id="getfindBoardCount" resultType="java.lang.Integer">
 		select count(*) from find_board
+	</select>
+	
+	<select id="getfindMissBoardCount" resultType="java.lang.Integer">
+		select count(*) from find_board where result="1"
 	</select>
 
 	<select id="getProvinceList" resultType="Hashmap">

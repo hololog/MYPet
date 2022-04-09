@@ -22,8 +22,11 @@ public interface FindboardDAO {
 	
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
+	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
+	
 	public int getfindBoardCount();
 	
+	public int getfindMissBoardCount();
 
 	public List<String> getProvinceList();
 

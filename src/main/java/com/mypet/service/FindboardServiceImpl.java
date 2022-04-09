@@ -34,6 +34,11 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 	
 	@Override
+	public int getfindMissBoardCount() {
+		return findboardDAO.getfindBoardCount();
+	}
+	
+	@Override
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO) {
 		
 		int currentPage=Integer.parseInt(pageDTO.getPageNum());
@@ -47,6 +52,22 @@ public class FindboardServiceImpl implements FindboardService {
 		pageDTO.setStartRow(startRow-1);
 		
 		return findboardDAO.getfindBoardList(pageDTO);
+	}
+	
+	@Override
+	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO) {
+		
+		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		pageDTO.setStartRow(startRow-1);
+		
+		return findboardDAO.getfindMissBoardList(pageDTO);
 	}
 	
 	@Override

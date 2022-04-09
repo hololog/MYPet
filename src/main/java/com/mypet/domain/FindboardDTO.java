@@ -29,5 +29,6 @@ public class FindboardDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp delete_date;
 	private int reward;
+	private String upload;
   
 }
