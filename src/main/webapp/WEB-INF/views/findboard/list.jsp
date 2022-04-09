@@ -103,10 +103,8 @@
 						value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }" />
 					<c:forEach var="findboardDTO" items="${findboardList }"
 						varStatus="loop">
-
 						<div class="row">
-							<div class="col-12 col-sm-7 position-relative">
-								<!-- 이미지 슬라이더로 교체? -->
+							<div class="col-12 col-sm-7 p-2 position-relative">
 								<a href="" data-bs-toggle="modal" class="openMod"
 									data-bs-toggle="modal" data-test="${loop.count}"
 									data-bs-target="#find_content"> <img
@@ -115,7 +113,7 @@
 									alt="실종동물사진" id="">
 								</a>
 							</div>
-							<div class="col-12 col-sm-5" id="find-info-ksk">
+							<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
 								<div class="row p-2">
 									<div class="col-6 col-sm-12">
 										<h4>${findboardDTO.address}</h4>
