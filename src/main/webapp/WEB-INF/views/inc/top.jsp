@@ -23,6 +23,7 @@
 		</c:when>
 		<c:otherwise>
 			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
+				<span>${sessionScope.nickname }님 반갑습니다.</span>
 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage">마이페이지</a>
 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
 		 	</div>
@@ -61,7 +62,7 @@
               <!-- 드롭다운메뉴 종료 -->
               <a class="nav-link" id="nav-buy-ksk" href="${pageContext.request.contextPath }/GB/GbuyMain">공동구매</a>
               <a class="nav-link" id="nav-event-ksk" href="${pageContext.request.contextPath }/notice/list_notice">공지사항</a>
-              <a class="nav-link" id="nav-about-ksk" href="${pageContext.request.contextPath }/main/main#main-about-ksk">ABOUT US</a>
+              <a class="nav-link" id="nav-about-ksk" href="${pageContext.request.contextPath }/main#main-about-ksk">ABOUT US</a>
           </div>
       </div>
     </div>
@@ -70,12 +71,12 @@
 
 <script>
 $(document).ready(function(){
-	//스크롤 좌표에 따라 모달창 실행
-	$(window).scroll(function(){
-		if($(window).scrollTop()==900){
-			$("#login-modal").modal('show');
-		}
-	});
+	//스크롤 좌표에 따라 모달창 실행-> 메인페이지로 이동(김성기)
+// 	$(window).scroll(function(){
+// 		if($(window).scrollTop()==900){
+// 			$("#login-modal").modal('show');
+// 		}
+// 	});
 	
 	$('#floatingInput-signupEmail').focusout(function(){
 		$.ajax({
@@ -90,7 +91,6 @@ $(document).ready(function(){
 				$('.valid-email').html(rdata);
 			}
 		});
-			
 	});
 });
 </script>
