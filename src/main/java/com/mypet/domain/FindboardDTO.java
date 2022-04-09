@@ -15,8 +15,7 @@ public class FindboardDTO {
 	private String content;
 	private int readcount;
 	private String pet_type;
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@DateTimeFormat(pattern = "mm/dd/yyyy")
+//	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Timestamp missing_date;
 	private String pet_name;
 	private int pet_age;

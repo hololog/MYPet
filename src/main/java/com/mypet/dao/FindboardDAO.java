@@ -29,6 +29,6 @@ public interface FindboardDAO {
 
 	public List<String> getCityList(String province);
 
-//	public List<String> getcityname(String province);
+//	public List<String> getTownList(String city);
 }
 

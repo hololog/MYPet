@@ -46,43 +46,22 @@
 			});
 		}); //city selected
 		
-	}); // jQuery closed
-			
+// 		$('#city').change(function(){//city 변경 이벤트발생시 ajax 실행
 // 			$.ajax({
-// //	 			traditional: true,
-// 				url: "{pageContext.request.contextPath}/findboard/provinceSelect",
-// 				dataType: "json",
-// 				success: function(rdata){
-// 					$.each(rdata, function(i){
-// 						$('#province').append("<option value='"+rdata[i]+"'>" + rdata[i]+ "</option>")
+// 				url:'${pageContext.request.contextPath }/findboard/townSelect',
+// 				data:{"city":$('#city').val(),"province":$('#province').val()},// request.setParameter("city", #city의 값)의 같음
+// 				dataType:'json',
+// 				success:function(rdata){
+// 					$('#town').html("<option selected>동</option>");//화면초기화
+// 					$.each(rdata,function(index,item){
+// 						$('#town').append("<option value='"+item.address3+"'>"+item.address3+"</option>");
 // 					});
-// 				}, 
-// 				error: function(jqXHR, textStatus, errorThrown) {
-// 						alert("오류발생");
 // 				}
-// 			}); //ajax closed
-// 		});
-// 	}); // function closed
-	
-	// 시/도 클릭 후 구 select  
-// 	function citySelect(province){
-// 		$.ajax({
-// 				type: "POST",
-// 				url: "{pageContext.request.contextPath}/findboard/citySelect",
-// 				dataType: "json",
-// 				data: {param:province},
-// 				success: function(rdata){
-// 					$('#address').find('option').remove().end().append('<option value=""></option>');
-// 					$.each(rdata, function(i){
-// 						$('#address').append("<option value='"+result[i]+"'>" + rdata[i] + "</option>")
-// 					});
-// 				}, // success closed
-// 				error: function(jqXHR, textStatus, errorThrown) {
-// 					alert("오류발생");
-// 				}
-// 			});	// ajax closed
-//	} // function closed
-	</script>
+// 			});
+// 		}); //city selected
+// 	}); // jQuery closed
+			
+</script>
 	<!-- 유효성 검사 -->
 <!-- 
  	$(document).ready(function(){
@@ -216,14 +195,11 @@
                                     <select class="form-select" name="address1" id="province">
                                         <option value="">지역</option>
                                     </select>
-                                    <select class="form-select" name="address2" id="city" onchange="citySelect(this.value);">
+                                    <select class="form-select" name="address2" id="city">
                                         <option selected>시</option>
-<!--                                         <option value="">수영구</option> -->
                                     </select>
                                     <select class="form-select" name="address3" id="town">
                                         <option selected>동</option>
-<!--                                         <option value="gwangan-dong">광안동</option> -->
-<!--                                         <option value="mangmi-dong">망미동</option> -->
                                     </select>
                             </div>
                             <div class="input-group">

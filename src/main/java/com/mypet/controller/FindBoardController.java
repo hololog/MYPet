@@ -1,6 +1,9 @@
 package com.mypet.controller;
 
 import java.util.List;
+import java.beans.PropertyEditorSupport;
+import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.inject.Inject;
@@ -59,6 +62,21 @@ public class FindBoardController {
 //		SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-mm-dd");
 //		
 //	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) throws Exception {
+	    binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+
+	        public void setAsText(String text) throws IllegalArgumentException {
+	            try {
+	                setValue(new SimpleDateFormat("yyyy-MM-dd").parse(text));
+	                System.out.println("initBinder 실행");
+	            } catch (ParseException e) {
+	                setValue(null);
+	            }
+	        }
+	    });
+	}
 	
 	// 경진
 	@RequestMapping(value = "/find/content", method = RequestMethod.GET)

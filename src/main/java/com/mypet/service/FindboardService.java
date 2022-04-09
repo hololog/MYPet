@@ -24,6 +24,7 @@ public interface FindboardService {
 	public List<String> getProvinceList();
 
 	public List<String> getCityList(String province);
+
+//	public List<String> getTownList(String city);
 	
-//	public List<String> getcityname(String province);
 }

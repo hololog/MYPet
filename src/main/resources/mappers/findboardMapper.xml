@@ -46,17 +46,13 @@
 		select distinct address1 from address
 	</select>
 	
-<!-- 	<select id="getCityList" resultType="com.mypet.domain.AddressDTO"> -->
-<!-- 		select distinct address2 from address where address1=#{province} -->
-<!-- 	</select> -->
-	
 	<select id="getCityList" resultType="Hashmap">
 		select distinct address2 from address where address1=#{province}
 	</select>
 
-<!-- 	<select id="getcityname" resultType="java.util.ArrayList"> -->
-<!-- 		select distinct address2 from address where address1 = #{province} -->
-<!-- 	</select> -->
+	<select id="getTownList" parameterType="String" resultType="Hashmap">
+		select distinct address3 from address where address1=#{province} and address2=#{city}
+	</select>
 
 
 </mapper>

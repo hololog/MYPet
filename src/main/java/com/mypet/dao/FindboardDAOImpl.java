@@ -1,6 +1,8 @@
 package com.mypet.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -44,23 +46,28 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace+".getfindBoardList", pageDTO);
 }
-	public List<String> getProvinceList() {
-		return sqlSession.selectList(namespace+".getProvinceList");
-	}
-	
-//	@Override
-//	public List<String> getcityname(String province) {
-//		return sqlSession.selectList(namespace+".getcityname", province);
-//	}
-	
-	
+
 	@Override
 	public int getfindBoardCount() {
 		return sqlSession.selectOne(namespace+".getfindBoardCount");
 	}
-
+	
+	@Override
+	public List<String> getProvinceList() {
+		return sqlSession.selectList(namespace+".getProvinceList");
+	}
+	
 	@Override
 	public List<String> getCityList(String province) {
 		return sqlSession.selectList(namespace + ".getCityList", province);
-	}
+	}	
+//	@Override
+//	public List<String> getTownList() {
+//		Map<String, String> selectedAddress = new HashMap<String, String>();
+//		selectedAddress.put("province", province);
+//		selectedAddress.put("city", city);
+//		return sqlSession.selectList(namespace+".getTownList");
+//	}
+
+
 }
