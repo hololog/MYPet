@@ -163,4 +163,15 @@
 	 	select * from tip_board order by readcount desc limit 3
 	</select>
 
+
+
+<!-- 	likecheck -->
+	<select id="freeLikeCheck" resultType="com.mypet.domain.BoardDTO">
+	 	select count(*) from free_like where user_id = #{user_id} and free_board_num = #{free_board_num}
+	</select>
+		
+
+
+
+
 </mapper>

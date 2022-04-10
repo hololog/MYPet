@@ -2,6 +2,8 @@ package com.mypet.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.GbuyBoardDTO;
 import com.mypet.domain.PageDTO;
@@ -86,6 +88,8 @@ public interface BoardService {
 		
 		public List<BoardDTO> bestreview(PageDTO pageDTO);
 	//like start	
-		
+		public BoardDTO LikeCheck(BoardDTO boardDTO);
+
+
 		
 }

@@ -460,5 +460,19 @@ public class BoardController {
 			
 			return "reviewboard/search_review";
 		}
-
-}
+		//세히
+		@RequestMapping(value = "/freeboard/like_check", method = RequestMethod.GET)
+		public String free_like(HttpServletRequest request,Model model) {
+			int free_board_num=Integer.parseInt(request.getParameter("free_board_num"));
+			int user_id=Integer.parseInt(request.getParameter("user_id"));
+		    BoardDTO boardDTO= new BoardDTO();
+			boardDTO.setFree_board_num(free_board_num);
+			boardDTO.setUser_id(user_id);
+			
+			model.addAttribute("boardDTO", boardDTO);
+			
+			boardService.LikeCheck(boardDTO);
+			
+			return "freeboard/like_check";
+		}
+};
