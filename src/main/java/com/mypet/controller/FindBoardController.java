@@ -63,20 +63,20 @@ public class FindBoardController {
 //		
 //	}
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) throws Exception {
-	    binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
-
-	        public void setAsText(String text) throws IllegalArgumentException {
-	            try {
-	                setValue(new SimpleDateFormat("yyyy-MM-dd").parse(text));
-	                System.out.println("initBinder 실행");
-	            } catch (ParseException e) {
-	                setValue(null);
-	            }
-	        }
-	    });
-	}
+//	@InitBinder
+//	public void initBinder(WebDataBinder binder) throws Exception {
+//	    binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+//
+//	        public void setAsText(String text) throws IllegalArgumentException {
+//	            try {
+//	                setValue(new SimpleDateFormat("yyyy-MM-dd").parse(text));
+//	                System.out.println("initBinder 실행");
+//	            } catch (ParseException e) {
+//	                setValue(null);
+//	            }
+//	        }
+//	    });
+//	}
 	
 	// 경진
 	@RequestMapping(value = "/find/content", method = RequestMethod.GET)

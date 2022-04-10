@@ -46,20 +46,20 @@
 			});
 		}); //city selected
 		
-// 		$('#city').change(function(){//city 변경 이벤트발생시 ajax 실행
-// 			$.ajax({
-// 				url:'${pageContext.request.contextPath }/findboard/townSelect',
-// 				data:{"city":$('#city').val(),"province":$('#province').val()},// request.setParameter("city", #city의 값)의 같음
-// 				dataType:'json',
-// 				success:function(rdata){
-// 					$('#town').html("<option selected>동</option>");//화면초기화
-// 					$.each(rdata,function(index,item){
-// 						$('#town').append("<option value='"+item.address3+"'>"+item.address3+"</option>");
-// 					});
-// 				}
-// 			});
-// 		}); //city selected
-// 	}); // jQuery closed
+		$('#city').change(function(){//city 변경 이벤트발생시 ajax 실행
+			$.ajax({
+				url:'${pageContext.request.contextPath }/findboard/townSelect',
+				data:{"city":$('#city').val(),"province":$('#province').val()},// request.setParameter("city", #city의 값)의 같음
+				dataType:'json',
+				success:function(rdata){
+					$('#town').html("<option selected>동</option>");//화면초기화
+					$.each(rdata,function(index,item){
+						$('#town').append("<option value='"+item.address3+"'>"+item.address3+"</option>");
+					});
+				}
+			});
+		}); //city selected
+	}); // jQuery closed
 			
 </script>
 	<!-- 유효성 검사 -->

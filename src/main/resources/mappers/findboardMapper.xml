@@ -58,8 +58,8 @@
 		select distinct address2 from address where address1=#{province}
 	</select>
 
-	<select id="getTownList" parameterType="String" resultType="Hashmap">
-		select distinct address3 from address where address1=#{province} and address2=#{city}
+	<select id="getTownList" resultType="com.mypet.domain.AddressDTO">
+		select distinct address3 from address where address1=#{address1} and address2=#{address2}
 	</select>
 
 

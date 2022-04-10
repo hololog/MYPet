@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.PageDTO;
@@ -70,14 +71,14 @@ public class FindboardDAOImpl implements FindboardDAO {
 	@Override
 	public List<String> getCityList(String province) {
 		return sqlSession.selectList(namespace + ".getCityList", province);
+	}
+
+	@Override
+	public List<String> getTownList(AddressDTO addressDTO) {
+		return sqlSession.selectList(namespace+ ".getTownList", addressDTO);
 	}	
-//	@Override
-//	public List<String> getTownList() {
-//		Map<String, String> selectedAddress = new HashMap<String, String>();
-//		selectedAddress.put("province", province);
-//		selectedAddress.put("city", city);
-//		return sqlSession.selectList(namespace+".getTownList");
-//	}
+
+	
 
 
 }
