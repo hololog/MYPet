@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +21,67 @@
 <!-- JQuery -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+<script>
+$(document).ready(function(){
+	var email = '${sessionScope.email}';
+	if(email == ""){
+		$(window).scroll(function(){
+			if($(window).scrollTop()==900){
+				$("#login-modal").modal('show');
+			}
+		});
+	}
+});//스크롤 로그인 모달
+
+$("#displayList").hide();
+// 검색어의 길이가 바뀔 때마다 호출
+var wordLength = $(this).val().trim().length;
+if(wordLength == 0){
+			$("#displayList").hide();
+		} else {
+			$.ajax({
+				url:"/wordSearchShow.action",
+				type:"get",
+				data:{"searchType": $("#searchType").val(),
+					  "searchWord": $("#searchWord").val() },
+				dataType:"json",
+				success:function(json){
+					if(json.length > 0){
+						// 검색된 데이터가 있는 경우
+						var html = "";
+						$.each(json, function(index, item){
+							var word = item.word;
+                            // 검색목록들과 검색단어를 모두 소문자로 바꾼 후 검색단어가 나타난 곳의 index를 표시.
+							var index = word.toLowerCase().indexOf( $("#searchWord").val().toLowerCase() );
+							// jaVa -> java
+							var len = $("#searchWord").val().length;
+							// 검색한 단어를 파랑색으로 표현
+							var result = word.substr(0, index) + "<span style='color:blue;'>"+word.substr(index, len)+"</span>" + word.substr(index+len);
+							html += "<span class='result' style='cursor:pointer;'>" + result + "</span><br>";
+						});
+						
+						var input_width = $("#searchWord").css("width"); // 검색어 input 태그 width 알아오기
+						$("#displayList").css({"width":input_width}); // 검색 결과의 width와 일치시키기
+						$("#displayList").html(html);
+						$("#displayList").show();
+					}
+					
+				},
+				error: function(request, status, error){
+	                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	            }
+				
+			});
+
+		}
+        
+        // 자동완성 목록을 클릭하면 검색하기
+	$(document).on('click', ".result", function(){
+		var word = $(this).text();
+		$("#searchWord").val(word);
+		goSearch(); // 검색기능
+	});
+</script>
 </head>
 <body>
 	<div>
@@ -43,17 +104,17 @@
         <div class="carousel-item">
           <img src="${pageContext.request.contextPath }/resources/img/dog6.jpg" alt="second slide" class="d-block w-100" />
           <!-- 글삽입 -->
-          <div class="carousel-caption">
-            <p>설명글</p>
-          </div>
+<!--           <div class="carousel-caption"> -->
+<!--             <p>설명글</p> -->
+<!--           </div> -->
         </div>
         <!-- 사진3 -->
         <div class="carousel-item">
           <img src="${pageContext.request.contextPath }/resources/img/dog5.jpg" alt="third slide" class="d-block w-100" />
           <!-- 버튼삽입 -->
-          <div class="carousel-caption">
-            <a class="btn btn-lg btn-primary" href="#">버튼</a>
-          </div>
+<!--           <div class="carousel-caption"> -->
+<!--             <a class="btn btn-lg btn-primary" href="#">버튼</a> -->
+<!--           </div> -->
         </div>
       </div>
       <!-- 슬라이드 쇼 끝 -->
@@ -103,7 +164,21 @@
       </div>
     </div>
     <!-- 검색 종료 -->
-
+    
+	<%-- 글검색 폼 --%>
+<!-- 	<form name="searchFrm" style="margin-top: 20px;"> -->
+<!-- 		<select name="searchType" id="searchType"> -->
+<!-- 			<option value="subject">제목</option> -->
+<!-- 			<option value="name">글쓴이</option> -->
+<!-- 		</select> -->
+<!-- 		<input type="text" id="searchWord" name="searchWord" size="100" autocomplete="off"> -->
+<!-- 		<input type="hidden" style="display: none;"> -->
+<!-- 		<button type="button" class="btn btn-secondary btn-sm" onclick="goSearch()">검색</button> -->
+<!-- 	</form> -->
+	<%-- 검색어 자동완성이 보여질 구역 --%>
+<!-- 	<div id="displayList" style="border: solid 1px gray; height: 100px; overflow: auto; margin-left: 77px; margin-top; -1px; border-top: 0px;"> -->
+<!-- 	</div> -->
+	
     <!-- 갤러리 -->
     <section class="container">
       <div>
@@ -112,10 +187,14 @@
           <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
         </div>
         <hr>
+        
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
+        
           <div class="col">
             <div class="card">
-              <img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
+              <a href="${pageContext.request.contextPath }/" target="">
+              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
+              </a>
               <!-- 북마크 아이콘 -->
               <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
               <div class="card-body">
@@ -123,8 +202,48 @@
                 <p class="card-text">부산 전포동/프렌치불독</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                   <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
+                    <!-- 댓글수, 조회수 아이콘 -->
+                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-chat-dots"></i> 0
+                    <i class="bi bi-eye-fill"></i>  1 
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="card">
+              <a href="${pageContext.request.contextPath }/" target="">	
+              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
+                alt="..." />
+              </a>  
+              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+              <div class="card-body">
+                <h5 class="card-title">멍멍이 찾습니다.</h5>
+                <p class="card-text">부산 광안동/견종모름</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <!-- 댓글수, 조회수 아이콘 -->
+                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-chat-dots"></i> 0
+                    <i class="bi bi-eye-fill"></i>  1 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                    <div class="col">
+            <div class="card">
+              <a href="${pageContext.request.contextPath }/" target="">
+              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
+              </a>
+              <!-- 북마크 아이콘 -->
+              <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
+              <div class="card-body">
+                <h5 class="card-title">멍멍이 찾습니다.</h5>
+                <p class="card-text">부산 전포동/프렌치불독</p>
+                <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <!-- 댓글수, 조회수 아이콘 -->
                     <i class="bi bi-star-fill"></i>  1 
@@ -137,21 +256,41 @@
           </div>
           <div class="col">
             <div class="card">
-              <img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
+              <a href="${pageContext.request.contextPath }/" target="">	
+              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
                 alt="..." />
+              </a>  
               <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
               <div class="card-body">
                 <h5 class="card-title">멍멍이 찾습니다.</h5>
                 <p class="card-text">부산 광안동/견종모름</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                   <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
+                    <!-- 댓글수, 조회수 아이콘 -->
+                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-chat-dots"></i> 0
+                    <i class="bi bi-eye-fill"></i>  1 
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                    <div class="col">
+            <div class="card">
+              <a href="${pageContext.request.contextPath }/" target="">
+              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
+              </a>
+              <!-- 북마크 아이콘 -->
+              <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
+              <div class="card-body">
+                <h5 class="card-title">멍멍이 찾습니다.</h5>
+                <p class="card-text">부산 전포동/프렌치불독</p>
+                <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="fa-regular fa-star"> 5 </i>
-                    <i class="fa-regular fa-comment-dots"> 1 </i>
-                    <i class="fa-regular fa-eye"> 12 </i>
+                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-chat-dots"></i> 0
+                    <i class="bi bi-eye-fill"></i>  1 
                   </div>
                 </div>
               </div>
@@ -159,68 +298,64 @@
           </div>
           <div class="col">
             <div class="card">
-              <img src="${pageContext.request.contextPath }/resources/img/dog6.jpg" class="card-img-top" alt="..." />
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/요크셔테리안</p>
-                <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/프렌치불독</p>
-                <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
+              <a href="${pageContext.request.contextPath }/" target="">	
+              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
                 alt="..." />
+              </a>  
               <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
               <div class="card-body">
                 <h5 class="card-title">멍멍이 찾습니다.</h5>
                 <p class="card-text">부산 광안동/견종모름</p>
-                <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <!-- 댓글수, 조회수 아이콘 -->
+                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-chat-dots"></i> 0
+                    <i class="bi bi-eye-fill"></i>  1 
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col">
+                    <div class="col">
             <div class="card">
-              <img src="${pageContext.request.contextPath }/resources/img/dog6.jpg" class="card-img-top" alt="..." />
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/요크셔테리안</p>
-                <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="${pageContext.request.contextPath }/resources/img/dog6.jpg" class="card-img-top" alt="..." />
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/요크셔테리안</p>
-                <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+              <a href="${pageContext.request.contextPath }/" target="">
+              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
+              </a>
+              <!-- 북마크 아이콘 -->
+              <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
               <div class="card-body">
                 <h5 class="card-title">멍멍이 찾습니다.</h5>
                 <p class="card-text">부산 전포동/프렌치불독</p>
-                <a href="#" class="btn text-white" style="background-color: #3f51b5">상세보기</a>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <!-- 댓글수, 조회수 아이콘 -->
+                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-chat-dots"></i> 0
+                    <i class="bi bi-eye-fill"></i>  1 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <a href="${pageContext.request.contextPath }/" target="">	
+              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
+                alt="..." />
+              </a>  
+              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+              <div class="card-body">
+                <h5 class="card-title">멍멍이 찾습니다.</h5>
+                <p class="card-text">부산 광안동/견종모름</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <!-- 댓글수, 조회수 아이콘 -->
+                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-chat-dots"></i> 0
+                    <i class="bi bi-eye-fill"></i>  1 
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -252,13 +387,13 @@
       <div class="row">
         <!-- 가로 12등분 -->
         <div class="col-sm-5">
-          <!-- 가로크기 4/12 -->
-          <img
+          <a href="${pageContext.request.contextPath }/pay/product_details"> 
+         	<img
             src="https://shop-phinf.pstatic.net/20201228_290/1609112167826pkx0d_JPEG/10247995466374241_827126827.jpg?type=m510"
             class="img-thumbnail" alt="강아지 사료" />
+          </a>
         </div>
         <div class="col-sm-7">
-          <!-- 가로크기 8/12 -->
           <h3>강아지 사료</h3>
           <p>
             It is a long established fact that a reader will be distracted by the readable
@@ -270,18 +405,15 @@
             <div class="progress-bar progress-bar-striped progress-bar-animated .active bg-success" role="progressbar" style="width: 85%"></div>
           </div>
           <br>
-          <button type="button" class="btn text-white" style="background-color: #3f51b5">
-            구매하러가기
-          </button>
           <a href="${pageContext.request.contextPath }/pay/product_details" class="btn">구매하러가기</a>
         </div>
       </div>
     </section>
     <!-- 공동구매 소개 종료 -->
 
-    <div class="">
-      <p>광고</p>
-    </div>
+<!--     <div class=""> -->
+<!--       <p>광고</p> -->
+<!--     </div> -->
 
     <!-- ABOUT US -->
     <section class="container py-3" id="main-about-ksk">

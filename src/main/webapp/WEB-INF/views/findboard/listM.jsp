@@ -30,7 +30,11 @@
 	src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/script/main.js"></script>
-
+<style>
+#nav-fboard-ksk {
+	font-weight: bold;
+}
+</style>
 </head>
 
 <body>
@@ -67,7 +71,7 @@
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.111677235935!2d126.97473421573828!3d37.575987879796195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eaa19c763d%3A0xb28a32722d675764!2z6rSR7ZmU66y4KEd3YW5naHdhbXVuIEdhdGUp!5e0!3m2!1sko!2skr!4v1481946656451"
 							id="map-ksk" allowfullscreen="allowfullscreen"></iframe>
-						<div id="map" style="width:500px;height:400px;"></div>                           
+						<!-- <div id="map" style="width:500px;height:400px;"></div>                            -->
 					</div>
 				</div>
 				<!-- 지도 api가져올 자리 -->
@@ -89,18 +93,19 @@
 					</div>
 					<div class="form-check d-flex justify-content-center p-3">
 						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault">미해결 공고만 보기</label>
+							id="flexCheckDefault" checked="checked"> <label class="form-check-label"
+							for="flexCheckDefault" >미해결 공고만 보기</label>
 					</div>
 					<!-- 검색창 종료-->
 
 					<!-- 간략히보기 시작 5개씩 -->
 					<c:set var="num"
 						value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }" />
-					<c:forEach var="fb" items="${findboardList }" varStatus="loop">
+					<c:forEach var="fb" items="${findmissboardList }"
+						varStatus="loop">
 						<div class="row ListSH" id="refresh">
-							<a type="hidden" data-result="${fb.result}"></a>
-							<div class="col-12 col-sm-7 p-2 position-relative">
+						<a type="hidden" data-result="${fb.result}"></a>
+								<div class="col-12 col-sm-7 p-2 position-relative">
 								<c:choose>
 									<c:when test="${fb.upload ne null}">
 										<a href="" data-bs-toggle="modal" class="openMod"
@@ -121,7 +126,7 @@
 										</a>
 									</c:when>
 								</c:choose>
-							</div>
+								</div>
 							<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
 								<div class="row p-2">
 									<div class="col-6 col-sm-12">
@@ -151,10 +156,12 @@
 											pattern="yyyy.MM.dd" />
 									</div>
 									<div class="p-1 col-6 col-sm-12">
-										<i class="bi bi-geo-alt"></i> ${fb.detail_address} 부근
+										<i class="bi bi-geo-alt"></i> ${fb.detail_address}
+										부근
 									</div>
 									<div class="p-1 col-6 col-sm-12">
-										<i class="bi bi-coin"></i> 사례금 : <b>${fb.reward}</b> 만원
+										<i class="bi bi-coin"></i> 사례금 : <b>${fb.reward}</b>
+										만원
 									</div>
 								</div>
 							</div>
@@ -169,19 +176,19 @@
 
 							<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
 								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
+									href="${pageContext.request.contextPath }/findboard/listM?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
 							</c:if>
 
 							<c:forEach var="i" begin="${pageDTO.startPage }"
-								end="${pageDTO.endPage }" step="1">
+								end="${pageDTO.endPage-1}" step="1">
 								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${i}">
+									href="${pageContext.request.contextPath }/findboard/listM?pageNum=${i}">
 										${i}</a></li>
 							</c:forEach>
 
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">
+									href="${pageContext.request.contextPath }/findboard/listM?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">
 										▷</a></li>
 							</c:if>
 						</ul>
@@ -236,7 +243,7 @@
 		<div class="modal fade  modal-dialog-scrollable" id="find_content">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<c:forEach var="fb" items="${findboardList}">
+					<c:forEach var="fb" items="${findmissboardList}">
 						<div class="ModalSH">
 							<!-- Modal Header -->
 							<div class="modal-header">
@@ -254,13 +261,13 @@
 									<div class="carousel-inner">
 										<!-- 사진1 -->
 										<div class="carousel-item active">
-											<c:if test="${fb.upload ne null}">
-												<img
-													src="${pageContext.request.contextPath }/resources/img/${fb.upload}"
-													alt="first slide" class="d-block w-100"
-													style="width: 100%; height: 100%; max-height: 550px;"
-													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</c:if>
+										<c:if test="${fb.upload ne null}">
+											<img
+												src="${pageContext.request.contextPath }/resources/img/${fb.upload}"
+												alt="first slide" class="d-block w-100"
+												style="width: 100%; height: 100%; max-height: 550px;"
+												onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
+										</c:if>
 										</div>
 										<!-- 사진2 -->
 										<%-- <div class="carousel-item">
@@ -309,7 +316,8 @@
 																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
 																			날짜</td>
 																		<td width="" style="text-align: center"><b> <fmt:formatDate
-																					value="${fb.missing_date}" pattern="yyyy.MM.dd" />
+																					value="${fb.missing_date}"
+																					pattern="yyyy.MM.dd" />
 																		</b></td>
 																	</tr>
 																</table>
@@ -370,30 +378,30 @@
 							</div>
 						</div>
 					</c:forEach>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger"
-							data-bs-dismiss="modal">Close</button>
-					</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger"
+						data-bs-dismiss="modal">Close</button>
 				</div>
+								</div>
 			</div>
 		</div>
 
 
-		<!-- ------------------------------- -->
-		<!-- 본문 종료-->
-		<!-- ------------------------------- -->
+	<!-- ------------------------------- -->
+	<!-- 본문 종료-->
+	<!-- ------------------------------- -->
 
-		<!-- footer 시작 -->
-		<jsp:include page="../inc/bottom.jsp"></jsp:include>
-		<!-- footer 종료 -->
-		<!-- 부트스트랩 스크립트 적용 -->
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-			crossorigin="anonymous">
+	<!-- footer 시작 -->
+	<jsp:include page="../inc/bottom.jsp"></jsp:include>
+	<!-- footer 종료 -->
+	<!-- 부트스트랩 스크립트 적용 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous">
 	</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		$(function() {
 			$('#find_content').on('show.bs.modal', function(e) {
 				var exp = $(e.relatedTarget).data('test');
@@ -401,14 +409,13 @@
 				$(".ModalSH").eq(exp - 1).show();
 			});
 		});
-	</script>
-
+		</script>
 		<script>
-	$(function(){
-	    $("#flexCheckDefault").click(function(){
-	            location.href="${pageContext.request.contextPath }/findboard/listM";
-	    });
-	});
+		$(function(){
+		    $("#flexCheckDefault").click(function(){
+		            location.href="${pageContext.request.contextPath }/findboard/list";
+		    });
+		});
 	</script>
 </body>
 </html>

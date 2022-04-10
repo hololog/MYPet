@@ -1,14 +1,18 @@
 package com.mypet.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FindboardDTO;
+import com.mypet.domain.PageDTO;
 
 @Repository
 public class FindboardDAOImpl implements FindboardDAO {
@@ -24,6 +28,11 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectOne(namespace+".getfindBoard", num);
 	}
 	
+//	@Override
+//	public FindboardDTO bringfindBoard(int num) {
+//		return sqlSession.selectOne(namespace+".bringfindBoard", num);
+//	}
+	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
 		sqlSession.insert(namespace+".insert_findboard", findboardDTO);
@@ -35,14 +44,41 @@ public class FindboardDAOImpl implements FindboardDAO {
 	}
 	
 	@Override
+	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getfindBoardList", pageDTO);
+}
+	
+	@Override
+	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getfindMissBoardList", pageDTO);
+}
+
+	@Override
+	public int getfindBoardCount() {
+		return sqlSession.selectOne(namespace+".getfindBoardCount");
+	}
+	
+	@Override
+	public int getfindMissBoardCount() {
+		return sqlSession.selectOne(namespace+".getfindMissBoardCount");
+	}
+	
+	@Override
 	public List<String> getProvinceList() {
 		return sqlSession.selectList(namespace+".getProvinceList");
 	}
 	
-//	@Override
-//	public List<String> getcityname(String province) {
-//		return sqlSession.selectList(namespace+".getcityname", province);
-//	}
+	@Override
+	public List<String> getCityList(String province) {
+		return sqlSession.selectList(namespace + ".getCityList", province);
+	}
+
+	@Override
+	public List<String> getTownList(AddressDTO addressDTO) {
+		return sqlSession.selectList(namespace+ ".getTownList", addressDTO);
+	}	
+
 	
-	
+
+
 }

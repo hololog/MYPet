@@ -28,12 +28,39 @@
 		where find_board_num = #{find_board_num}
 	</select>
 	
-	<select id="getProvinceList" resultType="java.util.ArrayList">
-		select distinct address1 from address
+
+	<!-- 게시글 가져오기(모달용) -->
+	<select id="bringfindBoard" resultType="com.mypet.domain.FindboardDTO">
+		SELECT * FROM find_board
+	</select>
+	
+	<select id="getfindBoardList" resultType="com.mypet.domain.FindboardDTO">
+		select * from find_board order by find_board_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
+		select * from find_board where result = "1" order by find_board_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+		<select id="getfindBoardCount" resultType="java.lang.Integer">
+		select count(*) from find_board
+	</select>
+	
+	<select id="getfindMissBoardCount" resultType="java.lang.Integer">
+		select count(*) from find_board where result="1"
 	</select>
 
-<!-- 	<select id="getcityname" resultType="java.util.ArrayList"> -->
-<!-- 		select distinct address2 from address where address1 = #{province} -->
-<!-- 	</select> -->
+	<select id="getProvinceList" resultType="Hashmap">
+		select distinct address1 from address
+	</select>
+	
+	<select id="getCityList" resultType="Hashmap">
+		select distinct address2 from address where address1=#{province}
+	</select>
+
+	<select id="getTownList" resultType="com.mypet.domain.AddressDTO">
+		select distinct address3 from address where address1=#{address1} and address2=#{address2}
+	</select>
+
 
 </mapper>

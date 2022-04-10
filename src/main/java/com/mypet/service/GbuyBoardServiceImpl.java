@@ -22,7 +22,7 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 	private GbuyBoardDAO boardDAO;
 	
 	@Override
-	public List<GbuyBoardDTO> getBoardList1(PageDTO pageDTO) {
+	public List<GbuyBoardDTO> getBoardList(PageDTO pageDTO) {
 		int currentPage=Integer.parseInt(pageDTO.getPageNum());
 		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
 		int endRow=startRow+pageDTO.getPageSize()-1;
@@ -37,21 +37,23 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 		return boardDAO.getGbuy_BoardCount();
 	}
 	@Override
-	public GbuyBoardDTO getBoard(int num) {
-		return boardDAO.getGbuy_Board(num);
+	public GbuyBoardDTO getBoard(int gbuy_num) {
+		return boardDAO.getGbuy_Board(gbuy_num);
 	}
 	@Override
 	public void updateReadcount(int num) {
 		boardDAO.updateGbuy_Readcount(num);
 	}
 	@Override
-	public void updateBoard(GbuyBoardDTO boardDTO) {
-		boardDAO.updateGbuy_Board(boardDTO);
+	public void updateGbuy_Board(GbuyBoardDTO gbuyBoardDTO) {
+		boardDAO.updateGbuy_Board(gbuyBoardDTO);
 	}
+	
 	@Override
-	public void deleteBoard(int num) {
-		boardDAO.deleteGbuy_Board(num);
+	public void deleteGbuy_Board(int gbuy_num) {
+		boardDAO.deleteGbuy_Board(gbuy_num);
 	}
+	
 	@Override
 	public void writeBoard(GbuyBoardDTO boardDTO) {
 		// name,subject,content 폼에서 입력해서 옴
@@ -68,19 +70,9 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 			// 글이 없는 경우 
 			boardDTO.setGbuy_num(1);
 		}
-		
-		
 		boardDAO.Gbuy_writeBoard(boardDTO);
-		
 	}
-	@Override
-	public GbuyBoardDTO getBoard1(int num) {
-		
-		return null;
-	}
-	@Override
-	public void updateBoard1(GbuyBoardDTO boardDTO) {
-		// TODO Auto-generated method stub
-		
-	}
+
+
+
 }

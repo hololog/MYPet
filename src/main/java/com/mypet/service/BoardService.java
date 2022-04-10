@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.mypet.domain.BoardDTO;
-import com.mypet.domain.GbuyBoardDTO;
 import com.mypet.domain.PageDTO;
 
 public interface BoardService {
