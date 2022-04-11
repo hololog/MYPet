@@ -17,13 +17,13 @@
 		delete from member where email=#{email}
 	</delete>
 	
-	<select id="getmyboardlist" resultType="com.mypet.domain.BoardDTO">
+	<select id="getmyBoardList" resultType="com.mypet.domain.BoardDTO">
 	
 		select free_board_num, board_code, subject, readcount
-			from free_board
-			union all
-			select tip_board_num, board_code, subject, readcount
-			from tip_board;
+				from free_board
+				union all
+				select tip_board_num, board_code, subject, readcount
+				from tip_board
 <!-- 		select * -->
 <!-- 		from (select free_board_num as num, board_code, subject, readcount -->
 <!-- 				from free_board order by num desc -->

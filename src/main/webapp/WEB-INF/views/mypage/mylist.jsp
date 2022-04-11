@@ -65,8 +65,8 @@ $(document).ready(function(){
 			data:{"email":${sessionScope.email}},
 			success:function(rdata){
 				$.each(rdata,function(index,item){
-					$('#table1').append('<tr><td>'+item.num+'</td><td>'+item.subject+'</td><td>'+item.name+'</td><td>'+d+'</td><td>'+item.readcount+'</td></tr>');
-					$('#table1').append('<tr><td>'+item.)
+// 					$('#table1').append('<tr><td>'+item.num+'</td><td>'+item.subject+'</td><td>'+item.name+'</td><td>'+d+'</td><td>'+item.readcount+'</td></tr>');
+					$('#table1').append('<tr><td>'+item.free_board_num+'</td><td>'+item.board_code+'</td><td>'+item.subject+'</td><td>'+item.readcount+'</td></tr>');
 				});
 			}
 		});
@@ -158,16 +158,16 @@ $(document).ready(function(){
             <div class=" border col" style="padding: 3%;">
                 <div class="content">
                 <input type="button" value="글조회" id="btn">
-                    <table class="table table-hover text-start" id="table1">
+                    <table class="table table-hover text-start" >
                         <thead>
                             <tr style="text-align: center;">
-                                <th width="7%">종류</th>
-                                <th width="65%">제목</th>
-                                <th width="11%">작성일</th>
-                                <th width="9%">댓글수</th>
+                                <th width="7%">번호</th>
+                                <th width="65%">종류</th>
+                                <th width="11%">제목</th>
+                                <th width="9%">조회수</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="table1">
                             <!-- <tr>
                                 <td>1</td>
                                 <td>치와와</td>

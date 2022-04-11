@@ -39,7 +39,7 @@ public class MypageDAOImpl implements MypageDAO {
 	@Override
 	public List<BoardDTO> getmyBoardList(PageDTO pageDTO) {
 		System.out.println("DAO알람");
-		return sqlSession.selectList(namespace+".getmyboardlist", pageDTO);
+		return sqlSession.selectList(namespace+".getmyBoardList", pageDTO);
 	}
 
 	@Override
