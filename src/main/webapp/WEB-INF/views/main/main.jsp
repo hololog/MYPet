@@ -33,54 +33,56 @@ $(document).ready(function(){
 	}
 });//스크롤 로그인 모달
 
-$("#displayList").hide();
-// 검색어의 길이가 바뀔 때마다 호출
-var wordLength = $(this).val().trim().length;
-if(wordLength == 0){
-			$("#displayList").hide();
-		} else {
-			$.ajax({
-				url:"/wordSearchShow.action",
-				type:"get",
-				data:{"searchType": $("#searchType").val(),
-					  "searchWord": $("#searchWord").val() },
-				dataType:"json",
-				success:function(json){
-					if(json.length > 0){
-						// 검색된 데이터가 있는 경우
-						var html = "";
-						$.each(json, function(index, item){
-							var word = item.word;
-                            // 검색목록들과 검색단어를 모두 소문자로 바꾼 후 검색단어가 나타난 곳의 index를 표시.
-							var index = word.toLowerCase().indexOf( $("#searchWord").val().toLowerCase() );
-							// jaVa -> java
-							var len = $("#searchWord").val().length;
-							// 검색한 단어를 파랑색으로 표현
-							var result = word.substr(0, index) + "<span style='color:blue;'>"+word.substr(index, len)+"</span>" + word.substr(index+len);
-							html += "<span class='result' style='cursor:pointer;'>" + result + "</span><br>";
-						});
-						
-						var input_width = $("#searchWord").css("width"); // 검색어 input 태그 width 알아오기
-						$("#displayList").css({"width":input_width}); // 검색 결과의 width와 일치시키기
-						$("#displayList").html(html);
-						$("#displayList").show();
-					}
-					
-				},
-				error: function(request, status, error){
-	                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-	            }
-				
-			});
 
-		}
+
+// $("#displayList").hide();
+// // 검색어의 길이가 바뀔 때마다 호출
+// var wordLength = $(this).val().trim().length;
+// if(wordLength == 0){
+// 			$("#displayList").hide();
+// 		} else {
+// 			$.ajax({
+// 				url:"/wordSearchShow.action",
+// 				type:"get",
+// 				data:{"searchType": $("#searchType").val(),
+// 					  "searchWord": $("#searchWord").val() },
+// 				dataType:"json",
+// 				success:function(json){
+// 					if(json.length > 0){
+// 						// 검색된 데이터가 있는 경우
+// 						var html = "";
+// 						$.each(json, function(index, item){
+// 							var word = item.word;
+//                             // 검색목록들과 검색단어를 모두 소문자로 바꾼 후 검색단어가 나타난 곳의 index를 표시.
+// 							var index = word.toLowerCase().indexOf( $("#searchWord").val().toLowerCase() );
+// 							// jaVa -> java
+// 							var len = $("#searchWord").val().length;
+// 							// 검색한 단어를 파랑색으로 표현
+// 							var result = word.substr(0, index) + "<span style='color:blue;'>"+word.substr(index, len)+"</span>" + word.substr(index+len);
+// 							html += "<span class='result' style='cursor:pointer;'>" + result + "</span><br>";
+// 						});
+						
+// 						var input_width = $("#searchWord").css("width"); // 검색어 input 태그 width 알아오기
+// 						$("#displayList").css({"width":input_width}); // 검색 결과의 width와 일치시키기
+// 						$("#displayList").html(html);
+// 						$("#displayList").show();
+// 					}
+					
+// 				},
+// 				error: function(request, status, error){
+// 	                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+// 	            }
+				
+// 			});
+
+// 		}
         
-        // 자동완성 목록을 클릭하면 검색하기
-	$(document).on('click', ".result", function(){
-		var word = $(this).text();
-		$("#searchWord").val(word);
-		goSearch(); // 검색기능
-	});
+//         // 자동완성 목록을 클릭하면 검색하기
+// 	$(document).on('click', ".result", function(){
+// 		var word = $(this).text();
+// 		$("#searchWord").val(word);
+// 		goSearch(); // 검색기능
+// 	});
 </script>
 </head>
 <body>
@@ -189,23 +191,30 @@ if(wordLength == 0){
         <hr>
         
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
-        
+
           <div class="col">
             <div class="card">
               <a href="${pageContext.request.contextPath }/" target="">
               	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
               </a>
               <!-- 북마크 아이콘 -->
-              <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
+              <c:if test="${sessionScope.email != null}">
+	              <button type="button" onclick="">
+	              	<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
+	              </button>
+       		  </c:if>
+       		  
+       		  
+       		  
               <div class="card-body">
                 <h5 class="card-title">멍멍이 찾습니다.</h5>
                 <p class="card-text">부산 전포동/프렌치불독</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
+                    <i class="bi bi-star-fill"></i> 1 
                     <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
+                    <i class="bi bi-eye-fill"></i> 1 
                   </div>
                 </div>
               </div>
