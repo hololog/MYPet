@@ -13,8 +13,8 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<!-- 부트스트랩 아이콘 -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-	
-	<!-- 실종지역 selectbox 동적 JQuery -->
+
+	<!-- 실종지역 동적 selectbox ajax -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
 	// 시/도 select
@@ -62,6 +62,7 @@
 	}); // jQuery closed
 			
 </script>
+
 	<!-- 유효성 검사 -->
 <!-- 
  	$(document).ready(function(){
@@ -109,6 +110,7 @@
  		});//		
 	</script>
  -->
+ 
 </head>
   <body class="bg-light">
             <!-- header 시작-->
@@ -123,8 +125,8 @@
 			<!-- 제목 종료 -->
 			<!-- 본문 시작 -->
             <div class="container p-5">
-            
-                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh"> <!--  enctype="multipart/form-data" -->
+
+                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh" enctype="multipart/form-data">
                    <input type="hidden" value="${sessionScope.nickname}" name="nickname">
                     <div class="row g-5">
                          <!--왼쪽여백-->
@@ -161,9 +163,9 @@
                             <div class="input-group mb-3">
                                 <label class="input-group-text"> 동물 나이 </label>
                                 <input type="text" class="form-control" placeholder="숫자만 입력" name="pet_age">
-                                <select class="form-select">
-                                    <option>개월</option>
-                                    <option>년(세)</option>
+                                <select class="form-select" name="pet_age2">
+                                    <option value="month">개월</option>
+                                    <option value="year">년(세)</option>
                                 </select>
                             </div>
                             <!--동물 성별 체크 radio-->
@@ -203,7 +205,6 @@
                                     </select>
                             </div>
                             <div class="input-group">
-                            	
                             </div>
                             <!--실종지역 상세 위치-->
                             <div class="input-group mb-3">
@@ -221,14 +222,18 @@
                                 <label class="input-group-text">연락 가능 수단</label>
                                 <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact">
                             </div>
+                            
                             <!--file 드래그앤드롭-->
-                            <div class="dropzone mb-5" id="dropZone">
-                                <div id="uploadDiv" class="dz-default dz-message db">
-                                    파일을 끌어 올려 업로드 해주세요.<br> 
-                                </div>
-                                <div id="imgDiv" class="dn"></div>
-                                <small style="color: gray; font-size: 13px;">업로드 가능 이미지 확장자 ( gif, jpeg, jpg, png, bmp )</small>
-                            </div>
+								<div id="drop" style="border:1px solid black; width:100%; height:auto; padding:3px">
+								<p>
+									<small style="color: gray; font-size: 13px;">
+	                            	반려동물의 사진을 드래그하여 첨부해주세요<br>
+	                            	업로드 가능 이미지 확장자 ( gif, jpeg, jpg, png, bmp )</small>
+                            	</p>
+                            	<p style="background-color:lightgrey;"><i>첨부파일</i>
+                            	<button type="button" value="확인" id="save">저장</button></p>
+								</div>                            
+
                             <!--submit 버튼-->
                             <div class="text-center p-2">
                                 <input type="submit" id="btn_eh" value="글쓰기"> 
@@ -241,6 +246,81 @@
                     </div>
                 </form>
             </div>
+
+	     <!-- file drag & drop 스크립트 적용 -->   
+	    <script type="text/javascript">
+   	 	var fileList = [];
+    	var $drop = $("#drop");
+    	
+	    $drop.on("dragenter", function(e) { //드래그 요소가 들어왔을떄
+	    $(this).addClass('drag-over');
+	    }).on("dragleave", function(e) { //드래그 요소가 나갔을때
+	    $(this).removeClass('drag-over');
+	    }).on("dragover", function(e) {
+	    e.stopPropagation();
+	    e.preventDefault();
+	    }).on('drop', function(e) { //드래그한 항목을 떨어뜨렸을때
+	    e.preventDefault();
+	    $(this).removeClass('drag-over');
+	    
+	    var files = e.originalEvent.dataTransfer.files; //드래그&드랍 항목
+	    //확장자 확인하기 
+	    if(files !=null && files !=undefined){
+		    	var tag="";	
+			    for(var i = 0; i < files.length; i++) {
+		    		var f = files[i];
+		    		var ext = f.name.split('.').pop().toLowerCase();
+		    		if(ext != 'png' && ext != 'jpeg' && ext != 'jpg' && ext != 'bmp' && ext != 'gif'){
+		    			alert("지원하는 파일 확장자가 아닙니다");
+		    		} else {
+	    			fileList.push(f);
+	    			var fileName = f.name;
+	    			var fileSize = f.size /1024/1024;
+	    			fileSize = fileSize<1? fileSize.toFixed(3) : fileSize.toFixed(1);
+	    			tag += "<span>"+fileName+" "+fileSize+"MB </span><button type='button' class='deletefiles'>삭제</button><br>";
+			    	}
+		    	$(this).append(tag);
+	    		}
+    		}
+	    }); // drop closed
+		  
+	   //저장하기
+	   $(document).on("click","#save", function(){
+		  var formData = new FormData();
+		  if(fileList.length > 0){
+			  fileList.forEach(function(f){
+				 formData.append("fileList",f); 
+			  });
+				alert("파일이 저장되었습니다");
+		  } 
+// 		  $.ajax({
+// 			url: "${pageContext.request.contextPath}/findboard/fileupload",
+// 			data: formData,
+// 			type:'POST',
+// 			enctype:'multipart/form-data',
+// 			processData:false,
+// 			contentType:false,
+// 			dataType:'json',
+// 			cache:false,
+// 			success:function(rdata){
+// 				 alert("저장되었습니다");
+// 			 	}, 
+// 		 	error:function(rdata){
+// 				 alert("오류발생");
+// 			 	}
+// 		  	}); // ajax closed
+	   	}); // document.on closed
+	
+    	$(document).on("click",".deletefiles", function(e) {
+    		alert("삭제 클릭시 파일 삭제 + 실제 업로드 파일도 제거 구현해야함");
+// 			var $target = $(e.target);
+// 			var idx = $target.attr('data-idx');
+// 			alert($target);
+// 			uploadFiles[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+// 			$target.parent().remove(); //프리뷰 삭제
+		});
+
+		</script>
             <!-- ------------------------------- -->
             <!-- 본문 종료-->
             <!-- ------------------------------- -->

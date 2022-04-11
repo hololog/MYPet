@@ -1,20 +1,26 @@
 package com.mypet.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
@@ -37,6 +43,8 @@ public class AjaxController {
 	
 	@Autowired
 	private MypageService mypageService;
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
 	public ResponseEntity<String> memberCheck(HttpServletRequest request) {
@@ -112,6 +120,23 @@ public class AjaxController {
 		
 		return entity;
 	}
+	
+	//은혜 - 실제파일 업로드
+//	@RequestMapping(value= "/findboard/fileupload", method = RequestMethod.POST)
+//	public ResponseEntity<List<MultipartFile>> fileupload(@RequestParam("fileList") MultipartFile file) throws Exception{
+//		UUID uid = UUID.randomUUID(); // 범용 고유 식별자
+//		String fileName = uid.toString()+"_"+file.getOriginalFilename(); // 실제파일 저장이름 
+//		
+//		File uploadfile = new File(uploadPath, fileName); // 파일복사 upload폴더에 fileName 
+//		FileCopyUtils.copy(file.getBytes(), uploadfile);
+//		
+//		Map<String,MultipartFile> fileNameList = new HashMap<String, MultipartFile>();
+//		
+//		ResponseEntity<Map<String,MultipartFile>> entity = 
+//				new ResponseEntity<List<MultipartFile>>(fileNameList, HttpStatus.OK);
+//		
+//		return entity;
+//	}	
 	
 	//다슬
 //	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)

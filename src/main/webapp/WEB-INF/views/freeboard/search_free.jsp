@@ -68,7 +68,6 @@
                         <td>${num }</td>
                         <td style="text-align: start;">
                         
-                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
                         </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>

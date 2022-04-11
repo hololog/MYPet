@@ -263,18 +263,33 @@
     <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
            <script>
+           var heart = 0;  
            jQuery(function($) {
+        	   $.ajax({
+					url:'${pageContext.request.contextPath }/reviewboard/like_check',
+					data:{
+						"user_id":$('#user_id').val()
+						"free_board_num":$('#free_board_num').val()
+						},
+					success:function(rdata){
+						if(rdata==0){
+						    $(this).attr('class','bi-heart');
+                          heart = 0
+						}else{
+							 $(this).attr('class','bi-heart-fill');
+                          heart = 1
+						}
+					}
+				}); 
         	   $('#swapHeart').on('click', function() {
         	     var $el = $(this),
         	       textNode = this.lastChild;
         	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
         	     $el.toggleClass('swap');
         	   });
+        	   
         	 });
            </script>
-				
-				
-
 			
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
@@ -282,22 +297,23 @@
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
                  <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
-						 
 						
 						    <script>
-						
-						        var i = 0;
+						  
 						        $('i').on('click',function(){
-						            if(i==0){
+						        		
+						            if (heart==0 ){
 						                $(this).attr('class','bi-heart-fill');
-						                i++;
-						            }else if(i==1){
+						                heart++;
+						                
+						            }else if(heart==1){
 						                $(this).attr('class','bi-heart');
-						                i--;
+						                heart--;
+						                //델리트
 						            }
 						
-						        });
-						
+						        });						        	
+						        
 						    </script>
                 		
                           <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>

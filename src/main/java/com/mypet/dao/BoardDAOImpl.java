@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.PageDTO;
@@ -202,6 +203,13 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<BoardDTO> bestreview(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace+".bestreview", pageDTO);
+	}
+
+	@Override
+	public BoardDTO LikeCheck(BoardDTO boardDTO) {
+		return sqlSession.selectOne(namespace+".freeLikeCheck", boardDTO);
+		
+		
 	}
 
 	

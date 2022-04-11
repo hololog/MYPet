@@ -8,6 +8,8 @@
         <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--   나중에 다시 확인  -->
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
   <title>main</title>
   <!-- css스타일 적용 -->
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
@@ -224,26 +226,77 @@
 						
 <!-- 	</script> -->
 <%-- 		</c:if>			 --%>
-<%-- 		 <c:if test="${!empty user_id }"> --%>
-<%-- 		 <button  onclick="location.href='${pageContext.request.contextPath }/freeboard/like_free'"> --%>
-<!-- 		 <i class="bi-heart" style="font-size:3rem; color: red; cursor: pointer;"></i></button> -->
-<!--   			<p style="color: red;"><p>			 -->
-<!--     		<script> -->
-	
-<!-- //         var i = 0; -->
-<!-- //         $('i').on('click',function(){ -->
-<!-- //             if(i==0){ -->
-<!-- //                 $(this).attr('class','bi-heart-fill'); -->
-<!-- //                 i++; -->
-<!-- //             }else if(i==1){ -->
-<!-- //                 $(this).attr('class','bi-heart'); -->
-<!-- //                 i--; -->
-<!-- //             } -->
-
-<!-- //         }); -->
-
-<!--     </script> -->
-<%--     </c:if> --%>
+			
+          <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
+		  <script>
+           var heart = 0;  
+           jQuery(function($) {
+        	   $('#swapHeart').on('click', function() {
+        	     var $el = $(this),
+        	       textNode = this.lastChild;
+        	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
+        	     $el.toggleClass('swap');
+        	   });
+        	  
+        	 });
+           function like(){
+        	   $.ajax({
+   				url:'${pageContext.request.contextPath }/freeboard/like_check',
+   				data:{
+   					"user_id":(${boardDTO.user_id}+1),
+   					"free_board_num":${boardDTO.free_board_num}
+   					},
+   				success:function(data){
+   					console.log(data);
+   					data = 1;
+   					console.log(data);
+   					if(rdata==1){
+   						 $('i').attr('class','bi-heart-fill');
+                        heart = 1
+   					}else{
+   						
+   						  $('i').attr('class','bi-heart');
+                        heart = 0
+   					}
+   				}
+   			  });
+         	};
+        	like();
+           console.log(heart);
+           console.log('d2');
+           console.log(${pageContext.request.contextPath });
+//            "user_id":$('#user_id').val(),
+// 				"free_board_num":$('#free_board_num').val()
+           
+           </script>
+			
+			
+						
+						    <script>
+						  
+						        $('i').on('click',function(){
+						        		
+						            if (heart==0 ){
+						            	
+						                $(this).attr('class','bi-heart-fill');
+						                heart++;
+						                
+						            }else if(heart==1){
+						                $(this).attr('class','bi-heart');
+						                heart--;
+						                //델리트
+						            }
+						
+						        });						        	
+						        
+						    </script>
+                <!-- Comment form-->
+                <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
+                <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
+                <!-- </form>-->
+                <!-- 댓글수, 조회수 아이콘 -->
+   
+     
 <!-- 		<script type="text/javascript"> -->
 <!-- // 		$(function(){ -->
 <!-- // 			// 추천버튼 클릭시(추천 추가 또는 추천 제거) -->
@@ -322,77 +375,57 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-    <section class="container mb-7 text-center">
-        <div class="card bg-light" style="margin-top: 30px">
-            <div class="card-body">
-                <!-- Comment form-->
-                <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
-                <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
-                <!-- </form>-->
-                <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>
-                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
-                <div class="in-line-kj">
+   <section class="mb-7">
+				<div class="card bg-light" style="margin-top: 30px">
+					<div class="card-body">
+						<div id="comment-count" style="margin-bottom: 5px">
+							댓글 <span id="count">4</span>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control"
+								placeholder="댓글을 입력해 주세요!" aria-label="Recipient's username"
+								aria-describedby="button-addon2">
+							<button class="btn btn-outline-secondary" type="button"
+								id="button-addon2"
+								style="background-color: white; color: #3f51b5; border-color: #3f51b5">제출</button>
+						</div>
 
-                    <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary "
-                        onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free'">등록</button>
-                </div>
-                <!-- <div class="input-group mb-3"> <input type="text" class="form-control"
-                placeholder="Recipient's username" aria-label="Recipient's username"
-                aria-describedby="button-addon2"> <button class="btn btn-outline-secondary"
-                type="button" id="button-addon2">Button</button> </div> -->
-                <div class="justify-content-center container mx-5">
-                    <div class="d-flex mb-4 ">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3">
-                            <div class="fw-bold">익명1<p style="font-size: x-small;">2022.03.30</p></div>
-                            꼭 찾으셧으면 좋겟어요 ㅠㅠ
-
-                            <div class="d-flex mt-4 ">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명2</div><p style="font-size: x-small;">2022.03.30</p>
-                                    그러게요 ㅠㅠ
-                                </div>
-                            </div>
-                            <!-- Child comment 2-->
-                            <div class="d-flex mt-4 mx-5">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명3</div><p style="font-size: x-small;">2022.03.30</p>
-                                    33
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single comment-->
-                    <div class="row-vh d-flex flex-row">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3 row">
-                            <div class="fw-bold">글작성자</div><p style="font-size: x-small;">2022.03.30</p>
-                            찾았습니다!! 감사합니다!!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+						<div class="d-flex mb-4">
+							<div class="flex-shrink-0">
+								<img class="rounded-circle"
+									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</div>
+							<div class="ms-3" id="commentList">
+						
+									<div class="fw-bold"></div>
+									<c:forEach items="${replyList}" var="commentList">
+									<p>${commentList.c_nik}</p> 
+									<p>${commentList.c_content}</p>
+									<div class="d-flex mt-4">
+										<div class="flex-shrink-0">
+											<img class="rounded-circle"
+												src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+												alt="...">
+										</div>
+										</div>
+										</c:forEach>
+							
+							</div>
+						</div>
+						<!-- Single comment-->
+						<div class="d-flex">
+							<div class="flex-shrink-0">
+								<img class="rounded-circle"
+									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</div>
+							<div class="ms-3">
+								<div class="fw-bold">${commentList.c_nik}</div>
+								찾았습니다!! 감사합니다!!
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
     
 
