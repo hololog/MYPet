@@ -24,7 +24,7 @@
 		<c:otherwise>
 			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
 				<span>${sessionScope.nickname }님 반갑습니다.</span>
-	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage">마이페이지</a>
+	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage/myinfo">마이페이지</a>
 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
 		 	</div>
 		</c:otherwise>

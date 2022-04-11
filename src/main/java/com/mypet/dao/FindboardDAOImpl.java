@@ -9,7 +9,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.PageDTO;
 
@@ -62,22 +64,27 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectOne(namespace+".getfindMissBoardCount");
 	}
 	
+	//은혜 지역검색
 	@Override
 	public List<String> getProvinceList() {
 		return sqlSession.selectList(namespace+".getProvinceList");
 	}
-	
 	@Override
 	public List<String> getCityList(String province) {
 		return sqlSession.selectList(namespace + ".getCityList", province);
+	}
+	@Override
+	public List<String> getTownList(AddressDTO addressDTO) {
+		return sqlSession.selectList(namespace+ ".getTownList", addressDTO);
+	}
+	//은혜 파일업로드
+	@Override
+	public void insert_findboard_file(FileDTO fileDTO) {
+		sqlSession.insert(namespace+".insertFindboardFile", fileDTO);
 	}	
-//	@Override
-//	public List<String> getTownList() {
-//		Map<String, String> selectedAddress = new HashMap<String, String>();
-//		selectedAddress.put("province", province);
-//		selectedAddress.put("city", city);
-//		return sqlSession.selectList(namespace+".getTownList");
-//	}
+	
+	
+	
 
 
 }

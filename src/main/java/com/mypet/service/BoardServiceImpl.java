@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.mypet.dao.BoardDAO;
 import com.mypet.domain.BoardDTO;
@@ -269,6 +270,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDTO> bestreview(PageDTO pageDTO) {
 		
 		return boardDAO.bestreview(pageDTO);
+	}
+
+	@Override
+	public BoardDTO LikeCheck(BoardDTO boardDTO) {
+		return boardDAO.LikeCheck(boardDTO);
 	}
 	
 	

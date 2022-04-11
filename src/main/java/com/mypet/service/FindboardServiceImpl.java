@@ -8,7 +8,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.mypet.dao.FindboardDAO;
+import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.PageDTO;
 
@@ -72,11 +74,10 @@ public class FindboardServiceImpl implements FindboardService {
 	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
-		//find_board_num 구하기
-//		if(findboardDAO.getMaxNum() != null) findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
-		findboardDTO.setFind_board_num(1); // INT 변경시 수정예정 
+		//find_board_num 구하기; 
 		//readcount, insertdate 설정
-		if(findboardDAO.getMaxNum() != null) findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
+		if(findboardDAO.getMaxNum() != null) 
+			findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
 		else findboardDTO.setFind_board_num(1);
 		//readcount, insertdate, boardnum 설정
 		findboardDTO.setReadcount(0);
@@ -98,10 +99,18 @@ public class FindboardServiceImpl implements FindboardService {
 		return findboardDAO.getCityList(province);
 	}
 
-//	@Override
-//	public List<String> getTownList(String province, String city) {
-//		return findboardDAO.getTownList(province, city);
-//	}
+	@Override
+	public List<String> getTownList(AddressDTO addressDTO) {
+		return findboardDAO.getTownList(addressDTO);
+	}
+
+	@Override
+	public void insert_findboard_file(FileDTO fileDTO) {
+		findboardDAO.insert_findboard_file(fileDTO);
+	}
+	
+	
+
 
 	
 	
