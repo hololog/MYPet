@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mypet.domain.AddressDTO;
+import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
+import com.mypet.domain.PageDTO;
+import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
+import com.mypet.service.MypageService;
 
 @RestController
 public class AjaxController {
@@ -30,6 +34,9 @@ public class AjaxController {
 
 	@Autowired
 	private FindboardService findboardService;
+	
+	@Autowired
+	private MypageService mypageService;
 	
 	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
 	public ResponseEntity<String> memberCheck(HttpServletRequest request) {
@@ -148,4 +155,19 @@ public class AjaxController {
 		
 		
 //	}
+	
+	// 준동
+	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)
+	public ResponseEntity<List<BoardDTO>> mypagejson(HttpServletRequest request){
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(5);
+		pageDTO.setPageNum("1");
+		
+		List<BoardDTO> myboardList=mypageService.getmyBoardList(pageDTO);
+		
+		ResponseEntity<List<BoardDTO>> entity=new ResponseEntity<List<BoardDTO>>(myboardList , HttpStatus.OK);
+		
+		return entity;
+	}
+	
 }
