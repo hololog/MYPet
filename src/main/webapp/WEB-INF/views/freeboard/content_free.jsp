@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--   나중에 다시 확인  -->
-  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <title>main</title>
   <!-- css스타일 적용 -->
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
@@ -22,9 +22,9 @@
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/203a25fbbd.js" crossorigin="anonymous"></script>
   <!-- JQuery -->
-  <script src="js/jquery-3.6.0.js"></script>
+  <script src="/resources/js/jquery-3.6.0.js"></script>
   <!-- Slick -->
-  <script src="js/slick.js"></script>
+  <script src="/resources/js/slick.js"></script>
   <!-- Slick CSS -->
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css" />
@@ -79,112 +79,95 @@
             class="col-11d-flex justify-content-end align-items-center flex-wrap gap-2"
             style="width: 100%; text-align: right; margin-bottom: 2px;">
             <!-- 페이스북 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600');">
-                <img
-                    src="../img/face.png"
-                    title="페이스북으로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+           			<a href=""
+						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/face.png"
+						title="페이스북으로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 트위터 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); ">
-                <img
-                    src="../img/twit.png"
-                    title="트위터로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+					<!-- 트위터 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/twit.png"
+						title="트위터로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 카카오 스토리 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); "><img
-                src="../img/kakaop.jpg"
-                title="카카오스토리로 공유하기"
-                class="sharebtn_custom"
-                style="width: 32px;"></a>
-        </div>
+					<!-- 카카오 스토리 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); return false;"><img
+						src="${pageContext.request.contextPath }/resources/img/kakaop.jpg"
+						title="카카오스토리로 공유하기" class="sharebtn_custom" style="width: 32px;"></a>
+				</div>
         <!-- SNS버튼 끝 -->
         <br>
 
 <!--         이미지 슬라이드 시작 -->
-<!--         <div > -->
-<!--             <div
-<!--                 id="carouselExampleIndicators" -->
-<!--                 class="carousel slide" -->
-<!--                 data-bs-ride="carousel" -->
-<!--                 style="width: 1500px; " -->
-<!--                 > --> 
-<!--             <div -->
-<!--                 id="carouselExampleIndicators" -->
-<!--                 class="carousel slide" -->
-<!--                 data-bs-ride="carousel" -->
-<!--                 > -->
-<!--                 <div class="carousel-indicators"> -->
-<!--                     <button -->
-<!--                         type="button" -->
-<!--                         data-bs-target="#carouselExampleIndicators" -->
-<!--                         data-bs-slide-to="0" -->
-<!--                         class="active" -->
-<!--                         aria-current="true" -->
-<!--                         aria-label="Slide 1"></button> -->
-<!--                     <button -->
-<!--                         type="button" -->
-<!--                         data-bs-target="#carouselExampleIndicators" -->
-<!--                         data-bs-slide-to="1" -->
-<!--                         aria-label="Slide 2"></button> -->
-<!--                     <button -->
-<!--                         type="button" -->
-<!--                         data-bs-target="#carouselExampleIndicators" -->
-<!--                         data-bs-slide-to="2" -->
-<!--                         aria-label="Slide 3"></button> -->
-<!--                 </div> -->
-<!--                 <div class="carousel-inner"> -->
-<!--                     <div class="carousel-item active"> -->
-<!--                         <img -->
-<!--                             src="img/dog1.jpg" -->
-<!--                             class="d-block w-50  img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
-<!--                     </div> -->
-<!--                     <div class="carousel-item"> -->
-<!--                         <img -->
-<!--                             src="img/dog2.jpg" -->
-<!--                             class="d-block w-50 img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
-<!--                     </div> -->
-<!--                     <div class="carousel-item"> -->
-<!--                         <img -->
-<!--                             src="img/dog3.jpg" -->
-<!--                             class="d-block w-50 img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
-<!--                     </div> -->
-<!--                 </div> -->
+        <div >
+             <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                style="width: 1500px; "
+                > 
+            <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                >
+                <div class="carousel-indicators">
+                    <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="0"
+                        class="active"
+                        aria-current="true"
+                        aria-label="Slide 1"></button>
+                    <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+<%--                 <c:forEach var="bDTO" test="items="${freeFileList }"> --%>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                            src="img/dog1.jpg"
+                            class="d-block w-50  img-responsive center-block"
+                            style=" margin: 0 auto; height: auto;"
+                            alt="...">
+                    </div>
+                   
+                </div>
+<%--                 </c:forEach> --%>
 
-<!--                 <button -->
-<!--                     class="carousel-control-prev carousel-dark" -->
-<!--                     type="button" -->
-<!--                     data-bs-target="#carouselExampleIndicators" -->
-<!--                     data-bs-slide="prev"> -->
-<!--                     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
-<!--                     <span class="visually-hidden">Previous</span> -->
-<!--                 </button> -->
-<!--                 <button -->
-<!--                     class="carousel-control-next carousel-dark" -->
-<!--                     type="button" -->
-<!--                     data-bs-target="#carouselExampleIndicators" -->
-<!--                     data-bs-slide="next"> -->
-<!--                     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
-<!--                     <span class="visually-hidden">Next</span> -->
-<!--                 </button> -->
+                <button
+                    class="carousel-control-prev carousel-dark"
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                    class="carousel-control-next carousel-dark"
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
 
-<!--             </div> -->
-<!--         </div> -->
+            </div>
+        </div>
+        </div>
         <!-- 슬라이드 쇼 끝 -->
          <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
@@ -229,6 +212,7 @@
 			
           <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
 		  <script>
+		
            var heart = 0;  
            jQuery(function($) {
         	   $('#swapHeart').on('click', function() {
@@ -242,6 +226,7 @@
            function like(){
         	   $.ajax({
    				url:'${pageContext.request.contextPath }/freeboard/like_check',
+   				type:'POST',
    				data:{
    					"user_id":(${boardDTO.user_id}+1),
    					"free_board_num":${boardDTO.free_board_num}
@@ -265,15 +250,19 @@
            console.log(heart);
            console.log('d2');
            console.log(${pageContext.request.contextPath });
-//            "user_id":$('#user_id').val(),
-// 				"free_board_num":$('#free_board_num').val()
+           "user_id":$('#user_id').val(),
+				"free_board_num":$('#free_board_num').val()
            
+             
+            
            </script>
 			
+
+
 			
 						
 						    <script>
-						  
+					
 						        $('i').on('click',function(){
 						        		
 						            if (heart==0 ){
