@@ -1,7 +1,10 @@
 package com.mypet.service;
 
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
@@ -25,7 +28,7 @@ public interface FindboardService {
 	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
-	public void insert_findboard(FindboardDTO findboardDTO);
+	public void insert_findboard(FindboardDTO findboardDTO, FileDTO fileDTO);
 	
 	public List<String> getProvinceList();
 

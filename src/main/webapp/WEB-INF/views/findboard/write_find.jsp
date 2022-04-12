@@ -223,7 +223,8 @@
                                 <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact">
                             </div>
                             
-                            <!--file 드래그앤드롭-->
+                            <!--(구현못함 ㅠㅠ) file 드래그앤드롭-->
+                            <!-- 
 								<div id="drop" style="border:1px solid black; width:100%; height:auto; padding:3px">
 								<p>
 									<small style="color: gray; font-size: 13px;">
@@ -233,6 +234,13 @@
                             	<p style="background-color:lightgrey;"><i>첨부파일</i>
                             	<button type="button" value="확인" id="save">저장</button></p>
 								</div>                            
+                             -->
+                             
+                             <!-- 기본 multiple file 전달 -->
+                             <div class="uploadDiv">
+                             	<input multiple="multiple" type="file" name="file" />
+                             	<input type="text" name="src" />
+                             </div>
 
                             <!--submit 버튼-->
                             <div class="text-center p-2">
@@ -247,8 +255,9 @@
                 </form>
             </div>
 
-	     <!-- file drag & drop 스크립트 적용 -->   
-	    <script type="text/javascript">
+	 	 
+	    <!-- (구현못함ㅠㅠ)file drag & drop 스크립트 적용 
+	    
    	 	var fileList = [];
     	var $drop = $("#drop");
     	
@@ -270,57 +279,54 @@
 			    for(var i = 0; i < files.length; i++) {
 		    		var f = files[i];
 		    		var ext = f.name.split('.').pop().toLowerCase();
-		    		if(ext != 'png' && ext != 'jpeg' && ext != 'jpg' && ext != 'bmp' && ext != 'gif'){
-		    			alert("지원하는 파일 확장자가 아닙니다");
+		    		if(ext == 'png' || ext == 'jpeg' || ext == 'jpg' || ext == 'bmp' || ext == 'gif'){
+		    			fileList.push(f);
+		    			var fileName = f.name;
+		    			var fileSize = f.size /1024/1024;
+		    			fileSize = fileSize<1? fileSize.toFixed(3) : fileSize.toFixed(1);
+		    			tag += "<span>"+fileName+" "+fileSize+"MB </span><button type='button' class='deletefiles'>삭제</button><br>";
 		    		} else {
-	    			fileList.push(f);
-	    			var fileName = f.name;
-	    			var fileSize = f.size /1024/1024;
-	    			fileSize = fileSize<1? fileSize.toFixed(3) : fileSize.toFixed(1);
-	    			tag += "<span>"+fileName+" "+fileSize+"MB </span><button type='button' class='deletefiles'>삭제</button><br>";
+		    			alert("지원하는 파일 확장자가 아닙니다");
 			    	}
 		    	$(this).append(tag);
 	    		}
     		}
 	    }); // drop closed
 		  
-	   //저장하기
+		   //저장하기
 	   $(document).on("click","#save", function(){
 		  var formData = new FormData();
 		  if(fileList.length > 0){
 			  fileList.forEach(function(f){
 				 formData.append("fileList",f); 
 			  });
-				alert("파일이 저장되었습니다");
 		  } 
-// 		  $.ajax({
-// 			url: "${pageContext.request.contextPath}/findboard/fileupload",
-// 			data: formData,
-// 			type:'POST',
-// 			enctype:'multipart/form-data',
-// 			processData:false,
-// 			contentType:false,
-// 			dataType:'json',
-// 			cache:false,
-// 			success:function(rdata){
-// 				 alert("저장되었습니다");
-// 			 	}, 
-// 		 	error:function(rdata){
-// 				 alert("오류발생");
-// 			 	}
-// 		  	}); // ajax closed
+		  $.ajax({
+			url: "${pageContext.request.contextPath}/findboard/fileupload",
+			data: formData,
+			type:'POST',
+			enctype:'multipart/form-data',
+			processData:false,
+			contentType:false,
+			dataType:'json',
+			cache:false,
+			success:function(rdata){
+				 alert("저장되었습니다");
+			 	}, 
+		 	error:function(rdata){
+				 alert("오류발생");
+			 	}
+		  	}); // ajax closed
 	   	}); // document.on closed
 	
     	$(document).on("click",".deletefiles", function(e) {
     		alert("삭제 클릭시 파일 삭제 + 실제 업로드 파일도 제거 구현해야함");
-// 			var $target = $(e.target);
-// 			var idx = $target.attr('data-idx');
-// 			alert($target);
-// 			uploadFiles[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
-// 			$target.parent().remove(); //프리뷰 삭제
-		});
 
-		</script>
+		});
+	   	
+    	(구현못함ㅠㅠ)file drag & drop 스크립트 적용 끝------------ -->  
+	    
+		  
             <!-- ------------------------------- -->
             <!-- 본문 종료-->
             <!-- ------------------------------- -->
