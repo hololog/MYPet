@@ -62,18 +62,68 @@
 				</div>
 			</div>
 			<!-- 메인 -->
-			<div class="row">
+			<div class="row" style="height:800px">
 
 				<!-- 지도 api가져올 자리 -->
-				<div class="mb-3 col-md-12 col-lg-7" id="map-frame-ksk"
+				<!-- <div class="mb-3 col-md-12 col-lg-7" id="map-frame-ksk"
 					style="z-index: 2;">
 					<div class="sticky-lg-top" style="top: 9rem;">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.111677235935!2d126.97473421573828!3d37.575987879796195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eaa19c763d%3A0xb28a32722d675764!2z6rSR7ZmU66y4KEd3YW5naHdhbXVuIEdhdGUp!5e0!3m2!1sko!2skr!4v1481946656451"
-							id="map-ksk" allowfullscreen="allowfullscreen"></iframe>
-						<!-- <div id="map" style="width:500px;height:400px;"></div>                            -->
+							id="map-ksk" allowfullscreen="allowfullscreen"></iframe>                           --><!-- 
 					</div>
-				</div>
+				</div>  -->
+				
+				<div id="map" style="max-width:55%;"class="mb-3 col-md-12 col-lg-7" id="map-kj"></div>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eff268212342867ed07048385b8791c9"></script>
+				<script>
+				
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		  	    mapOption = {
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
+
+				// 지도   
+				var map = new kakao.maps.Map(mapContainer, mapOption); 
+				
+				// 지도타입
+				var mapTypeControl = new kakao.maps.MapTypeControl();
+
+				// 위치
+				map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+				// 줌 컨트롤러
+				var zoomControl = new kakao.maps.ZoomControl();
+				map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+				
+				var geocoder = new kakao.maps.services.Geocoder();
+			
+				// 주소로 좌표를 검색합니다
+				geocoder.addressSearch('경상남도 창원시 진해구', function(result, status) {
+
+				    // 정상적으로 검색이 완료됐으면 
+				     if (status === kakao.maps.services.Status.OK) {
+
+				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+				        // 결과값으로 받은 위치를 마커로 표시합니다
+				        var marker = new kakao.maps.Marker({
+				            map: map,
+				            position: coords
+				        });
+
+				        // 인포윈도우로 장소에 대한 설명을 표시합니다
+				        var infowindow = new kakao.maps.InfoWindow({
+				            content: '<div style="width:150px;text-align:center;padding:6px 0;">진해구</div>'
+				        });
+				        infowindow.open(map, marker);
+
+				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				        map.setCenter(coords);
+				    } 
+				});    
+				</script>
 				<!-- 지도 api가져올 자리 -->
 
 				<div class="mb-3 col-md-12 col-lg-5" id="finder-photo">
@@ -417,5 +467,16 @@
 		    });
 		});
 	</script>
+		<script>
+ 	window.onload=function relayout() {    
+	    
+	    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+	    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+	    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+	    map.relayout();
+//		map.setBounds(bounds);
+	   
+	} 
+ 	</script>
 </body>
 </html>
