@@ -81,6 +81,11 @@ public class FindboardDAOImpl implements FindboardDAO {
 	@Override
 	public void insert_findboard_file(FileDTO fileDTO) {
 		sqlSession.insert(namespace+".insertFindboardFile", fileDTO);
+	}
+
+	@Override
+	public List<FindboardDTO> getfindBoardListMain() {
+		return sqlSession.selectList(namespace + ".getfindBoardListMain");
 	}	
 	
 	

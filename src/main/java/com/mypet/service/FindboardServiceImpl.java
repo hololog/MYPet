@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.mypet.dao.FindboardDAO;
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.BookmarkDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.PageDTO;
@@ -108,12 +109,16 @@ public class FindboardServiceImpl implements FindboardService {
 	public void insert_findboard_file(FileDTO fileDTO) {
 		findboardDAO.insert_findboard_file(fileDTO);
 	}
-	
-	
 
+	@Override
+	public List<FindboardDTO> getfindBoardListMain() {
+		return findboardDAO.getfindBoardListMain();
+	}
 
-	
-	
-	
+	@Override
+	public BookmarkDTO getBookmark(String findboardNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

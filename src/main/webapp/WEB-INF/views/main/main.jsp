@@ -30,10 +30,25 @@ $(document).ready(function(){
 				$("#login-modal").modal('show');
 			}
 		});
-	}
-});//스크롤 로그인 모달
-
-
+	}//스크롤 로그인 모달
+	
+	$('bookmark').
+	
+	$('bookmark-click').click(function(){
+		//빈별표 일때
+		if($(this).children('i').attr('class') == 'fa-solid fa-star fa-2x'){
+			$.ajax({
+				url:"${pageContext.request.contextPath }/findboard/bookmark",
+				data:{"findboardNum" : $('#fbnum-ksk').val()},{"email":${sesseionScope.email}},
+				success:function(){
+					$('.star-ksk').html();
+				}	
+			});
+			$(this).html();
+			
+		}
+	});
+});
 
 // $("#displayList").hide();
 // // 검색어의 길이가 바뀔 때마다 호출
@@ -188,185 +203,58 @@ $(document).ready(function(){
         <div class="d-flex justify-content-end">
           <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
         </div>
-        <hr>
-        
+       	 <hr>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
+         <!-- 메인에 실종공고 8개  -->
+         <c:forEach var="flist" items="${findboardListMain }">
           <div class="col">
+          	<input type="hidden" value="${flist.find_board_num }" id="fbnum-ksk">
             <div class="card">
               <a href="${pageContext.request.contextPath }/" target="">
-              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
+              	<img src="${pageContext.request.contextPath }/resources/img/${flist.upload}" class="card-img-top" alt="실종동물사진" />
               </a>
-              <!-- 북마크 아이콘 -->
-              <c:if test="${sessionScope.email != null}">
-	              <button type="button" onclick="">
-	              	<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
-	              </button>
-       		  </c:if>
-       		  
-       		  
-       		  
+              <c:choose>
+              	<c:when test="${!empty sesseionScope.email }">
+              	
+              	
+              		
+              		
+              		<button type="button" class="bookmark-click">
+	              		<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
+	             	</button>
+              	</c:when>
+              	<c:otherwise>
+              		<a href="#" class="bookmark-click">
+	              		<i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+	             	</a>
+              	</c:otherwise>
+              </c:choose>
               <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/프렌치불독</p>
+                <h5 class="card-title">
+                	<c:choose>
+						<c:when test="${flist.pet_type eq 0 }">개</c:when>
+						<c:when test="${flist.pet_type eq 1 }">고양이</c:when>
+						<c:otherwise>기타</c:otherwise>
+					</c:choose>/
+					<c:choose>
+						<c:when test="${flist.pet_gender eq 0 }">암컷</c:when>
+						<c:when test="${flist.pet_gender eq 1 }">수컷</c:when>
+						<c:otherwise>모름</c:otherwise>
+					</c:choose>/ 
+					${flist.pet_age }살
+                </h5>
+                <p class="card-text">${flist.address } ${flist.address2 }</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i> 1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i> 1 
+                    <i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i><span class="star-ksk"> ${flist.bookmarkCount }  </span> 
+                    <i class="bi bi-chat-dots"></i> <span class="chat-ksk"> 0 </span> 
+                    <i class="bi bi-eye-fill"></i> <span class="eye-ksk"> ${flist.readcount }</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div class="col">
-            <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">	
-              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
-                alt="..." />
-              </a>  
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 광안동/견종모름</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-                    <div class="col">
-            <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">
-              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
-              </a>
-              <!-- 북마크 아이콘 -->
-              <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/프렌치불독</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">	
-              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
-                alt="..." />
-              </a>  
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 광안동/견종모름</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-                    <div class="col">
-            <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">
-              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
-              </a>
-              <!-- 북마크 아이콘 -->
-              <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/프렌치불독</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">	
-              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
-                alt="..." />
-              </a>  
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 광안동/견종모름</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-                    <div class="col">
-            <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">
-              	<img src="${pageContext.request.contextPath }/resources/img/dog1.jpg" class="card-img-top" alt="..." />
-              </a>
-              <!-- 북마크 아이콘 -->
-              <i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 전포동/프렌치불독</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">	
-              	<img src="https://cdn.pixabay.com/photo/2017/11/02/15/20/dog-2911444_960_720.jpg" class="card-img-top"
-                alt="..." />
-              </a>  
-              <i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-              <div class="card-body">
-                <h5 class="card-title">멍멍이 찾습니다.</h5>
-                <p class="card-text">부산 광안동/견종모름</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <!-- 댓글수, 조회수 아이콘 -->
-                    <i class="bi bi-star-fill"></i>  1 
-                    <i class="bi bi-chat-dots"></i> 0
-                    <i class="bi bi-eye-fill"></i>  1 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         </c:forEach>
         </div>
         <div class="d-flex mt-1 justify-content-end">
            <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 

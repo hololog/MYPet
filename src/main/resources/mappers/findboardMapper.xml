@@ -66,6 +66,9 @@
 		insert into find_board_file(file_num, find_board_num, board_code, upload, filename, save_filename, file_upload_date, ext)
 		values (#{file_num},#{find_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{ext})
 	</insert>
-
+	
+	<select id="getfindBoardListMain" resultType="com.mypet.domain.FindboardDTO">
+		select * from find_board order by insert_date desc limit 8
+	</select>
 
 </mapper>
