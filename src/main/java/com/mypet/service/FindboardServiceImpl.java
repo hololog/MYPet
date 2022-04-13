@@ -69,6 +69,23 @@ public class FindboardServiceImpl implements FindboardService {
 		pageDTO.setStartRow(startRow-1);
 		
 		return findboardDAO.getfindBoardList(pageDTO);
+		
+	}
+	
+	@Override
+	public List<FileDTO> getfindFileList(PageDTO pageDTO){
+		
+		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		pageDTO.setStartRow(startRow-1);
+		
+		return findboardDAO.getfindFileList(pageDTO);
 	}
 	
 	@Override
@@ -88,6 +105,14 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 	
 	@Override
+	public void updatefindboard(FindboardDTO findboardDTO) {
+		findboardDAO.updatefindboard(findboardDTO);
+	}
+	
+	@Override
+	public void insert_findboard(FindboardDTO findboardDTO) {
+		//find_board_num 구하기; 
+		//readcount, insertdate 설정
 	public void insert_findboard(FindboardDTO findboardDTO, FileDTO fileDTO) {
 		
 		//findboardDTO
@@ -100,6 +125,19 @@ public class FindboardServiceImpl implements FindboardService {
 		findboardDTO.setResult(0); // 미해결
 		
 		findboardDAO.insert_findboard(findboardDTO);
+	
+//	public void write_findfile(FileDTO fileDTO) {
+//		
+//		fileDTO.setReadcount(0);
+//		fileDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
+//		
+//		if(findboardDAO.getfreeMaxNum()!=null) {
+//			fileDTO.setFree_board_num(findboardDAO.getfreeMaxNum()+1);	      
+//			 }else {
+//				 fileDTO.setfind_board_num(1);
+//	      }
+//		fileDTO.write_filefile(fileDTO);
+//	}
 	
 
 	}

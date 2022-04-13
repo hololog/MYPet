@@ -14,4 +14,7 @@ public class FileDTO {
 	private String save_filename;
 	private Timestamp file_upload_date;
 	private String ext; // 파일확장자
+	private int free_board_num;
+	private int notice_num;
+	private int review_board_num;
 }
