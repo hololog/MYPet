@@ -21,17 +21,17 @@ public class BookmarkController {
 	@Autowired
 	public BookmarkService bookmarkService;
 	
-//	@RequestMapping(value = "/findboard/bookmark")
-//	public BookmarkDTO bookmark(@RequestParam int findboardNum, HttpSession session) {
-//		BookmarkDTO bookmarkDTO = new BookmarkDTO();
-//		
-//		bookmarkDTO.setFindboardNum(findboardNum);
-//		bookmarkDTO.setEmail((String)session.getAttribute("email"));
-//		
-//		BookmarkService.updateBookmark(bookmarkDTO);
-//		
-//		return ;
-//	}
+	@RequestMapping(value = "/findboard/bookmark")
+	public BookmarkDTO bookmark(@RequestParam int findboardNum, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+		
+		bookmarkDTO.setFindboardNum(findboardNum);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		
+		BookmarkService.updateBookmark(bookmarkDTO);
+		
+		return ;
+	}
 	
 //	private Map<String, Object> getTargetUserAndBoard() {
 //        boolean findTarget = false;
