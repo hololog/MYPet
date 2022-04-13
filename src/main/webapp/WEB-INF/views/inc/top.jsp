@@ -123,6 +123,43 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+<script language="javascript"> 
+function validate() 
+{ 
+					  var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식 
+					  var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 이메일이 적합한지 검사할 정규식 
+					  var email = document.getElementById("email"); 
+					  var pw = document.getElementById("pw"); 
+					  
+					  if(email.value=="") { 
+						  alert("이메일을 입력해 주세요"); 
+						  email.focus(); 
+						  return false; 
+						  
+					  } if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) { 
+						  return false; 
+						  
+					  }
+					  
+					  if(!check(re,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) { 
+						  return false; 
+					  } 
+					  
+					  if(join.pw.value != join.checkpw.value) { 
+						  alert("비밀번호가 다릅니다. 다시 확인해 주세요."); 
+						  join.checkpw.value = ""; 
+						  join.checkpw.focus(); 
+						  return false; 
+					  } 
+					  
+					  alert("회원가입이 완료되었습니다.");
+}
+
+					 
+}
+
+
 <!-- 모달창 시작 -->
             <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal" style="transition: opacity 0.5s linear;">
           
@@ -150,41 +187,44 @@ $(document).ready(function(){
                             <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password" name="password">
                             <label for="floatingPassword">Password</label>
                           </div>
-                          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">로그인</button>
+                          <P> 
+                          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" id="login_btn">로그인</button>
+                          </P>
                           <!-- 작은 안내글
                               <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
                             -->
                          
-                          <h8><a href="" id="idpw_kds">비밀번호찾기</a> </h8>
-                          </div>  
+                       	 <h6><a href="" id="idpw_kds">비밀번호찾기</a></h6> 
 
-                          <div class="singin">
-                          <p>
-                          <h2 class="fs-5 fw-bold mb-3">아직 회원이 아니신가요?
-                           <a href="${pageContext.request.contextPath }/member/tmppwd">회원가입</a> </h2>
-                          </p>
-                          </div>
-                          
-                          <hr class="my-4">
-                          <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 " type="submit">
-<!--                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg> -->
-                            네이버계정으로 로그인
-                          </button>
-                          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds" type="submit">
-<!--                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg> -->
-                            카카오계정으로 로그인
-                          </button>
-                          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds" type="submit">
-<!--                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg> -->
-                            구글계정으로 로그인
-                          </button>
-                          <div class="singin">
-                          <p>
-                          <h2 class="fs-5 fw-bold mb-3"><a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a></h2>
-                          </p>
-                       </div>
-                          </div>
-                        </form>
+
+							<hr class="my-4">
+							<button
+								class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 "
+								type="submit">
+								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg> -->
+								네이버계정으로 로그인
+							</button>
+							<button
+								class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds"
+								type="submit">
+								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg> -->
+								카카오계정으로 로그인
+							</button>
+							<button
+								class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds"
+								type="submit">
+								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg> -->
+								구글계정으로 로그인
+							</button>
+							<div class="singin">
+								<p>
+								<h2 class="fs-5 fw-bold mb-3">
+									<a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a>
+								</h2>
+								</p>
+							</div>
+						</div>
+							</form>
                         <!-- Modal footer -->
                         <div class="modal-footer">
 				
@@ -194,7 +234,7 @@ $(document).ready(function(){
                 </div>
               </div>
              </div>
-                
+            </div>    
 
       
     <!-- 회원가입 -->
@@ -216,7 +256,7 @@ $(document).ready(function(){
                     <div class="modal-body p-5 pt-0">
                         <form class="whole_modal">
                           <div class="form-floating mb-3">
-		    <input type="text" class="form-control rounded-4 id="join" placeholder="닉네임"  id="floatingNN_kds" required autofocus>
+		   				  <input type="text" class="form-control rounded-4 id="join" placeholder="닉네임"  id="floatingNN_kds" required autofocus>
                             <label for="floatingInput">닉네임</label>
                           </div>
                           <div class="form-floating mb-3">
@@ -227,7 +267,7 @@ $(document).ready(function(){
                             <input type="password" class="form-control rounded-4" id="floatingPassword_kds" placeholder="비밀번호" autofocus minlength="8" maxlength="10" required>
                             <label for="floatingPassword">비밀번호</label>
                           </div>
-		  <div class="form-floating mb-3">
+		  					<div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" id="Ck_floatingPassword_kds" placeholder="비밀번호 재확인" minlength="8" maxlength="10" required>
                             <label for="floatingPassword">비밀번호 재확인</label>
                           </div>
@@ -263,8 +303,8 @@ $(document).ready(function(){
                     </div>
                   </div>
                 </div>
-                </div>
-                
+               </div>
+             
 
     
     <script type="text/javascript"
@@ -274,6 +314,7 @@ $(document).ready(function(){
 
     <!-- 모달창 종료 -->
 <!-- header 종료 -->
+<script type="text/javascript">
 
 $(document).mouseup(function (e){
   var LayerPopup = $(".whole_modal");
@@ -281,3 +322,4 @@ $(document).mouseup(function (e){
     LayerPopup.removeClass("show");
   }
 });
+</script>
