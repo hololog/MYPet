@@ -48,5 +48,7 @@ public interface FindboardDAO {
 
 	public List<FindboardDTO> getfindBoardListMain();
 
+	public List<FindboardDTO> getfindBoardListMain(String email);
+
 }
 

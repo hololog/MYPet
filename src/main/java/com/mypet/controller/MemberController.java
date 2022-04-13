@@ -26,11 +26,10 @@ public class MemberController {
 	public FindboardService findboardService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model) {
-		List<FindboardDTO> findboardListMain = findboardService.getfindBoardListMain();
-//		BookmarkDTO bookmarkDTO = findboardService.getBookmark(findboardNum);
+	public String main(HttpSession session, Model model) {
+		String email = (String)session.getAttribute("email");
+		List<FindboardDTO> findboardListMain = findboardService.getfindBoardListMain(email);
 		model.addAttribute("findboardListMain", findboardListMain);
-//		model.addAttribute("bookmarkDTO", bookmarkDTO);
 		return "main/main";
 	}
 	

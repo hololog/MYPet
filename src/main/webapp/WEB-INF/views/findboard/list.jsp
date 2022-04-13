@@ -180,9 +180,7 @@
 									</c:when>
 								</c:choose>
 							</div>
-							<div>
-							
-							</div>
+						
 							<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
 								<div class="row p-2">
 									<div class="col-6 col-sm-12">

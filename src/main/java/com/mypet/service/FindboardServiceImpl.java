@@ -111,12 +111,12 @@ public class FindboardServiceImpl implements FindboardService {
 			findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
 		else findboardDTO.setFind_board_num(1);
 		//readcount, insertdate, boardnum 설정
-		findboardDTO.setReadcount(0);
-		findboardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
-		findboardDTO.setResult(0); // 미해결
-		
-		findboardDAO.insert_findboard(findboardDTO);
-	
+//		findboardDTO.setReadcount(0);
+//		findboardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
+//		findboardDTO.setResult(0); // 미해결
+//		
+//		findboardDAO.insert_findboard(findboardDTO);
+//	
 //	public void write_findfile(FileDTO fileDTO) {
 //		
 //		fileDTO.setReadcount(0);
@@ -173,6 +173,9 @@ public class FindboardServiceImpl implements FindboardService {
 		return null;
 	}
 
-	
-	
+	@Override
+	public List<FindboardDTO> getfindBoardListMain(String email) {
+		return findboardDAO.getfindBoardListMain(email);
+	}
+
 }
