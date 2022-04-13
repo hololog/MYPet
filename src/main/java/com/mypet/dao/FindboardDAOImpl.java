@@ -105,6 +105,11 @@ public class FindboardDAOImpl implements FindboardDAO {
 	@Override
 	public List<FindboardDTO> getfindBoardListMain() {
 		return sqlSession.selectList(namespace + ".getfindBoardListMain");
+	}
+
+	@Override
+	public List<FindboardDTO> getfindBoardListMain(String email) {
+		return sqlSession.selectList(namespace + ".getfindBoardListMain", email);
 	}	
 
 	
