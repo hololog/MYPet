@@ -68,7 +68,7 @@ public class AjaxController {
 
 		return entity;
 	}
-	@ResponseBody
+	
 	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET)
 	public ResponseEntity<FindboardDTO> ajaxboard(HttpServletRequest request) throws Exception{
 		int num1 = Integer.parseInt(request.getParameter("num"));
