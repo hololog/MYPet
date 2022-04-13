@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.PageDTO;
 
 
@@ -89,9 +90,9 @@ public interface BoardDAO {
 	public List<BoardDTO> reviewListsearch(PageDTO pageDTO);
 	
 	public int getreviewBoardCountSearch(PageDTO pageDTO);
-	//search end
+//search end
 	
-	//likebest start
+//likebest start
 	public List<BoardDTO> bestfree(PageDTO pageDTO);
 	
 	public List<BoardDTO> bestnotice(PageDTO pageDTO);
@@ -99,7 +100,18 @@ public interface BoardDAO {
 	public List<BoardDTO> bestreview(PageDTO pageDTO);
    
 	
-	//likecheck
+//likecheck
 	public BoardDTO LikeCheck(BoardDTO boardDTO);
 	
+	
+//	fileMaxNum start
+	public Integer getFileMaxNum();
+	
+//fileMaxNum end
+	
+//file start
+	
+	
+	public void insert_freeboard_file(FileDTO fileDTO);
+//file end
 }

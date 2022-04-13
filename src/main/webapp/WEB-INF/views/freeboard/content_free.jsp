@@ -135,18 +135,19 @@
                         data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
                 </div>
-<%--                 <c:forEach var="bDTO" test="items="${freeFileList }"> --%>
+                <c:forEach var="fileDTO" items="${fileDTO }">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img
-                            src="img/dog1.jpg"
+                            src="${fileDTO.filename }"
                             class="d-block w-50  img-responsive center-block"
                             style=" margin: 0 auto; height: auto;"
                             alt="...">
+                            
                     </div>
                    
                 </div>
-<%--                 </c:forEach> --%>
+                </c:forEach>
 
                 <button
                     class="carousel-control-prev carousel-dark"
