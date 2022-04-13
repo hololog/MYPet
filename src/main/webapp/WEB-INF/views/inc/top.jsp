@@ -8,33 +8,33 @@
 <header class="fixed-top bg-white main-header">
   <!-- 로고 + 로그인/회원가입 버튼 -->
 
-  <div class="row py-3 mx-3">
-    <div class="col-4"></div>
-    <div class="col-4 d-flex justify-content-center align-items-center">
-      <h1>
-        <a href="${pageContext.request.contextPath }/main">
-          <i class="bi bi-emoji-smile">MyPet</i>
-        </a>
-      </h1>
-    </div>
-    <!-- 로그인시 메뉴변화 -->
-	<c:choose>
-		<c:when test="${ empty sessionScope.email}">
-			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-	     		<a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#login-modal">로그인</a>
-	     		<a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">회원가입</a>
-		 	</div>
-		</c:when>
-		<c:otherwise>
-			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-				<span>${sessionScope.nickname }님 반갑습니다.</span>
-	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage/myinfo">마이페이지</a>
-	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
-		 	</div>
-		</c:otherwise>
-	</c:choose>    
+<!--   <div class="row py-3 mx-3"> -->
+<!--     <div class="col-4"></div> -->
+<!--     <div class="col-4 d-flex justify-content-center align-items-center"> -->
+<!--       <h1> -->
+<%--         <a href="${pageContext.request.contextPath }/main"> --%>
+<!--           <i class="bi bi-emoji-smile">MyPet</i> -->
+<!--         </a> -->
+<!--       </h1> -->
+<!--     </div> -->
+<!--     로그인시 메뉴변화 -->
+<%-- 	<c:choose> --%>
+<%-- 		<c:when test="${ empty sessionScope.email}"> --%>
+<!-- 			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2"> -->
+<!-- 	     		<a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#login-modal">로그인</a> -->
+<!-- 	     		<a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">회원가입</a> -->
+<!-- 		 	</div> -->
+<%-- 		</c:when> --%>
+<%-- 		<c:otherwise> --%>
+<!-- 			<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2"> -->
+<%-- 				<span>${sessionScope.nickname }님 반갑습니다.</span> --%>
+<%-- 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage/myinfo">마이페이지</a> --%>
+<%-- 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">로그아웃</a> --%>
+<!-- 		 	</div> -->
+<%-- 		</c:otherwise> --%>
+<%-- 	</c:choose>     --%>
 	
-  </div>
+<!--   </div> -->
 
   <!-- 네이게이션바 -->
   <nav class="navbar navbar-expand-lg navbar-light">
@@ -141,7 +141,7 @@ $(document).ready(function(){
                     	</div>
                     <!-- Modal body -->       
                     <div class="modal-body p-5 pt-0">
-                        <form action="${pageContext.request.contextPath }/member/login" class="whole_modal" method="post">
+                        <form action="${pageContext.request.contextPath }/member/loginPro" class="whole_modal" method="post">
                           <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com" name="email">
                             <label for="floatingInput">E-mail</label>
