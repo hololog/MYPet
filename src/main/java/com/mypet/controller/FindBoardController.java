@@ -92,6 +92,8 @@ public class FindBoardController {
 		fbDTO.setReward(Integer.parseInt(mtfRequest.getParameter("reward")));
 		fbDTO.setTitle(""); // 없애기
 		
+		findboardService.insert_findboard(fbDTO);
+		
 	       return "redirect:/findboard/list";
 		}
 		
