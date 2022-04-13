@@ -16,13 +16,13 @@ public class GbuyBoardDAOImpl implements GbuyBoardDAO{
 
 	@Inject
 	private SqlSession sqlSession;
-	
+
 	private static final String namespace="com.mypet.mappers.GbuyboardMapper";
 
 	@Override
 	public void Gbuy_writeBoard(GbuyBoardDTO gbuyBoardDTO) {
 		sqlSession.insert(namespace+".Gbuy_writeBoard", gbuyBoardDTO);
-		
+
 	}
 	@Override
 	public Integer getGbuy_MaxNum() {
@@ -40,8 +40,8 @@ public class GbuyBoardDAOImpl implements GbuyBoardDAO{
 	}
 
 	@Override
-	public GbuyBoardDTO getGbuy_Board(int num) {
-		return sqlSession.selectOne(namespace+".getGbuy_Board", num);
+	public GbuyBoardDTO getGbuy_Board(int gbuy_num) {
+		return sqlSession.selectOne(namespace+".getGbuy_Board", gbuy_num);
 	}
 
 	@Override
@@ -50,18 +50,20 @@ public class GbuyBoardDAOImpl implements GbuyBoardDAO{
 	}
 
 	@Override
-	public void updateGbuy_Board(GbuyBoardDTO boardDTO) {
-		sqlSession.update(namespace+".updateGbuy_Board", boardDTO);
+	public void updateGbuy_Board(GbuyBoardDTO gbuyBoardDTO) {
+		sqlSession.update(namespace+".updateGbuy_Board", gbuyBoardDTO);
 	}
 
 	@Override
-	public void deleteGbuy_Board(int num) {
-		sqlSession.delete(namespace+".deleteGbuy_Board", num);
+	public void deleteGbuy_Board(int gbuy_num) {
+		sqlSession.delete(namespace+".deleteGbuy_Board", gbuy_num);
 	}
 	@Override
 	public GbuyBoardDTO getGbuy_Board1(int gbuy_num) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".getGbuy_Board", gbuy_num);
 	}
+
+
 
 }//

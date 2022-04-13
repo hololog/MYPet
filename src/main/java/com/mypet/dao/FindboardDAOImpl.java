@@ -1,14 +1,21 @@
 package com.mypet.dao;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
+import com.mypet.domain.PageDTO;
 
 @Repository
 public class FindboardDAOImpl implements FindboardDAO {
@@ -24,25 +31,95 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectOne(namespace+".getfindBoard", num);
 	}
 	
+//	@Override
+//	public FindboardDTO bringfindBoard(int num) {
+//		return sqlSession.selectOne(namespace+".bringfindBoard", num);
+//	}
+	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
 		sqlSession.insert(namespace+".insert_findboard", findboardDTO);
 	}
+	
+	@Override
+	public void insert_findboard_files(FileDTO fileDTO) {
+		sqlSession.insert(namespace+".insert_findboard_files", fileDTO);
+	}
 
+	
 	@Override
 	public Integer getMaxNum() {
 		return sqlSession.selectOne(namespace+".getMaxNum");
 	}
 	
 	@Override
+	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getfindBoardList", pageDTO);
+}
+	
+	@Override
+	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getfindMissBoardList", pageDTO);
+}
+
+	@Override
+	public int getfindBoardCount() {
+		return sqlSession.selectOne(namespace+".getfindBoardCount");
+	}
+	
+	@Override
+	public int getfindMissBoardCount() {
+		return sqlSession.selectOne(namespace+".getfindMissBoardCount");
+	}
+	
+	//은혜 지역검색
+	@Override
 	public List<String> getProvinceList() {
 		return sqlSession.selectList(namespace+".getProvinceList");
 	}
+	@Override
+	public List<String> getCityList(String province) {
+		return sqlSession.selectList(namespace + ".getCityList", province);
+	}
+	@Override
+	public List<String> getTownList(AddressDTO addressDTO) {
+		return sqlSession.selectList(namespace+ ".getTownList", addressDTO);
+	}
 	
+	//은혜 파일maxnum
+	@Override
+	public void insert_findboard_file(FileDTO fileDTO) {
+		sqlSession.insert(namespace+".insertFindboardFile", fileDTO);
+	}
+
+	@Override
+	public List<FindboardDTO> getfindBoardListMain() {
+		return sqlSession.selectList(namespace + ".getfindBoardListMain");
+	}	
+	public Integer getFileMaxNum() {
+		return sqlSession.selectOne(namespace+".getFileMaxNum");
+	}
+	
+	//은혜 파일업로드
 //	@Override
-//	public List<String> getcityname(String province) {
-//		return sqlSession.selectList(namespace+".getcityname", province);
+//	public void insert_findboard_file(FileDTO fileDTO) {
+//		sqlSession.insert(namespace+".insertFindboardFile", fileDTO);
 //	}
 	
+//	@Override
+//	public boolean insert_findboard_file(Map<String, Object> fileMap) {
+//		try {
+//		sqlSession.insert(namespace+".insertFiles", fileMap);
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+//		return true ;
+//	}	
 	
+	
+	
+	
+
+
 }

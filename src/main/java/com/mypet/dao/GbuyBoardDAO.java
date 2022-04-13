@@ -8,23 +8,21 @@ import com.mypet.domain.PageDTO;
 
 public interface GbuyBoardDAO {
 
-	public void Gbuy_writeBoard(GbuyBoardDTO gbuyBoardDTO);
-
 	public Integer getGbuy_MaxNum();
 	
-	public int getGbuy_BoardCount();
-	
-	public void updateGbuy_Readcount(int num);
-	
-	public void deleteGbuy_Board(int num);
-
 	public List<GbuyBoardDTO> getGbuyBoardList(PageDTO pageDTO);
 
-	public GbuyBoardDTO getGbuy_Board(int num);
+	public GbuyBoardDTO getGbuy_Board(int gbuy_num);
 
 	public GbuyBoardDTO getGbuy_Board1(int gbuy_num);
 
 	public void updateGbuy_Board(GbuyBoardDTO gbuyBoardDTO);
 
+	public void deleteGbuy_Board(int gbuy_num);	
 
+	public void updateGbuy_Readcount(int gbuy_num);
+
+	public void Gbuy_writeBoard(GbuyBoardDTO gbuyBoardDTO);
+	
+	public int getGbuy_BoardCount();
 }

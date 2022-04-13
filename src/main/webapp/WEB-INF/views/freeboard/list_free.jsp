@@ -90,17 +90,17 @@
                   <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
                   <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
-                        <td>${num }</td>
-                        <td></td>
-                        <td></td>
-                        <td style="text-align: start;">${bDTO.subject}</td>
+                        <td  width="4%">${num }</td>
+                        <td  width="3%"></td>
+                        
+                        <td width="30%" style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
                           <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
-                        <td>${bDTO.nickname}</td>
-                        <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
+                        <td width="10%">${bDTO.nickname}</td>
+                        <td  width="10%" style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
                     <c:set var="num" value="${num-1 }"/>
@@ -122,7 +122,7 @@
                   </div>
                   </form>
                  <!-- 아이디 없을때 -->
-                  <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+                  <c:if test="${empty sessionScope.nickname  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
                   	<script>
 
@@ -139,7 +139,7 @@
                   
                   
                   <!-- 아이디 있을때 -->
-                  <c:if test="${!empty user_id }">
+                  <c:if test="${!empty sessionScope.nickname }">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/freeboard/write_free'">글쓰기</button> </div>
@@ -167,7 +167,7 @@
                   </div>
                </div>
            
-        
+        </div>
 
 
         <!-- 게시판 끝 -->

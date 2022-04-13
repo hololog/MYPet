@@ -41,7 +41,7 @@
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
-	<input type="text"name="nickname"id="nicename">
+	<input type="hidden" name="nickname" value="${sessionScope.id }">
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
@@ -54,19 +54,19 @@
         </div>
        
       </div>
-      
+      <h4>파일</h4><input type="file" name="file">
       <hr>
       
-      <div class="mt-3">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">사진</span>
-          </div>
-          <div class="custom-file">
-              &nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1">
-          </div>
-        </div>
-      </div>
+<!--       <div class="mt-3"> -->
+<!--         <div class="input-group mb-3"> -->
+<!--           <div class="input-group-prepend"> -->
+<!--             <span class="input-group-text" id="inputGroupFileAddon01">사진</span> -->
+<!--           </div> -->
+<!--           <div class="custom-file"> -->
+<!--               &nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
 
        <div class="col-12" id="editor">
         
@@ -81,7 +81,6 @@
       
      <br>
      <br>
-	<button type="button" onclick="<span class='bi bi-heart-fill'></span>"><span class='bi bi-heart' style='color: red'></span></button>
      <div class="col-6.5 d-flex  align-items-center flex-wrap gap-2 justify-content-center">
         <button type="submit"  class="btn btn-outline-primary" style="width: 20%; font-weight: bold;">
           등   록          
@@ -101,45 +100,46 @@
     	      });
     });
   </script>
-<!--   <script> -->
-<!-- // 	// 툴바생략 -->
-<!-- // 	var setting = { -->
-<!-- //             height : 300, -->
-<!-- //             minHeight : null, -->
-<!-- //             maxHeight : null, -->
-<!-- //             focus : true, -->
-<!-- //             lang : 'ko-KR', -->
-<!-- //             toolbar : toolbar, -->
-<!-- //             //콜백 함수 -->
-<!-- //             callbacks : {  -->
-<!-- //             	onImageUpload : function(files, editor, welEditable) { -->
-<!-- //             // 파일 업로드(다중업로드를 위해 반복문 사용) -->
-<!-- //             for (var i = files.length - 1; i >= 0; i--) { -->
-<!-- //             uploadSummernoteImageFile(files[i], -->
-<!-- //             this); -->
-<!-- //             		} -->
-<!-- //             	} -->
-<!-- //             } -->
-<!-- //          }; -->
-<!-- //         $('#summernote').summernote(setting); -->
-<!-- //         }); -->
-        
-<!-- //         function uploadSummernoteImageFile(file, el) { -->
-<!-- // 			data = new FormData(); -->
-<!-- // 			data.append("file", file); -->
-<!-- // 			$.ajax({ -->
-<!-- // 				data : data, -->
-<!-- // 				type : "POST", -->
-<!-- // 				url : "uploadSummernoteImageFile", -->
-<!-- // 				contentType : false, -->
-<!-- // 				enctype : 'multipart/form-data', -->
-<!-- // 				processData : false, -->
-<!-- // 				success : function(data) { -->
-<!-- // 					$(el).summernote('editor.insertImage', data.url); -->
-<!-- // 				} -->
-<!-- // 			}); -->
-<!-- // 		} -->
-<!-- </script> -->
+   <script> 
+// 툴바생략 
+	var setting = { 
+            height : 300, 
+            minHeight : null,
+            maxHeight : null,
+             focus : true, 
+           lang : 'ko-KR', 
+           toolbar : toolbar, 
+            //콜백 함수 
+           callbacks : { 
+             	onImageUpload : function(files, editor, welEditable) { 
+        // 파일 업로드(다중업로드를 위해 반복문 사용)
+           for (var i = files.length - 1; i >= 0; i--) { 
+             uploadSummernoteImageFile(files[i], 
+           this); 
+            		} 
+            	} 
+            } 
+          }; 
+	 $('#summernote').summernote(setting);
+ });
+ 
+//  function uploadSummernoteImageFile(file, el) {
+// 		data = new FormData();
+// 		data.append("file", file);
+// 		$.ajax({
+// 			data : data,
+// 			type : "POST",
+// 			url : "uploadSummernoteImageFile",
+// 			contentType : false,
+// 			enctype : 'multipart/form-data',
+// 			processData : false,
+// 			success : function(data) {
+// 				$(el).summernote('editor.insertImage', data.url);
+// 			}
+// 		});
+// 	}
+
+ </script> 
    </form>
        <!-- 게시판 끝 -->
         

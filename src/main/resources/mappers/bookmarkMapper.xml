@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.mypet.mappers.bookmarkMapper">
+	
+	<insert id="insertBookmark">
+		insert into bookmark(find_board_num, email, board_category) 
+					values(#{find_board_num},#{email},"fi")
+	</insert>
+	
+	<update id="updateBookmark">
+		update find_board set bookmark_count = bookmark_count+1 where find_board_num = #{find_board_num}
+	</update>
+	
+	
+</mapper>

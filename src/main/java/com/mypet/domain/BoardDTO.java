@@ -15,6 +15,9 @@ public class BoardDTO {
 	private Timestamp insert_date;
 	private Timestamp update_date;
 	private int like_count;
+	private int like_num;
+	private int user_id;
+	private String file;
 	
 	
 
@@ -83,6 +86,25 @@ public class BoardDTO {
 	}
 	public void setNotice_num(int notice_num) {
 		this.notice_num = notice_num;
+	}
+	public int getLike_num() {
+		return like_num;
+	}
+	public void setLike_num(int like_num) {
+		this.like_num = like_num;
+	}
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
 	}
 
 	

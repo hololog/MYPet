@@ -8,6 +8,8 @@
         <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--   나중에 다시 확인  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <title>main</title>
   <!-- css스타일 적용 -->
   <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
@@ -20,9 +22,9 @@
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/203a25fbbd.js" crossorigin="anonymous"></script>
   <!-- JQuery -->
-  <script src="js/jquery-3.6.0.js"></script>
+  <script src="/resources/js/jquery-3.6.0.js"></script>
   <!-- Slick -->
-  <script src="js/slick.js"></script>
+  <script src="/resources/js/slick.js"></script>
   <!-- Slick CSS -->
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css" />
@@ -77,112 +79,95 @@
             class="col-11d-flex justify-content-end align-items-center flex-wrap gap-2"
             style="width: 100%; text-align: right; margin-bottom: 2px;">
             <!-- 페이스북 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600');">
-                <img
-                    src="../img/face.png"
-                    title="페이스북으로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+           			<a href=""
+						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/face.png"
+						title="페이스북으로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 트위터 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); ">
-                <img
-                    src="../img/twit.png"
-                    title="트위터로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+					<!-- 트위터 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/twit.png"
+						title="트위터로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 카카오 스토리 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); "><img
-                src="../img/kakaop.jpg"
-                title="카카오스토리로 공유하기"
-                class="sharebtn_custom"
-                style="width: 32px;"></a>
-        </div>
+					<!-- 카카오 스토리 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); return false;"><img
+						src="${pageContext.request.contextPath }/resources/img/kakaop.jpg"
+						title="카카오스토리로 공유하기" class="sharebtn_custom" style="width: 32px;"></a>
+				</div>
         <!-- SNS버튼 끝 -->
         <br>
 
 <!--         이미지 슬라이드 시작 -->
-<!--         <div > -->
-<!--             <div
-<!--                 id="carouselExampleIndicators" -->
-<!--                 class="carousel slide" -->
-<!--                 data-bs-ride="carousel" -->
-<!--                 style="width: 1500px; " -->
-<!--                 > --> 
-<!--             <div -->
-<!--                 id="carouselExampleIndicators" -->
-<!--                 class="carousel slide" -->
-<!--                 data-bs-ride="carousel" -->
-<!--                 > -->
-<!--                 <div class="carousel-indicators"> -->
-<!--                     <button -->
-<!--                         type="button" -->
-<!--                         data-bs-target="#carouselExampleIndicators" -->
-<!--                         data-bs-slide-to="0" -->
-<!--                         class="active" -->
-<!--                         aria-current="true" -->
-<!--                         aria-label="Slide 1"></button> -->
-<!--                     <button -->
-<!--                         type="button" -->
-<!--                         data-bs-target="#carouselExampleIndicators" -->
-<!--                         data-bs-slide-to="1" -->
-<!--                         aria-label="Slide 2"></button> -->
-<!--                     <button -->
-<!--                         type="button" -->
-<!--                         data-bs-target="#carouselExampleIndicators" -->
-<!--                         data-bs-slide-to="2" -->
-<!--                         aria-label="Slide 3"></button> -->
-<!--                 </div> -->
-<!--                 <div class="carousel-inner"> -->
-<!--                     <div class="carousel-item active"> -->
-<!--                         <img -->
-<!--                             src="img/dog1.jpg" -->
-<!--                             class="d-block w-50  img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
-<!--                     </div> -->
-<!--                     <div class="carousel-item"> -->
-<!--                         <img -->
-<!--                             src="img/dog2.jpg" -->
-<!--                             class="d-block w-50 img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
-<!--                     </div> -->
-<!--                     <div class="carousel-item"> -->
-<!--                         <img -->
-<!--                             src="img/dog3.jpg" -->
-<!--                             class="d-block w-50 img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
-<!--                     </div> -->
-<!--                 </div> -->
+        <div >
+             <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                style="width: 1500px; "
+                > 
+            <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                >
+                <div class="carousel-indicators">
+                    <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="0"
+                        class="active"
+                        aria-current="true"
+                        aria-label="Slide 1"></button>
+                    <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button
+                        type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+<%--                 <c:forEach var="bDTO" test="items="${freeFileList }"> --%>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                            src="img/dog1.jpg"
+                            class="d-block w-50  img-responsive center-block"
+                            style=" margin: 0 auto; height: auto;"
+                            alt="...">
+                    </div>
+                   
+                </div>
+<%--                 </c:forEach> --%>
 
-<!--                 <button -->
-<!--                     class="carousel-control-prev carousel-dark" -->
-<!--                     type="button" -->
-<!--                     data-bs-target="#carouselExampleIndicators" -->
-<!--                     data-bs-slide="prev"> -->
-<!--                     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
-<!--                     <span class="visually-hidden">Previous</span> -->
-<!--                 </button> -->
-<!--                 <button -->
-<!--                     class="carousel-control-next carousel-dark" -->
-<!--                     type="button" -->
-<!--                     data-bs-target="#carouselExampleIndicators" -->
-<!--                     data-bs-slide="next"> -->
-<!--                     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
-<!--                     <span class="visually-hidden">Next</span> -->
-<!--                 </button> -->
+                <button
+                    class="carousel-control-prev carousel-dark"
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                    class="carousel-control-next carousel-dark"
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
 
-<!--             </div> -->
-<!--         </div> -->
+            </div>
+        </div>
+        </div>
         <!-- 슬라이드 쇼 끝 -->
          <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
@@ -224,26 +209,83 @@
 						
 <!-- 	</script> -->
 <%-- 		</c:if>			 --%>
-<%-- 		 <c:if test="${!empty user_id }"> --%>
-<%-- 		 <button  onclick="location.href='${pageContext.request.contextPath }/freeboard/like_free'"> --%>
-<!-- 		 <i class="bi-heart" style="font-size:3rem; color: red; cursor: pointer;"></i></button> -->
-<!--   			<p style="color: red;"><p>			 -->
-<!--     		<script> -->
-	
-<!-- //         var i = 0; -->
-<!-- //         $('i').on('click',function(){ -->
-<!-- //             if(i==0){ -->
-<!-- //                 $(this).attr('class','bi-heart-fill'); -->
-<!-- //                 i++; -->
-<!-- //             }else if(i==1){ -->
-<!-- //                 $(this).attr('class','bi-heart'); -->
-<!-- //                 i--; -->
-<!-- //             } -->
+			
+          <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
+		  <script>
+		
+           var heart = 0;  
+           jQuery(function($) {
+        	   $('#swapHeart').on('click', function() {
+        	     var $el = $(this),
+        	       textNode = this.lastChild;
+        	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
+        	     $el.toggleClass('swap');
+        	   });
+        	  
+        	 });
+           function like(){
+        	   $.ajax({
+   				url:'${pageContext.request.contextPath }/freeboard/like_check',
+   				type:'POST',
+   				data:{
+   					"user_id":(${boardDTO.user_id}+1),
+   					"free_board_num":${boardDTO.free_board_num}
+   					},
+   				success:function(data){
+   					console.log(data);
+   					data = 1;
+   					console.log(data);
+   					if(rdata==1){
+   						 $('i').attr('class','bi-heart-fill');
+                        heart = 1
+   					}else{
+   						
+   						  $('i').attr('class','bi-heart');
+                        heart = 0
+   					}
+   				}
+   			  });
+         	};
+        	like();
+           console.log(heart);
+           console.log('d2');
+           console.log(${pageContext.request.contextPath });
+           "user_id":$('#user_id').val(),
+				"free_board_num":$('#free_board_num').val()
+           
+             
+            
+           </script>
+			
 
-<!-- //         }); -->
 
-<!--     </script> -->
-<%--     </c:if> --%>
+			
+						
+						    <script>
+					
+						        $('i').on('click',function(){
+						        		
+						            if (heart==0 ){
+						            	
+						                $(this).attr('class','bi-heart-fill');
+						                heart++;
+						                
+						            }else if(heart==1){
+						                $(this).attr('class','bi-heart');
+						                heart--;
+						                //델리트
+						            }
+						
+						        });						        	
+						        
+						    </script>
+                <!-- Comment form-->
+                <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
+                <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
+                <!-- </form>-->
+                <!-- 댓글수, 조회수 아이콘 -->
+   
+     
 <!-- 		<script type="text/javascript"> -->
 <!-- // 		$(function(){ -->
 <!-- // 			// 추천버튼 클릭시(추천 추가 또는 추천 제거) -->
@@ -322,77 +364,57 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-    <section class="container mb-7 text-center">
-        <div class="card bg-light" style="margin-top: 30px">
-            <div class="card-body">
-                <!-- Comment form-->
-                <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
-                <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
-                <!-- </form>-->
-                <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>
-                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
-                <div class="in-line-kj">
+   <section class="mb-7">
+				<div class="card bg-light" style="margin-top: 30px">
+					<div class="card-body">
+						<div id="comment-count" style="margin-bottom: 5px">
+							댓글 <span id="count">4</span>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control"
+								placeholder="댓글을 입력해 주세요!" aria-label="Recipient's username"
+								aria-describedby="button-addon2">
+							<button class="btn btn-outline-secondary" type="button"
+								id="button-addon2"
+								style="background-color: white; color: #3f51b5; border-color: #3f51b5">제출</button>
+						</div>
 
-                    <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary "
-                        onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free'">등록</button>
-                </div>
-                <!-- <div class="input-group mb-3"> <input type="text" class="form-control"
-                placeholder="Recipient's username" aria-label="Recipient's username"
-                aria-describedby="button-addon2"> <button class="btn btn-outline-secondary"
-                type="button" id="button-addon2">Button</button> </div> -->
-                <div class="justify-content-center container mx-5">
-                    <div class="d-flex mb-4 ">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3">
-                            <div class="fw-bold">익명1<p style="font-size: x-small;">2022.03.30</p></div>
-                            꼭 찾으셧으면 좋겟어요 ㅠㅠ
-
-                            <div class="d-flex mt-4 ">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명2</div><p style="font-size: x-small;">2022.03.30</p>
-                                    그러게요 ㅠㅠ
-                                </div>
-                            </div>
-                            <!-- Child comment 2-->
-                            <div class="d-flex mt-4 mx-5">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명3</div><p style="font-size: x-small;">2022.03.30</p>
-                                    33
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single comment-->
-                    <div class="row-vh d-flex flex-row">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3 row">
-                            <div class="fw-bold">글작성자</div><p style="font-size: x-small;">2022.03.30</p>
-                            찾았습니다!! 감사합니다!!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+						<div class="d-flex mb-4">
+							<div class="flex-shrink-0">
+								<img class="rounded-circle"
+									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</div>
+							<div class="ms-3" id="commentList">
+						
+									<div class="fw-bold"></div>
+									<c:forEach items="${replyList}" var="commentList">
+									<p>${commentList.c_nik}</p> 
+									<p>${commentList.c_content}</p>
+									<div class="d-flex mt-4">
+										<div class="flex-shrink-0">
+											<img class="rounded-circle"
+												src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+												alt="...">
+										</div>
+										</div>
+										</c:forEach>
+							
+							</div>
+						</div>
+						<!-- Single comment-->
+						<div class="d-flex">
+							<div class="flex-shrink-0">
+								<img class="rounded-circle"
+									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</div>
+							<div class="ms-3">
+								<div class="fw-bold">${commentList.c_nik}</div>
+								찾았습니다!! 감사합니다!!
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
     
 

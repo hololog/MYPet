@@ -18,14 +18,20 @@ public class FindboardDTO {
 	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Timestamp missing_date;
 	private String pet_name;
-	private int pet_age;
+	private String pet_age;
 	private String pet_gender;
 	private String address;
 	private String address2;
+	private String address3; // 은혜 추가로 만듦 
 	private String detail_address;
 	private String result;
+	private int bookmarkCount;
+	private int result;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp insert_date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp delete_date;
 	private int reward;
+	private String upload;
   
 }

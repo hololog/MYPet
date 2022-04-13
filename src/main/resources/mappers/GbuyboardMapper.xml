@@ -31,7 +31,7 @@
 	</update>
 	
 	<update id="updateGbuy_Board">
-		update Gbuy_board set Gbuy_subject=#{Gbuy_subject}, Gbuy_content=#{Gbuy_content} where Gbuy_num=#{Gbuy_num}
+		update Gbuy_board set Gbuy_subject=#{Gbuy_subject}, Gbuy_count=#{Gbuy_count}, Gbuy_tcount=#{Gbuy_tcount}, Gbuy_price=#{Gbuy_price} where Gbuy_num=#{Gbuy_num}
 	</update>
 	
 	<delete id="deleteGbuy_Board">

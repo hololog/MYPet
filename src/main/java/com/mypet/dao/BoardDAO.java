@@ -1,8 +1,11 @@
 package com.mypet.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
 
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.PageDTO;
@@ -78,13 +81,25 @@ public interface BoardDAO {
 	public List<BoardDTO> freeListsearch(PageDTO pageDTO);
 	
 	public int getfreeBoardCountSearch(PageDTO pageDTO);
+	
+	public List<BoardDTO> noticeListsearch(PageDTO pageDTO);
+	
+	public int getnoticeBoardCountSearch(PageDTO pageDTO);
+	
+	public List<BoardDTO> reviewListsearch(PageDTO pageDTO);
+	
+	public int getreviewBoardCountSearch(PageDTO pageDTO);
 	//search end
 	
 	//likebest start
 	public List<BoardDTO> bestfree(PageDTO pageDTO);
 	
+	public List<BoardDTO> bestnotice(PageDTO pageDTO);
 	
-	
-
+	public List<BoardDTO> bestreview(PageDTO pageDTO);
    
+	
+	//likecheck
+	public BoardDTO LikeCheck(BoardDTO boardDTO);
+	
 }

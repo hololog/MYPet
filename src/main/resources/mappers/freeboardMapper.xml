@@ -6,8 +6,8 @@
 <mapper namespace="com.mypet.mappers.freeboardMapper">
 <!-- insert start -->
 	<insert id="writefreeBoard">
-		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date) values
-        ( #{free_board_num},'r', #{subject}, #{content}, #{nickname}, #{insert_date}  )
+		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date,file) values
+        ( #{free_board_num},'r', #{subject}, #{content}, #{nickname}, #{insert_date}, #{file} )
  
 	</insert>
 	
@@ -132,11 +132,44 @@
 		select count(*) from free_board where subject like #{search} 
 	</select>
 	
+	<select id="noticeListsearch" resultType="com.mypet.domain.BoardDTO">
+		select * from notice where subject like #{search} order by notice_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getnoticeBoardCountSearch"  resultType="java.lang.Integer">
+		select count(*) from notice where subject like #{search} 
+	</select>
+	
+	<select id="reviewListsearch" resultType="com.mypet.domain.BoardDTO">
+		select * from tip_board where subject like #{search} order by tip_board_num desc limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getreviewBoardCountSearch"  resultType="java.lang.Integer">
+		select count(*) from tip_board where subject like #{search} 
+	</select>
+	
 <!-- search end -->
 
 
 	<select id="bestfree" resultType="com.mypet.domain.BoardDTO">
 	 	select * from free_board order by readcount desc limit 3
 	</select>
+	
+	<select id="bestnotice" resultType="com.mypet.domain.BoardDTO">
+	 	select * from notice order by readcount desc limit 3
+	</select>
+	
+	<select id="bestreview" resultType="com.mypet.domain.BoardDTO">
+	 	select * from tip_board order by readcount desc limit 3
+	</select>
+
+
+
+<!-- 	likecheck -->
+	<select id="freeLikeCheck" resultType="com.mypet.domain.BoardDTO">
+	 	select count(*) from free_like where user_id = #{user_id} and free_board_num = #{free_board_num}
+	</select>
+		
+	
 
 </mapper>

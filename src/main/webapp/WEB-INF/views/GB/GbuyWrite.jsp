@@ -47,6 +47,7 @@ function readURL2(input) {
   }
 }
 </script>
+
 <body>
 	<div>
 	<!-- 본문 시작-->
@@ -62,41 +63,45 @@ function readURL2(input) {
             <!-- 제목 종료 -->
 <form action="${pageContext.request.contextPath }/GB/GbuyWritePro" method="post">
             <div class="container p-2" style="border: 1px solid red;">
-                <div class="row g-5">
+                <div class="container col-md-10">
+                <div class="container row col-md-12">
                     <!--파일 미리보기 img-->
-                    <!-- <hr> -->
-                   	<div class="col-sm-12 col-md-12 col-lg-6 order-lg-last p-5">
-       				 <h6 class="text-center p-3">
-        				 <img style="width: 300px;" class="preview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-      					   <input style="display: block;" type="file" name="Gbuy_file" onchange="readURL(this);">
-    				</div>
-                    <div class="col-sm-12 col-md-12 col-lg-6 p-5">
-                        <!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
-                        <div class="row">
+                    <div class=" col-md-6" id=kpo style="border: 1px solid red;">
                             <!--상품명-->
-                            <div class="col input-group mb-3">
+                            <br><br>
+                            <div class="col input-group mb-3 ">
+                           		<label class="input-group-text">상품이름</label>
                                 <input type="text" name="Gbuy_subject" class="form-control" placeholder="상풍명">
                             </div>
-                        </div>
-                        <!--상품간략설명-->
-                        <div class="input-group mb-3">
-                            <textarea rows="2" name="Gbuy_content" class="form-control" aria-label="With textarea" placeholder="상품간략소개"></textarea>
-                        </div>
                         <!--가격-->
-                        <div class="input-group mb-5">
-                            <input type="text" name="Gbuy_price" class="form-control" placeholder="가격">
+                            <div class="col input-group mb-3 ">
+                           		<label class="input-group-text">상품가격</label>
+                            <input type="text" name="Gbuy_price" class="form-control" placeholder="가격" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                             		<label class="input-group-text">원</label>
                         </div>
-                        <div class="input-group mb-5">
-                            <input type="text" name="Gbuy_tcount" class="form-control" placeholder="목표수">
+                            <div class="col input-group mb-3 ">
+                           		<label class="input-group-text">목표수량</label>
+                            <input type="text" id="b" name="Gbuy_tcount" class="form-control" placeholder="목표수" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
-                        <div class="input-group mb-5">
-                            <input type="text" name="Gbuy_count" class="form-control" placeholder="재고수">
+                            <div class="col input-group mb-3 ">
+                           		<label class="input-group-text">재고수량</label>
+                            <input type="text" id="a" name="Gbuy_count" class="form-control" placeholder="재고수" readonly="readonly">
                         </div>
-                        <!--상세설명-이미지파일--->
-                        <div>
- 							<img style="width: 900px;" class="preview2" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-   							<input style="display: block;" type="file" name="Gbuy_file2" onchange="readURL2(this);" >
-                        </div>
+                       </div>
+                    <div class="col-md-6 btn text-lg-end ">
+             			<img style="width: 300px;" class="preview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+      					<input type="file" name="Gbuy_file" onchange="readURL(this);">
+    				</div>
+<!--재고수 목표수 동시입력-->
+						<script>
+						    $("#b").keydown(function(){
+						        $('#a').val($(this).val());
+						    });
+						    $("#b").change(function(){
+						        $('#a').val($(this).val());
+						    });
+						</script>
+
                         <br>
                         <!--상품등록 결정 버튼-->
                         <p>
@@ -104,8 +109,14 @@ function readURL2(input) {
 							<input type="button" value="취소" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain'">
                         </p>
                     </div>
+                	</div>
                 </div>
-            </div>
+            
+                                    <!--상세설명-이미지파일--->
+                        <div class="col12"style="text-align: center;">
+ 							<img style="width: 1000px;" class="preview2" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+   							<input style="display: block;" type="file" name="Gbuy_file2" onchange="readURL2(this);" >
+                        </div>
 </form>
     <!-- 공동구매끝 -->
 	<!-- 본문종료 종료 -->  

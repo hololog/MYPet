@@ -6,23 +6,20 @@ import com.mypet.domain.GbuyBoardDTO;
 import com.mypet.domain.PageDTO;
 
 public interface GbuyBoardService {
-	
-	public void writeBoard(GbuyBoardDTO boardDTO);
-	
-	public List<GbuyBoardDTO> getBoardList1(PageDTO pageDTO);
-	
+
+	public void writeBoard(GbuyBoardDTO gbuyBoardDTO);
+
+	public List<GbuyBoardDTO> getBoardList(PageDTO pageDTO);
+
 	public int getBoardCount();
-	
-	public GbuyBoardDTO getBoard1(int gbuy_num);
-	
-	public void updateReadcount(int num);
-	
-	public void updateBoard1(GbuyBoardDTO boardDTO);
-	
-	public void deleteBoard(int num);
 
-	public GbuyBoardDTO getBoard(int num);
+	public void updateReadcount(int gbuy_num);
 
-	public void updateBoard(GbuyBoardDTO boardDTO);
-	
+
+	public void deleteGbuy_Board(int gbuy_num);
+
+	public GbuyBoardDTO getBoard(int gbuy_num);
+
+	public void updateGbuy_Board(GbuyBoardDTO gbuyBoardDTO);
+
 }
