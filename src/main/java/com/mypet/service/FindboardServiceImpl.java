@@ -157,7 +157,7 @@ public class FindboardServiceImpl implements FindboardService {
         
 		fileDTO.setBoard_code('f');
         fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
-        fileDTO.setFind_board_num(10000);  // 수정하기
+        fileDTO.setFind_board_num(123);  // 수정하기
         
         findboardDAO.insert_findboard_file(fileDTO);
 	}
