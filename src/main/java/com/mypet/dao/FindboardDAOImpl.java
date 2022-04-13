@@ -1,5 +1,6 @@
 package com.mypet.dao;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
@@ -38,11 +40,23 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public void insert_findboard(FindboardDTO findboardDTO) {
 		sqlSession.insert(namespace+".insert_findboard", findboardDTO);
 	}
+	
+	@Override
+	public void insert_findboard_file(FileDTO fileDTO) {
+		sqlSession.insert(namespace+".insert_findboard_file", fileDTO);
+	}
 
+	
 	@Override
 	public Integer getMaxNum() {
 		return sqlSession.selectOne(namespace+".getMaxNum");
 	}
+	
+	@Override
+	public Integer getFileMaxNum() {
+		return sqlSession.selectOne(namespace+".getFileMaxNum");
+	}
+	
 	
 	@Override
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO) {
@@ -87,11 +101,13 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public List<String> getTownList(AddressDTO addressDTO) {
 		return sqlSession.selectList(namespace+ ".getTownList", addressDTO);
 	}
-	//은혜 파일업로드
+
 	@Override
-	public void insert_findboard_file(FileDTO fileDTO) {
-		sqlSession.insert(namespace+".insertFindboardFile", fileDTO);
+	public List<FindboardDTO> getfindBoardListMain() {
+		return sqlSession.selectList(namespace + ".getfindBoardListMain");
 	}	
+
+	
 	
 	
 	

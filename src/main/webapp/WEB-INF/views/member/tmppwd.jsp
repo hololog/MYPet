@@ -13,15 +13,17 @@
     <title>tmppwd</title>
     <!-- css스타일 적용 -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modal.css" />
-    <link rel="stylesheet" href=".${pageContext.request.contextPath }/resources/css/main.css"  />
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css"  />
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/modals/">
 
         <!-- Bootstrap core CSS -->
-<link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet"  />
+<!-- Custom styles for this template -->
+<link href="${pageContext.request.contextPath }/resources/css/modals.css"  />
 
-		<!-- Custom styles for this template -->
-<link href="../project-data/bootstrap-5.1.3-examples/modals/modals.css" rel="stylesheet">
   </head>
   
   <body>
@@ -59,7 +61,7 @@
               </div>
         
 
-    <script src="../project-data/bootstrap-5.1.3-examples/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/../resources/script/bootstrap.bundle.min.js"></script>
   </body>
   
 </html>

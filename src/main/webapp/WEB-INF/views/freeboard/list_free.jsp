@@ -122,7 +122,7 @@
                   </div>
                   </form>
                  <!-- 아이디 없을때 -->
-                  <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+                  <c:if test="${empty sessionScope.nickname  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
                   	<script>
 
@@ -139,7 +139,7 @@
                   
                   
                   <!-- 아이디 있을때 -->
-                  <c:if test="${!empty user_id }">
+                  <c:if test="${!empty sessionScope.nickname }">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/freeboard/write_free'">글쓰기</button> </div>

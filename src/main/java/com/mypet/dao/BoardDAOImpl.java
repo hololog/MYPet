@@ -1,6 +1,7 @@
 package com.mypet.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -213,8 +214,8 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	
-
-   
+	
+	
 	
 
 	

@@ -1,6 +1,7 @@
 package com.mypet.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -100,4 +101,5 @@ public interface BoardDAO {
 	
 	//likecheck
 	public BoardDTO LikeCheck(BoardDTO boardDTO);
+	
 }
