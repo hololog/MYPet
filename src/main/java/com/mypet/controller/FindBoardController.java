@@ -67,7 +67,7 @@ public class FindBoardController {
 	
 	// 은혜 - 다중파일업로드
 	@RequestMapping(value = "/findboard/write_findPro")
-    public String requestupload2(MultipartHttpServletRequest mtfRequest) {
+    public String requestupload2(HttpServletRequest mtfRequest) {
 		//FindboardDTO 값 들고오기 
 		FindboardDTO fbDTO = new FindboardDTO();
 		
@@ -90,7 +90,12 @@ public class FindBoardController {
 		fbDTO.setReward(Integer.parseInt(mtfRequest.getParameter("reward")));
 		fbDTO.setTitle(""); // 없애기
 		
+	       return "redirect:/findboard/list";
+		}
 		
+		// 은혜 - 다중파일업로드 -ajax
+		@RequestMapping(value = "/findboard/write_find_filePro")
+	    public String requestupload2(MultipartHttpServletRequest mtfRequest) {
 		// 파일들고오기 
 		FileDTO fileDTO = new FileDTO();
 
@@ -111,7 +116,7 @@ public class FindBoardController {
             fileDTO.setSave_filename(originFileName); // safefile넣기
             fileDTO.setUpload(uploadPath);
             
-            findboardService.insert_findboard(fbDTO, fileDTO);
+            findboardService.insert_findboard_file(fileDTO);
 
             try {
                 mf.transferTo(new File(safeFile));

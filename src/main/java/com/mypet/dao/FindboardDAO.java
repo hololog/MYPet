@@ -20,8 +20,6 @@ public interface FindboardDAO {
 	
 	public void insert_findboard(FindboardDTO findboardDTO);
 
-	public void insert_findboard_files(FileDTO fileDTO);
-	
 	public Integer getMaxNum();
 	
 	public Integer getFileMaxNum();

@@ -100,17 +100,7 @@ public class FindboardServiceImpl implements FindboardService {
 		findboardDTO.setResult(0); // 미해결
 		
 		findboardDAO.insert_findboard(findboardDTO);
-		
-		//fileDTO
-		if(findboardDAO.getFileMaxNum() != null) 
-			fileDTO.setFile_num(findboardDAO.getFileMaxNum()+1);
-		else fileDTO.setFile_num(1);  
-        
-		fileDTO.setBoard_code('f');
-        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
-        fileDTO.setFind_board_num(findboardDTO.getFind_board_num()); 
-        
-        findboardDAO.insert_findboard_files(fileDTO);
+	
 
 	}
 		
@@ -164,7 +154,16 @@ public class FindboardServiceImpl implements FindboardService {
 
 	@Override
 	public void insert_findboard_file(FileDTO fileDTO) {
-		findboardDAO.insert_findboard_file(fileDTO);
+		//fileDTO
+		if(findboardDAO.getFileMaxNum() != null) 
+			fileDTO.setFile_num(findboardDAO.getFileMaxNum()+1);
+		else fileDTO.setFile_num(1);  
+        
+		fileDTO.setBoard_code('f');
+        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
+        fileDTO.setFind_board_num(10000);  // 수정하기
+        
+        findboardDAO.insert_findboard_file(fileDTO);
 	}
 
 	@Override

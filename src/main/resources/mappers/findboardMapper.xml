@@ -17,10 +17,11 @@
 	</insert>
 	
 	<!-- 은혜 실종공고 글쓰기 파일첨부 -->
-	<insert id="insert_findboard_files">
+	<insert id="insert_findboard_file">
 		insert into find_board_file(file_num, find_board_num, board_code, upload, filename, save_filename, file_upload_date, ext)
 		values (#{file_num},#{find_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{ext})
 	</insert>
+	
 
 	<!-- 은혜 실종공고 글쓰기 maxnum -->
 	<select id="getMaxNum" resultType="java.lang.Integer">
@@ -74,11 +75,7 @@
 	<select id="getTownList" resultType="com.mypet.domain.AddressDTO">
 		select distinct address3 from address where address1=#{address1} and address2=#{address2}
 	</select>
-	<!-- 은혜 실종공고 글쓰기 파일첨부 -->
-	<insert id="insertFindboardFile">
-		insert into find_board_file(file_num, find_board_num, board_code, upload, filename, save_filename, file_upload_date, ext)
-		values (#{file_num},#{find_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{ext})
-	</insert>
+
 	
 	<select id="getfindBoardListMain" resultType="com.mypet.domain.FindboardDTO">
 		select * from find_board order by insert_date desc limit 8

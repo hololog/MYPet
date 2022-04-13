@@ -28,9 +28,9 @@ public class BookmarkController {
 		bookmarkDTO.setFindboardNum(findboardNum);
 		bookmarkDTO.setEmail((String)session.getAttribute("email"));
 		
-		BookmarkService.updateBookmark(bookmarkDTO);
+//		BookmarkService.updateBookmark(bookmarkDTO);
 		
-		BoardDTO boardDTO = 
-		return ;
+//		BoardDTO boardDTO = 
+		return bookmarkDTO;
 	}
 } 
