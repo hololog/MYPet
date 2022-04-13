@@ -234,7 +234,7 @@
                 
                 function sendFileToServer(formData,status)
                 {
-                    var uploadURL = "/fileUpload/post"; //Upload URL
+                    var uploadURL = '${pageContext.request.contextPath }/findboard/write_find_filePro'; //Upload URL
                     var extraData ={}; //Extra Data.
                     var jqXHR=$.ajax({
                             xhr: function() {

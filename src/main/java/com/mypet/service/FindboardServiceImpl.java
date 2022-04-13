@@ -111,25 +111,11 @@ public class FindboardServiceImpl implements FindboardService {
 			findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
 		else findboardDTO.setFind_board_num(1);
 		//readcount, insertdate, boardnum 설정
-//		findboardDTO.setReadcount(0);
-//		findboardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
-//		findboardDTO.setResult(0); // 미해결
-//		
-//		findboardDAO.insert_findboard(findboardDTO);
-//	
-//	public void write_findfile(FileDTO fileDTO) {
-//		
-//		fileDTO.setReadcount(0);
-//		fileDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
-//		
-//		if(findboardDAO.getfreeMaxNum()!=null) {
-//			fileDTO.setFree_board_num(findboardDAO.getfreeMaxNum()+1);	      
-//			 }else {
-//				 fileDTO.setfind_board_num(1);
-//	      }
-//		fileDTO.write_filefile(fileDTO);
-//	}
-	
+		findboardDTO.setReadcount(0);
+		findboardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
+		findboardDTO.setResult(0); // 미해결
+		
+		findboardDAO.insert_findboard(findboardDTO);
 
 	}
 	    
@@ -157,7 +143,7 @@ public class FindboardServiceImpl implements FindboardService {
         
 		fileDTO.setBoard_code('f');
         fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
-        fileDTO.setFind_board_num(123);  // 수정하기
+//        fileDTO.setFind_board_num(123);  // 수정하기
         
         findboardDAO.insert_findboard_file(fileDTO);
 	}
