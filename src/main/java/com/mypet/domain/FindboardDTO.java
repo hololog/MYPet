@@ -22,6 +22,7 @@ public class FindboardDTO {
 	private String pet_gender;
 	private String address;
 	private String address2;
+	private String address3;
 	private String detail_address;
 	private String result;
 	private int bookmarkCount;
