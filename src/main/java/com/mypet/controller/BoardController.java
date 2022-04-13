@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.FindcommentDTO;
 
@@ -52,6 +53,7 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 
 		List<FindboardDTO> findboardList = findboardService.getfindBoardList(pageDTO);
+		List<FileDTO> fileList = findboardService.getfindFileList(pageDTO);
 
 		int count = findboardService.getfindBoardCount();
 
@@ -71,11 +73,14 @@ public class BoardController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("findboardList", findboardList);
+		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
 		FindboardDTO findboardDTO = findboardService.getfindBoard(1);
 		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
 		model.addAttribute("replyList", replyList);
+		
+		
 		
 		return "findboard/list";
 	}

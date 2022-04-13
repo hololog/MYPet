@@ -50,6 +50,11 @@ public class FindboardDAOImpl implements FindboardDAO {
 }
 	
 	@Override
+	public List<FileDTO> getfindFileList(PageDTO pageDTO){
+		return sqlSession.selectList(namespace+".getfindFileList", pageDTO);
+	}
+	
+	@Override
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace+".getfindMissBoardList", pageDTO);
 }
@@ -62,6 +67,11 @@ public class FindboardDAOImpl implements FindboardDAO {
 	@Override
 	public int getfindMissBoardCount() {
 		return sqlSession.selectOne(namespace+".getfindMissBoardCount");
+	}
+	
+	@Override
+	public void updatefindboard(FindboardDTO findboardDTO) {
+		sqlSession.update(namespace+".updatefindboard", findboardDTO);
 	}
 	
 	//은혜 지역검색

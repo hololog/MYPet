@@ -22,6 +22,8 @@ public interface FindboardService {
 
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
+	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
 	public void insert_findboard(FindboardDTO findboardDTO);
@@ -33,5 +35,7 @@ public interface FindboardService {
 	public List<String> getTownList(AddressDTO addressDTO);
 
 	public void insert_findboard_file(FileDTO fileDTO);
+	
+	public void updatefindboard(FindboardDTO findboardDTO);
 	
 }
