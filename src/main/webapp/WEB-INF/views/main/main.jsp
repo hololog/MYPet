@@ -31,24 +31,29 @@ $(document).ready(function(){
 			}
 		});
 	}//스크롤 로그인 모달
-	
-	$('bookmark').
-	
-	$('bookmark-click').click(function(){
-		//빈별표 일때
-		if($(this).children('i').attr('class') == 'fa-solid fa-star fa-2x'){
-			$.ajax({
-				url:"${pageContext.request.contextPath }/findboard/bookmark",
-				data:{"findboardNum" : $('#fbnum-ksk').val()},{"email":${sesseionScope.email}},
-				success:function(){
-					$('.star-ksk').html();
-				}	
-			});
-			$(this).html();
-			
-		}
-	});
 });
+	
+	//북마크정보 가져오기 
+
+	
+	
+	//북마트 클릭이벤트
+// 	$('bookmark-click').click(function(){
+// 		//빈별표 일때
+// 		if($(this).children('i').attr('class') == 'fa-solid fa-star fa-2x'){
+// 			$.ajax({
+// 				url:"${pageContext.request.contextPath }/findboard/bookmark",
+// 				data:{"findboardNum" : $('.fbnum-ksk').val()},{"email":${sesseionScope.email}},
+// 				success:function(){
+// 					$('.star-ksk').html();
+// 				}	
+// // 				error:
+// 			});
+// 			$(this).html();
+			
+// 		}
+// 	});
+
 
 // $("#displayList").hide();
 // // 검색어의 길이가 바뀔 때마다 호출
@@ -208,27 +213,26 @@ $(document).ready(function(){
          <!-- 메인에 실종공고 8개  -->
          <c:forEach var="flist" items="${findboardListMain }">
           <div class="col">
-          	<input type="hidden" value="${flist.find_board_num }" id="fbnum-ksk">
+<%--           	<input type="hidden" value="${flist.find_board_num }" class="fbnum-ksk"> --%>
             <div class="card">
-              <a href="${pageContext.request.contextPath }/" target="">
+              <a href="${pageContext.request.contextPath }/findboard/list">
               	<img src="${pageContext.request.contextPath }/resources/img/${flist.upload}" class="card-img-top" alt="실종동물사진" />
               </a>
-              <c:choose>
-              	<c:when test="${!empty sesseionScope.email }">
+              <c:if test="${!empty sesseionScope.email }">
+	              <c:choose>
+	              	<c:when test="${flist.book ne null }">
+	              		<button type="button" class="bookmark-click">
+		              		<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
+		             	</button>
+	              	</c:when>
+	              	<c:otherwise>
+	              		<button type="button" class="bookmark-click">
+		              		<i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+		             	</button>
+	              	</c:otherwise>
+	              </c:choose>
               	
-              	
-              		
-              		
-              		<button type="button" class="bookmark-click">
-	              		<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
-	             	</button>
-              	</c:when>
-              	<c:otherwise>
-              		<a href="#" class="bookmark-click">
-	              		<i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-	             	</a>
-              	</c:otherwise>
-              </c:choose>
+              </c:if>
               <div class="card-body">
                 <h5 class="card-title">
                 	<c:choose>
