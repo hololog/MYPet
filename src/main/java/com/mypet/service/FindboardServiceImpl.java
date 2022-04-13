@@ -109,10 +109,10 @@ public class FindboardServiceImpl implements FindboardService {
 		findboardDAO.updatefindboard(findboardDTO);
 	}
 	
-	@Override
-	public void insert_findboard(FindboardDTO findboardDTO) {
+//	public void insert_findboard(FindboardDTO findboardDTO) {
 		//find_board_num 구하기; 
 		//readcount, insertdate 설정
+	@Override
 	public void insert_findboard(FindboardDTO findboardDTO, FileDTO fileDTO) {
 		
 		//findboardDTO
