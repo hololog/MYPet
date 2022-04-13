@@ -17,10 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/main.js"></script>
-    <script
-            type="text/javascript"
-            charset="utf-8"
-            src="https://checkout.naver.com/button/info?callback=nhn.CheckoutButton.jsonp.callback&amp;buttonKey=71B3292E-36AF-4218-8187-4942CE799E4A&amp;buttonTypeCode=A_1_2_Y&amp;site_preference=normal"></script>
+    
     <link
             type="text/css"
             rel="stylesheet"
@@ -35,7 +32,7 @@
 	<!-- jQuery -->
   	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
  	 <!-- iamport.payment.js -->
-  	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>	
+  	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>	
   	
   	
   	
@@ -97,7 +94,42 @@
     }
 	</script>
 	
+	<!-- 결제 준비하기 IMP 객체 초기화 -->
+	<script type="text/javascript">
+    var IMP = window.IMP; // 생략 가능
+    IMP.init("imp82814328"); // 예: imp00000000
+
+    
+    function requestPay() {
+     // IMP.request_pay(param, callback) //결제창 호출
+      IMP.request_pay({ // param
+          pg: "html5_inicis",
+          pay_method: "card",
+          merchant_uid: "ORD20180131-0000011",
+          name: "노르웨이 회전 의자",
+          amount: 64900,
+          buyer_email: "gildong@gmail.com",
+          buyer_name: "홍길동",
+          buyer_tel: "010-4242-4242",
+          buyer_addr: "서울특별시 강남구 신사동",
+          buyer_postcode: "01181"
+    
+
+
+      }, function (rsp) { // callback
+          if (rsp.success) {
+             
+              // 결제 성공 시 로직,
+             
+          } else {
+             
+              // 결제 실패 시 로직,
+              
+          }
+      });
+    }
 	
+  </script>
 	
 	
 	
@@ -187,36 +219,7 @@
                 </div>
             </div>
             <br>
-       		<div class="container">
-                <div class="xans-element- xans-product xans-product-action" style="text-align: center;">
-                    <!-- //네이버 체크아웃 구매 버튼 -->
-                    <div id="appPaymentButtonBox">
-                        <div id="kakao-checkout-button">
-                            <div
-                                id="checkoutContainer"
-                                data-id="6634f6d4-98b4-4641-a753-319e2b7578cb"
-                                class="__checkout_buy_container __checkout_sdk_container   ">
-                                <div class="__checkout_buy_contents">
-
-                                    <span class="__checkout_img_comm __checkout_buy_title">
-                                        구매와 관리를<br>톡으로 간편하게
-                                    </span>
-
-                                    <button type="button" class="__checkout_btn_buy ">
-                                        <span class="__checkout_img_comm __checkout_img_buy">
-                                            카카오페이 구매
-                                        </span>
-                                    </button>
-
-                                    <button type="button" class="__checkout_btn_wish ">
-                                        <span class="__checkout_img_comm __checkout_img_wish">찜</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       	
 
 
 
@@ -224,42 +227,6 @@
 
 
 
-
-
-
-	<!-- 결제 준비하기 IMP 객체 초기화 -->
-	<script type="text/javascript">
-    var IMP = window.IMP; // 생략 가능
-    IMP.init("imp82814328"); // 예: imp00000000
-
-    
-    function requestPay() {
-     // IMP.request_pay(param, callback) //결제창 호출
-      IMP.request_pay({ // param
-          pg: "html5_inicis",
-          pay_method: "card",
-          merchant_uid: "ORD20180131-0000011",
-          name: "노르웨이 회전 의자",
-          amount: 64900,
-          buyer_email: "gildong@gmail.com",
-          buyer_name: "홍길동",
-          buyer_tel: "010-4242-4242",
-          buyer_addr: "서울특별시 강남구 신사동",
-          buyer_postcode: "01181"
-      }, function (rsp) { // callback
-          if (rsp.success) {
-             
-              // 결제 성공 시 로직,
-             
-          } else {
-             
-              // 결제 실패 시 로직,
-              
-          }
-      });
-    }
-	
-  </script>
 	
 	
 

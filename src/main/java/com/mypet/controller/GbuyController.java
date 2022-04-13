@@ -51,7 +51,7 @@ public class GbuyController {
 		//select count(*) from board
 		// int count=bDAO.getBoardCount();
 		int count=boardService.getBoardCount();
-		
+
 		int currentPage=Integer.parseInt(pageNum);
 		int pageBlock=5;
 		int startPage=(currentPage-1)/pageBlock*pageBlock+1;
@@ -60,17 +60,17 @@ public class GbuyController {
 		if(endPage > pageCount){
 			endPage = pageCount;
 		}
-		
+
 		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		
+
 		// 디비에서 가져온 글을 model 담아서 notice.jsp 전달
 		model.addAttribute("GbuyboardList", GbuyboardList);
 		model.addAttribute("pageDTO", pageDTO);
-		
+
 		// /WEB-INF/views/center/notice.jsp 이동(주소줄에 주소가 안바뀌면서 이동)
 		return "GB/GbuyMain";
 	}
@@ -78,15 +78,14 @@ public class GbuyController {
 		@RequestMapping(value = "/pay/product_details", method = RequestMethod.GET)
 		public String product_details(HttpServletRequest request, Model model) {
 			System.out.println("BoardController product_details() ");
+			System.out.println("BoardController product_details(3) ");
 			int gbuy_num=Integer.parseInt(request.getParameter("gbuy_num"));
-			// num에 대한 글 가져오기
-			
-			GbuyBoardDTO boardDTO=boardService.getBoard(gbuy_num);		
-			// 디비에서 가져온 글을 model 담아서 content.jsp 전달
 			System.out.println("BoardController product_details(2) ");
+			// num에 대한 글 가져오기
+			GbuyBoardDTO boardDTO=boardService.getBoard1(gbuy_num);
+			// 디비에서 가져온 글을 model 담아서 content.jsp 전달
 			model.addAttribute("boardDTO", boardDTO);
 			// /WEB-INF/views/center/content.jsp 이동(주소줄에 주소가 안바뀌면서 이동)
-			System.out.println("BoardController product_details(3) ");
 			return "pay/product_details";
 		}
 		// 가상주소 GB/GbuyUpdate?num=1
@@ -99,7 +98,7 @@ public class GbuyController {
 			GbuyBoardDTO boardDTO=boardService.getBoard(gbuy_num);
 			// 디비에서 가져온 글을 model 담아서 update.jsp 전달
 			model.addAttribute("boardDTO", boardDTO);
-			
+
 			// /WEB-INF/views/center/update.jsp 이동(주소줄에 주소가 안바뀌면서 이동)
 			return "GB/GbuyUpdate";
 		}
@@ -108,7 +107,7 @@ public class GbuyController {
 		@RequestMapping(value = "/GB/GbuyUpdatePro", method = RequestMethod.GET)
 		public String updatePro(GbuyBoardDTO BoardDTO) {
 			System.out.println("BoardController updatePro() ");
-			System.out.println(BoardDTO.getGbuy_num()); 
+			System.out.println(BoardDTO.getGbuy_num());
 			//디비작업
 			// 객체생성
 //			BoardService boardService=new BoardServiceImpl();
@@ -131,10 +130,10 @@ public class GbuyController {
 			boardService.deleteGbuy_Board(gbuy_num);
 			// 가상주소 로그인주소 이동 /board/list (주소줄에 주소가 바뀌면서 이동)
 			// 	response.sendRedirect("/board/list");
-			
+
 			return "redirect:/GB/GbuyMain";
 		}
 
 
-	
+
 }

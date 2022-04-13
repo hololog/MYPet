@@ -1,21 +1,33 @@
 package com.mypet.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.FindcommentDTO;
@@ -25,6 +37,7 @@ import com.mypet.domain.PageDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
 import com.mypet.service.FindcommentService;
+import com.mypet.service.MemberService;
 
 @Controller
 public class BoardController {
@@ -33,10 +46,16 @@ public class BoardController {
 	public  BoardService boardService;
 	
 	@Inject
+	private MemberService memberService;
+	
+	@Inject
 	public FindboardService findboardService;
 	
 	@Inject
 	public FindcommentService findcommentService;
+	
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 	
 	@RequestMapping(value = "/findboard/list", method = RequestMethod.GET)
 	public String findboard(HttpServletRequest request, Model model) throws Exception {
@@ -301,8 +320,8 @@ public class BoardController {
 	}
 	//세히
 	@RequestMapping(value = "/freeboard/write_freePro", method = RequestMethod.POST)
-	public String writeFreePro(BoardDTO boardDTO) {
-			
+	public String writeFreePro(BoardDTO boardDTO)throws Exception {
+
 		boardService.write_freeBoard(boardDTO);
 			
 		return "redirect:/freeboard/list_free";
@@ -586,10 +605,12 @@ public class BoardController {
 			return "reviewboard/search_review";
 		}
 		//세히
-		@RequestMapping(value = "/freeboard/like_check", method = RequestMethod.GET)
+		@RequestMapping(value = "/freeboard/like_check", method = RequestMethod.POST)
 		public String free_like(HttpServletRequest request,Model model) {
-			int free_board_num=Integer.parseInt(request.getParameter("free_board_num"));
-			int user_id=Integer.parseInt(request.getParameter("user_id"));
+			int free_board_num=Integer.parseInt(request.getParameter("free_board_num").trim());
+			System.out.println("aaaa");
+			System.out.println(free_board_num);
+			int user_id=Integer.parseInt(request.getParameter("user_id").trim());
 		    BoardDTO boardDTO= new BoardDTO();
 			boardDTO.setFree_board_num(free_board_num);
 			boardDTO.setUser_id(user_id);
@@ -598,6 +619,53 @@ public class BoardController {
 			
 			boardService.LikeCheck(boardDTO);
 			
-			return "freeboard/like_check";
+			return "redirect:freeboard/like_check";
 		}
-};
+		
+		@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
+		@ResponseBody
+		public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+			JsonObject jsonObject = new JsonObject();
+			
+	       
+			
+			// 내부경로로 저장
+			String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+			String fileRoot = contextRoot+"resources/fileupload/";
+			
+			String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+			String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+			String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+			
+			File targetFile = new File(fileRoot + savedFileName);	
+			try {
+				InputStream fileStream = multipartFile.getInputStream();
+				FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+				jsonObject.addProperty("url", "/views/freeboard/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+				jsonObject.addProperty("responseCode", "success");
+					
+			} catch (IOException e) {
+				FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+				jsonObject.addProperty("responseCode", "error");
+				e.printStackTrace();
+			}
+			String a = jsonObject.toString();
+			return a;
+		}
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+

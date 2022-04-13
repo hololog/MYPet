@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.mypet.mappers.findboardMapper">
+
 	<!-- 은혜 실종공고 글쓰기 insert -->
 	<insert id="insert_findboard">
 		insert into find_board(find_board_num, board_code, nickname, title, content, readcount, pet_type,
@@ -14,10 +15,24 @@
 				#{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},
 				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward})
 	</insert>
+	
+	<!-- 은혜 실종공고 글쓰기 파일첨부 -->
+	<insert id="insert_findboard_file">
+		insert into find_board_file(file_num, find_board_num, board_code, upload, filename, save_filename, file_upload_date, ext)
+		values (#{file_num},#{find_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{ext})
+	</insert>
+	
+
 	<!-- 은혜 실종공고 글쓰기 maxnum -->
 	<select id="getMaxNum" resultType="java.lang.Integer">
 		select max(find_board_num) from find_board 
 	</select>
+
+	<!-- 은혜 실종공고 파일 maxnum -->
+	<select id="getFileMaxNum" resultType="java.lang.Integer">
+		select max(file_num) from find_board_file 
+	</select>
+
 	
 	<select id="getfindBoard" resultType="com.mypet.domain.FindboardDTO">
 		select * from find_board where find_board_num=#{find_board_num}
@@ -29,7 +44,6 @@
 		where find_board_num = #{find_board_num}
 	</select>
 	
-
 	<!-- 게시글 가져오기(모달용) -->
 	<select id="bringfindBoard" resultType="com.mypet.domain.FindboardDTO">
 		SELECT * FROM find_board
@@ -61,11 +75,10 @@
 	<select id="getTownList" resultType="com.mypet.domain.AddressDTO">
 		select distinct address3 from address where address1=#{address1} and address2=#{address2}
 	</select>
-	<!-- 은혜 실종공고 글쓰기 파일첨부 -->
-	<insert id="insertFindboardFile">
-		insert into find_board_file(file_num, find_board_num, board_code, upload, filename, save_filename, file_upload_date, ext)
-		values (#{file_num},#{find_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{ext})
-	</insert>
 
+	
+	<select id="getfindBoardListMain" resultType="com.mypet.domain.FindboardDTO">
+		select * from find_board order by insert_date desc limit 8
+	</select>
 
 </mapper>

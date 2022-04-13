@@ -88,7 +88,7 @@ public interface BoardService {
 		public List<BoardDTO> bestreview(PageDTO pageDTO);
 	//like start	
 		public BoardDTO LikeCheck(BoardDTO boardDTO);
-
-
+		
+		
 		
 }
