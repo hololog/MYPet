@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.JsonObject;
 import com.mypet.domain.BoardDTO;
@@ -376,11 +377,14 @@ public class BoardController {
 	public String freeContent(HttpServletRequest request, Model model) {
 		
 		int num=Integer.parseInt(request.getParameter("free_board_num"));
+		
 		boardService.updatefreeReadcount(num);
 		
 		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		FileDTO fileDTO=new FileDTO();
 		
 		model.addAttribute("boardDTO", boardDTO);
+		model.addAttribute("fileDTO", fileDTO);
 		
 		return "freeboard/content_free";
 	}
@@ -627,36 +631,42 @@ public class BoardController {
 			return "redirect:freeboard/like_check";
 		}
 		
-		@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
-		@ResponseBody
-		public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
-			JsonObject jsonObject = new JsonObject();
-			
-	       
-			
-			// 내부경로로 저장
-			String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-			String fileRoot = contextRoot+"resources/fileupload/";
-			
-			String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-			String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-			String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-			
-			File targetFile = new File(fileRoot + savedFileName);	
-			try {
-				InputStream fileStream = multipartFile.getInputStream();
-				FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-				jsonObject.addProperty("url", "/views/freeboard/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
-				jsonObject.addProperty("responseCode", "success");
-					
-			} catch (IOException e) {
-				FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-				jsonObject.addProperty("responseCode", "error");
-				e.printStackTrace();
-			}
-			String a = jsonObject.toString();
-			return a;
-		}
+		@RequestMapping(value = "/freedboard/write_free_filePro")
+	    public String freeFilepro(MultipartHttpServletRequest mtfRequest) {
+		// 파일들고오기 
+		FileDTO fileDTO = new FileDTO();
+
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+
+        for (MultipartFile mf : fileList) {
+            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+            long fileSize = mf.getSize(); // 파일 사이즈
+
+            System.out.println("originFileName : " + originFileName);
+            System.out.println("fileSize : " + fileSize);
+            
+            UUID uid = UUID.randomUUID();
+            String safeFile = uid.toString() +"_"+ originFileName;
+
+            fileDTO.setExt(originFileName.substring(originFileName.lastIndexOf(".")));
+            fileDTO.setFilename(originFileName);
+            fileDTO.setSave_filename(originFileName); // safefile넣기
+            fileDTO.setUpload(uploadPath);
+            
+            boardService.insert_freeboard_file(fileDTO);
+
+            try {
+                mf.transferTo(new File(safeFile));
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "redirect:/freedboard/list_free";
+    }
+
 		 
 		 
 		 

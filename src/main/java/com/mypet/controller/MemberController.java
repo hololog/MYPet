@@ -52,7 +52,7 @@ public class MemberController {
 	}
 	
 	//로그인
-	@RequestMapping(value = "/member/login", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/member/loginPro", method = {RequestMethod.POST, RequestMethod.GET})
 	public String login() {
 		return "member/login";
 	}

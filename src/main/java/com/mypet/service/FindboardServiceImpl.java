@@ -105,16 +105,8 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 	
 	@Override
-	public void updatefindboard(FindboardDTO findboardDTO) {
-		findboardDAO.updatefindboard(findboardDTO);
-	}
-	
-	@Override
-		//find_board_num 구하기; 
-		//readcount, insertdate 설정
-	public void insert_findboard(FindboardDTO findboardDTO, FileDTO fileDTO) {
+	public void insert_findboard(FindboardDTO findboardDTO) {
 		
-		//findboardDTO
 		if(findboardDAO.getMaxNum() != null) 
 			findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
 		else findboardDTO.setFind_board_num(1);
@@ -140,39 +132,6 @@ public class FindboardServiceImpl implements FindboardService {
 	
 
 	}
-		
-	
-		//드래그드롭 파일업로드
-//    public boolean uploadFile(MultipartFile[] uploadFiles) throws IOException {
-//	        
-//	        Map<String,Object>fileMap=new HashMap<String,Object>();
-//	        try {
-//	        for(MultipartFile multipartFile : uploadFiles) {
-//	                UUID uid = UUID.randomUUID(); // 랜덤문자 만들기
-//	            	String fileName= uid +"_"+multipartFile.getOriginalFilename(); // 랜덤문자_파일이름
-//	                File tmp=new File(uploadPath+fileName); // 파일복사 -> upload폴더 파일이름
-//	                FileCopyUtils.copy(multipartFile.getBytes(), tmp);
-//	                
-//	             // map 에 dto 정보담기
-//	                fileMap.put("file_num", 1);
-//	                fileMap.put("file_name", fileName);  
-//	                fileMap.put("upload", uploadPath);
-//	                fileMap.put("save_filename", multipartFile.getOriginalFilename());
-//	                fileMap.put("file_upload_date", new Timestamp(System.currentTimeMillis()));
-//	                fileMap.put("ext", multipartFile.getOriginalFilename().split(".")[1]);
-//	                System.out.println("fileMap 저장성공? :"+fileMap);
-////	                multipartFile.transferTo(tmp);
-//	                
-//	            }
-//	                findboardDAO.insert_findboard_file(fileMap);
-//
-//	        } catch(Exception e){
-//            	e.printStackTrace();
-//            	return false;
-//            	}
-//	        return true;
-//	    }
-    
 	    
 	@Override
 	public List<String> getProvinceList() {
