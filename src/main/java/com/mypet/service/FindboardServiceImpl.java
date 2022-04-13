@@ -97,7 +97,7 @@ public class FindboardServiceImpl implements FindboardService {
 		//readcount, insertdate, boardnum 설정
 		findboardDTO.setReadcount(0);
 		findboardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
-		findboardDTO.setResult("N");
+		findboardDTO.setResult(0); // 미해결
 		
 		findboardDAO.insert_findboard(findboardDTO);
 		

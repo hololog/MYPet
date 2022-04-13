@@ -239,7 +239,6 @@
                              <!-- 기본 multiple file 전달 -->
                              <div class="uploadDiv">
                              	<input multiple="multiple" type="file" name="file" />
-                             	<input type="text" name="src" />
                              </div>
 
                             <!--submit 버튼-->

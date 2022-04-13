@@ -108,20 +108,11 @@ public class FindBoardController {
 
             fileDTO.setExt(originFileName.substring(originFileName.lastIndexOf(".")));
             fileDTO.setFilename(originFileName);
-            fileDTO.setSave_filename(safeFile);
+            fileDTO.setSave_filename(originFileName); // safefile넣기
             fileDTO.setUpload(uploadPath);
             
             findboardService.insert_findboard(fbDTO, fileDTO);
 
-            System.out.println(fileDTO.getBoard_code());
-            System.out.println(fileDTO.getExt());
-            System.out.println(fileDTO.getFile_num());
-            System.out.println(fileDTO.getFilename());
-            System.out.println(fileDTO.getFind_board_num());
-            System.out.println(fileDTO.getSave_filename());
-            System.out.println(fileDTO.getUpload());
-            System.out.println(fileDTO.getFile_upload_date());
-            
             try {
                 mf.transferTo(new File(safeFile));
             } catch (IllegalStateException e) {
