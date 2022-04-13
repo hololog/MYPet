@@ -22,9 +22,10 @@ public class FindboardDTO {
 	private String pet_gender;
 	private String address;
 	private String address2;
+	private String address3; // 은혜 추가로 만듦 
 	private String detail_address;
-	private String result;
 	private int bookmarkCount;
+	private int result;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp insert_date;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

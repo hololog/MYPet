@@ -34,8 +34,8 @@ public class MemberController {
 		return "main/main";
 	}
 	
-	//로그인
-	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
+	//회원가입
+	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
 	public String loginPro(MemberDTO memberDTO, HttpSession session) {
 		
 		MemberDTO memberCheckDTO = memberService.memberCheck(memberDTO);
@@ -45,13 +45,21 @@ public class MemberController {
 			session.setAttribute("nickname", memberCheckDTO.getNickname());
 //			return "redirect:/main";
 			return "member/loginMsg";
+			
 		} else {
+			
 			return "member/msg";
 		}
 	}
 	
-	//회원가입
-	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
+	//로그인
+	@RequestMapping(value = "/member/login", method = {RequestMethod.POST, RequestMethod.GET})
+	public String login() {
+		return "member/login";
+	}
+	
+	//로그인
+	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
 	public String insertMemberPro(MemberDTO memberDTO) {
 		memberService.insertMember(memberDTO);
 		return "redirect:/main";
