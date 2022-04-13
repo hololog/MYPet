@@ -22,6 +22,8 @@ public interface GbuyBoardDAO {
 
 	public GbuyBoardDTO getGbuy_Board(int num);
 
+	public GbuyBoardDTO getGbuy_Board1(int gbuy_num);
+
 	public void updateGbuy_Board(GbuyBoardDTO gbuyBoardDTO);
 
 

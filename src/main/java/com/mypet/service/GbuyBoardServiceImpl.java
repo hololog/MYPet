@@ -37,8 +37,8 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 		return boardDAO.getGbuy_BoardCount();
 	}
 	@Override
-	public GbuyBoardDTO getBoard(int num) {
-		return boardDAO.getGbuy_Board(num);
+	public GbuyBoardDTO getBoard(int gbuy_num) {
+		return boardDAO.getGbuy_Board(gbuy_num);
 	}
 	@Override
 	public void updateReadcount(int num) {
@@ -74,9 +74,9 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 		
 	}
 	@Override
-	public GbuyBoardDTO getBoard1(int num) {
-		
-		return null;
+	public GbuyBoardDTO getBoard1(int gbuy_num) {
+		// TODO Auto-generated method stub
+		return boardDAO.getGbuy_Board1(gbuy_num);
 	}
 	@Override
 	public void updateBoard1(GbuyBoardDTO boardDTO) {

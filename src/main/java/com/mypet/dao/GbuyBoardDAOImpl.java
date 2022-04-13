@@ -41,7 +41,7 @@ public class GbuyBoardDAOImpl implements GbuyBoardDAO{
 
 	@Override
 	public GbuyBoardDTO getGbuy_Board(int num) {
-		return sqlSession.selectOne(namespace+".getBoard", num);
+		return sqlSession.selectOne(namespace+".getGbuy_Board", num);
 	}
 
 	@Override
@@ -57,6 +57,11 @@ public class GbuyBoardDAOImpl implements GbuyBoardDAO{
 	@Override
 	public void deleteGbuy_Board(int num) {
 		sqlSession.delete(namespace+".deleteGbuy_Board", num);
+	}
+	@Override
+	public GbuyBoardDTO getGbuy_Board1(int gbuy_num) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".getGbuy_Board", gbuy_num);
 	}
 
 }//

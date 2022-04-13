@@ -13,7 +13,7 @@ public interface GbuyBoardService {
 	
 	public int getBoardCount();
 	
-	public GbuyBoardDTO getBoard1(int num);
+	public GbuyBoardDTO getBoard1(int gbuy_num);
 	
 	public void updateReadcount(int num);
 	
