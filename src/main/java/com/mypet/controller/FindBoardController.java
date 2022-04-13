@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.FindcommentDTO;
@@ -203,6 +205,7 @@ public class FindBoardController {
 //		
 //	}
 	
+	
 	// 경진
 	@RequestMapping(value = "/find/content", method = RequestMethod.GET)
 	public String content_find(HttpServletRequest request, Model model) throws Exception {
@@ -212,4 +215,11 @@ public class FindBoardController {
 		
 		return "findboard/content";
 	}
+	
+//	@RequestMapping(value = "findboard/updatePro", method = RequestMethod.POST)
+//	public String updatePro_find(FindboardDTO findboardDTO) {
+//		findboardService.updatefindBoard(findboardDTO);
+//		
+//		return "redirect:/findboard/list";
+//	}
 }

@@ -53,6 +53,10 @@
 		select * from find_board order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
+	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
+		select concat(upload,"\\",filename) as upload from find_board_file order by find_board_num desc limit #{startRow},#{pageSize}
+	</select>
+	
 	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
 		select * from find_board where result = "1" order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
@@ -64,6 +68,22 @@
 	<select id="getfindMissBoardCount" resultType="java.lang.Integer">
 		select count(*) from find_board where result="1"
 	</select>
+	
+	<!-- 게시글 수정(모달) -->
+	<update id="updatefindboard">
+		update find_board 
+		set pet_type=#{pet_type},
+		pet_name=#{pet_name},
+		pet_age=#{pet_age},
+		pet_gender=#{pet_gender},
+		missing_date=#{missing_date},
+		address=#{address},
+		address2=#{daaress2},
+		detail_address=#{detail_address},
+		content=#{content},
+		contact=#{contact},
+		where find_board_num=#{find_board_num}
+	</update>
 
 	<!-- 은혜 실공공고 글쓰기 지역검색 -->
 	<select id="getProvinceList" resultType="Hashmap">

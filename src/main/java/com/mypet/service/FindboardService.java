@@ -26,6 +26,8 @@ public interface FindboardService {
 
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
+	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
 	public void insert_findboard(FindboardDTO findboardDTO, FileDTO fileDTO);
@@ -41,5 +43,7 @@ public interface FindboardService {
 	public List<FindboardDTO> getfindBoardListMain();
 
 	public BookmarkDTO getBookmark(String findboardNum);
+	
+	public void updatefindboard(FindboardDTO findboardDTO);
 	
 }

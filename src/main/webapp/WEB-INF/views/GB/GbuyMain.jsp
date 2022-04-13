@@ -56,10 +56,12 @@
 <%--  			<%String id=(String)session.getAttribute("id");	//세션값 가져오기  --%>
 <%--  			%>			  --%>
 			<input type="button" value="글쓰기" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'">	
+			<input type="button" value="리스트" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain2'">	
 <%-- 			<%} %> --%>
 		</div>
 		<!--상품-->
 		<c:forEach var="GDTO" items="${GbuyboardList}">
+		
 		<div class="row g-0 border rounded overflow-hidden flex-row mb-4 shadow-sm h-250 position-relative" >
 			<c:if test="${GDTO.gbuy_count == 0 }"><div class="LK_end"></div></c:if>
 			<div class="col-6 p-4 d-flex flex-column position-static"  id="ba"style="border: 1px solid red;">
@@ -75,9 +77,16 @@
 				</p>
 				<div class="col-12">
 					<div class="LK_ba">
-						<div class="progress-bar" id="LK_ba" role="progressbar"
+						<c:if test="${(GDTO.gbuy_count/GDTO.gbuy_tcount)-1!=0}">
+						<div class="progress-bar" id="LK_ba" role="progressbar "
 							style="width: ${((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100)}%" aria-valuenow="100" aria-valuemin="0"
-							aria-valuemax="100">판매 : <fmt:formatNumber value="${(((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100))}"/> %</div>
+							aria-valuemax="100">판매 : <fmt:formatNumber value="${(((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100))}"/> %
+						</div>
+						</c:if>
+						<c:if test="${(GDTO.gbuy_count/GDTO.gbuy_tcount)-1==0}">
+						<div>판매 : 0%</div>
+						</c:if>
+						
 					</div>
 				</div>
 			</div>

@@ -29,7 +29,6 @@
 <script language="JavaScript">
 
 var sell_price;
-var sell_price;
 var amount;
 function init () {
 	sell_price = document.form.sell_price.value;
@@ -37,25 +36,22 @@ function init () {
 	document.form.sum.value = sell_price;
 	change();
 }
-
 function add () {
 	hm = document.form.amount;
 	sum = document.form.sum;
 	if	(hm.value<${boardDTO.gbuy_count}){
 		 hm.value ++ ;
-		 sum.value = parseInt(hm.value) * sell_price;
+		 sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
 	}
 }
-
 function del () {
 	hm = document.form.amount;
 	sum = document.form.sum;
 		if (hm.value > 1) {
 			hm.value -- ;
-			sum.value = parseInt(hm.value) * sell_price;
+			sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		}
 }
-
 function change () {
 	hm = document.form.amount;
 	sum = document.form.sum;
@@ -63,15 +59,14 @@ function change () {
 		if (hm.value >${boardDTO.gbuy_count}) {
 			hm.value =${boardDTO.gbuy_count};
 		}
-		
-	sum.value = parseInt(hm.value) * sell_price;
+	sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }  
 function xx() {
   	hm = document.form.amount;
 	sum = document.form.sum;
 	hm.value="1" ;
 
-	sum.value = parseInt(hm.value) * sell_price;
+	sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
 }
 
 
@@ -82,10 +77,10 @@ function xx() {
       <!-- 제품이미지 -->
 <br>
 <div>
-<input type="button" value="글수정" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyUpdate?gbuy_num=${boardDTO.gbuy_num}'">
-<input type="button" value="글삭제" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyDelete?gbuy_num=${boardDTO.gbuy_num}'">	
+<input type="button" value="글수정" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${boardDTO.gbuy_num}'" >
+<input type="button" value="글삭제" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyDelete?gbuy_num=${boardDTO.gbuy_num}'" >	
 	<div style="font-family:fantasy; text-align: center; color: #3f51b5; ">
-<%-- 	 <h2>공동구매 진행중! (${boardDTO.gbuy_count}/${boardDTO.gbuy_tcount})</h2> --%>
+	 <h2>공동구매 진행중! (${boardDTO.gbuy_count}/${boardDTO.gbuy_tcount})</h2>
 	</div>
 	<br>
 	<br>
@@ -147,7 +142,6 @@ function xx() {
   	<jsp:include page="../inc/bottom.jsp"></jsp:include>
     <!-- footer 종료 -->
     <!--스크립트 적용 -->
-    <script src="js/main.js"></script>
     <!-- 부트스트랩 스크립트 적용 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>

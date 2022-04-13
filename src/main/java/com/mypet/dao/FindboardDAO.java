@@ -28,6 +28,8 @@ public interface FindboardDAO {
 	
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
+	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
 	public int getfindBoardCount();
@@ -41,7 +43,10 @@ public interface FindboardDAO {
 	public List<String> getTownList(AddressDTO addressDTO);
 
 	public void insert_findboard_file(FileDTO fileDTO);
+	
+	public void updatefindboard(FindboardDTO findboardDTO);
 
 	public List<FindboardDTO> getfindBoardListMain();
+
 }
 
