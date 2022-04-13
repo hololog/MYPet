@@ -27,10 +27,10 @@
 
 <!-- file start -->
 	<insert id="insert_freeboard_file">
-		insert into free_board_file(file_num, free_board_num, board_code, upload, filename, save_filename, file_upload_date, int_ext)
-		values (#{file_num},#{free_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{int_ext})
+		insert into free_board_file(file_num, board_num, board_code, upload, filename, save_filename, file_upload_date)
+		values (#{file_num},#{free_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date})
 	</insert>
-
+	
 <!-- file end -->
 
 <!-- fileMaxNum start -->
@@ -85,11 +85,7 @@
 	
 <!-- Board start -->	
 	<select id="getfreeBoard" resultType="com.mypet.domain.BoardDTO">
-		select *
-			from free_board a
-			join free_board_file b
-			on  a.free_board_num=#{free_board_num}
-			where b.board_num=#{free_board_num}
+		select * from free_board where free_board_num=#{free_board_num}
 	</select>
 	
 	<select id="getnoticeBoard" resultType="com.mypet.domain.BoardDTO">
