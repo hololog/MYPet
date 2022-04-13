@@ -44,7 +44,7 @@ public interface FindboardService {
 
 	public BookmarkDTO getBookmark(String findboardNum);
 	
-	public void updatefindboard(FindboardDTO findboardDTO);
+//	public void updatefindboard(FindboardDTO findboardDTO);
 
 	public List<FindboardDTO> getfindBoardListMain(String email);
 	
