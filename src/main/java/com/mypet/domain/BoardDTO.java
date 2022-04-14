@@ -18,7 +18,58 @@ public class BoardDTO {
 	private int like_num;
 	private int user_id;
 	private String file;
+	private int file_num;
+	private String upload;
+	private String filename;
+	private String save_filename;
+	private Timestamp file_upload_date;
+	private String ext; // 파일확장자
+	private String ImageUploader; 
 	
+	
+	public int getFile_num() {
+		return file_num;
+	}
+	public void setFile_num(int file_num) {
+		this.file_num = file_num;
+	}
+	public String getUpload() {
+		return upload;
+	}
+	public void setUpload(String upload) {
+		this.upload = upload;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getSave_filename() {
+		return save_filename;
+	}
+	public void setSave_filename(String save_filename) {
+		this.save_filename = save_filename;
+	}
+	public Timestamp getFile_upload_date() {
+		return file_upload_date;
+	}
+	public void setFile_upload_date(Timestamp file_upload_date) {
+		this.file_upload_date = file_upload_date;
+	}
+	public String getExt() {
+		return ext;
+	}
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+	public int getReview_board_num() {
+		return review_board_num;
+	}
+	public void setReview_board_num(int review_board_num) {
+		this.review_board_num = review_board_num;
+	}
+	private int review_board_num;
 	
 
 	public String getSubject() {
@@ -105,6 +156,12 @@ public class BoardDTO {
 	}
 	public void setFile(String file) {
 		this.file = file;
+	}
+	public String getImageUploader() {
+		return ImageUploader;
+	}
+	public void setImageUploader(String imageUploader) {
+		ImageUploader = imageUploader;
 	}
 
 	

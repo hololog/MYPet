@@ -110,8 +110,8 @@ public interface BoardDAO {
 //fileMaxNum end
 	
 //file start
+	public void insert_freeboard_file(BoardDTO boardDTO);
 	
-	
-	public void insert_freeboard_file(FileDTO fileDTO);
+//	public FileDTO getfreefileNum(int num);
 //file end
 }

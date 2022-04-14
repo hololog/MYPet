@@ -85,7 +85,11 @@
 	
 <!-- Board start -->	
 	<select id="getfreeBoard" resultType="com.mypet.domain.BoardDTO">
-		select * from free_board where free_board_num=#{free_board_num}
+		select *
+		from free_board a
+		join free_board_file b
+		where  a.free_board_num=#{free_board_num} 
+		or b.board_num=#{free_board_num}
 	</select>
 	
 	<select id="getnoticeBoard" resultType="com.mypet.domain.BoardDTO">

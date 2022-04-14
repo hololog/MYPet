@@ -103,6 +103,7 @@
         <!-- SNS버튼 끝 -->
         <br>
 <!--         이미지 슬라이드 시작 -->
+	<c:if test="${!empty boardDTO.filename }">
         <div >
              <div
                 id="carouselExampleIndicators"
@@ -134,19 +135,19 @@
                         data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
                 </div>
-<%--                 <c:forEach items="${fileDTO }"> --%>
-<!--                 <div class="carousel-inner"> -->
-<!--                     <div class="carousel-item active"> -->
-<!--                         <img -->
-<%--                             src="${fileDTO.upload }" --%>
-<!--                             class="d-block w-50  img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
+                <c:forEach begin="1" end="3">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" id="imageBoard ">
+                        <ul class="d-block w-50  img-responsive center-block"
+                            style=" margin: 0 auto; height: auto;">
+                           
+                           
+                           </ul>
                             
-<!--                     </div> -->
+                    </div>
                    
-<!--                 </div> -->
-<%--                 </c:forEach> --%>
+                </div>
+                </c:forEach>
 
                 <button
                     class="carousel-control-prev carousel-dark"
@@ -168,6 +169,7 @@
             </div>
         </div>
         </div>
+        </c:if>
         <!-- 슬라이드 쇼 끝 -->
 
          <!-- 글 -->
