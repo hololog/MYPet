@@ -163,7 +163,7 @@
                 
                 function sendFileToServer(formData,status)
                 {
-                    var uploadURL = "${pageContext.request.contextPath}/freeboard/write_free_filePro"; //Upload URL
+                    var uploadURL = "${pageContext.request.contextPath }/freeboard/write_free_filePro"; //Upload URL
                     var extraData ={}; //Extra Data.
                     var jqXHR=$.ajax({
                             xhr: function() {

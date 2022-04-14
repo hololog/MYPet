@@ -33,26 +33,22 @@ $(document).ready(function(){
 	}//스크롤 로그인 모달
 });
 	
-	//북마크정보 가져오기 
-
-	
-	
 	//북마트 클릭이벤트
-// 	$('bookmark-click').click(function(){
-// 		//빈별표 일때
-// 		if($(this).children('i').attr('class') == 'fa-solid fa-star fa-2x'){
-// 			$.ajax({
-// 				url:"${pageContext.request.contextPath }/findboard/bookmark",
-// 				data:{"findboardNum" : $('.fbnum-ksk').val()},{"email":${sesseionScope.email}},
-// 				success:function(){
-// 					$('.star-ksk').html();
-// 				}	
-// // 				error:
-// 			});
-// 			$(this).html();
+	$('bookmark-click').click(function(){
+		//빈별표 일때
+		if($(this).children('i').attr('class') == 'fa-solid fa-star fa-2x'){
+			$.ajax({
+				url:"${pageContext.request.contextPath }/findboard/bookmark",
+				data:{"findboardNum" : $('.fbnum-ksk').val()},
+				success:function(){
+					$('.bookmark-click').attr('class', 'fa-regular fa-star fa-2x');
+				}	
+// 				error:
+			});
+			$(this).html();
 			
-// 		}
-// 	});
+		}
+	});
 
 
 // $("#displayList").hide();
@@ -213,22 +209,24 @@ $(document).ready(function(){
          <!-- 메인에 실종공고 8개  -->
          <c:forEach var="flist" items="${findboardListMain }">
           <div class="col">
-<%--           	<input type="hidden" value="${flist.find_board_num }" class="fbnum-ksk"> --%>
+          
+          	<input type="hidden" value="${flist.find_board_num }" class="fbnum-ksk">
             <div class="card">
               <a href="${pageContext.request.contextPath }/findboard/list">
-              	<img src="${pageContext.request.contextPath }/resources/img/${flist.upload}" class="card-img-top" alt="실종동물사진" />
+<%--               	<img src="${pageContext.request.contextPath }/resources/img/${flist.upload}" class="card-img-top" alt="실종동물사진" /> --%>
+              	<img src="${pageContext.request.contextPath }/resources/upload/${flist.upload}" class="card-img-top" alt="실종동물사진" />
               </a>
-              <c:if test="${!empty sesseionScope.email }">
+              <c:if test="${!empty sessionScope.email }">
 	              <c:choose>
-	              	<c:when test="${flist.book ne null }">
-	              		<button type="button" class="bookmark-click">
-		              		<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgb(245, 211, 22);"></i>
-		             	</button>
+	              	<c:when test="${flist.book eq 'N' }">
+	              		<a type="button" class="bookmark-click">
+		              		<i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+		             	</a>
 	              	</c:when>
 	              	<c:otherwise>
-	              		<button type="button" class="bookmark-click">
-		              		<i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
-		             	</button>
+	              		<a type="button" class="bookmark-click">
+	              			<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+	              		</a>
 	              	</c:otherwise>
 	              </c:choose>
               	
@@ -245,7 +243,7 @@ $(document).ready(function(){
 						<c:when test="${flist.pet_gender eq 1 }">수컷</c:when>
 						<c:otherwise>모름</c:otherwise>
 					</c:choose>/ 
-					${flist.pet_age }살
+					${flist.pet_age }
                 </h5>
                 <p class="card-text">${flist.address } ${flist.address2 }</p>
                 <div class="d-flex justify-content-between align-items-center">
