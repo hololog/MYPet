@@ -82,7 +82,9 @@ public class FindBoardController {
 		fbDTO.setContent(mtfRequest.getParameter("content"));
 //		fbDTO.setMissing_date(request.getParameter());
 		fbDTO.setNickname(mtfRequest.getParameter("nickname"));
-		fbDTO.setMissing_date(new Timestamp(System.currentTimeMillis())); // 추후수정
+		System.out.println(mtfRequest.getParameter("missing_date"));
+		
+		fbDTO.setMissing_date(mtfRequest.getParameter("missing_date")); // 추후수정
 		fbDTO.setPet_age(mtfRequest.getParameter("pet_age") + mtfRequest.getParameter("pet_age2")); // pet_age + 개월/년 한번에 담기
 		System.out.println("getAgeCheck"+ fbDTO.getPet_age()); //체크
 		
@@ -90,6 +92,7 @@ public class FindBoardController {
 		fbDTO.setPet_name(mtfRequest.getParameter("pet_name"));
 		fbDTO.setPet_type(mtfRequest.getParameter("pet_type"));
 		fbDTO.setReward(Integer.parseInt(mtfRequest.getParameter("reward")));
+//		fbDTO.setUpload();
 		fbDTO.setTitle(""); // 없애기
 		
 		findboardService.insert_findboard(fbDTO);
