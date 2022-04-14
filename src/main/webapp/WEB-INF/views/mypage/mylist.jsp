@@ -57,22 +57,20 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#btn').click(function(){
-//			alert("클릭");
-		$.ajax({
-			url:'${pageContext.request.contextPath }/mypage/mypagejson',
-			dataType:'json',
-			data:{"email":${sessionScope.email}},
-			success:function(rdata){
-				$.each(rdata,function(index,item){
-// 					$('#table1').append('<tr><td>'+item.num+'</td><td>'+item.subject+'</td><td>'+item.name+'</td><td>'+d+'</td><td>'+item.readcount+'</td></tr>');
-					$('#table1').append('<tr><td>'+item.free_board_num+'</td><td>'+item.board_code+'</td><td>'+item.subject+'</td><td>'+item.readcount+'</td></tr>');
-				});
-			}
-		});
+			$.ajax({
+				url:'${pageContext.request.contextPath }/mypage/mypagejson',
+				dataType:'json',
+				data:{"nickname":'${sessionScope.nickname}'},
+				success:function(rdata){
+					$.each(rdata,function(index,item){
+//							$('#table1').append('<tr><td>'+item.num+'</td><td>'+item.subject+'</td><td>'+item.name+'</td><td>'+d+'</td><td>'+item.readcount+'</td></tr>');
+						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td>'+item.subject+'</td><td>'+item.readcount+'</td></tr>');
+					});
+				}
+			});	
+		
+		
 	});//
-});//
-
 </script>
 
 </head>
@@ -104,13 +102,13 @@ $(document).ready(function(){
                             width="70"
                             height="70"
                             class="rounded-circle me-3 align-items-center">
-                        <strong style="color: white;"><br>JunDong 님</strong>
+                        <strong style="color: white;"><br>${sessionScope.nickname } 님</strong>
                 </div>
                 <hr>
               
                 <ul class="nav nav-pills flex-column mb-auto sidebar1" id="sdb">
                     <li class="nav-item2">  
-                        <a href="${pageContext.request.contextPath }/myinfo" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/myinfo" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
                                 <use href="#"/>
                             </svg>
@@ -118,7 +116,7 @@ $(document).ready(function(){
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/mylist" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/mylist" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
                                 <use href="#"/>
                             </svg>
@@ -127,7 +125,7 @@ $(document).ready(function(){
                     </li>
                     
                     <li>
-                        <a href="${pageContext.request.contextPath }/bookmark" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/bookmark" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
                                 <use href="#"/>
                             </svg>
@@ -143,7 +141,7 @@ $(document).ready(function(){
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/leave" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/leave" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
                                 <use href="#"/>
                             </svg>
@@ -156,14 +154,17 @@ $(document).ready(function(){
 
             <!-- 게시판 시작 -->
             <div class=" border col" style="padding: 3%;">
+            	<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
+            	<a class="p-1 btn" data-bs-target="#login-modal">게시판 글목록</a>
+	     		<a class="p-1 btn" data-bs-target="#signup-modal">실종공고 글목록</a>
+            	</div>
                 <div class="content">
-                <input type="button" value="글조회" id="btn">
                     <table class="table table-hover text-start" >
                         <thead>
                             <tr style="text-align: center;">
                                 <th width="7%">번호</th>
-                                <th width="65%">종류</th>
-                                <th width="11%">제목</th>
+                                <th width="11%">종류</th>
+                                <th width="65%">제목</th>
                                 <th width="9%">조회수</th>
                             </tr>
                         </thead>
@@ -228,5 +229,6 @@ $(document).ready(function(){
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
   crossorigin="anonymous">
 </script>
+
 </body>
 </html>

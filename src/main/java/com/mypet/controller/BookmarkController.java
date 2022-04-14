@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.BookmarkDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.service.BookmarkService;
 import com.mypet.service.FindboardService;
 
@@ -21,18 +23,42 @@ public class BookmarkController {
 	@Autowired
 	public BookmarkService bookmarkService;
 	
-//	@RequestMapping(value = "/findboard/bookmark")
-//	public BookmarkDTO bookmark(@RequestParam int findboardNum, HttpSession session) {
-//		BookmarkDTO bookmarkDTO = new BookmarkDTO();
-//		
-//		bookmarkDTO.setFindboardNum(findboardNum);
-//		bookmarkDTO.setEmail((String)session.getAttribute("email"));
-//		
-//		BookmarkService.updateBookmark(bookmarkDTO);
-//		
-//		return ;
-//	}
+	@Autowired
+	public FindboardService findboardService;
 	
+	//빈 북마크 클릭
+	@ResponseBody
+	@RequestMapping(value = "findboard/addBookmark")
+	public FindboardDTO addBookmark(@RequestParam int findboardNum, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+		//게시물 번호 저장
+		bookmarkDTO.setFindboardNum(findboardNum);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+	
+		
+		//실종공고테이블 북마크 개수 추가,
+		findboardService.addBookmarkCount(findboardNum);
+		//북마크 테이블 추가
+		bookmarkService.addBookmarkCount(findboardNum);
+		
+		return findboardDTO;
+	}
+
+	//꽉찬 북마크 클릭
+	@ResponseBody
+	@RequestMapping(value = "findboard/removeBookmark")
+	public FindboardDTO removeBookmark(@RequestParam int findboardNum, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+		//게시물 번호 저장
+		bookmarkDTO.setFindboardNum(findboardNum);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		//실종공고테이블 북마크 개수 추가
+		FindboardDTO findboardDTO = bookmarkService.addBookmarkCount(findboardNum);
+		
+		return findboardDTO;
+	}
+	
+//	
 //	private Map<String, Object> getTargetUserAndBoard() {
 //        boolean findTarget = false;
 //        long boardTotal = boardRepository.count();

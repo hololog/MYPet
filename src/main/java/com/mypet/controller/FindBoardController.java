@@ -67,7 +67,7 @@ public class FindBoardController {
 		return "findboard/write_find";
 	}
 	
-	// 은혜
+	// 은혜 - 실종공고 form 입력값 insert
 	@RequestMapping(value = "/findboard/write_findPro")
     public String requestupload2(HttpServletRequest mtfRequest) {
 		System.out.println("순서 확인 : /findboard/write_findPro");
@@ -79,21 +79,15 @@ public class FindBoardController {
 						mtfRequest.getParameter("address3")); 
 		fbDTO.setDetail_address(mtfRequest.getParameter("detail_address")); // address1~3 한번에 담기
 
-		
 		fbDTO.setContent(mtfRequest.getParameter("content"));
 		fbDTO.setNickname(mtfRequest.getParameter("nickname"));
-		System.out.println(mtfRequest.getParameter("missing_date"));
-		
+		fbDTO.setEmail(mtfRequest.getParameter("email"));
 		fbDTO.setMissing_date(mtfRequest.getParameter("missing_date"));
-
 		fbDTO.setPet_age(mtfRequest.getParameter("pet_age") + mtfRequest.getParameter("pet_age2")); // pet_age + 개월/년 한번에 담기
-
-		
 		fbDTO.setPet_gender(mtfRequest.getParameter("pet_gender"));
 		fbDTO.setPet_name(mtfRequest.getParameter("pet_name"));
 		fbDTO.setPet_type(mtfRequest.getParameter("pet_type"));
 		fbDTO.setReward(Integer.parseInt(mtfRequest.getParameter("reward")));
-		fbDTO.setTitle(""); // 없애기
 		
 	       return "redirect:/findboard/list";
 		}
@@ -124,12 +118,9 @@ public class FindBoardController {
             fileDTO.setFilename(originFileName);
             fileDTO.setSave_filename(safeFile); // safefile넣기
             
-            fileDTO.setUpload(path);
+            fileDTO.setUpload(path +"/"+ safeFile);
             
-            findboardService.insert_findboard_file(fileDTO);
-
             try {
-//                mf.transferTo(new File(safeFile));
                 File uploadfile = new File(path,safeFile);
                 FileCopyUtils.copy(mf.getBytes(), uploadfile);
                 
@@ -138,6 +129,8 @@ public class FindBoardController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            findboardService.insert_findboard_file(fileDTO);
         }
 
         return "redirect:/findboard/list";

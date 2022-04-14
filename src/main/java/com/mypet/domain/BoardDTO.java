@@ -17,6 +17,7 @@ public class BoardDTO {
 	private int like_count;
 	private int like_num;
 	private int user_id;
+	private int rownum;
 	private String file;
 	private int file_num;
 	private String upload;
@@ -72,6 +73,12 @@ public class BoardDTO {
 	private int review_board_num;
 	
 
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public String getSubject() {
 		return subject;
 	}
