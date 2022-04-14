@@ -127,8 +127,8 @@
                   </form>
                   
                   <!-- 글쓰기버튼 -->
-                 <c:if test="${! empty sessionScope.user_id }">
-					<c:if test="${sessionScope.user_id  ne 'admin'}">
+                 <c:if test="${!empty sessionScope.nickname}">
+					<c:if test="${sessionScope.email  ne 'admin@naver.com'}">
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>

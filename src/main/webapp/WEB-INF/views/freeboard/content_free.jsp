@@ -102,72 +102,75 @@
 				</div>
         <!-- SNS버튼 끝 -->
         <br>
+        <!-- 안됨(202204.14) -->
 <!--         이미지 슬라이드 시작 -->
-        <div >
-             <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                style="width: 1500px; "
-                > 
-            <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                >
-                <div class="carousel-indicators">
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true"
-                        aria-label="Slide 1"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-<%--                 <c:forEach items="${fileDTO }"> --%>
+<%-- 	<c:if test="${!empty boardDTO.filename }"> --%>
+<!--         <div > -->
+<!--              <div -->
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 style="width: 1500px; " -->
+<!--                 >  -->
+<!--             <div -->
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 > -->
+<!--                 <div class="carousel-indicators"> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="0" -->
+<!--                         class="active" -->
+<!--                         aria-current="true" -->
+<!--                         aria-label="Slide 1"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="1" -->
+<!--                         aria-label="Slide 2"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="2" -->
+<!--                         aria-label="Slide 3"></button> -->
+<!--                 </div> -->
+<%--                 <c:forEach begin="1" end="3"> --%>
 <!--                 <div class="carousel-inner"> -->
-<!--                     <div class="carousel-item active"> -->
-<!--                         <img -->
-<%--                             src="${fileDTO.upload }" --%>
-<!--                             class="d-block w-50  img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;" -->
-<!--                             alt="..."> -->
+<!--                     <div class="carousel-item active" id="imageBoard "> -->
+<!--                         <ul class="d-block w-50  img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;"> -->
+                           
+                           
+<!--                            </ul> -->
                             
 <!--                     </div> -->
                    
 <!--                 </div> -->
 <%--                 </c:forEach> --%>
 
-                <button
-                    class="carousel-control-prev carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                    class="carousel-control-next carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!--                 <button -->
+<!--                     class="carousel-control-prev carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="prev"> -->
+<!--                     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Previous</span> -->
+<!--                 </button> -->
+<!--                 <button -->
+<!--                     class="carousel-control-next carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="next"> -->
+<!--                     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Next</span> -->
+<!--                 </button> -->
 
-            </div>
-        </div>
-        </div>
+<!--             </div> -->
+<!--         </div> -->
+<!--         </div> -->
+<%--         </c:if> --%>
         <!-- 슬라이드 쇼 끝 -->
 
          <!-- 글 -->
@@ -195,70 +198,70 @@
 
      
 				
-	
+	<!-- 좋아요 안됨 -->
 <%-- 		 <c:if test="${empty user_id  }"> --%>
 <!-- 		 <button onclick="nolike()"> -->
 <!-- 		 <i class="bi-heart " style="font-size:3rem; color: red; cursor: pointer;"></i></button> -->
   			
 <!-- 			<script> -->
 
-<!-- // 					function nolike() {  -->
+<!-- // 					function nolike() {   -->
 						
-<!-- // 					  alert("로그인해라"); -->
+<!-- // 					  alert("로그인해라");  -->
 						
 <%-- // 				  location.href = "${pageContext.request.contextPath }/main/main"; --%>
 						
-<!-- // 						} -->
+<!-- // 						}  -->
 						
-<!-- 	</script> -->
+<!--  	</script> -->
 <%-- 		</c:if>			 --%>
 			
-          <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
-		  <script>
+<!--           <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i> -->
+<!-- 		  <script> -->
 		
-           var heart = 0;  
-           jQuery(function($) {
-        	   $('#swapHeart').on('click', function() {
-        	     var $el = $(this),
-        	       textNode = this.lastChild;
-        	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
-        	     $el.toggleClass('swap');
-        	   });
+<!-- //            var heart = 0;   -->
+<!-- //            jQuery(function($) { -->
+<!-- //         	   $('#swapHeart').on('click', function() { -->
+<!-- //         	     var $el = $(this), -->
+<!-- //         	       textNode = this.lastChild; -->
+<!-- //         	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty'); -->
+<!-- //         	     $el.toggleClass('swap'); -->
+<!-- //         	   }); -->
         	  
-        	 });
-           function like(){
-        	   $.ajax({
-   				url:'${pageContext.request.contextPath }/freeboard/like_check',
-   				type:'POST',
-   				data:{
-   					"user_id":(${boardDTO.user_id}+1),
-   					"free_board_num":${boardDTO.free_board_num}
-   					},
-   				success:function(data){
-   					console.log(data);
-   					data = 1;
-   					console.log(data);
-   					if(rdata==1){
-   						 $('i').attr('class','bi-heart-fill');
-                        heart = 1
-   					}else{
+<!-- //         	 }); -->
+<!-- //            function like(){ -->
+<!-- //         	   $.ajax({ -->
+<%-- //    				url:'${pageContext.request.contextPath }/freeboard/like_check', --%>
+<!-- //    				type:'POST', -->
+<!-- //    				data:{ -->
+<%-- //    					"user_id":(${boardDTO.user_id}+1), --%>
+<%-- //    					"free_board_num":${boardDTO.free_board_num} --%>
+<!-- //    					}, -->
+<!-- //    				success:function(data){ -->
+<!-- //    					console.log(data); -->
+<!-- //    					data = 1; -->
+<!-- //    					console.log(data); -->
+<!-- //    					if(rdata==1){ -->
+<!-- //    						 $('i').attr('class','bi-heart-fill'); -->
+<!-- //                         heart = 1 -->
+<!-- //    					}else{ -->
    						
-   						  $('i').attr('class','bi-heart');
-                        heart = 0
-   					}
-   				}
-   			  });
-         	};
-        	like();
-           console.log(heart);
-           console.log('d2');
-           console.log(${pageContext.request.contextPath });
-           "user_id":$('#user_id').val(),
-				"free_board_num":$('#free_board_num').val()
+<!-- //    						  $('i').attr('class','bi-heart'); -->
+<!-- //                         heart = 0 -->
+<!-- //    					} -->
+<!-- //    				} -->
+<!-- //    			  }); -->
+<!-- //          	}; -->
+<!-- //         	like(); -->
+<!-- //            console.log(heart); -->
+<!-- //            console.log('d2'); -->
+<%-- //            console.log(${pageContext.request.contextPath }); --%>
+<!-- //            "user_id":$('#user_id').val(), -->
+<!-- // 				"free_board_num":$('#free_board_num').val() -->
            
              
             
-           </script>
+<!--            </script> -->
 			
 
 
@@ -266,20 +269,20 @@
 						
 						    <script>
 					
-						        $('i').on('click',function(){
+// 						        $('i').on('click',function(){
 						        		
-						            if (heart==0 ){
+// 						            if (heart==0 ){
 						            	
-						                $(this).attr('class','bi-heart-fill');
-						                heart++;
+// 						                $(this).attr('class','bi-heart-fill');
+// 						                heart++;
 						                
-						            }else if(heart==1){
-						                $(this).attr('class','bi-heart');
-						                heart--;
-						                //델리트
-						            }
+// 						            }else if(heart==1){
+// 						                $(this).attr('class','bi-heart');
+// 						                heart--;
+// 						                //델리트
+// 						            }
 						
-						        });						        	
+// 						        });						        	
 						        
 						    </script>
                 <!-- Comment form-->

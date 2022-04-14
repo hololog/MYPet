@@ -11,11 +11,11 @@ public class FindboardDTO {
 	private int find_board_num;
 	private char board_code;
 	private String nickname;
+	private String email; // 준동 추가 
 	private String title;
 	private String content;
 	private int readcount;
 	private String pet_type;
-	@DateTimeFormat(pattern = "yyyyMMdd")
 	private String missing_date;
 	private String pet_name;
 	private String pet_age;

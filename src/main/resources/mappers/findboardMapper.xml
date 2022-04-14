@@ -7,19 +7,32 @@
 
 	<!-- 은혜 실종공고 글쓰기 insert -->
 	<insert id="insert_findboard">
-		insert into find_board(find_board_num, board_code, nickname, title, content, readcount, pet_type,
-								missing_date, pet_name, pet_age, pet_gender,address, address2, result, 
-								insert_date, delete_date, detail_address, reward)
-		values (#{find_board_num},'f',#{nickname},"title",
+		insert into find_board(board_code, nickname, title, content, readcount, pet_type,
+								missing_date, pet_name, pet_age, pet_gender, address, address2, result, 
+								insert_date, delete_date, detail_address, reward, email)
+		values ('f',#{nickname},"title",
 				#{content},#{readcount},#{pet_type},#{missing_date},
 				#{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},
-				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward})
+				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward}, #{email})
+	</insert>
+	
+	<insert id="update_boardNum_forfile">
+		update find_board_file
+		set find_board_num = (select max(find_board_num) from find_board)
+		where find_board_num = 0
 	</insert>
 	
 	<!-- 은혜 실종공고 글쓰기 파일첨부 -->
 	<insert id="insert_findboard_file">
 		insert into find_board_file(file_num, find_board_num, board_code, upload, filename, save_filename, file_upload_date, ext)
-		values (#{file_num},#{find_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{ext})
+		values (#{file_num},
+				#{find_board_num},
+				#{board_code},
+				#{upload},
+				#{filename},
+				#{save_filename},
+				#{file_upload_date},
+				#{ext})
 	</insert>
 	
 
@@ -39,7 +52,7 @@
 	</select>
 	
 	<!-- 댓글조회 -->
-	<select id="readComment" resultType="com.mypet.domain.FindcommentDTO">
+	<select id="readComment" resultType="com.mypet.domain.FindcommentDTO"> 
 		SELECT * FROM find_comment
 		where find_board_num = #{find_board_num}
 	</select>
@@ -107,7 +120,7 @@
 		 ) b
 		 ON a.find_board_num = b.find_board_num
 		 order by a.insert_date desc
-		 limit 8;
+		 limit 8
 	</select>
 
 </mapper>

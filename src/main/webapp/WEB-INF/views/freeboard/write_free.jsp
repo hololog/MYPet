@@ -35,6 +35,154 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
+	<!-- 안됨 -->
+	 <!-- 기본 multiple file 전달 -->
+<!--               <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div> -->
+<!--         	<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/> -->
+<!--        <script type="text/javascript"> -->
+<!-- //               $(document).ready(function(){ -->
+<!-- //                var objDragAndDrop = $(".dragAndDropDiv");  -->
+                
+<!-- //                 $(document).on("dragenter",".dragAndDropDiv",function(e){ -->
+<!-- //                  e.stopPropagation();  -->
+<!-- //                     e.preventDefault();  -->
+<!-- //                      $(this).css('border', '2px solid #0B85A1');  -->
+<!-- //                  });  -->
+<!-- //                $(document).on("dragover",".dragAndDropDiv",function(e){  -->
+<!-- //                      e.stopPropagation();  -->
+<!-- //                    e.preventDefault();  -->
+<!-- //                  });  -->
+<!-- //                 $(document).on("drop",".dragAndDropDiv",function(e){  -->
+                    
+<!-- //                      $(this).css('border', '2px dotted #0B85A1');  -->
+<!-- //                     e.preventDefault();  -->
+<!-- //                    var files = e.originalEvent.dataTransfer.files;  -->
+                
+<!-- //                     handleFileUpload(files,objDragAndDrop);  -->
+<!-- //                 });  -->
+                
+<!-- //                  $(document).on('dragenter', function (e){  -->
+<!-- //                      e.stopPropagation();  -->
+<!-- //                     e.preventDefault();  -->
+<!-- //                });  -->
+<!-- //                  $(document).on('dragover', function (e){  -->
+<!-- //                    e.stopPropagation();  -->
+<!-- //                   e.preventDefault();  -->
+<!-- //                   objDragAndDrop.css('border', '2px dotted #0B85A1');  -->
+<!-- //                 });  -->
+<!-- //                  $(document).on('drop', function (e){  -->
+<!-- //                     e.stopPropagation();  -->
+<!-- //                      e.preventDefault();  -->
+<!-- //                  });  -->
+<!-- //                  //drag 영역 클릭시 파일 선택창  -->
+<!-- //                 objDragAndDrop.on('click',function (e){  -->
+<!-- //                      $('input[type=file]').trigger('click');  -->
+<!-- //                  }); -->
+ 
+<!-- //                  $('input[type=file]').on('change', function(e) {  -->
+<!-- //                      var files = e.originalEvent.target.files;  -->
+<!-- //                     handleFileUpload(files,objDragAndDrop);  -->
+<!-- //                 });  -->
+<!-- // 				function handleFileUpload(files,obj) -->
+<!-- //                  {  -->
+<!-- //                    for (var i = 0; i < files.length; i++)   -->
+<!-- //                    {  -->
+<!-- //                          var fd = new FormData();  -->
+<!-- //                         fd.append('file', files[i]);  -->
+                 
+<!-- //                         var status = new createStatusbar(obj); //Using this we can set progress.  -->
+<!-- //                          status.setFileNameSize(files[i].name,files[i].size);  -->
+<!-- //                         sendFileToServer(fd,status);  -->
+                 
+<!-- //                   }  -->
+<!-- //                  }  -->
+                
+<!-- //                 var rowCount=0;  -->
+<!-- //                 function createStatusbar(obj){  -->
+                        
+<!-- //                      rowCount++;  -->
+<!-- //                      var row="odd";  -->
+<!-- //                      if(rowCount %2 ==0) row ="even";  -->
+<!-- //                      this.statusbar = $("<div class='statusbar "+row+"'></div>");  -->
+<!-- //                      this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);  -->
+<!-- //                      this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);  -->
+<!-- //                      this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);  -->
+<!-- //                     this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);  -->
+                    
+<!-- //                      obj.after(this.statusbar);  -->
+                 
+<!-- //                      this.setFileNameSize = function(name,size){  -->
+<!-- //                          var sizeStr="";  -->
+<!-- //                          var sizeKB = size/1024;  -->
+<!-- //                         if(parseInt(sizeKB) > 1024){  -->
+<!-- //                            var sizeMB = sizeKB/1024;  -->
+<!-- //                             sizeStr = sizeMB.toFixed(2)+" MB";  -->
+<!-- //                          }else{ --> -->
+<!-- //                             sizeStr = sizeKB.toFixed(2)+" KB";  -->
+<!-- //                          }  -->
+                 
+<!-- //                          this.filename.html(name);  -->
+<!-- //                          this.size.html(sizeStr);  -->
+<!-- //                     }  -->
+                    
+<!-- //                    this.setProgress = function(progress){         -->
+<!-- //                        var progressBarWidth =progress*this.progressBar.width()/ 100;    -->
+<!-- //                          this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");  -->
+<!-- //                          if(parseInt(progress) >= 100)  -->
+<!-- //                          {  -->
+<!-- //                              this.abort.hide();  -->
+<!-- //                          }  -->
+<!-- //                      }  -->
+<!-- //  					this.setAbort = function(jqxhr){  -->
+<!-- //                          var sb = this.statusbar;  -->
+<!-- //                          this.abort.click(function()  -->
+<!-- //                          {  -->
+<!-- //                              jqxhr.abort();  -->
+<!-- //                              sb.hide();  -->
+<!-- //                          });  -->
+<!-- //                     }  -->
+<!-- //                }  -->
+                
+<!-- //                 function sendFileToServer(formData,status)  -->
+<!-- //                 {  -->
+<%-- //                     var uploadURL = "${pageContext.request.contextPath }/freeboard/write_free_filePro"; //Upload URL - --%>
+<!-- //                     var extraData ={}; //Extra Data.  -->
+<!-- //                    var jqXHR=$.ajax({  -->
+<!-- //                              xhr: function() {  -->
+<!-- // 	                        var xhrobj = $.ajaxSettings.xhr();  -->
+<!-- //                            if (xhrobj.upload) {  -->
+<!-- //                                     xhrobj.upload.addEventListener('progress', function(event) {  -->
+<!-- //                                         var percent = 0;  -->
+<!-- //                                         var position = event.loaded || event.position;  -->
+<!-- //                                         var total = event.total;  -->
+<!-- //                                        if (event.lengthComputable) {  -->
+<!-- //                                            percent = Math.ceil(position / total * 100);  -->
+<!-- //                                        }  -->
+<!-- //                                         //Set progress  -->
+<!-- //                                          status.setProgress(percent);  -->
+<!-- //                                   }, false);  -->
+<!-- //                                  }  -->
+<!-- //                            return xhrobj;  -->
+<!-- //                        },  -->
+<!-- //                        url: uploadURL,  -->
+<!-- //                         type: "POST",  -->
+<!-- //                       contentType:false,  -->
+<!-- //                          processData: false,  -->
+<!-- //                        cache: false,  -->
+<!-- //                          data: formData,  -->
+<!-- //                        success: function(data){  -->
+<!-- //                             status.setProgress(100);  -->
+                 
+<!--                            //$("#status1").append("File upload Done<br>");          -->
+<!--                          }  -->
+<!--                   });   -->
+                 
+<!--                      status.setAbort(jqXHR);  -->
+<!--                }  -->
+                
+<!--              });  -->
+         </script> 
+	<input type="hidden" name="tempFolder" id="tempFolder" value="testfile" />
 
      <form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
     <div class="container py-5" name="board_code">
@@ -54,152 +202,7 @@
         </div>
        
       </div>
-     	 <!-- 기본 multiple file 전달 -->
-              <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div>
-        	<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
-       <script type="text/javascript">
-            $(document).ready(function(){
-                var objDragAndDrop = $(".dragAndDropDiv");
-                
-                $(document).on("dragenter",".dragAndDropDiv",function(e){
-                    e.stopPropagation();
-                    e.preventDefault();
-                    $(this).css('border', '2px solid #0B85A1');
-                });
-                $(document).on("dragover",".dragAndDropDiv",function(e){
-                    e.stopPropagation();
-                    e.preventDefault();
-                });
-                $(document).on("drop",".dragAndDropDiv",function(e){
-                    
-                    $(this).css('border', '2px dotted #0B85A1');
-                    e.preventDefault();
-                    var files = e.originalEvent.dataTransfer.files;
-                
-                    handleFileUpload(files,objDragAndDrop);
-                });
-                
-                $(document).on('dragenter', function (e){
-                    e.stopPropagation();
-                    e.preventDefault();
-                });
-                $(document).on('dragover', function (e){
-                  e.stopPropagation();
-                  e.preventDefault();
-                  objDragAndDrop.css('border', '2px dotted #0B85A1');
-                });
-                $(document).on('drop', function (e){
-                    e.stopPropagation();
-                    e.preventDefault();
-                });
-                //drag 영역 클릭시 파일 선택창
-                objDragAndDrop.on('click',function (e){
-                    $('input[type=file]').trigger('click');
-                });
- 
-                $('input[type=file]').on('change', function(e) {
-                    var files = e.originalEvent.target.files;
-                    handleFileUpload(files,objDragAndDrop);
-                });
-				function handleFileUpload(files,obj)
-                {
-                   for (var i = 0; i < files.length; i++) 
-                   {
-                        var fd = new FormData();
-                        fd.append('file', files[i]);
-                 
-                        var status = new createStatusbar(obj); //Using this we can set progress.
-                        status.setFileNameSize(files[i].name,files[i].size);
-                        sendFileToServer(fd,status);
-                 
-                   }
-                }
-                
-                var rowCount=0;
-                function createStatusbar(obj){
-                        
-                    rowCount++;
-                    var row="odd";
-                    if(rowCount %2 ==0) row ="even";
-                    this.statusbar = $("<div class='statusbar "+row+"'></div>");
-                    this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
-                    this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
-                    this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
-                    this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);
-                    
-                    obj.after(this.statusbar);
-                 
-                    this.setFileNameSize = function(name,size){
-                        var sizeStr="";
-                        var sizeKB = size/1024;
-                        if(parseInt(sizeKB) > 1024){
-                            var sizeMB = sizeKB/1024;
-                            sizeStr = sizeMB.toFixed(2)+" MB";
-                        }else{
-                            sizeStr = sizeKB.toFixed(2)+" KB";
-                        }
-                 
-                        this.filename.html(name);
-                        this.size.html(sizeStr);
-                    }
-                    
-                    this.setProgress = function(progress){       
-                        var progressBarWidth =progress*this.progressBar.width()/ 100;  
-                        this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
-                        if(parseInt(progress) >= 100)
-                        {
-                            this.abort.hide();
-                        }
-                    }
-					this.setAbort = function(jqxhr){
-                        var sb = this.statusbar;
-                        this.abort.click(function()
-                        {
-                            jqxhr.abort();
-                            sb.hide();
-                        });
-                    }
-                }
-                
-                function sendFileToServer(formData,status)
-                {
-                    var uploadURL = "${pageContext.request.contextPath }/freeboard/write_free_filePro"; //Upload URL
-                    var extraData ={}; //Extra Data.
-                    var jqXHR=$.ajax({
-                            xhr: function() {
-                            var xhrobj = $.ajaxSettings.xhr();
-                            if (xhrobj.upload) {
-                                    xhrobj.upload.addEventListener('progress', function(event) {
-                                        var percent = 0;
-                                        var position = event.loaded || event.position;
-                                        var total = event.total;
-                                        if (event.lengthComputable) {
-                                            percent = Math.ceil(position / total * 100);
-                                        }
-                                        //Set progress
-                                        status.setProgress(percent);
-                                    }, false);
-                                }
-                            return xhrobj;
-                        },
-                        url: uploadURL,
-                        type: "POST",
-                        contentType:false,
-                        processData: false,
-                        cache: false,
-                        data: formData,
-                        success: function(data){
-                            status.setProgress(100);
-                 
-                            //$("#status1").append("File upload Done<br>");           
-                        }
-                    }); 
-                 
-                    status.setAbort(jqXHR);
-                }
-                
-            });
-        </script>
+     	
       <hr>
       
 <!--       <div class="mt-3"> -->
@@ -215,10 +218,10 @@
 
        <div class="col-12" id="editor">
         
-       <textarea name="content" id="summernote" placeholder="내용을 입력해주세요." >
-      
 
-       </textarea>
+      <textarea id="summernote" name="content"></textarea>
+
+       </div>
           
       </div>
       </div>
@@ -244,29 +247,72 @@
     	        height: 500
     	      });
     });
+   
+				
   </script>
-   <script> 
-// 툴바생략 
-	var setting = { 
-            height : 300, 
+ <script>
+	툴바생략
+	var setting = {
+            height : 300,
             minHeight : null,
             maxHeight : null,
-             focus : true, 
-           lang : 'ko-KR', 
-           toolbar : toolbar, 
-            //콜백 함수 
-           callbacks : { 
-             	onImageUpload : function(files, editor, welEditable) { 
-        // 파일 업로드(다중업로드를 위해 반복문 사용)
-           for (var i = files.length - 1; i >= 0; i--) { 
-             uploadSummernoteImageFile(files[i], 
-           this); 
-            		} 
-            	} 
-            } 
-          }; 
-	 $('#summernote').summernote(setting);
- });
+            focus : true,
+            lang : 'ko-KR',
+            toolbar : toolbar,
+            //콜백 함수
+            callbacks : { 
+            	onImageUpload : function(files, editor, welEditable) {
+            // 파일 업로드(다중업로드를 위해 반복문 사용)
+            for (var i = files.length - 1; i >= 0; i--) {
+            uploadSummernoteImageFile(files[i],
+            this);
+            		}
+            	}
+            }
+         };
+	
+        $('#summernote').summernote(setting);
+        });
+        
+        function uploadSummernoteImageFile(file, el) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "${pageContext.request.contextPath }/freeboard/free_freefile",
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(data) {
+					$(el).summernote('editor.insertImage', data.url);
+				}
+			});
+		}
+</script>
+<!-- 안됨 -->
+   <script> 
+// 툴바생략 
+// 	var setting = { 
+//             height : 300, 
+//             minHeight : null,
+//             maxHeight : null,
+//              focus : true, 
+//            lang : 'ko-KR', 
+//            toolbar : toolbar, 
+//             //콜백 함수 
+//            callbacks : { 
+//              	onImageUpload : function(files, editor, welEditable) { 
+//         // 파일 업로드(다중업로드를 위해 반복문 사용)
+//            for (var i = files.length - 1; i >= 0; i--) { 
+//              uploadSummernoteImageFile(files[i], 
+//            this); 
+//             		} 
+//             	} 
+//             } 
+//           }; 
+// 	 $('#summernote').summernote(setting);
+//  });
  
 //  function uploadSummernoteImageFile(file, el) {
 // 		data = new FormData();
@@ -274,7 +320,7 @@
 // 		$.ajax({
 // 			data : data,
 // 			type : "POST",
-// 			url : "uploadSummernoteImageFile",
+// 			url : "${pageContext.request.contextPath }/freeboard/write_free_filePro";",
 // 			contentType : false,
 // 			enctype : 'multipart/form-data',
 // 			processData : false,
@@ -283,6 +329,45 @@
 // 			}
 // 		});
 // 	}
+// $(function () {
+//         $('#faqContent').summernote(
+//                 {
+//                         callbacks: {
+//                                 onImageUpload: function (files) {
+//                                         uploadSummernoteImageFile(files[0], this);
+//                                 },
+//                                 onPaste: function (e) {
+//                                         var clipboardData = e.originalEvent.clipboardData;
+//                                         if (clipboardData && clipboardData.items && clipboardData.items.length) {
+//                                                 var item = clipboardData.items[0];
+//                                                 if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+//                                                         e.preventDefault();
+//                                                 }
+//                                         }
+//                                 }
+//                         }
+
+//                 });
+
+
+//         function uploadSummernoteImageFile(file, editor) {
+//                 let data = new FormData();
+//                 data.append("file", file);
+
+//                 $.ajax({
+//                         data: data,
+//                         type: "POST",
+//                         url: "${pageContext.request.contextPath }/freeboard/write_free_filePro",
+//                         contentType: false,
+//                         processData: false,
+//                         success: function (url) {
+//                                 $(editor).summernote('insertImage', url);
+//                                 $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+
+//                         }
+//                 });
+//         }
+// });
 
  </script> 
    </form>
@@ -298,7 +383,7 @@
  
 
     <!--스크립트 적용 -->
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
     <!-- 부트스트랩 스크립트 적용 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
