@@ -107,7 +107,7 @@
 		 ) b
 		 ON a.find_board_num = b.find_board_num
 		 order by a.insert_date desc
-		 limit 8;
+		 limit 8
 	</select>
 
 </mapper>
