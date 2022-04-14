@@ -10,6 +10,7 @@ public class MemberDTO {
 	private String email;
 	private String nickname;
 	private String password;
+	private String password2;
 	private String name;
 	private String phone_no;
 	private String zipcode;

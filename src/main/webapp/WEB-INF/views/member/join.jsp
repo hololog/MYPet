@@ -40,7 +40,7 @@
                     </div>
                             
                     <div class="modal-body p-5 pt-0">
-                        <form class="whole_modal">
+                        <form action="${pageContext.request.contextPath }/member/join" class="whole_modal">
                           <div class="form-floating mb-3">
 		    <input type="text" class="form-control rounded-4 id="join" placeholder="닉네임"  id="floatingNN_kds" required autofocus>
                             <label for="floatingInput">닉네임</label>
