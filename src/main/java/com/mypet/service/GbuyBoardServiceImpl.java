@@ -20,7 +20,7 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 
 	@Inject
 	private GbuyBoardDAO boardDAO;
-	
+
 	@Override
 	public List<GbuyBoardDTO> getBoardList(PageDTO pageDTO) {
 		int currentPage=Integer.parseInt(pageDTO.getPageNum());
@@ -48,12 +48,12 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 	public void updateGbuy_Board(GbuyBoardDTO gbuyBoardDTO) {
 		boardDAO.updateGbuy_Board(gbuyBoardDTO);
 	}
-	
+
 	@Override
 	public void deleteGbuy_Board(int gbuy_num) {
 		boardDAO.deleteGbuy_Board(gbuy_num);
 	}
-	
+
 	@Override
 	public void writeBoard(GbuyBoardDTO boardDTO) {
 		// name,subject,content 폼에서 입력해서 옴
@@ -61,18 +61,19 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 		boardDTO.setGbuy_pass("1111");
 		boardDTO.setGbuy_readcount(0);
 		boardDTO.setGbuy_date(new Timestamp(System.currentTimeMillis()));
-		
-		// 글번호 :  디비에 저장된 최대번호 구해서 +1 
+
+		// 글번호 :  디비에 저장된 최대번호 구해서 +1
 		if(boardDAO.getGbuy_MaxNum()!=null) {
-			// 글이 있는 경우 
+			// 글이 있는 경우
 			boardDTO.setGbuy_num(boardDAO.getGbuy_MaxNum()+1);
 		}else {
-			// 글이 없는 경우 
+			// 글이 없는 경우
 			boardDTO.setGbuy_num(1);
 		}
 		boardDAO.Gbuy_writeBoard(boardDTO);
-	}
 
+	}
+	
 
 
 }

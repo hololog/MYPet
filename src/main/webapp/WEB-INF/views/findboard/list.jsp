@@ -30,6 +30,9 @@
 	src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eff268212342867ed07048385b8791c9&libraries=services"></script>
+
 
 </head>
 
@@ -57,22 +60,77 @@
 						class="btn float-end" style="border-color: #3f51b5;">실종신고</a>
 				</div>
 			</div>
+			<input type="hidden" data-addr="${findboardDTO.address}">
 			<!-- 메인 -->
-			<div class="row">
+			<div class="row" style="height: 1397px">
 
 				<!-- 지도 api가져올 자리 -->
-				<div class="mb-3 col-md-12 col-lg-7" id="map-frame-ksk"
-					style="z-index: 2;">
-					<div class="sticky-lg-top" style="top: 9rem;">
-						<iframe
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.111677235935!2d126.97473421573828!3d37.575987879796195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2eaa19c763d%3A0xb28a32722d675764!2z6rSR7ZmU66y4KEd3YW5naHdhbXVuIEdhdGUp!5e0!3m2!1sko!2skr!4v1481946656451"
-							id="map-ksk" allowfullscreen="allowfullscreen"></iframe>
-						<div id="map" style="width:500px;height:400px;"></div>                           
-					</div>
-				</div>
-				<!-- 지도 api가져올 자리 -->
+				<div id="map" style="max-width: 55%;"
+					class="mb-3 col-md-12 col-lg-7" id="map-kj"></div>
+				<script type="text/javascript"
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eff268212342867ed07048385b8791c9"></script>
+				<script type="text/javascript">
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+					mapOption = {
+						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+						level : 3
+					// 지도의 확대 레벨
+					};
 
-				<div class="mb-3 col-md-12 col-lg-5" id="finder-photo">
+					// 지도   
+					var map = new kakao.maps.Map(mapContainer, mapOption);
+
+					// 지도타입
+					var mapTypeControl = new kakao.maps.MapTypeControl();
+
+					// 위치
+					map.addControl(mapTypeControl,
+							kakao.maps.ControlPosition.TOPRIGHT);
+
+					// 줌 컨트롤러
+					var zoomControl = new kakao.maps.ZoomControl();
+					map.addControl(zoomControl,
+							kakao.maps.ControlPosition.RIGHT);
+
+					var geocoder = new kakao.maps.services.Geocoder();
+
+					// 주소로 좌표를 검색합니다
+					geocoder
+							.addressSearch(
+									'경상남도 창원시 진해구',
+									function(result, status) {
+
+										// 정상적으로 검색이 완료됐으면 
+										if (status === kakao.maps.services.Status.OK) {
+
+											var coords = new kakao.maps.LatLng(
+													result[0].y, result[0].x);
+
+											// 결과값으로 받은 위치를 마커로 표시합니다
+											var marker = new kakao.maps.Marker(
+													{
+														map : map,
+														position : coords
+													});
+
+											// 인포윈도우로 장소에 대한 설명을 표시합니다
+											var infowindow = new kakao.maps.InfoWindow(
+													{
+														content : '<div style="width:150px;text-align:center;padding:6px 0;">진해구</div>'
+													});
+											infowindow.open(map, marker);
+
+											// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+											map.setCenter(coords);
+										}
+									});
+				</script>
+				<script>
+				
+				</script>
+				<!-- 지도 api가져올 자리 -->
+				<div class="mb-3 col-md-12 col-lg-5" style="margin-left: 20px"
+					id="finder-photo">
 
 					<!-- 검색창 시작 ajax -->
 					<div class="pt-3 d-flex justify-content-center gap-3">
@@ -97,31 +155,32 @@
 					<!-- 간략히보기 시작 5개씩 -->
 					<c:set var="num"
 						value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }" />
-					<c:forEach var="fb" items="${findboardList }" varStatus="loop">
+					<c:forEach var="fb" items="${findboardList}" varStatus="loop">
 						<div class="row ListSH" id="refresh">
 							<a type="hidden" data-result="${fb.result}"></a>
 							<div class="col-12 col-sm-7 p-2 position-relative">
 								<c:choose>
-									<c:when test="${fb.upload ne null}">
+									<c:when test="${fileList[loop.index].filename ne null}">
 										<a href="" data-bs-toggle="modal" class="openMod"
 											data-bs-toggle="modal" data-test="${loop.count}"
-											data-bs-target="#find_content"> <img
-											class="img-fluid rounded"
-											src="${pageContext.request.contextPath }/resources/img/${fb.upload}"
+											data-bs-target="#find_content" onmouseover=mapmark()
+											id="marking"> <img class="img-fluid rounded"
+											src="${fileList[loop.index].upload}"
 											alt="실종동물사진" id="">
 										</a>
 									</c:when>
-									<c:when test="${fb.upload eq null}">
+									<c:when test="${fileList[loop.index].filename eq null}">
 										<a href="" data-bs-toggle="modal" class="openMod"
 											data-bs-toggle="modal" data-test="${loop.count}"
 											data-bs-target="#find_content"> <img
 											class="img-fluid rounded"
-											src="${pageContext.request.contextPath}/resources/img/dog1.jpg"
+											src="${fileList[loop.index].upload}"
 											alt="실종동물사진" id="">
 										</a>
 									</c:when>
 								</c:choose>
 							</div>
+						
 							<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
 								<div class="row p-2">
 									<div class="col-6 col-sm-12">
@@ -233,10 +292,11 @@
 
 		<!-- The Modal -->
 
-		<div class="modal fade  modal-dialog-scrollable" id="find_content">
+		<div class="modal fade  modal-dialog-scrollable" id="find_content"
+			aria-labelledby="ModalToggleLabel" tabindex="-1">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<c:forEach var="fb" items="${findboardList}">
+					<c:forEach var="fb" items="${findboardList}" varStatus="mdloop">
 						<div class="ModalSH">
 							<!-- Modal Header -->
 							<div class="modal-header">
@@ -245,18 +305,18 @@
 								</h4>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 							</div>
-
 							<!-- Modal body -->
 							<div class="modal-body">
+								<div style="margin_bottom: 10px"></div>
 								<section id="slider" class="carousel slide"
 									data-bs-ride="carousel">
 									<!-- 슬라이드 쇼 -->
 									<div class="carousel-inner">
 										<!-- 사진1 -->
 										<div class="carousel-item active">
-											<c:if test="${fb.upload ne null}">
+											<c:if test="${ff.upload ne null}">
 												<img
-													src="${pageContext.request.contextPath }/resources/img/${fb.upload}"
+													src="${ff.upload }/${ff.save_filename}"
 													alt="first slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
@@ -368,32 +428,263 @@
 									</div>
 								</div>
 							</div>
+							<!-- Modal footer -->
+							<c:choose>
+							<c:when test="${sessionScope.nickname eq fb.nickname}">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary"
+									data-bs-target="#modify_content" data-bs-toggle="modal"
+									data-test2="${mdloop.count}" onclick="conf()">수정하기</button>
+								<button type="button" class="btn btn-danger"
+									data-bs-dismiss="modal">닫기</button>
+							</div>
+							</c:when>
+							<c:when test="${sessionScope.nickname ne fb.nickname}">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									data-bs-dismiss="modal">닫기</button>
+							</div>
+							</c:when>
+							</c:choose>
 						</div>
 					</c:forEach>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger"
-							data-bs-dismiss="modal">Close</button>
-					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- The Modal2 -->
+		<div class="modal fade" id="modify_content"
+			aria-labelledby="ModalToggleLabel" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<c:forEach var="fb" items="${findboardList}" varStatus="num">
+						<div class="ModalLH">
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title">
+									<a><b>${fb.title}</b></a><a>(</a><a><b>${fb.address}</b>&nbsp;</a><a><b>${fb.address2}</b></a><a>)</a>
+								</h4>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<!-- Modal body -->
+							<div class="modal-body">
+								<form
+									action="${pageContext.request.contextPath}/findboard/write_findPro"
+									method="post" id="f_eh" enctype="multipart/form-data">
+									<input type="hidden" value="${sessionScope.nickname}"
+										name="nickname">
+									<div class="row g-5">
+										<!--왼쪽여백-->
+										<div class="col-md-1 col-lg-3"></div>
+										<!--작성 form-->
+										<div class="col-md-10 col-lg-6">
+											<!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
+											<div class="row">
+												<div class="col">
+													<!--                                     <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="0" name="result"> -->
+													<!--                                     <label class="form-check-label" for="switch_eh">미해결</label> -->
+												</div>
+												<!--사례금 유무-->
+												<div class="col input-group mb-3">
+													<label class="input-group-text">사례금</label> <input
+														type="text" class="form-control"
+														placeholder="만원" name="reward" value="${fb.reward }">
+												</div>
+											</div>
+											<!--동물 종류 select -->
+											<div class="input-group mb-3">
+												<label class="input-group-text" for="animal_sort_eh">동물
+													종류</label> <select class="form-select" id="animal_sort_eh"
+													name="pet_type">
+													<c:choose>
+													<c:when test="${fb.pet_type eq 0}">
+													<option value="" >선택해주세요</option>
+													<option value="0" selected>개</option>
+													<option value="1">고양이</option>
+													<option value="2">기타</option>
+													</c:when>
+													<c:when test="${fb.pet_type eq 1}">
+													<option value="" >선택해주세요</option>
+													<option value="0" >개</option>
+													<option value="1" selected>고양이</option>
+													<option value="2">기타</option>
+													</c:when>
+													<c:when test="${fb.pet_type eq 2}">
+													<option value="" >선택해주세요</option>
+													<option value="0" >개</option>
+													<option value="1">고양이</option>
+													<option value="2" selected>기타</option>
+													</c:when>
+													</c:choose>
+												</select>
+											</div>
+											<!--동물 이름, 동물 나이 text-->
+											<div class="input-group mb-3">
+												<label class="input-group-text"> 동물 이름 </label> <input
+													type="text" class="form-control"
+													placeholder="이름을 입력해 주세요" name="pet_name" value="${fb.pet_name }">
+											</div>
+											<div class="input-group mb-3">
+												<label class="input-group-text"> 동물 나이 </label> <input
+													type="text" class="form-control"
+													placeholder="" name="pet_age"value="${fb.pet_age }"> <select
+													class="form-select" name="pet_age2">
+													<option value="month">개월</option>
+													<option value="year" selected>년(세)</option>
+												</select>
+											</div>
+											<!--동물 성별 체크 radio-->
+											<div class="input-group mb-3">
+												<div class="input-group-text">동물 성별</div>
+												<div class="form-control">
+												<c:choose>
+												<c:when test="${fb.pet_gender eq 0 }">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra1_eh"
+															value="0" name="pet_gender" checked> <label
+															class="form-check-label" for="ra1_eh">암컷</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra2_eh"
+															value="1" name="pet_gender"> <label
+															class="form-check-label" for="ra2_eh">수컷</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra3_eh"
+															value="2" name="pet_gender"> <label
+															class="form-check-label" for="ra3_eh">모름</label>
+													</div>
+													</c:when>
+													<c:when test="${fb.pet_gender eq 1 }">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra1_eh"
+															value="0" name="pet_gender" > <label
+															class="form-check-label" for="ra1_eh">암컷</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra2_eh"
+															value="1" name="pet_gender" checked> <label
+															class="form-check-label" for="ra2_eh">수컷</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra3_eh"
+															value="2" name="pet_gender"> <label
+															class="form-check-label" for="ra3_eh">모름</label>
+													</div>
+													</c:when>
+													<c:when test="${fb.pet_gender eq 2 }">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra1_eh"
+															value="0" name="pet_gender" > <label
+															class="form-check-label" for="ra1_eh">암컷</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra2_eh"
+															value="1" name="pet_gender"> <label
+															class="form-check-label" for="ra2_eh">수컷</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio" id="ra3_eh"
+															value="2" name="pet_gender" checked> <label
+															class="form-check-label" for="ra3_eh">모름</label>
+													</div>
+													</c:when>
+													</c:choose>
+												</div>
+											</div>
+											<!--실종날짜-->
+											<div class="input-group mb-3">
+												<label class="input-group-text">실종 날짜</label> <input
+													type="date" class="form-control" name="missing_date" value="${fb.missing_date }">
+											</div>
+											<!--실종지역 selectbox -->
+											<div class="input-group">
+												<label class="input-group-text">실종 지역</label> <select
+													class="form-select" name="address1" id="province">
+													<option value="${fb.address }">지역</option>
+												</select> 
+												<select class="form-select" name="address2" id="city">
+													<option selected>시</option>
+												</select> 
+												<select class="form-select" name="address3" id="town">
+													<option selected>동</option>
+												</select>
+											</div>
+											<div class="input-group"></div>
+											<!--실종지역 상세 위치-->
+											<div class="input-group mb-3">
+												<label class="input-group-text">상세 위치</label> <input
+													type="text" class="form-control" placeholder="OO초등학교 인근"
+													name="detail_address">
+											</div>
+											<!--기타 특징-->
+											<div class="input-group mb-3">
+												<label class="input-group-text" for="ta_eh">기타 특징</label>
+												<textarea rows="4" class="form-control"
+													aria-label="With textarea" id="ta_eh"
+													placeholder="중성화 유무, 자주가는 산책길, 좋아하는 음식 등 동물에 대한 상세정보"
+													name="content">${fb.content }</textarea>
+											</div>
+											<!--연락가능 수단-->
+											<div class="input-group mb-3">
+												<label class="input-group-text">연락 가능 수단</label> <input
+													type="text" class="form-control"
+													placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact">
+											</div>
 
-		<!-- ------------------------------- -->
-		<!-- 본문 종료-->
-		<!-- ------------------------------- -->
+											<!--file 드래그앤드롭-->
+											<div id="drop"
+												style="border: 1px solid black; width: 100%; height: auto; padding: 3px">
+												<p>
+													<small style="color: gray; font-size: 13px;"> 반려동물의
+														사진을 드래그하여 첨부해주세요<br> 업로드 가능 이미지 확장자 ( gif, jpeg, jpg,
+														png, bmp )
+													</small>
+												</p>
+												<p style="background-color: lightgrey;">
+													<i>첨부파일</i>
+													<button type="button" value="확인" id="save">저장</button>
+												</p>
+											</div>
+										</div>
+										<!--오른쪽여백-->
+										<div class="col-md-1 col-lg-3"></div>
+									</div>
+								</form>
+							</div>
 
-		<!-- footer 시작 -->
-		<jsp:include page="../inc/bottom.jsp"></jsp:include>
-		<!-- footer 종료 -->
-		<!-- 부트스트랩 스크립트 적용 -->
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-			crossorigin="anonymous">
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary" value="글쓰기"
+									onclick="modifyfind()">수정하기</button>
+								<button type="button" class="btn btn-danger"
+									data-bs-dismiss="modal">닫기</button>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- ------------------------------- -->
+	<!-- 본문 종료-->
+	<!-- ------------------------------- -->
+
+	<!-- footer 시작 -->
+	<jsp:include page="../inc/bottom.jsp"></jsp:include>
+	<!-- footer 종료 -->
+	<!-- 부트스트랩 스크립트 적용 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous">
+		
 	</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		$(function() {
 			$('#find_content').on('show.bs.modal', function(e) {
 				var exp = $(e.relatedTarget).data('test');
@@ -402,13 +693,35 @@
 			});
 		});
 	</script>
+	<script>
+		$(function() {
+			$('#modify_content').on('show.bs.modal', function(ea) {
+				var exp2 = $(ea.relatedTarget).data('test2');
+				$(".ModalLH").hide();
+				$(".ModalLH").eq(exp2 - 1).show();
+			});
+		});
+	</script>
 
-		<script>
-	$(function(){
-	    $("#flexCheckDefault").click(function(){
-	            location.href="${pageContext.request.contextPath }/findboard/listM";
-	    });
-	});
+	<script>
+		$(function() {
+			$("#flexCheckDefault")
+					.click(
+							function() {
+								location.href = "${pageContext.request.contextPath }/findboard/listM";
+							});
+		});
+	</script>
+	<script>
+		window.onload = function relayout() {
+
+			// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+			// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+			map.relayout();
+			//		map.setBounds(bounds);
+
+		}
 	</script>
 </body>
 </html>

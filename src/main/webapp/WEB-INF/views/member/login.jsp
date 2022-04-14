@@ -12,22 +12,22 @@
 
     <title>login</title>
     <!-- css스타일 적용 -->
+    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
-    
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modal.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css"  />
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/modals/">
 
         <!-- Bootstrap core CSS -->
-<link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet"  />
+<!-- Custom styles for this template -->
+<link href="${pageContext.request.contextPath }/resources/css/modals.css"  />
 
-		<!-- Custom styles for this template -->
-<link href="../project-data/bootstrap-5.1.3-examples/modals/modals.css" rel="stylesheet">
   </head>
   <body>
 
             <!-- modal 시작 -->
-            <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+            <div class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="login-modal">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content rounded-5 shadow">
                     <div class="modal-header p-5 pb-4 border-bottom-0">
@@ -39,9 +39,10 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                        -->
                     </div>
-                            
+                    
+                    <!-- Modal body -->       
                     <div class="modal-body p-5 pt-0">
-                        <form action="${pageContext.request.contextPath }/member/loginPro" class="whole_modal" method="post">
+                        <form action="${pageContext.request.contextPath }/member/login" class="whole_modal" method="post">
                           <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com" name="email">
                             <label for="floatingInput">E-mail</label>
@@ -61,21 +62,21 @@
                           <div class="singin">
                           <p>
                           <h2 class="fs-5 fw-bold mb-3">아직 회원이 아니신가요?
-                           <a href="">회원가입</a> </h2>
+                           <a href="${pageContext.request.contextPath }/member/tmppwd">회원가입</a> </h2>
                           </p>
                           </div>
                           
                           <hr class="my-4">
                           <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 " type="submit">
-                            <svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg>
+<!--                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg> -->
                             네이버계정으로 로그인
                           </button>
                           <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds" type="submit">
-                            <svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg>
+<!--                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg> -->
                             카카오계정으로 로그인
                           </button>
                           <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds" type="submit">
-                            <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg>
+<!--                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg> -->
                             구글계정으로 로그인
                           </button>
                           <div class="singin">
@@ -85,13 +86,37 @@
                        </div>
                           </div>
                         </form>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+				
                       </div>
                     </div>
                   </div>
                 </div>
-
                 
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous">
+	</script>
 
-    <script src="../project-data/bootstrap-5.1.3-examples/assets/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 	모달?
+	<script type="text/javascript">
+		$(function() {
+			$('#login-modal').on('show.bs.modal', function(e) {
+				$(".whole_modal").hide();
+				$(".whole_modal").eq(exp - 1).show();
+			});
+		});
+		</script>
+		<script>
+		$(function(){
+		    $("#flexCheckDefault").click(function(){
+		            location.href="${pageContext.request.contextPath }/member/loginPro";
+		    });
+		});
+	</script> 
+	-->
+	
   </body>
 </html>

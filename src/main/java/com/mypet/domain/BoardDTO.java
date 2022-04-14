@@ -18,6 +18,8 @@ public class BoardDTO {
 	private int like_num;
 	private int user_id;
 	private int rownum;
+	private String file;
+	
 	
 
 	public int getRownum() {
@@ -103,6 +105,13 @@ public class BoardDTO {
 	}
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
+	}
+	
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
 	}
 
 	

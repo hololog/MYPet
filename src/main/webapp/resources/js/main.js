@@ -40,4 +40,8 @@ campaign.addEventListener('mouseout', function(){
 //	});//
 //
 //});//
- 		
+
+function modifyfind(){
+	
+	window.location.reload;
+}

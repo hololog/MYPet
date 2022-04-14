@@ -1,8 +1,11 @@
 package com.mypet.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -10,6 +13,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.BookmarkDTO;
 import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
@@ -66,7 +73,7 @@ public class AjaxController {
 
 		return entity;
 	}
-	@ResponseBody
+	
 	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET)
 	public ResponseEntity<FindboardDTO> ajaxboard(HttpServletRequest request) throws Exception{
 		int num1 = Integer.parseInt(request.getParameter("num"));
@@ -126,22 +133,22 @@ public class AjaxController {
 		return entity;
 	}
 	
-	//은혜 - 실제파일 업로드
+	//은혜 - 드래그드롭 실제파일 업로드
+//	@ResponseBody
 //	@RequestMapping(value= "/findboard/fileupload", method = RequestMethod.POST)
-//	public ResponseEntity<List<MultipartFile>> fileupload(@RequestParam("fileList") MultipartFile file) throws Exception{
-//		UUID uid = UUID.randomUUID(); // 범용 고유 식별자
-//		String fileName = uid.toString()+"_"+file.getOriginalFilename(); // 실제파일 저장이름 
-//		
-//		File uploadfile = new File(uploadPath, fileName); // 파일복사 upload폴더에 fileName 
-//		FileCopyUtils.copy(file.getBytes(), uploadfile);
-//		
-//		Map<String,MultipartFile> fileNameList = new HashMap<String, MultipartFile>();
-//		
-//		ResponseEntity<Map<String,MultipartFile>> entity = 
-//				new ResponseEntity<List<MultipartFile>>(fileNameList, HttpStatus.OK);
-//		
-//		return entity;
-//	}	
+//	   public Map<String, Object> uploadFiles(MultipartFile[] uploadFiles) throws IOException{
+//	    
+//        Map<String,Object> resultMap=new HashMap<String,Object>();
+//
+//        boolean fileUpload=findboardService.uploadFile(uploadFiles);
+//        
+//        if(fileUpload) {
+//            resultMap.put("result", "success");
+//        }else {
+//            resultMap.put("result", "fail");
+//        }
+//        return resultMap;
+//    }
 	
 	//다슬
 //	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
@@ -200,4 +207,20 @@ public class AjaxController {
 		return entity;
 	}
 	
+//	@RequestMapping(value = "/main/mainjson", method = RequestMethod.GET)
+//	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {
+//		
+//		BookmarkDTO bookmarkDTO = findboardService.getBookmark(findboardNum);
+////		model.addAttribute("findboardListMain", findboardListMain);
+//		
+//
+//		
+////		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
+//		
+//		
+//		ResponseEntity<List<FindboardDTO>> entity = 
+//				new ResponseEntity<List<FindboardDTO>>(findboardListMain,HttpStatus.OK);
+//		
+//		return entity;
+//	}
 }

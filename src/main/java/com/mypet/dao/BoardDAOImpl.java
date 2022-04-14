@@ -1,6 +1,7 @@
 package com.mypet.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.PageDTO;
 
 
@@ -212,9 +214,17 @@ public class BoardDAOImpl implements BoardDAO{
 		
 	}
 
+	@Override
+	public void insert_freeboard_file(FileDTO fileDTO) {
+		sqlSession.insert(namespace+".insert_freeboard_file", fileDTO);
+	}
+	@Override
+	public Integer getFileMaxNum() {
+		return sqlSession.selectOne(namespace+".getFileMaxNum");
+	}
 	
-
-   
+	
+	
 	
 
 	

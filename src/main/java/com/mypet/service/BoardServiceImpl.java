@@ -1,18 +1,28 @@
 package com.mypet.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.mypet.dao.BoardDAO;
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.PageDTO;
 
 
@@ -276,10 +286,21 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDTO LikeCheck(BoardDTO boardDTO) {
 		return boardDAO.LikeCheck(boardDTO);
 	}
-	
-	
-	
 
+	
+	@Override
+	public void insert_freeboard_file(FileDTO fileDTO) {
+		//fileDTO
+		if(boardDAO.getFileMaxNum() != null) 
+			fileDTO.setFile_num(boardDAO.getFileMaxNum()+1);
+		else fileDTO.setFile_num(1);  
+        
+		fileDTO.setBoard_code('r');
+        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
+        fileDTO.setFind_board_num(10000);  // 수정하기
+        
+        boardDAO.insert_freeboard_file(fileDTO);
+	}
 
 
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
 import com.mypet.domain.PageDTO;
 
 public interface BoardService {
@@ -88,7 +89,10 @@ public interface BoardService {
 		public List<BoardDTO> bestreview(PageDTO pageDTO);
 	//like start	
 		public BoardDTO LikeCheck(BoardDTO boardDTO);
-
-
+		
+	//file start
+		public void insert_freeboard_file(FileDTO fileDTO);
+	//file end
+		
 		
 }
