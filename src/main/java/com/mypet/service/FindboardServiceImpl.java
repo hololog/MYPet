@@ -110,7 +110,6 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 	
 	@Override
-	public void insert_findboard(FindboardDTO findboardDTO) {
 		//find_board_num 구하기; 
 		//readcount, insertdate 설정
 	public void insert_findboard(FindboardDTO findboardDTO, FileDTO fileDTO) {

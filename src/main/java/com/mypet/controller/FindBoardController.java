@@ -33,19 +33,14 @@ import org.springframework.web.multipart.MultipartRequest;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
-import com.mypet.domain.FindcommentDTO;
 import com.mypet.domain.PageDTO;
 import com.mypet.service.FindboardService;
-import com.mypet.service.FindcommentService;
 
 @Controller
 public class FindBoardController {
 
 	@Inject
 	public FindboardService findboardService;
-
-	@Inject
-	public FindcommentService findcommentService;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
@@ -207,15 +202,15 @@ public class FindBoardController {
 	
 	
 	// 경진
-	@RequestMapping(value = "/find/content", method = RequestMethod.GET)
-	public String content_find(HttpServletRequest request, Model model) throws Exception {
-		int num=Integer.parseInt(request.getParameter("find_board_num"));
-		FindboardDTO findboardDTO=findboardService.getfindBoard(num);
-		model.addAttribute("findboardDTO", findboardDTO);
-		
-		return "findboard/content";
-	}
-	
+//	@RequestMapping(value = "/find/content", method = RequestMethod.GET)
+//	public String content_find(HttpServletRequest request, Model model) throws Exception {
+//		int num=Integer.parseInt(request.getParameter("find_board_num"));
+//		FindboardDTO findboardDTO=findboardService.getfindBoard(num);
+//		model.addAttribute("findboardDTO", findboardDTO);
+//		
+//		return "findboard/content";
+//	}
+//	
 //	@RequestMapping(value = "findboard/updatePro", method = RequestMethod.POST)
 //	public String updatePro_find(FindboardDTO findboardDTO) {
 //		findboardService.updatefindBoard(findboardDTO);

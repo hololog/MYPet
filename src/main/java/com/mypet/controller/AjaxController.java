@@ -28,10 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.mypet.dao.FreecommentDAO;
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.BookmarkDTO;
 import com.mypet.domain.FindboardDTO;
+import com.mypet.domain.FreecommentDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.PageDTO;
 import com.mypet.service.BoardService;
@@ -47,6 +49,9 @@ public class AjaxController {
 
 	@Autowired
 	private FindboardService findboardService;
+	
+	@Autowired
+	private FreecommentDAO freecommentDAO;
 	
 	@Autowired
 	private MypageService mypageService;
@@ -78,6 +83,21 @@ public class AjaxController {
 		
 		return fin;
 	}
+	
+	@RequestMapping(value = "/free/ajaxcomments", method = RequestMethod.GET)
+	public ResponseEntity<List<FreecommentDTO>> freeboardjson(FreecommentDTO freecommentDTO, HttpServletRequest request) throws Exception {
+		
+		PageDTO pageDTO=new PageDTO();
+		pageDTO.setPageSize(10);
+		pageDTO.setPageNum("1");
+		
+		List<FreecommentDTO> freeboardList = freecommentDAO.getfreecList(pageDTO); // 10
+		
+		ResponseEntity<List<FreecommentDTO>> entity=new ResponseEntity<List<FreecommentDTO>>(freeboardList , HttpStatus.OK);
+		
+		return entity;
+	}
+
 	
 
 	//은혜

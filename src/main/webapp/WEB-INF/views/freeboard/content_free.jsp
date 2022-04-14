@@ -256,6 +256,18 @@
              
             
            </script>
+           <script>
+           $(document).ready(function(){
+           	alert("확인");
+           	$.ajax{
+           		url:'${pageContext.request.contextPath }/free/ajaxcomments',
+           		dataType:'json',
+           		success:function(rdata){
+           	}
+           	}
+           	
+           	});
+           </script>
 			
 
 
@@ -385,9 +397,7 @@
 									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
 							</div>
 							<div class="ms-3" id="commentList">
-						
 									<div class="fw-bold"></div>
-									<c:forEach items="${replyList}" var="commentList">
 									<p>${commentList.c_nik}</p> 
 									<p>${commentList.c_content}</p>
 									<div class="d-flex mt-4">
@@ -397,7 +407,6 @@
 												alt="...">
 										</div>
 										</div>
-										</c:forEach>
 							
 							</div>
 						</div>
@@ -462,6 +471,19 @@ function report() {
         alert("동의 후 이용가능합니다. 불법개인정보 수집은 법적 처벌대상이 될수있습니다. ");
     }
 }
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

@@ -73,16 +73,6 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 		boardDAO.Gbuy_writeBoard(boardDTO);
 
 	}
-	@Override
-	public GbuyBoardDTO getBoard1(int gbuy_num) {
-		// TODO Auto-generated method stub
-		return boardDAO.getGbuy_Board1(gbuy_num);
-	}
-	@Override
-	public void updateBoard1(GbuyBoardDTO boardDTO) {
-		// TODO Auto-generated method stub
-
-	}
 
 
 

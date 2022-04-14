@@ -31,13 +31,11 @@ import com.google.gson.JsonObject;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
-import com.mypet.domain.FindcommentDTO;
 
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.PageDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
-import com.mypet.service.FindcommentService;
 import com.mypet.service.MemberService;
 
 @Controller
@@ -51,9 +49,6 @@ public class BoardController {
 	
 	@Inject
 	public FindboardService findboardService;
-	
-	@Inject
-	public FindcommentService findcommentService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -95,10 +90,6 @@ public class BoardController {
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
-		FindboardDTO findboardDTO = findboardService.getfindBoard(1);
-		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
-		model.addAttribute("replyList", replyList);
-		
 		
 		
 		return "findboard/list";
@@ -139,9 +130,6 @@ public class BoardController {
 		model.addAttribute("findmissboardList", findmissboardList);
 		model.addAttribute("pageDTO", pageDTO);
 		
-		FindboardDTO findboardDTO = findboardService.getfindBoard(1);
-		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
-		model.addAttribute("replyList", replyList);
 		
 		return "findboard/listM";
 	}
