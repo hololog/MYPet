@@ -9,6 +9,9 @@
   <!-- 로고 + 로그인/회원가입 버튼 -->
 
 <!--   <div class="row py-3 mx-3"> -->
+
+
+	
 <!--     <div class="col-4"></div> -->
 <!--     <div class="col-4 d-flex justify-content-center align-items-center"> -->
 <!--       <h1> -->
@@ -172,29 +175,43 @@ $(document).ready(function(){
 								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg> -->
 								네이버계정으로 로그인
 							</button>
-							<button
-								class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds"
-								type="submit">
-								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg> -->
-								카카오계정으로 로그인
-							</button>
+							
+							
+<!-- 							<button -->
+<!-- 								class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 " -->
+<!-- 								type="submit"> -->
+<!-- 								<svg class="bi me-1" width="16" height="16"><use xlink:href="#kakdao"/></svg> -->
+<!-- 								카카계정으로 로그인 -->
+<!-- 							</button> -->
+
+							<div id="kakaologin">
+								<div class="kakaobtn">
+								<input type="hidden" name="kakaoemail" id="kakaoemail">
+								<input type="hidden" name="kakaoname" id="kakaoname">
+								<a href="javascript:kakaoLogin();"> 
+   								 	<img src="${pageContext.request.contextPath }/resources/img/kakao_login_medium_wide.png" title="카카계정으로 회원가입" class="kakao_login" style="width: 315px;">
+                          		</a>
+                            	</div>
+                            </div>
+                            <br>
+                            
 							<button
 								class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds"
 								type="submit">
 								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg> -->
 								구글계정으로 로그인
 							</button>
-							<div class="singin">
-								<p>
-								<h2 class="fs-5 fw-bold mb-3">
-									<a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a>
-								</h2>
-								</p>
-							</div>
-						</div>
+<!-- 							<div class="singin"> -->
+<!-- 								<p> -->
+<!-- 								<h2 class="fs-5 fw-bold mb-3"> -->
+<!-- 									<a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a> -->
+<!-- 								</h2> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
 							</form>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
+						</div>
+                       
+                   
 				
                       </div>
                     </div>
@@ -202,7 +219,7 @@ $(document).ready(function(){
                 </div>
               </div>
              </div>
-            </div>    
+               
 
       
     <!-- 회원가입 -->
@@ -226,6 +243,7 @@ $(document).ready(function(){
                           <div class="form-floating mb-3">
 		   				  <input type="text" class="form-control rounded-4 id="join" name="nickname" required autofocus>
                             <label for="floatingInput">닉네임</label>
+<!--                             <button id="nnbtn">중복확인</button> -->
                           </div>
                           <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-4" name="email" required autofocus>
@@ -236,8 +254,10 @@ $(document).ready(function(){
                             <label for="floatingPassword">비밀번호(8~10자 입력)</label>
                           </div>
 		  					<div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="pw2" minlength="8" maxlength="10" required>
+                            <input type="password" class="form-control rounded-4" id="pw2" onkeyup="checkPwd()" minlength="8" maxlength="10" required>
                             <label for="floatingPassword">비밀번호 재확인</label>
+                            <span class="glyphicon glyphicon-ok form-control-feedback" style="display :none"></span>
+ 							<span id="r_pwErr" class="help-block" style="display :none"> 비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
                           </div>
                           <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">회원가입</button>
                           <!-- 작은 안내글
@@ -252,18 +272,19 @@ $(document).ready(function(){
                           </p>
                           </div>
                           
-                          <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 " type="submit">
-                            <svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg>
-                            네이버계정으로 회원가입
-                          </button>
+                          <a href=""> 
+   						  <img src="" 
+   						  title="카카계정으로 회원가입" class="kakao_login" style="width: 300px;">
+                          </a>
                           <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds" type="submit">
                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg>
-                            카카오계정으로 회원가입
+                            네이버계정으로 회원가입
                           </button>
                           <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds" type="submit">
                             <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg>
                             구글계정으로 회원가입
                           </button>
+                          </div>
                           
                           </div>
                         </form>
@@ -271,38 +292,103 @@ $(document).ready(function(){
                     </div>
                   </div>
                 </div>
-               </div>
              
-<script type="text/javascript">
-	function passConfirm() {
-	/* 비밀번호, 비밀번호 확인 입력창에 입력된 값을 비교해서 같다면 비밀번호 일치, 그렇지 않으면 불일치 라는 텍스트 출력.*/
-	/* document : 현재 문서를 의미함. 작성되고 있는 문서를 뜻함. */
-	/* getElementByID('아이디') : 아이디에 적힌 값을 가진 id의 value를 get을 해서 password 변수 넣기 */
-		var password = document.getElementById('pw');					//비밀번호 
-		var passwordConfirm = document.getElementById('pw2');	//비밀번호 확인 값
-		var confrimMsg = document.getElementById('confirmMsg');				//확인 메세지
-		var correctColor = "#00ff00";	//맞았을 때 출력되는 색깔.
-		var wrongColor ="#ff0000";	//틀렸을 때 출력되는 색깔
-		
-		if(password.value == passwordConfirm.value){//password = passwordConfirm 
-			confirmMsg.style.color = correctColor;
-			confirmMsg.innerHTML ="비밀번호 일치";
-		}else{
-			confirmMsg.style.color = wrongColor;
-			confirmMsg.innerHTML ="비밀번호 불일치";
-		}
-	}
+ 
+ 
+<!-- 카카오 로그인//b4c6c29aa62ff98658b6232a7a02f728 -->
+<<script type="text/javascript">
+
+
+window.Kakao.init("b4c6c29aa62ff98658b6232a7a02f728");
+
+function kakaoLogin(){
+    window.Kakao.Auth.login({
+        scope:'profile,account_email',
+        success: function(authObj){
+            //console.log(authObj);
+            window.Kakao.API.request({
+                url: '/v2/user/me',
+                success: res => {
+                    const email = res.kakao_account.email;
+                    const name = res.properties.nickname;
+                   
+                    console.log(email);
+                    console.log(name);
+                
+
+                    $('#kakaoemail').val(email);
+                    $('#kakaoname').val(name);
+                    document.login_frm.submit();
+                }
+            });
+
+        }
+    });
+}            
 </script>
+<!-- 	<!-- 닉네임 중복 확인 ajax --> -->
+<%-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script> --%>
+<!-- 	<script type="text/javascript"> -->
+// 	$(document).ready(function(){
+// 		$('#nnbtn').onclick(function()
+// 	$.ajax({ 
+// 		type : 'POST',
+// 		url : "${pageContext.request.contextPath }/member/memberCheck", 
+// 		data : { 
+// 			data : nickname, 
+// 		}, 
+// 		error : function(err) { 
+// 			alert("실행중 오류가 발생하였습니다."); 
+// 		}, 
+// 		success : function(data) { 
+// 			alert("사용할 수 있는 닉네임 입니다."); 
+// 			} else { 
+// 				alert("사용할 수 없는 닉네임 입니다."); 
+// 			} 
+// 		} 
+// 	}); 
+		
+<script type="text/javascript">
+//비밀번호 재확인 입력칸에 focus했을 때
+$("#pw2").focus(function() {
+	recheck();
+});
+	
+//비밀번호 재확인 입력칸이 blur됐을 때
+$("#pw2").blur(function() {
+	recheck();
+});
+
+//비밀번호 재확인 메서드
+function recheck() {
+	var rpw = $("#pw2").val();
+	var pw = $("#pw").val();
+		
+	if(rpw == pw){
+		 $("#r_pwErr").hide();
+		changeSuccess("#pw2");
+	}else{
+		 $("#r_pwErr").show();
+		 changeError("#pw2");
+	}	
+};
+
+</script>
+
+
+
+    
     
     <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/css/style.css"></script>
+	
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/script.js"></script>
 
     <!-- 모달창 종료 -->
 <!-- header 종료 -->
-<script type="text/javascript">
 
+<script type="text/javascript">
 $(document).mouseup(function (e){
   var LayerPopup = $(".whole_modal");
   if(LayerPopup.has(e.target).length === 0){
