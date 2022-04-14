@@ -163,6 +163,7 @@
                                     id="email"
                                     readonly>
                             </div>
+                            <input type="hidden" name="password" value="${memberDTO.password }">
                             <br>
                             <div id="buttons">
 	                            <input type="submit" value="수정" >
