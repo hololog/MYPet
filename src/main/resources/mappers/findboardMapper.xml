@@ -92,7 +92,16 @@
 
 	
 	<select id="getfindBoardListMain" resultType="com.mypet.domain.FindboardDTO">
-		select * from find_board order by insert_date desc limit 8
+		select CASE WHEN b.num is not null THEN 'Y' ELSE 'N' END AS book, a.* 
+		from find_board a
+		 LEFT JOIN (
+				SELECT *
+		          FROM bookmark
+				 where email = #{email}
+		 ) b
+		 ON a.find_board_num = b.find_board_num
+		 order by a.insert_date desc
+		 limit 8;
 	</select>
 
 </mapper>

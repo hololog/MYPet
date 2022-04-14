@@ -30,7 +30,7 @@ public interface FindboardService {
 	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
-	public void insert_findboard(FindboardDTO findboardDTO, FileDTO fileDTO);
+	public void insert_findboard(FindboardDTO findboardDTO);
 	
 	public List<String> getProvinceList();
 
@@ -44,6 +44,8 @@ public interface FindboardService {
 
 	public BookmarkDTO getBookmark(String findboardNum);
 	
-	public void updatefindboard(FindboardDTO findboardDTO);
+//	public void updatefindboard(FindboardDTO findboardDTO);
+
+	public List<FindboardDTO> getfindBoardListMain(String email);
 	
 }

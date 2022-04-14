@@ -21,16 +21,43 @@ public class BookmarkController {
 	@Autowired
 	public BookmarkService bookmarkService;
 	
-	@RequestMapping(value = "/findboard/bookmark")
-	public BookmarkDTO bookmark(@RequestParam int findboardNum, HttpSession session) {
-		BookmarkDTO bookmarkDTO = new BookmarkDTO();
-		
-		bookmarkDTO.setFindboardNum(findboardNum);
-		bookmarkDTO.setEmail((String)session.getAttribute("email"));
-		
+//	@RequestMapping(value = "/findboard/bookmark")
+//	public BookmarkDTO bookmark(@RequestParam int findboardNum, HttpSession session) {
+//		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+//		
+//		bookmarkDTO.setFindboardNum(findboardNum);
+//		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+//		
 //		BookmarkService.updateBookmark(bookmarkDTO);
-		
-//		BoardDTO boardDTO = 
-		return bookmarkDTO;
-	}
+//		
+//		return ;
+//	}
+	
+//	private Map<String, Object> getTargetUserAndBoard() {
+//        boolean findTarget = false;
+//        long boardTotal = boardRepository.count();
+//        int findSize = 30;
+//
+//        Map<String, Object> target = new HashMap<>();
+//
+//        List<UserEntity> userEntities = userRepository.findAll();
+//
+//        for (UserEntity user : userEntities) {
+//            for (int index = 0; index <= boardTotal / findSize; index += findSize) {
+//                Page<BoardEntity> boardEntityPage = boardRepository.findAll(PageRequest.of(index, findSize));
+//                List<BoardEntity> boardEntities = boardEntityPage.getContent().stream().filter(entity -> entity.getWriter().equals(user) == false).collect(Collectors.toList());
+//                for (BoardEntity board : boardEntities) {
+//                    if (goodContentsHistoryRepository.findByUserAndBoard(user, board).isPresent() == false) {
+//                        target.put("targetUser", user);
+//                        target.put("targetBoard", board);
+//                        findTarget = true;
+//                        break;
+//                    }
+//                }
+//                if (findTarget) { break; }
+//            }
+//            if (findTarget) { break; }
+//        }
+//        return target;
+//    }
 } 

@@ -130,7 +130,7 @@
 						
 						  alert("로그인해라");
 						
-						  location.href = "${pageContext.request.contextPath }/main/main";
+						  location.href = "${pageContext.request.contextPath }/main";
 						
 						}
 						

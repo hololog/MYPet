@@ -6,10 +6,11 @@
 <mapper namespace="com.mypet.mappers.freeboardMapper">
 <!-- insert start -->
 	<insert id="writefreeBoard">
-		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date,file) values
-        ( #{free_board_num},'r', #{subject}, #{content}, #{nickname}, #{insert_date}, #{file} )
+		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date) values
+        ( #{free_board_num},'r', #{subject}, #{content}, #{nickname}, #{insert_date} )
  
 	</insert>
+	
 	
 	<insert id="writenoticeBoard">
 		insert into notice (notice_num, board_code, subject, content,insert_date) values
@@ -23,6 +24,22 @@
  
 	</insert>
 <!-- write insert end -->
+
+<!-- file start -->
+	<insert id="insert_freeboard_file">
+		insert into free_board_file(file_num, board_num, board_code, upload, filename, save_filename, file_upload_date)
+		values (#{file_num},#{free_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date})
+	</insert>
+	
+<!-- file end -->
+
+<!-- fileMaxNum start -->
+<!-- 은혜 실종공고 파일 maxnum -->
+	<select id="getFileMaxNum" resultType="java.lang.Integer">
+		select max(file_num) from free_board_file 
+	</select>
+
+<!-- fileMaxNum end -->
 
 <!-- MaxNum select start -->
 	<select id="getfreeMaxNum" resultType="java.lang.Integer">

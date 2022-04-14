@@ -102,7 +102,6 @@
 				</div>
         <!-- SNS버튼 끝 -->
         <br>
-
 <!--         이미지 슬라이드 시작 -->
         <div >
              <div
@@ -135,17 +134,18 @@
                         data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
                 </div>
-<%--                 <c:forEach var="bDTO" test="items="${freeFileList }"> --%>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img
-                            src="img/dog1.jpg"
-                            class="d-block w-50  img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
+<%--                 <c:forEach items="${fileDTO }"> --%>
+<!--                 <div class="carousel-inner"> -->
+<!--                     <div class="carousel-item active"> -->
+<!--                         <img -->
+<%--                             src="${fileDTO.upload }" --%>
+<!--                             class="d-block w-50  img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+                            
+<!--                     </div> -->
                    
-                </div>
+<!--                 </div> -->
 <%--                 </c:forEach> --%>
 
                 <button
@@ -169,6 +169,7 @@
         </div>
         </div>
         <!-- 슬라이드 쇼 끝 -->
+
          <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
         <br>
@@ -180,6 +181,8 @@
 				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td>
 				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
+				
+				
 				<br>
 				<br>
 				<div>글내용</div>

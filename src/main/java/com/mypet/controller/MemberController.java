@@ -26,16 +26,21 @@ public class MemberController {
 	public FindboardService findboardService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model) {
-		List<FindboardDTO> findboardListMain = findboardService.getfindBoardListMain();
-//		BookmarkDTO bookmarkDTO = findboardService.getBookmark(findboardNum);
+	public String main(HttpSession session, Model model) {
+		String email = (String)session.getAttribute("email");
+		List<FindboardDTO> findboardListMain = findboardService.getfindBoardListMain(email);
 		model.addAttribute("findboardListMain", findboardListMain);
-//		model.addAttribute("bookmarkDTO", bookmarkDTO);
 		return "main/main";
 	}
 	
-	//회원가입
-	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
+//	//로그인
+//	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
+//	public String login(MemberDTO memberDTO) {
+//		return "redirect:/main";
+//	}
+	
+	//로그인
+	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
 	public String loginPro(MemberDTO memberDTO, HttpSession session) {
 		
 		MemberDTO memberCheckDTO = memberService.memberCheck(memberDTO);
@@ -52,18 +57,13 @@ public class MemberController {
 		}
 	}
 	
-	//로그인
-	@RequestMapping(value = "/member/login", method = {RequestMethod.POST, RequestMethod.GET})
-	public String login() {
-		return "member/login";
-	}
-	
-	//로그인
-	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
-	public String insertMemberPro(MemberDTO memberDTO) {
+	//회원가입
+	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
+	public String join(MemberDTO memberDTO) {
 		memberService.insertMember(memberDTO);
 		return "redirect:/main";
 	}
+	
 	
 	//로그아웃
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)

@@ -15,22 +15,22 @@ public class FindboardDTO {
 	private String content;
 	private int readcount;
 	private String pet_type;
-	@DateTimeFormat(pattern = "mm/dd/yyyy")
-	private Timestamp missing_date;
+	@DateTimeFormat(pattern = "yyyyMMdd")
+	private String missing_date;
 	private String pet_name;
 	private String pet_age;
 	private String pet_gender;
 	private String address;
 	private String address2;
-	private String address3; // 은혜 추가로 만듦 
+	private String address3;
 	private String detail_address;
-	private int bookmarkCount;
 	private int result;
+	private int bookmarkCount;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp insert_date;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp delete_date;
 	private int reward;
 	private String upload;
-  
+	private String book;
 }
