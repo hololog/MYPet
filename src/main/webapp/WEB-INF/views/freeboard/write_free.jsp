@@ -35,7 +35,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-	
+	<!-- 안됨 -->
 	 <!-- 기본 multiple file 전달 -->
 <!--               <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div> -->
 <!--         	<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/> -->
@@ -290,6 +290,7 @@
 			});
 		}
 </script>
+<!-- 안됨 -->
    <script> 
 // 툴바생략 
 // 	var setting = { 
