@@ -1,6 +1,7 @@
 package com.mypet.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -18,4 +19,5 @@ public class MemberDTO {
 	private String member_point;
 	private Timestamp last_access;
 	private Timestamp join_date;
+	
 }

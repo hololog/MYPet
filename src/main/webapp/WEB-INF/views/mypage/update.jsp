@@ -66,7 +66,7 @@
     <!-- ------------------------------- -->
     <!-- 제목 시작 -->
     <div class="container">
-      <h1 class="sub-title">내정보</h1>
+      <h1 class="sub-title">내정보 변경</h1>
       <hr>
     </div>
     <!-- 제목 종료 -->
@@ -85,7 +85,7 @@
                             height="70"
                             class="rounded-circle me-3 align-items-center">
                    		</a>
-                        <strong style="color: white;"><br>JunDong 님</strong>
+                        <strong style="color: white;"><br>${sessionScope.nickname } 님</strong>
                 </div>
                 <hr>
               
@@ -137,7 +137,8 @@
 
             <!-- 내정보 시작 -->
             <div class=" border col" style="padding: 3%;">
-                <form class="needs-validation" novalidate="novalidate">
+                <form action="${pageContext.request.contextPath }/mypage/updatePro" method="post"
+                	  class="needs-validation" novalidate="novalidate">
                     <div class="row">
                         <div
                             class="d-flex flex-column justify-content-center align-items-center">
@@ -147,7 +148,8 @@
                                 <label for="nick" class="form-label">닉네임<span class="text-muted"></span></label>
                                 <input
                                 	value="${sessionScope.nickname }"
-                                    type="email"
+                                	name="nickname"
+                                    type="text"
                                     class="form-control"
                                     id="nick">
                             </div>
@@ -155,13 +157,15 @@
                                 <label for="email" class="form-label">이메일<span class="text-muted"></span></label>
                                 <input
                                 	value="${sessionScope.email }"
+                                	name="email"
                                     type="text"
                                     class="form-control"
-                                    id="email">
+                                    id="email"
+                                    readonly>
                             </div>
                             <br>
                             <div id="buttons">
-	                            <input type="submit" value="수정" onclick="location.href='${pageContext.request.contextPath }/mypage/myinfo'">
+	                            <input type="submit" value="수정" >
 								<input type="reset" value="취소" onclick="location.href='${pageContext.request.contextPath }/mypage/myinfo'">
 							</div>
                     </div>

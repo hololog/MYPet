@@ -1,13 +1,16 @@
 package com.mypet.dao;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -21,30 +24,43 @@ public class MypageDAOImpl implements MypageDAO {
 	
 
 	@Override
-	public MypageDTO getMember(String email) {
-		return sqlSession.selectOne(namespace + ".getMember", email); 
+	public MemberDTO getMember(String email) {
+		return sqlSession.selectOne(namespace + ".getMember", email);
+	}
+	
+	@Override
+	public MemberDTO updateCheck(MemberDTO memberDTO) {
+		return sqlSession.selectOne(namespace + ".updateCheck", memberDTO);
 	}
 
 	@Override
-	public void updateMember(MypageDTO mypageDTO) {
-		System.out.println("MyapgeDAOImpl updateMember()");
-		sqlSession.update(namespace+".updateMember", mypageDTO);
+	public void updateMember(MemberDTO memberDTO) {
+		System.out.println("DAO확인");
+		sqlSession.update(namespace+".updateMember", memberDTO);
 	}
 
 	@Override
-	public void deleteMember(MypageDTO mypageDTO) {
-		sqlSession.delete(namespace+".deleteMember", mypageDTO);
+	public void deleteMember(MemberDTO memberDTO) {
+		sqlSession.delete(namespace+".deleteMember", memberDTO);
 	}
 
 	@Override
-	public List<BoardDTO> getmyBoardList(PageDTO pageDTO) {
-		System.out.println("DAO알람");
-		return sqlSession.selectList(namespace+".getmyBoardList", pageDTO);
+	public List<MypageDTO> getmyBoardList(String mylist) {
+		return sqlSession.selectList(namespace+".getmyBoardList", mylist);
 	}
 
 	@Override
-	public int getmyBoardlistCount() {
-		return sqlSession.selectOne(namespace+".getmyBoardlistCount");
+	public void updateUimage(String email, String userImg) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", email);
+		paramMap.put("userImg", userImg);
+		sqlSession.update(namespace + ".updateUimage", paramMap);
+
 	}
+
+//	@Override
+//	public int getmyBoardlistCount() {
+//		return sqlSession.selectOne(namespace+".getmyBoardlistCount");
+//	}
 	
 }

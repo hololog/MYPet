@@ -17,9 +17,15 @@ public class BoardDTO {
 	private int like_count;
 	private int like_num;
 	private int user_id;
-	
+	private int rownum;
 	
 
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public String getSubject() {
 		return subject;
 	}
