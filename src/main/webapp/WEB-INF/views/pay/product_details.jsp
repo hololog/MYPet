@@ -26,10 +26,13 @@
 <!-- 1씩증가 감소 스크립트 -->
 </head>
   <body onload="init();">
+  
+  
 <script language="JavaScript">
 
 var sell_price;
 var amount;
+
 function init () {
 	sell_price = document.form.sell_price.value;
 	amount = document.form.amount.value;
@@ -39,9 +42,10 @@ function init () {
 function add () {
 	hm = document.form.amount;
 	sum = document.form.sum;
+	
 	if	(hm.value<${boardDTO.gbuy_count}){
 		 hm.value ++ ;
-		 sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
+		 sum.value = (parseInt(hm.value) * sell_price);
 	}
 }
 function del () {
@@ -49,7 +53,7 @@ function del () {
 	sum = document.form.sum;
 		if (hm.value > 1) {
 			hm.value -- ;
-			sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			sum.value = (parseInt(hm.value) * sell_price);
 		}
 }
 function change () {
@@ -59,14 +63,14 @@ function change () {
 		if (hm.value >${boardDTO.gbuy_count}) {
 			hm.value =${boardDTO.gbuy_count};
 		}
-	sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	sum.value = (parseInt(hm.value) * sell_price);
 }  
 function xx() {
   	hm = document.form.amount;
 	sum = document.form.sum;
 	hm.value="1" ;
 
-	sum.value = (parseInt(hm.value) * sell_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');;
+	sum.value = (parseInt(hm.value) * sell_price);
 }
 
 
@@ -115,19 +119,35 @@ function xx() {
                     	<td>
 							<form name="form" method="get">
 								수량 : <input type="hidden" name="sell_price" value="${boardDTO.gbuy_price}">
-									  <input type="text" name="amount" value="1" size="3" onchange="change();" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+									  <input type="text" id="final_qty" name="amount" value="1" size="3" onchange="change();" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">개
 									  <input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><input type="button" value=" x " onclick="xx();"><br>
-								금액 : <input type="text" name="sum" size="11" readonly>원
+							    금액 :<input type="text" name="sum" id="final_price" size="11" value="0" readonly>원
+<!-- 								 <fmt:formatNumber pattern="###,###" value="0" name="sum" id="final_price" size="11"  readonly />원 -->
 							</form>
                         </td>
                     </tr>
          		</table>
          		<!-- 결제방식 선택 -->
+         		
        			<div class="row" style="text-align: center;">
-             		<div><button type="button" name="pay_now" class="btn btn-success">
-             			 구매하기</button>
+       			
+             		<div>
+             			 <input id="btnBuy" type="button" value="구매하기" class="btn btn-success" onclick="move()"> 
              		</div>
+             		
          		</div>
+         		<script type="text/javascript">
+         		
+         		function move(){
+         			var final_qty = document.getElementById('final_qty').value;
+					var final_price = document.getElementById('final_price').value;
+         			
+             		
+             		location.href ='${pageContext.request.contextPath}/pay/pay_processing?gbuy_num=${boardDTO.gbuy_num}'+ '&final_qty=' + final_qty + '&final_price=' + final_price;
+         		}
+         		
+         		</script>
+         		
 			</div>
             <!-- 상세페이지 영역! -->
             <!-- 더미데이터-->
@@ -138,11 +158,27 @@ function xx() {
 		</div>
 	</div>
 </div>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 	<!-- footer 시작 -->
   	<jsp:include page="../inc/bottom.jsp"></jsp:include>
     <!-- footer 종료 -->
     <!--스크립트 적용 -->
     <!-- 부트스트랩 스크립트 적용 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ 
   </body>
 </html>
