@@ -1,6 +1,7 @@
 package com.mypet.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -10,7 +11,6 @@ public class MemberDTO {
 	private String email;
 	private String nickname;
 	private String password;
-	private String password2;
 	private String name;
 	private String phone_no;
 	private String zipcode;

@@ -8,6 +8,8 @@ public class PageDTO {
 	private int startRow;
 	private int endRow;
 	
+	
+	
 	private String search;	
 
 
@@ -87,8 +89,6 @@ public class PageDTO {
 	public void setSearch(String search) {
 		this.search = search;
 	}
-
-
 
 	
 

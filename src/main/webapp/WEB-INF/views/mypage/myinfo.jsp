@@ -85,7 +85,7 @@
                             height="70"
                             class="rounded-circle me-3 align-items-center">
                         </a>
-                        <strong style="color: white;"><br>JunDong 님</strong>
+                        <strong style="color: white;"><br>${sessionScope.nickname } 님</strong>
                 </div>
                 <hr>
               
