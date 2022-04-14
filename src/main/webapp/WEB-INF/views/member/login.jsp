@@ -62,7 +62,7 @@
                           <div class="singin">
                           <p>
                           <h2 class="fs-5 fw-bold mb-3">아직 회원이 아니신가요?
-                           <a href="${pageContext.request.contextPath }/member/tmppwd">회원가입</a> </h2>
+                           <a href="${pageContext.request.contextPath }/member/join">회원가입</a> </h2>
                           </p>
                           </div>
                           

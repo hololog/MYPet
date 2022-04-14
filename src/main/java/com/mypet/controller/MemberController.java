@@ -58,11 +58,14 @@ public class MemberController {
 	}
 	
 	//회원가입
-	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
-	public String join(MemberDTO memberDTO) {
+	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
+	public String joinPro(MemberDTO memberDTO) {
 		memberService.insertMember(memberDTO);
 		return "redirect:/main";
 	}
+	
+	
+	
 	
 	
 	//로그아웃
@@ -72,3 +75,24 @@ public class MemberController {
 		return "redirect:/main";
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
