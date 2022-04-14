@@ -40,6 +40,8 @@ public class FindboardServiceImpl implements FindboardService {
 		return findboardDAO.getfindBoard(num);
 	}
 	
+	
+	
 //	@Override
 //	public FindboardDTO bringfindBoard(int num) {
 //		return findboardDAO.bringfindBoard(num);

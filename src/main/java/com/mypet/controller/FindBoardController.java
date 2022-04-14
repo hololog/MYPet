@@ -67,9 +67,10 @@ public class FindBoardController {
 		return "findboard/write_find";
 	}
 	
-	// 은혜 - 다중파일업로드
+	// 은혜
 	@RequestMapping(value = "/findboard/write_findPro")
     public String requestupload2(HttpServletRequest mtfRequest) {
+		System.out.println("순서 확인 : /findboard/write_findPro");
 		//FindboardDTO 값 들고오기 
 		FindboardDTO fbDTO = new FindboardDTO();
 		
@@ -77,38 +78,39 @@ public class FindBoardController {
 						mtfRequest.getParameter("address2") +" "+ 
 						mtfRequest.getParameter("address3")); 
 		fbDTO.setDetail_address(mtfRequest.getParameter("detail_address")); // address1~3 한번에 담기
-		System.out.println("getAdressCheck"+ fbDTO.getAddress() + " " + fbDTO.getDetail_address()); //체크 
+
 		
 		fbDTO.setContent(mtfRequest.getParameter("content"));
-//		fbDTO.setMissing_date(request.getParameter());
 		fbDTO.setNickname(mtfRequest.getParameter("nickname"));
 		System.out.println(mtfRequest.getParameter("missing_date"));
 		
-		fbDTO.setMissing_date(mtfRequest.getParameter("missing_date")); // 추후수정
+		fbDTO.setMissing_date(mtfRequest.getParameter("missing_date"));
+
 		fbDTO.setPet_age(mtfRequest.getParameter("pet_age") + mtfRequest.getParameter("pet_age2")); // pet_age + 개월/년 한번에 담기
-		System.out.println("getAgeCheck"+ fbDTO.getPet_age()); //체크
+
 		
 		fbDTO.setPet_gender(mtfRequest.getParameter("pet_gender"));
 		fbDTO.setPet_name(mtfRequest.getParameter("pet_name"));
 		fbDTO.setPet_type(mtfRequest.getParameter("pet_type"));
 		fbDTO.setReward(Integer.parseInt(mtfRequest.getParameter("reward")));
-//		fbDTO.setUpload();
 		fbDTO.setTitle(""); // 없애기
-		
-		findboardService.insert_findboard(fbDTO);
 		
 	       return "redirect:/findboard/list";
 		}
 		
-		// 은혜 - 다중파일업로드 -ajax
+		 //은혜 - 다중파일업로드 -ajax
 		@RequestMapping(value = "/findboard/write_find_filePro")
 	    public String requestupload2(MultipartHttpServletRequest mtfRequest) {
+			System.out.println("순서 확인 : /findboard/write_find_filePro");
 		// 파일들고오기 
 		FileDTO fileDTO = new FileDTO();
 
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+		System.out.println("fileList : " + fileList);
+		
+		String path = uploadPath; 
 
-        for (MultipartFile mf : fileList) {
+		for (MultipartFile mf : fileList) {
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             long fileSize = mf.getSize(); // 파일 사이즈
 
@@ -122,7 +124,6 @@ public class FindBoardController {
             fileDTO.setFilename(originFileName);
             fileDTO.setSave_filename(safeFile); // safefile넣기
             
-            String path = uploadPath; 
             fileDTO.setUpload(path);
             
             findboardService.insert_findboard_file(fileDTO);
@@ -142,72 +143,6 @@ public class FindBoardController {
         return "redirect:/findboard/list";
     }
 
-
-	// 은혜
-//	@RequestMapping(value = "/findboard/write_findPro", method = RequestMethod.POST)
-//	public String write_find(MultipartHttpServletRequest request, MultipartFile file) throws Exception {
-//		//FindboardDTO 값 들고오기 
-//		FindboardDTO fbDTO = new FindboardDTO();
-//		
-//		fbDTO.setAddress(request.getParameter("address1") +" "+ 
-//						request.getParameter("address2") +" "+ 
-//						request.getParameter("address3")); 
-//		fbDTO.setDetail_address(request.getParameter("detail_address")); // address1~3 한번에 담기
-//		System.out.println(fbDTO.getAddress()); //체크 
-//		
-//		fbDTO.setContent(request.getParameter("content"));
-////		fbDTO.setMissing_date(request.getParameter());
-//		fbDTO.setNickname(request.getParameter("nickname"));
-//		
-//		fbDTO.setPet_age( request.getParameter("pet_age") + request.getParameter("pet_age2")); // pet_age + 개월/년 한번에 담기
-//		System.out.println(fbDTO.getPet_age()); //체크
-//		
-//		fbDTO.setPet_gender(request.getParameter("pet_gender"));
-//		fbDTO.setPet_name(request.getParameter("pet_name"));
-//		fbDTO.setPet_type(request.getParameter("pet_type"));
-//		fbDTO.setResult(request.getParameter("result"));
-//		fbDTO.setReward(Integer.parseInt(request.getParameter("reward")));
-//		fbDTO.setTitle(""); // 없애기
-//		
-//		//Findboard_file 값 
-//		FileDTO fileDTO = new FileDTO();
-//		
-//		UUID uid=UUID.randomUUID();  // 범용 고유 식별자
-//		
-//		file = request.getFile(uploadPath)
-//		String fileName=uid.toString()+"_"+file.getOriginalFilename(); // 실제 저장될 파일이름
-//		String fileFullPath = uploadPath+"/"+fileName; // 파일 전체 경로 
-//
-//		fileDTO.setFile_num(500); //임시
-//		fileDTO.setFind_board_num(500); // 임시
-//		fileDTO.setBoard_code('f');
-//		fileDTO.setFilename(file.getOriginalFilename()); // 원래 업로드 파일명
-//		fileDTO.setSave_filename(fileName); // 실제저장파일명
-//		fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
-//		fileDTO.setExt(file.getOriginalFilename().split(".")[1]); // 확장자만 저장
-//		
-//		
-//		File uploadfile = new File(uploadPath, fileName);
-//		FileCopyUtils.copy(file.getBytes(), uploadfile);
-//		
-//		findboardService.insert_findboard(fbDTO);
-//		findboardService.insert_findboard_file(fileDTO);
-//		System.out.println("insert_findboard 메서드 실행");
-//
-//		return "redirect:/findboard/list";
-//	}
-
-	// 은혜
-//	@RequestMapping(value = "/findboard/fileupload", method = RequestMethod.POST)
-//	public String fileupload(HttpServletRequest request, MultipartFile file) {
-//		
-//		BoardDTO boardDTO = new BoardDTO();
-//		boardDTO.set
-//		findboardService.fileupload(file);
-//		
-//		System.out.println("insert_findboard 메서드 실행");
-//		return "redirect:/findboard/list";
-//	}
 	
 //	@InitBinder
 //	public void InitBinder(WebDataBinder binder) {
