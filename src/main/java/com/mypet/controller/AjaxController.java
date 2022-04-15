@@ -211,11 +211,11 @@ public class AjaxController {
 //	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {
 //		
 //		BookmarkDTO bookmarkDTO = findboardService.getBookmark(findboardNum);
-////		model.addAttribute("findboardListMain", findboardListMain);
+//		model.addAttribute("findboardListMain", findboardListMain);
 //		
 //
 //		
-////		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
+//		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
 //		
 //		
 //		ResponseEntity<List<FindboardDTO>> entity = 

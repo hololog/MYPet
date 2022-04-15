@@ -29,33 +29,35 @@ public class BookmarkController {
 	//빈 북마크 클릭
 	@ResponseBody
 	@RequestMapping(value = "findboard/addBookmark")
-	public FindboardDTO addBookmark(@RequestParam int findboardNum, HttpSession session) {
+	public int addBookmark(@RequestParam int findboardNum, HttpSession session) {
 		BookmarkDTO bookmarkDTO = new BookmarkDTO();
 		//게시물 번호 저장
 		bookmarkDTO.setFindboardNum(findboardNum);
 		bookmarkDTO.setEmail((String)session.getAttribute("email"));
-	
 		
-		//실종공고테이블 북마크 개수 추가,
-		findboardService.addBookmarkCount(findboardNum);
-		//북마크 테이블 추가
+		//실종공고테이블 북마크 개수 +1,
 		bookmarkService.addBookmarkCount(findboardNum);
+		//북마크 테이블 추가
+		bookmarkService.addBookmark(bookmarkDTO);
 		
-		return findboardDTO;
+		return bookmarkService.getBookmarkNum(findboardNum);
 	}
 
 	//꽉찬 북마크 클릭
 	@ResponseBody
 	@RequestMapping(value = "findboard/removeBookmark")
-	public FindboardDTO removeBookmark(@RequestParam int findboardNum, HttpSession session) {
+	public int removeBookmark(@RequestParam int findboardNum, HttpSession session) {
 		BookmarkDTO bookmarkDTO = new BookmarkDTO();
-		//게시물 번호 저장
+
 		bookmarkDTO.setFindboardNum(findboardNum);
 		bookmarkDTO.setEmail((String)session.getAttribute("email"));
-		//실종공고테이블 북마크 개수 추가
-		FindboardDTO findboardDTO = bookmarkService.addBookmarkCount(findboardNum);
 		
-		return findboardDTO;
+		//실종공고테이블 북마크 개수 -1
+		bookmarkService.removeBookmarkCount(findboardNum);
+		//북마크 테이블에서 제거
+		bookmarkService.removeBookmark(bookmarkDTO);
+		
+		return bookmarkService.getBookmarkNum(findboardNum);
 	}
 	
 //	
