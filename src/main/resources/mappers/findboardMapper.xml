@@ -90,10 +90,10 @@
 		select distinct address3 from address where address1=#{address1} and address2=#{address2}
 	</select>
 
-	
+	<!-- 성기 -->
 	<select id="getfindBoardListMain" resultType="com.mypet.domain.FindboardDTO">
 		select CASE WHEN b.num is not null THEN 'Y' ELSE 'N' END AS book, a.* 
-		from find_board a
+		  from find_board a
 		 LEFT JOIN (
 				SELECT *
 		          FROM bookmark

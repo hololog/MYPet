@@ -33,23 +33,38 @@ $(document).ready(function(){
 	}//스크롤 로그인 모달
 });
 	
+$(document).ready(function(){
 	//북마트 클릭이벤트
-	$('bookmark-click').click(function(){
+	$('.bookmark-click').click(function(){
+		let no = $(this).children('.fbnum-ksk').val();
+// 		console.log(no);
 		//빈별표 일때
-		if($(this).children('i').attr('class') == 'fa-solid fa-star fa-2x'){
+		if($(this).children('i').attr('class') === 'fa-regular fa-star fa-2x'){
+			$(this).children('i').attr('class', 'fa-solid fa-star fa-2x');
 			$.ajax({
-				url:"${pageContext.request.contextPath }/findboard/bookmark",
-				data:{"findboardNum" : $('.fbnum-ksk').val()},
-				success:function(){
-					$('.bookmark-click').attr('class', 'fa-regular fa-star fa-2x');
+				url:"${pageContext.request.contextPath }/findboard/addBookmark",
+				data:{"findboardNum" : no},
+				success:function(rdata){
+					if(rdata != null) {
+						$('#mark'+no).text(" "+ rdata);
+					}
 				}	
-// 				error:
 			});
-			$(this).html();
-			
+		//꽉찬 별표 일때
+		} else {
+			$(this).children('i').attr('class', 'fa-regular fa-star fa-2x');
+			$.ajax({
+				url:"${pageContext.request.contextPath }/findboard/removeBookmark",
+				data:{"findboardNum" : no},
+				success:function(rdata){
+					if(rdata != null) {
+						$('#mark'+no).html(" "+ rdata);
+					}
+				}	
+			});
 		}
 	});
-
+});
 
 // $("#displayList").hide();
 // // 검색어의 길이가 바뀔 때마다 호출
@@ -209,23 +224,23 @@ $(document).ready(function(){
          <!-- 메인에 실종공고 8개  -->
          <c:forEach var="flist" items="${findboardListMain }">
           <div class="col">
-          
-          	<input type="hidden" value="${flist.find_board_num }" class="fbnum-ksk">
+          	
             <div class="card">
               <a href="${pageContext.request.contextPath }/findboard/list">
-<%--               	<img src="${pageContext.request.contextPath }/resources/img/${flist.upload}" class="card-img-top" alt="실종동물사진" /> --%>
               	<img src="${pageContext.request.contextPath }/resources/upload/${flist.upload}" class="card-img-top" alt="실종동물사진" />
               </a>
               <c:if test="${!empty sessionScope.email }">
 	              <c:choose>
-	              	<c:when test="${flist.book eq 'N' }">
+	              	<c:when test="${flist.book eq 'Y' }">
 	              		<a type="button" class="bookmark-click">
-		              		<i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+	              		<input type="hidden" value="${flist.find_board_num }" class="fbnum-ksk">
+		              		<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
 		             	</a>
 	              	</c:when>
 	              	<c:otherwise>
 	              		<a type="button" class="bookmark-click">
-	              			<i class="fa-solid fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+	              		<input type="hidden" value="${flist.find_board_num }" class="fbnum-ksk">
+	              			<i class="fa-regular fa-star fa-2x" style="position: absolute; top:10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
 	              		</a>
 	              	</c:otherwise>
 	              </c:choose>
@@ -248,7 +263,7 @@ $(document).ready(function(){
                 <p class="card-text">${flist.address } ${flist.address2 }</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i><span class="star-ksk"> ${flist.bookmarkCount }  </span> 
+                    <i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i><span id="mark${flist.find_board_num }" class="star-ksk"> ${flist.bookmark_count }</span> 
                     <i class="bi bi-chat-dots"></i> <span class="chat-ksk"> 0 </span> 
                     <i class="bi bi-eye-fill"></i> <span class="eye-ksk"> ${flist.readcount }</span>
                   </div>

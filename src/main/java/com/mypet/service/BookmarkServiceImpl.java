@@ -11,10 +11,33 @@ public class BookmarkServiceImpl implements BookmarkService{
 	
 	@Autowired
 	private BookmarkDAO bookmarkDAO;
-	
+
 	@Override
-	public void updateBookmark(BookmarkDTO bookmarkDTO) {
-		bookmarkDAO.updateBookmark(bookmarkDTO);
+	public void addBookmarkCount(int findboardNum) {
+		bookmarkDAO.addBookmarkCount(findboardNum);
 	}
+
+	@Override
+	public void addBookmark(BookmarkDTO bookmarkDTO) {
+		bookmarkDAO.addBookmark(bookmarkDTO);
+	}
+
+	@Override
+	public void removeBookmarkCount(int findboardNum) {
+		bookmarkDAO.removeBookmarkCount(findboardNum);
+		
+	}
+
+	@Override
+	public void removeBookmark(BookmarkDTO bookmarkDTO) {
+		bookmarkDAO.removeBookmark(bookmarkDTO);
+		
+	}
+
+	@Override
+	public int getBookmarkNum(int findboardNum) {
+		return bookmarkDAO.getBookmarkNum(findboardNum);
+	}
+	
 
 }

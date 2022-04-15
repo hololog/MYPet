@@ -32,6 +32,42 @@ public class BookmarkController {
 //		
 //		return ;
 //	}
+	@Autowired
+	public FindboardService findboardService;
+	
+	//빈 북마크 클릭
+	@ResponseBody
+	@RequestMapping(value = "findboard/addBookmark")
+	public int addBookmark(@RequestParam int findboardNum, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+		//게시물 번호 저장
+		bookmarkDTO.setFindboardNum(findboardNum);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		
+		//실종공고테이블 북마크 개수 +1,
+		bookmarkService.addBookmarkCount(findboardNum);
+		//북마크 테이블 추가
+		bookmarkService.addBookmark(bookmarkDTO);
+		
+		return bookmarkService.getBookmarkNum(findboardNum);
+	}
+
+	//꽉찬 북마크 클릭
+	@ResponseBody
+	@RequestMapping(value = "findboard/removeBookmark")
+	public int removeBookmark(@RequestParam int findboardNum, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+
+		bookmarkDTO.setFindboardNum(findboardNum);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		
+		//실종공고테이블 북마크 개수 -1
+		bookmarkService.removeBookmarkCount(findboardNum);
+		//북마크 테이블에서 제거
+		bookmarkService.removeBookmark(bookmarkDTO);
+		
+		return bookmarkService.getBookmarkNum(findboardNum);
+	}
 	
 //	private Map<String, Object> getTargetUserAndBoard() {
 //        boolean findTarget = false;

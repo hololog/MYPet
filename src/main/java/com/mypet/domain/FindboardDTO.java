@@ -25,7 +25,7 @@ public class FindboardDTO {
 	private String address3;
 	private String detail_address;
 	private int result;
-	private int bookmarkCount;
+	private int bookmark_count;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp insert_date;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
