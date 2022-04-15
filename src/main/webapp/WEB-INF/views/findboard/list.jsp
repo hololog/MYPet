@@ -199,7 +199,7 @@
 											<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
 											<c:when test="${fb.pet_gender eq 2}">모름</c:when>
 										</c:choose>
-										/ ${fb.pet_age}살
+										/ ${fb.pet_age}
 									</div>
 									<div class="p-1 col-6 col-sm-12">
 										<i class="bi bi-calendar3"></i>
