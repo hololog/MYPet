@@ -123,8 +123,6 @@ public class FindBoardController {
             
             fileDTO.setUpload(path);
             
-            findboardService.insert_findboard_file(fileDTO);
-
             try {
 //                mf.transferTo(new File(safeFile));
                 File uploadfile = new File(path,safeFile);
