@@ -374,8 +374,8 @@
                                 <label class="input-group-text"> 동물 나이 </label>
                                 <input type="text" class="form-control" placeholder="숫자만 입력" name="pet_age">
                                 <select class="form-select" name="pet_age2">
-                                    <option value="month">개월</option>
-                                    <option value="year">년(세)</option>
+                                    <option value="개월">개월</option>
+                                    <option value="살">살(년)</option>
                                 </select>
                             </div>
                             <!--동물 성별 체크 radio-->
