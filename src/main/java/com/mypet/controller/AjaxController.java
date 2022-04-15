@@ -219,20 +219,4 @@ public class AjaxController {
 		return entity;
 	}
 	
-//	@RequestMapping(value = "/main/mainjson", method = RequestMethod.GET)
-//	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {
-//		
-//		BookmarkDTO bookmarkDTO = findboardService.getBookmark(findboardNum);
-//		model.addAttribute("findboardListMain", findboardListMain);
-//		
-//
-//		
-//		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
-//		
-//		
-//		ResponseEntity<List<FindboardDTO>> entity = 
-//				new ResponseEntity<List<FindboardDTO>>(findboardListMain,HttpStatus.OK);
-//		
-//		return entity;
-//	}
 }
