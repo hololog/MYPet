@@ -52,5 +52,7 @@ public interface FindboardDAO {
 
 	public void updatefilename();
 
+	public void update_board_num_forfile();
+
 }
 

@@ -113,6 +113,11 @@ public class FindboardDAOImpl implements FindboardDAO {
 	}	
 
 	@Override
+	public void update_board_num_forfile() {
+		sqlSession.update(namespace +".update_boardNum_forfile");
+	}
+
+	@Override
 	public void updatefilename() {
 		sqlSession.update(namespace +".updatefilename");
 	}

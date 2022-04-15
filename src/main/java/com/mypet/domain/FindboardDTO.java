@@ -11,6 +11,7 @@ public class FindboardDTO {
 	private int find_board_num;
 	private char board_code;
 	private String nickname;
+	private String email;
 	private String title;
 	private String content;
 	private int readcount;

@@ -160,20 +160,6 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 
 	@Override
-	public void insert_findboard_file(FileDTO fileDTO) {
-		//fileDTO
-		if(findboardDAO.getFileMaxNum() != null) 
-			fileDTO.setFile_num(findboardDAO.getFileMaxNum()+1);
-		else fileDTO.setFile_num(1);  
-        
-		fileDTO.setBoard_code('f');
-        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
-//        fileDTO.setFind_board_num(123);  // 수정하기
-        
-        findboardDAO.insert_findboard_file(fileDTO);
-	}
-
-	@Override
 	public List<FindboardDTO> getfindBoardListMain() {
 		return findboardDAO.getfindBoardListMain();
 	}
