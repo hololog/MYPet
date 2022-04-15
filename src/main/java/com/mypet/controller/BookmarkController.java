@@ -34,7 +34,6 @@ public class BookmarkController {
 		//게시물 번호 저장
 		bookmarkDTO.setFindboardNum(findboardNum);
 		bookmarkDTO.setEmail((String)session.getAttribute("email"));
-	
 		
 		//실종공고테이블 북마크 개수 +1,
 		bookmarkService.addBookmarkCount(findboardNum);
@@ -42,7 +41,6 @@ public class BookmarkController {
 		bookmarkService.addBookmark(bookmarkDTO);
 		
 		return bookmarkService.getBookmarkNum(findboardNum);
-		
 	}
 
 	//꽉찬 북마크 클릭
@@ -60,7 +58,6 @@ public class BookmarkController {
 		bookmarkService.removeBookmark(bookmarkDTO);
 		
 		return bookmarkService.getBookmarkNum(findboardNum);
-		
 	}
 	
 //	

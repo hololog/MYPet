@@ -5,22 +5,32 @@
   
 <mapper namespace="com.mypet.mappers.bookmarkMapper">
 	<insert id="addBookmark">
-		insert into bookmark(find_board_num, email) values(#{findboardNum}, #{email})
+		insert into bookmark(find_board_num, email) 
+	 	     values (#{findboardNum}, #{email})
 	</insert>
 	
 	<update id="addBookmarkCount">
-		update find_board set bookmark_count = bookmark_count + 1 where find_board_num = #{find_board_num}
+		update find_board 
+		   set bookmark_count = bookmark_count + 1 
+		 where find_board_num = #{find_board_num}
 	</update>
 	
 	<delete id="removeBookmark">
-		delete from bookmark where find_board_num = #{findboardNum} and email = #{email}
+		delete from bookmark 
+		 where find_board_num = #{findboardNum} 
+		   and email = #{email}
 	</delete>
 	
 	<update id="removeBookmarkCount">
-		update find_board set bookmark_count = bookmark_count - 1 where find_board_num = #{find_board_num} and bookmark_count >= 1
+		update find_board 
+		   set bookmark_count = bookmark_count - 1 
+		 where find_board_num = #{find_board_num} 
+		   and bookmark_count >= 1
 	</update>
 	
 	<select id="getBookmarkNum" resultType="int">
-		select bookmark_count from find_board where find_board_num = #{find_board_num}
+		select bookmark_count 
+		  from find_board 
+		 where find_board_num = #{find_board_num}
 	</select>
 </mapper>

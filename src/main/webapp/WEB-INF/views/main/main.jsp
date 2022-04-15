@@ -36,15 +36,17 @@ $(document).ready(function(){
 $(document).ready(function(){
 	//북마트 클릭이벤트
 	$('.bookmark-click').click(function(){
+		let no = $(this).children('.fbnum-ksk').val();
+// 		console.log(no);
 		//빈별표 일때
 		if($(this).children('i').attr('class') === 'fa-regular fa-star fa-2x'){
 			$(this).children('i').attr('class', 'fa-solid fa-star fa-2x');
 			$.ajax({
 				url:"${pageContext.request.contextPath }/findboard/addBookmark",
-				data:{"findboardNum" : $(this).children('.fbnum-ksk').val()},
+				data:{"findboardNum" : no},
 				success:function(rdata){
-					if (rdata != null) {
-						$('.eye-ksk').html("rdata");
+					if(rdata != null) {
+						$('#mark'+no).text(" "+ rdata);
 					}
 				}	
 			});
@@ -53,18 +55,15 @@ $(document).ready(function(){
 			$(this).children('i').attr('class', 'fa-regular fa-star fa-2x');
 			$.ajax({
 				url:"${pageContext.request.contextPath }/findboard/removeBookmark",
-				data:{"findboardNum" : $(this).children('.fbnum-ksk').val()},
+				data:{"findboardNum" : no},
 				success:function(rdata){
-					if (rdata != null) {
-						$('.eye-ksk').html(rdata);
+					if(rdata != null) {
+						$('#mark'+no).html(" "+ rdata);
 					}
 				}	
 			});
 		}
 	});
-	
-	
-	
 });
 
 // $("#displayList").hide();
@@ -264,7 +263,7 @@ $(document).ready(function(){
                 <p class="card-text">${flist.address } ${flist.address2 }</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i><span class="star-ksk"> ${flist.bookmarkCount }  </span> 
+                    <i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i><span id="mark${flist.find_board_num }" class="star-ksk"> ${flist.bookmark_count }</span> 
                     <i class="bi bi-chat-dots"></i> <span class="chat-ksk"> 0 </span> 
                     <i class="bi bi-eye-fill"></i> <span class="eye-ksk"> ${flist.readcount }</span>
                   </div>
