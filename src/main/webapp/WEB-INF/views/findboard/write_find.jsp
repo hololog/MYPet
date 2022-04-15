@@ -374,8 +374,8 @@
                                 <label class="input-group-text"> 동물 나이 </label>
                                 <input type="text" class="form-control" placeholder="숫자만 입력" name="pet_age">
                                 <select class="form-select" name="pet_age2">
-                                    <option value="month">개월</option>
-                                    <option value="year">년(세)</option>
+                                    <option value="개월">개월</option>
+                                    <option value="살">살(년)</option>
                                 </select>
                             </div>
                             <!--동물 성별 체크 radio-->
@@ -447,7 +447,7 @@
                              -->
                              
                              <!-- 기본 multiple file 전달 -->
-                             <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div>
+                             <div id="fileUpload" class="dragAndDropDiv">업로드할 이미지를 드래그하여 넣기 <br> (1장씩 첨부, 최대 3장)</div>
         						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
 
                             <!--submit 버튼-->

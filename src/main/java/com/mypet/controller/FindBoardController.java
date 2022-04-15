@@ -80,7 +80,7 @@ public class FindBoardController {
 		System.out.println(mtfRequest.getParameter("missing_date"));
 		
 		fbDTO.setMissing_date(mtfRequest.getParameter("missing_date"));
-
+		System.out.println("missing_date 입력됨");
 		fbDTO.setPet_age(mtfRequest.getParameter("pet_age") + mtfRequest.getParameter("pet_age2")); // pet_age + 개월/년 한번에 담기
 
 		
@@ -88,7 +88,9 @@ public class FindBoardController {
 		fbDTO.setPet_name(mtfRequest.getParameter("pet_name"));
 		fbDTO.setPet_type(mtfRequest.getParameter("pet_type"));
 		fbDTO.setReward(Integer.parseInt(mtfRequest.getParameter("reward")));
-		fbDTO.setTitle(""); // 없애기
+		fbDTO.setContact(mtfRequest.getParameter("contact"));
+		
+		findboardService.insert_findboard(fbDTO);
 		
 	       return "redirect:/findboard/list";
 		}
@@ -104,8 +106,8 @@ public class FindBoardController {
 		System.out.println("fileList : " + fileList);
 		
 		String path = uploadPath; 
-
 		for (MultipartFile mf : fileList) {
+			
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             long fileSize = mf.getSize(); // 파일 사이즈
 
@@ -121,8 +123,6 @@ public class FindBoardController {
             
             fileDTO.setUpload(path);
             
-            findboardService.insert_findboard_file(fileDTO);
-
             try {
 //                mf.transferTo(new File(safeFile));
                 File uploadfile = new File(path,safeFile);
@@ -133,6 +133,8 @@ public class FindBoardController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            
+            findboardService.insert_findboard_file(fileDTO);
         }
 
         return "redirect:/findboard/list";

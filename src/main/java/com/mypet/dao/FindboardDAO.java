@@ -50,5 +50,9 @@ public interface FindboardDAO {
 
 	public List<FindboardDTO> getfindBoardListMain(String email);
 
+	public void updatefilename();
+
+	public void update_board_num_forfile();
+
 }
 

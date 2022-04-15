@@ -112,6 +112,21 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectList(namespace + ".getfindBoardListMain", email);
 	}	
 
+	@Override
+	public void update_board_num_forfile() {
+		sqlSession.update(namespace +".update_boardNum_forfile");
+	}
+
+	@Override
+	public void updatefilename() {
+		sqlSession.update(namespace +".updatefilename");
+	}
+	
+	
+
+
+	
+	
 	
 	
 	

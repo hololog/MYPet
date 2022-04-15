@@ -11,6 +11,7 @@ public class FindboardDTO {
 	private int find_board_num;
 	private char board_code;
 	private String nickname;
+	private String email;
 	private String title;
 	private String content;
 	private int readcount;
@@ -24,6 +25,7 @@ public class FindboardDTO {
 	private String address2;
 	private String address3;
 	private String detail_address;
+	private String contact;
 	private int result;
 	private int bookmark_count;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -31,6 +33,6 @@ public class FindboardDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp delete_date;
 	private int reward;
-	private String upload;
+	private String upload; //file테이블의 save_filename 을 담을 변수
 	private String book;
 }
