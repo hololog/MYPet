@@ -447,7 +447,7 @@
                              -->
                              
                              <!-- 기본 multiple file 전달 -->
-                             <div id="fileUpload" class="dragAndDropDiv">Drag & Drop Files Here or Browse Files</div>
+                             <div id="fileUpload" class="dragAndDropDiv">업로드할 이미지를 드래그하여 넣기 <br> (1장씩 첨부, 최대 3장)</div>
         						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
 
                             <!--submit 버튼-->
