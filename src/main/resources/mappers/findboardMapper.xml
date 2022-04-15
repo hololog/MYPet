@@ -48,7 +48,7 @@
 	</select>
 	
 	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
-		select concat(upload,"\\",filename) as upload from find_board_file order by find_board_num desc limit #{startRow},#{pageSize}
+		select concat(upload,"\\",save_filename) as upload from find_board_file order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
 	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
