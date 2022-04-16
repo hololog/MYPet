@@ -38,10 +38,11 @@
 <br><br><br><br>
    <form action="${pageContext.request.contextPath }/notice/write_noticePro" method="post">
     <div class="container py-5"name="board_code">
+    <input type="hidden" value="${sessionScope.nickname}" name="nickname">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
-	 <input type="hidden" value="${sessionScope.nickname}" name="nickname">
+
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
@@ -70,7 +71,7 @@
 
        <div class="col-12" id="editor">
         
-       <textarea name="content" id="summernote" placeholder="내용을 입력해주세요." >
+       <textarea name="content" id="summernote"  >
       
 
        </textarea>

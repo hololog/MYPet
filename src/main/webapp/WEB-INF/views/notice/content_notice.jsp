@@ -54,6 +54,8 @@
             <c:if test="${ ! empty sessionScope.nickname }">
 
 	<c:if test="${sessionScope.nickname  eq boardDTO.nickname}">
+            
+
             <button
                 type="button"
                 class="btn btn-outline-primary "
@@ -84,8 +86,9 @@
         <!-- 수정삭제 목록 버튼 끝 -->
 <br>
         <!-- SNS버튼 시작 -->
-        <div
-            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+         <div
+            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"
+            >
             <!-- 페이스북 공유 버튼 -->
            			<a href=""
 						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
@@ -113,12 +116,21 @@
 
         <!-- 이미지 슬라이드 시작 -->
 <!--         <div > -->
+
 <!--             <div
 <!--                 id="carouselExampleIndicators" -->
 <!--                 class="carousel slide" -->
 <!--                 data-bs-ride="carousel" -->
 <!--                 style="width: 1500px; " -->
 <!--                 > --> -->
+
+            <!-- <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-bs-ride="carousel"
+                style="width: 1500px; "
+                > -->
+
 <!--             <div -->
 <!--                 id="carouselExampleIndicators" -->
 <!--                 class="carousel slide" -->
@@ -188,20 +200,24 @@
 <!--         </div> -->
         <!-- 슬라이드 쇼 끝 -->
           <!-- 글 -->
-         <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
+        <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
+        <br>
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
+           
                <table id="notice text-center border">
 				<tr><td>글번호 : </td><td> ${boardDTO.notice_num}</td></tr>
-				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-7"></td>
-				     <td>작성일 : </td><td><fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
+				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td>
+				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
+				
+				<hr>
 				<br>
 				<br>
 				<div>글내용</div>
-				<br><br>
-				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br>
+				<div class="shadow-sm p-3 mb-5 bg-body rounded justify-content-center w-100" style="height:70%" ><h3>${boardDTO.content}</h3></div>
 				<br><br>
             </div>
         </div>

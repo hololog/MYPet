@@ -55,11 +55,10 @@
         <!-- 검색창 종료-->
 
         <!-- 수정 삭제 목록 -->
-        <div
-            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+        <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
         <c:if test="${ ! empty sessionScope.nickname }">
 
-	<c:if test="${sessionScope.nickname  eq boardDTO.nickname}">
+        <c:if test="${sessionScope.nickname eq boardDTO.nickname}">
           
 		            <button
 		                type="button"
@@ -83,6 +82,9 @@
                 </script>
      		      </c:if>
         </c:if>
+
+		              
+
             <button
                 type="button"
                 class="btn btn-outline-primary "
@@ -90,10 +92,13 @@
         </div>
        
         <!-- 수정삭제 목록 버튼 끝 -->
+
 <br>
+     
         <!-- SNS버튼 시작 -->
         <div
-            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"
+            >
             <!-- 페이스북 공유 버튼 -->
            			<a href=""
 						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
@@ -189,6 +194,7 @@
          <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
         <br>
+        <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
            
@@ -198,12 +204,12 @@
 				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
 				
-				
+				<hr>
 				<br>
 				<br>
 				<div>글내용</div>
-				<br><br>
-				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br>
+				<div class="shadow-sm p-3 mb-5 bg-body rounded justify-content-center w-100" style="height:70%" ><h3>${boardDTO.content}</h3></div>
 				<br><br>
             </div>
         </div>
@@ -386,6 +392,12 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
+
+   
+
+<br>
+   
+   
    <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
             <div class="card-body">
@@ -397,66 +409,57 @@
                          <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">
+				<div class="card bg-light" style="margin-top: 30px">
+					<div class="card-body">
+						<div id="comment-count" style="margin-bottom: 5px">
+							댓글 <span id="count">4</span>
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control"
+								placeholder="댓글을 입력해 주세요!" aria-label="Recipient's username"
+								aria-describedby="button-addon2">
+							<button class="btn btn-outline-secondary" type="button"
+								id="button-addon2"
+								style="background-color: white; color: #3f51b5; border-color: #3f51b5">제출</button>
+						</div>
 
-                    <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary "
-                        onclick="location.href=''">등록</button>
-                </div>
-                <!-- <div class="input-group mb-3"> <input type="text" class="form-control"
-                placeholder="Recipient's username" aria-label="Recipient's username"
-                aria-describedby="button-addon2"> <button class="btn btn-outline-secondary"
-                type="button" id="button-addon2">Button</button> </div> -->
-                <div class="justify-content-center container mx-5">
-                    <div class="d-flex mb-4 ">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3">
-                            <div class="fw-bold">익명1<p style="font-size: x-small;">2022.03.30</p></div>
-                            꼭 찾으셧으면 좋겟어요 ㅠㅠ
+						<div class="d-flex mb-4">
+							<div class="flex-shrink-0">
+								<img class="rounded-circle"
+									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</div>
+							<div class="ms-3" id="commentList">
+						
+									<div class="fw-bold"></div>
+									<c:forEach items="${replyList}" var="commentList">
+									<p>${commentList.c_nik}</p> 
+									<p>${commentList.c_content}</p>
+									<div class="d-flex mt-4">
+										<div class="flex-shrink-0">
+											<img class="rounded-circle"
+												src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+												alt="...">
+										</div>
+										</div>
+										</c:forEach>
+							
+							</div>
+						</div>
+						<!-- Single comment-->
+						<div class="d-flex">
+							<div class="flex-shrink-0">
+								<img class="rounded-circle"
+									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</div>
+							<div class="ms-3">
+								<div class="fw-bold">${commentList.c_nik}</div>
+								찾았습니다!! 감사합니다!!
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
-                            <div class="d-flex mt-4 ">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명2</div><p style="font-size: x-small;">2022.03.30</p>
-                                    그러게요 ㅠㅠ
-                                </div>
-                            </div>
-                            <!-- Child comment 2-->
-                            <div class="d-flex mt-4 mx-5">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명3</div><p style="font-size: x-small;">2022.03.30</p>
-                                    33
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single comment-->
-                    <div class="row-vh d-flex flex-row">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3 row">
-                            <div class="fw-bold">글작성자</div><p style="font-size: x-small;">2022.03.30</p>
-                            찾았습니다!! 감사합니다!!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     
 
  <!-- 게시판 끝 -->

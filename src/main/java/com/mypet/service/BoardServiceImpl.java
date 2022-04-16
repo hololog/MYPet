@@ -288,6 +288,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
+	
 //	@Override
 //	public void insert_freeboard_file(FileDTO fileDTO) {
 //		//fileDTO
