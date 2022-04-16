@@ -107,10 +107,7 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 	
 	@Override
-		//find_board_num 구하기; 
-		//readcount, insertdate 설정
 	public void insert_findboard(FindboardDTO findboardDTO) {
-
 		
 		if(findboardDAO.getMaxNum() != null) 
 			findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);

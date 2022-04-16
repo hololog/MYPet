@@ -121,7 +121,7 @@ public class FindBoardController {
             fileDTO.setFilename(originFileName);
             fileDTO.setSave_filename(safeFile); // safefile넣기
             
-            fileDTO.setUpload(path);
+            fileDTO.setUpload(path +"/"+ safeFile);
             
             try {
 //                mf.transferTo(new File(safeFile));

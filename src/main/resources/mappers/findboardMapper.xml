@@ -31,7 +31,7 @@
 	<insert id="update_boardNum_forfile">
 		update find_board_file
 		set find_board_num = (select max(find_board_num) from find_board)
-		where find_board_num = 0
+		where find_board_num = 0 and board_code = 'f'
 	</insert>
 	
 	<!-- 은혜 실종공고 글쓰기 파일첨부 -->
