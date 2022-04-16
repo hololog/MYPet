@@ -35,13 +35,13 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
    <form action="${pageContext.request.contextPath }/notice/write_noticePro" method="post">
     <div class="container py-5"name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
-	<input type="text"name="nickname"id="nicename">
+	 <input type="hidden" value="${sessionScope.nickname}" name="nickname">
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
@@ -52,7 +52,7 @@
           </div>
           
         </div>
-       
+          <h2>사진은 최대 2개까지 가능합니다</h2>
       </div>
       
       <hr>

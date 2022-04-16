@@ -31,7 +31,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-	
+<br><br><br><br>	
         <!-- 제목 시작 -->
        <div class="container">
             <h1 class="sub-title">공지사항</h1>
@@ -127,13 +127,13 @@
                   </form>
                   
                   <!-- 글쓰기버튼 -->
-                 <c:if test="${! empty sessionScope.user_id }">
-					<c:if test="${sessionScope.user_id  ne 'admin'}">
+                 
+					<c:if test="${sessionScope.nickname  ne 'admin'}">
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
                   </c:if>
-                  </c:if>
+                  
                  <!-- 다음버튼 -->
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">

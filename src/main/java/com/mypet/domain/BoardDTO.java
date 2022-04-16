@@ -7,7 +7,8 @@ public class BoardDTO {
 	private int free_board_num;
 	private int tip_board_num;
 	private int notice_num;
-	private char board_code;
+	private String board_code;
+	private String email;
 	private String nickname;
 	private String subject;
 	private String content;
@@ -69,10 +70,10 @@ public class BoardDTO {
 	public void setUpdate_date(Timestamp update_date) {
 		this.update_date = update_date;
 	}
-	public char getBoard_code() {
+	public String getBoard_code() {
 		return board_code;
 	}
-	public void setBoard_code(char board_code) {
+	public void setBoard_code(String board_code) {
 		this.board_code = board_code;
 	}
 	public int getTip_board_num() {
@@ -105,6 +106,12 @@ public class BoardDTO {
 	}
 	public void setFile(String file) {
 		this.file = file;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	

@@ -313,9 +313,9 @@ public class BoardController {
 	//세히
 	@RequestMapping(value = "/freeboard/write_freePro", method = RequestMethod.POST)
 	public String writeFreePro(BoardDTO boardDTO)throws Exception {
-		FileDTO fileDTO=new FileDTO();
+//		FileDTO fileDTO=new FileDTO();
 		boardService.write_freeBoard(boardDTO);
-		boardService.insert_freeboard_file(fileDTO);
+//		boardService.insert_freeboard_file(fileDTO);
 			
 		return "redirect:/freeboard/list_free";
 	}
@@ -619,41 +619,41 @@ public class BoardController {
 			return "redirect:freeboard/like_check";
 		}
 		
-		@RequestMapping(value = "/freedboard/write_free_filePro")
-	    public String freeFilepro(MultipartHttpServletRequest mtfRequest) {
-		// 파일들고오기 
-			FileDTO fileDTO = new FileDTO();
-
-			List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-	        for (MultipartFile mf : fileList) {
-	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	            long fileSize = mf.getSize(); // 파일 사이즈
-
-	            System.out.println("originFileName : " + originFileName);
-	            System.out.println("fileSize : " + fileSize);
-	            
-	            UUID uid = UUID.randomUUID();
-	            String safeFile = uid.toString() +"_"+ originFileName;
-
-	            fileDTO.setExt(originFileName.substring(originFileName.lastIndexOf(".")));
-	            fileDTO.setFilename(originFileName);
-	            fileDTO.setSave_filename(originFileName); // safefile넣기
-	            fileDTO.setUpload(uploadPath);
-	            
-	            boardService.insert_freeboard_file(fileDTO);
-
-	            try {
-	                mf.transferTo(new File(safeFile));
-	            } catch (IllegalStateException e) {
-	                e.printStackTrace();
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-
-        return "redirect:/freedboard/list_free";
-    }
+//		@RequestMapping(value = "/freedboard/write_free_filePro")
+//	    public String freeFilepro(MultipartHttpServletRequest mtfRequest) {
+//		// 파일들고오기 
+//			FileDTO fileDTO = new FileDTO();
+//
+//			List<MultipartFile> fileList = mtfRequest.getFiles("file");
+//
+//	        for (MultipartFile mf : fileList) {
+//	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+//	            long fileSize = mf.getSize(); // 파일 사이즈
+//
+//	            System.out.println("originFileName : " + originFileName);
+//	            System.out.println("fileSize : " + fileSize);
+//	            
+//	            UUID uid = UUID.randomUUID();
+//	            String safeFile = uid.toString() +"_"+ originFileName;
+//
+//	            fileDTO.setExt(originFileName.substring(originFileName.lastIndexOf(".")));
+//	            fileDTO.setFilename(originFileName);
+//	            fileDTO.setSave_filename(originFileName); // safefile넣기
+//	            fileDTO.setUpload(uploadPath);
+//	            
+//	            boardService.insert_freeboard_file(fileDTO);
+//
+//	            try {
+//	                mf.transferTo(new File(safeFile));
+//	            } catch (IllegalStateException e) {
+//	                e.printStackTrace();
+//	            } catch (IOException e) {
+//	                e.printStackTrace();
+//	            }
+//	        }
+//
+//        return "redirect:/freedboard/list_free";
+//    }
 
 		 
 		 

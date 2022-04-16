@@ -54,7 +54,9 @@
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-          
+           <c:if test="${ ! empty sessionScope.nickname }">
+
+	<c:if test="${sessionScope.nickname  eq boardDTO.nickname}">
 		            <button
 		                type="button"
 		                class="btn btn-outline-primary "
@@ -62,48 +64,54 @@
 		            <button
 		                type="button"
 		                class="btn btn-outline-primary "
-		                onclick="location.href='${pageContext.request.contextPath }/reviewboard/delete_review?tip_board_num=${boardDTO.tip_board_num}'">삭제</button>
-     		  
+		                onclick='del()'>삭제</button>
+		                
+		                 <script type="text/javascript">
+			                function del() {
+			                	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			                        alert("삭제"); // 하고 링크된 곳으로
+			                        location.href='${pageContext.request.contextPath }/reviewboard/delete_review?tip_board_num=${boardDTO.tip_board_num}';
+			                	}else{   //취소
+			                        alert("삭제를 취소하셨습니다");
+			                    }
+			                }   
+			                	
+                </script>
+                
+     		  </c:if>
+     		  </c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "
                 onclick="location.href='${pageContext.request.contextPath }/reviewboard/list_review'">목록</button>
         </div>
         <!-- 수정삭제 목록 버튼 끝 -->
-
+<br>
         <!-- SNS버튼 시작 -->
         <div
-            class="col-11d-flex justify-content-end align-items-center flex-wrap gap-2"
-            style="width: 100%; text-align: right; margin-bottom: 2px;">
+            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
             <!-- 페이스북 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600');">
-                <img
-                    src="../img/face.png"
-                    title="페이스북으로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+           			<a href=""
+						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/face.png"
+						title="페이스북으로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 트위터 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); ">
-                <img
-                    src="../img/twit.png"
-                    title="트위터로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+					<!-- 트위터 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/twit.png"
+						title="트위터로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 카카오 스토리 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); "><img
-                src="../img/kakaop.jpg"
-                title="카카오스토리로 공유하기"
-                class="sharebtn_custom"
-                style="width: 32px;"></a>
-        </div>
+					<!-- 카카오 스토리 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); return false;"><img
+						src="${pageContext.request.contextPath }/resources/img/kakaop.jpg"
+						title="카카오스토리로 공유하기" class="sharebtn_custom" style="width: 32px;"></a>
+				</div>
         <!-- SNS버튼 끝 -->
         <br>
 
@@ -203,16 +211,7 @@
         </div>
         <!-- 글끝 -->
 
-        <!-- 제보 버튼 -->
-        <div style="text-align: center; margin-bottom: 10px">
-            <span
-                class="btn btn-primary"
-                role="button"
-                style="color: white"
-                onclick="report()">제보하기</span>
-            <p class="arrow_box">연락수단 확인하고 글쓴이에게 제보하기!</p>
-        </div>
-        <!-- 제보버튼 끝 -->
+      
 
         <!-- <div class="row">-->
         <!-- <div class="col-md-12 col-xl-8">-->
@@ -260,63 +259,15 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-    <section class="container mb-7 text-center">
+     <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
-           <script>
-           var heart = 0;  
-           jQuery(function($) {
-        	   $.ajax({
-					url:'${pageContext.request.contextPath }/reviewboard/like_check',
-					data:{
-						"user_id":$('#user_id').val()
-						"free_board_num":$('#free_board_num').val()
-						},
-					success:function(rdata){
-						if(rdata==0){
-						    $(this).attr('class','bi-heart');
-                          heart = 0
-						}else{
-							 $(this).attr('class','bi-heart-fill');
-                          heart = 1
-						}
-					}
-				}); 
-        	   $('#swapHeart').on('click', function() {
-        	     var $el = $(this),
-        	       textNode = this.lastChild;
-        	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
-        	     $el.toggleClass('swap');
-        	   });
-        	   
-        	 });
-           </script>
-			
+            <div class="card-body">
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
-                 <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
-						
-						    <script>
-						  
-						        $('i').on('click',function(){
-						        		
-						            if (heart==0 ){
-						                $(this).attr('class','bi-heart-fill');
-						                heart++;
-						                
-						            }else if(heart==1){
-						                $(this).attr('class','bi-heart');
-						                heart--;
-						                //델리트
-						            }
-						
-						        });						        	
-						        
-						    </script>
-                		
-                          <i class="fa-regular fa-comment-dots">${boardDTO.like_count} </i>
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">
 
@@ -324,7 +275,7 @@
                     <button
                         type="button"
                         class="btn btn-outline-primary "
-                        onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review'">등록</button>
+                        onclick="location.href=''">등록</button>
                 </div>
                 <!-- <div class="input-group mb-3"> <input type="text" class="form-control"
                 placeholder="Recipient's username" aria-label="Recipient's username"
@@ -413,19 +364,5 @@ var url_combine_tw = url_default_tw_txt + document.title +
         url_default_tw_url + url_this_page;
 </script>
 
-<script>
-function report() {
-    var result = confirm("동물신고전화 이외의 용도로 사용하지 않음을 동의하십니까?");
-    if (result) {
-        window.open(
-            '',
-            '상세사진',
-            'width=430,height=500,location=no,status=no,scrollbars=yes'
-        );
-    } else {
-        alert("동의 후 이용가능합니다. 불법개인정보 수집은 법적 처벌대상이 될수있습니다. ");
-    }
-}
-</script>
 </body>
 </html>

@@ -7,29 +7,29 @@
 <!-- insert start -->
 	<insert id="writefreeBoard">
 		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date) values
-        ( #{free_board_num},'r', #{subject}, #{content}, #{nickname}, #{insert_date} )
+        ( #{free_board_num},"자유", #{subject}, #{content}, #{nickname}, #{insert_date} )
  
 	</insert>
 	
 	
 	<insert id="writenoticeBoard">
 		insert into notice (notice_num, board_code, subject, content,insert_date) values
-        ( #{notice_num},'n', #{subject}, #{content},  #{insert_date}  )
+        ( #{notice_num},"공지", #{subject}, #{content},  #{insert_date}  )
  
 	</insert>
 	
 	<insert id="writereviewBoard">
 		insert into tip_board (tip_board_num, board_code, subject, content, nickname,insert_date) values
-        ( #{tip_board_num},'v', #{subject}, #{content}, #{nickname}, #{insert_date}  )
+        ( #{tip_board_num},"꿀팁", #{subject}, #{content}, #{nickname}, #{insert_date}  )
  
 	</insert>
 <!-- write insert end -->
 
 <!-- file start -->
-	<insert id="insert_freeboard_file">
-		insert into free_board_file(file_num, board_num, board_code, upload, filename, save_filename, file_upload_date)
-		values (#{file_num},#{free_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date})
-	</insert>
+<!-- 	<insert id="insert_freeboard_file"> -->
+<!-- 		insert into free_board_file(file_num, board_num, board_code, upload, filename, save_filename, file_upload_date) -->
+<!-- 		values (#{file_num},#{free_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date}) -->
+<!-- 	</insert> -->
 	
 <!-- file end -->
 

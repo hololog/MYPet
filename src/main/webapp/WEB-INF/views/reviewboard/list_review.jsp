@@ -31,7 +31,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
         <!-- 제목 시작 -->
        <div class="container">
             <h1 class="sub-title">꿀팁 & 입양후기</h1>
@@ -126,29 +126,30 @@
                   </div>
                   </form>
                   <!-- 아이디 없을때 -->
-<%--                   <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"> --%>
-<!--                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div> -->
-<!--                   	<script> -->
+                  <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+                    <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
+                  	<script>
 
-<!-- // 						function login() { -->
+				function login() { 
 						
-<!-- // 						  alert("로그인해라"); -->
+ 						  alert("로그인해라"); 
 						
-<%-- // 						  location.href = "${pageContext.request.contextPath }/main/main"; --%>
+ 						  location.href = "${pageContext.request.contextPath }/main";
 						
-<!-- // 						} -->
+ 						} 
 						
-<!-- 						</script> -->
-<%--                   </c:if> --%>
+ 						</script> 
+                  </c:if>
                   
                   
 <!--                   아이디 있을때 -->
-<%--                   <c:if test="${!empty user_id }"> --%>
+                 <c:if test="${!empty sessionScope.nickname }">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button>
                   </div>
-<%--                   </c:if> --%>
+                  </c:if>
+
                   <!-- 다음버튼 -->
                   <div class="text-center clear">
                         <div class="pagination justify-content-center" style="margin:20px 0">

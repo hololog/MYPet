@@ -288,19 +288,19 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	@Override
-	public void insert_freeboard_file(FileDTO fileDTO) {
-		//fileDTO
-		if(boardDAO.getFileMaxNum() != null) 
-			fileDTO.setFile_num(boardDAO.getFileMaxNum()+1);
-		else fileDTO.setFile_num(1);  
-        
-		fileDTO.setBoard_code('r');
-        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
-        fileDTO.setFind_board_num(10000);  // 수정하기
-        
-        boardDAO.insert_freeboard_file(fileDTO);
-	}
+//	@Override
+//	public void insert_freeboard_file(FileDTO fileDTO) {
+//		//fileDTO
+//		if(boardDAO.getFileMaxNum() != null) 
+//			fileDTO.setFile_num(boardDAO.getFileMaxNum()+1);
+//		else fileDTO.setFile_num(1);  
+//        
+//		fileDTO.setBoard_code('r');
+//        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
+//        fileDTO.setFind_board_num(10000);  // 수정하기
+//        
+//        boardDAO.insert_freeboard_file(fileDTO);
+//	}
 
 
 	
