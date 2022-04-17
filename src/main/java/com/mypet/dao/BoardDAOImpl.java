@@ -214,19 +214,14 @@ public class BoardDAOImpl implements BoardDAO{
 		
 	}
 
-	@Override
-	public void insert_freeboard_file(BoardDTO boardDTO) {
-		sqlSession.insert(namespace+".insert_freeboard_file", boardDTO);
-	}
+//	@Override
+//	public void insert_freeboard_file(FileDTO fileDTO) {
+//		sqlSession.insert(namespace+".insert_freeboard_file", fileDTO);
+//	}
 	@Override
 	public Integer getFileMaxNum() {
 		return sqlSession.selectOne(namespace+".getFileMaxNum");
 	}
-
-//	@Override
-//	public FileDTO getfreefileNum(int num) {
-//		return sqlSession.selectOne(namespace+".getfreefileNum", num);
-//	}
 	
 	
 	

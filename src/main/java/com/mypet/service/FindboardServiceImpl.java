@@ -108,24 +108,22 @@ public class FindboardServiceImpl implements FindboardService {
 	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
-		//findboardDTO
-//		if(findboardDAO.getMaxNum() != null) 
-//			findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
-//		else findboardDTO.setFind_board_num(1);
 		
-		System.out.println("순서확인 service : insert_findboard(FindboardDTO findboardDTO) ");
-
+		if(findboardDAO.getMaxNum() != null) 
+			findboardDTO.setFind_board_num(findboardDAO.getMaxNum()+1);
+		else findboardDTO.setFind_board_num(1);
 		//readcount, insertdate, boardnum 설정
 		findboardDTO.setReadcount(0);
 		findboardDTO.setInsert_date(new Timestamp(System.currentTimeMillis()));
 		findboardDTO.setResult(0); // 미해결
-//		findboardDTO.setUpload(findboardDAO.getUpload());
 		System.out.println("순서확인 service : getAdressCheck"+ findboardDTO.getAddress() + " " + findboardDTO.getDetail_address()); //체크 
 		System.out.println("순서확인 service : missing_date check :" + findboardDTO.getMissing_date());
 		System.out.println("순서확인 service : getAgeCheck"+ findboardDTO.getPet_age()); 
 		
 		findboardDAO.insert_findboard(findboardDTO);
 		findboardDAO.update_board_num_forfile();
+		findboardDAO.updatefilename();
+		
 	}
 	
 	@Override

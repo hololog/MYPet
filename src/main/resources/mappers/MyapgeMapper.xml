@@ -43,6 +43,14 @@
 		limit 10
 	</select>
 	
+	<select id="pwCheck" resultType="String">
+		select * from user where email=#{email}
+	</select>
+	
+	<update id="pwUpdate">
+		update user set password=#{password} where email=#{email}
+	</update>
+	
 <!-- 	<select id="getmyfind_BoardList" resultType="com.mypet.domain.MypageDTO"> -->
 <!-- 		select @rownum := @rownum + 1 as rownum, num -->
 	

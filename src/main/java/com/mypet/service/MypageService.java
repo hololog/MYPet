@@ -18,6 +18,10 @@ public interface MypageService {
 	public MemberDTO getMember(String email);
 	
 	public MemberDTO updateCheck(MemberDTO memberDTO);
+	
+	public MemberDTO pwCheck(MemberDTO memberDTO);
+	
+	public void pwUpdate(MemberDTO memberDTO);
 
 //	public List<MypageDTO> getmyBoardList(BoradDTO boardDTO);
 	

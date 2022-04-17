@@ -125,9 +125,6 @@
 										}
 									});
 				</script>
-				<script>
-				
-				</script>
 				<!-- 지도 api가져올 자리 -->
 				<div class="mb-3 col-md-12 col-lg-5" style="margin-left: 20px"
 					id="finder-photo">
@@ -202,12 +199,11 @@
 											<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
 											<c:when test="${fb.pet_gender eq 2}">모름</c:when>
 										</c:choose>
-										/ ${fb.pet_age}살
+										/ ${fb.pet_age}
 									</div>
 									<div class="p-1 col-6 col-sm-12">
 										<i class="bi bi-calendar3"></i>
-										<fmt:formatDate value="${fb.missing_date}"
-											pattern="yyyy.MM.dd" />
+											${fb.missing_date}
 									</div>
 									<div class="p-1 col-6 col-sm-12">
 										<i class="bi bi-geo-alt"></i> ${fb.detail_address} 부근
@@ -368,8 +364,7 @@
 																		<td width="113"
 																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
 																			날짜</td>
-																		<td width="" style="text-align: center"><b> <fmt:formatDate
-																					value="${fb.missing_date}" pattern="yyyy.MM.dd" />
+																		<td width="" style="text-align: center"><b> ${fb.missing_date}
 																		</b></td>
 																	</tr>
 																</table>

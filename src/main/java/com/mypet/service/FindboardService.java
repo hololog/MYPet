@@ -38,7 +38,7 @@ public interface FindboardService {
 
 	public List<String> getTownList(AddressDTO addressDTO);
 
-	public void insert_findboard_file(FileDTO fileDTO); 
+	public void insert_findboard_file(FileDTO fileDTO);
 
 	public List<FindboardDTO> getfindBoardListMain();
 

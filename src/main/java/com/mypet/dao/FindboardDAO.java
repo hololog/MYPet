@@ -24,8 +24,6 @@ public interface FindboardDAO {
 	
 	public Integer getFileMaxNum();
 	
-	public void update_board_num_forfile();
-	
 //	public FindboardDTO bringfindBoard(int num);
 	
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
@@ -52,7 +50,9 @@ public interface FindboardDAO {
 
 	public List<FindboardDTO> getfindBoardListMain(String email);
 
-//	public String getUpload();
+	public void updatefilename();
+
+	public void update_board_num_forfile();
 
 }
 

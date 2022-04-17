@@ -3,7 +3,6 @@ package com.mypet.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,6 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -34,13 +32,11 @@ import com.google.gson.JsonObject;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
-import com.mypet.domain.FindcommentDTO;
 
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.PageDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
-import com.mypet.service.FindcommentService;
 import com.mypet.service.MemberService;
 
 @Controller
@@ -52,9 +48,6 @@ public class BoardController {
 	
 	@Inject
 	public FindboardService findboardService;
-	
-	@Inject
-	public FindcommentService findcommentService;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
@@ -96,10 +89,6 @@ public class BoardController {
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
-		FindboardDTO findboardDTO = findboardService.getfindBoard(1);
-		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
-		model.addAttribute("replyList", replyList);
-		
 		
 		
 		return "findboard/list";
@@ -140,9 +129,6 @@ public class BoardController {
 		model.addAttribute("findmissboardList", findmissboardList);
 		model.addAttribute("pageDTO", pageDTO);
 		
-		FindboardDTO findboardDTO = findboardService.getfindBoard(1);
-		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
-		model.addAttribute("replyList", replyList);
 		
 		return "findboard/listM";
 	}
@@ -327,6 +313,7 @@ public class BoardController {
 	//세히
 	@RequestMapping(value = "/freeboard/write_freePro", method = RequestMethod.POST)
 	public String writeFreePro(BoardDTO boardDTO)throws Exception {
+//		FileDTO fileDTO=new FileDTO();
 		boardService.write_freeBoard(boardDTO);
 //		boardService.insert_freeboard_file(fileDTO);
 			
@@ -378,17 +365,14 @@ public class BoardController {
 		
 		int num=Integer.parseInt(request.getParameter("free_board_num"));
 		
-		
 		boardService.updatefreeReadcount(num);
 		
 		BoardDTO boardDTO=boardService.getfreeBoard(num);
 		
-//		FileDTO fileDTO=boardService.getfreefileNum(num);
-		
-//		fileDTO.setFilename(uploadPath);
+		FileDTO fileDTO=new FileDTO();
 		
 		model.addAttribute("boardDTO", boardDTO);
-//		model.addAttribute("fileDTO", fileDTO);
+		model.addAttribute("fileDTO", fileDTO);
 		
 		return "freeboard/content_free";
 	}
@@ -635,80 +619,43 @@ public class BoardController {
 			return "redirect:freeboard/like_check";
 		}
 		
-		@RequestMapping(value = "/freedboard/write_free_filePro")
-	    public String freeFilepro(MultipartHttpServletRequest mtfRequest) {
-		// 파일들고오기 
-			BoardDTO boardDTO = new BoardDTO();
+//		@RequestMapping(value = "/freedboard/write_free_filePro")
+//	    public String freeFilepro(MultipartHttpServletRequest mtfRequest) {
+//		// 파일들고오기 
+//			FileDTO fileDTO = new FileDTO();
+//
+//			List<MultipartFile> fileList = mtfRequest.getFiles("file");
+//
+//	        for (MultipartFile mf : fileList) {
+//	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+//	            long fileSize = mf.getSize(); // 파일 사이즈
+//
+//	            System.out.println("originFileName : " + originFileName);
+//	            System.out.println("fileSize : " + fileSize);
+//	            
+//	            UUID uid = UUID.randomUUID();
+//	            String safeFile = uid.toString() +"_"+ originFileName;
+//
+//	            fileDTO.setExt(originFileName.substring(originFileName.lastIndexOf(".")));
+//	            fileDTO.setFilename(originFileName);
+//	            fileDTO.setSave_filename(originFileName); // safefile넣기
+//	            fileDTO.setUpload(uploadPath);
+//	            
+//	            boardService.insert_freeboard_file(fileDTO);
+//
+//	            try {
+//	                mf.transferTo(new File(safeFile));
+//	            } catch (IllegalStateException e) {
+//	                e.printStackTrace();
+//	            } catch (IOException e) {
+//	                e.printStackTrace();
+//	            }
+//	        }
+//
+//        return "redirect:/freedboard/list_free";
+//    }
 
-			List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-	        for (MultipartFile mf : fileList) {
-	            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	            long fileSize = mf.getSize(); // 파일 사이즈
-
-	            System.out.println("originFileName : " + originFileName);
-	            System.out.println("fileSize : " + fileSize);
-	            
-	            UUID uid = UUID.randomUUID();
-	            String safeFile = uid.toString() +"_"+ originFileName;
-
-	            boardDTO.setExt(originFileName.substring(originFileName.lastIndexOf(".")));
-	            boardDTO.setFilename(originFileName);
-	            boardDTO.setSave_filename(originFileName); // safefile넣기
-	            
-	            String path = uploadPath; 
-	            boardDTO.setUpload(path);
-	            
-	            boardService.insert_freeboard_file(boardDTO);
-
-	            try {
-	            	 File uploadfile = new File(path,safeFile);
-	                 FileCopyUtils.copy(mf.getBytes(), uploadfile);
-	                 
-	             } catch (IllegalStateException e) {
-	                 e.printStackTrace();
-	             } catch (IOException e) {
-	                 e.printStackTrace();
-	             }
-	         }
-
-        return "redirect:/freedboard/list_free";
-    }
-
-		@RequestMapping(value="/freeboard/free_freefile", produces = "application/json; charset=utf8", method = RequestMethod.POST)
-		@ResponseBody
-		public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
-			JsonObject jsonObject = new JsonObject();
-			BoardDTO boardDTO = new BoardDTO();
-	        /*
-			 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-			 */
-			
-			// 내부경로로 저장
-			String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-			String fileRoot = contextRoot+"resources/upload/";
-			
-			String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-			String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-			String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-			
-			File targetFile = new File(fileRoot + savedFileName);	
-			
-			 boardService.insert_freeboard_file(boardDTO);
-			try {
-				InputStream fileStream = multipartFile.getInputStream();
-				FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-				jsonObject.addProperty("url", "/resources/upload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
-				jsonObject.addProperty("responseCode", "success");
-					
-			} catch (IOException e) {
-				FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-				jsonObject.addProperty("responseCode", "error");
-				e.printStackTrace();
-			}
-			String a = jsonObject.toString();
-			return a;
-		}
+		 
 		 
 		 
 		 

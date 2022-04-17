@@ -124,7 +124,38 @@ $(document).ready(function(){
 });
 </script>
 
-
+<script> 
+function validate() 
+{ 
+		  var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식 
+		  var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 이메일이 적합한지 검사할 정규식 
+		  var email = document.getElementById("email"); 
+		  var pw = document.getElementById("pw"); 
+		  
+		  if(email.value=="") { 
+			  alert("이메일을 입력해 주세요"); 
+			  email.focus(); 
+			  return false; 
+			  
+		  } if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) { 
+			  return false; 
+			  
+		  }
+		  
+		  if(!check(re,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) { 
+			  return false; 
+		  } 
+		  
+		  if(join.pw.value != join.checkpw.value) { 
+			  alert("비밀번호가 다릅니다. 다시 확인해 주세요."); 
+			  join.checkpw.value = ""; 
+			  join.checkpw.focus(); 
+			  return false; 
+		  } 
+		  
+		  alert("회원가입이 완료되었습니다.");
+}
+</script>
 					   
 					    
 
@@ -222,21 +253,21 @@ $(document).ready(function(){
                     </div>
                             
                     <div class="modal-body p-5 pt-0">
-                        <form action="${pageContext.request.contextPath }/member/joinPro" class="whole_modal" method="post">
+                        <form class="whole_modal">
                           <div class="form-floating mb-3">
-		   				  <input type="text" class="form-control rounded-4 id="join" name="nickname" required autofocus>
+		   				  <input type="text" class="form-control rounded-4 id="join" placeholder="닉네임"  id="floatingNN_kds" required autofocus>
                             <label for="floatingInput">닉네임</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" name="email" required autofocus>
-                            <label for="floatingInput">email@example.com</label>
+                            <input type="email" class="form-control rounded-4" id="floatingInput_kds" placeholder="name@example.com" autofocus>
+                            <label for="floatingInput">E-mail</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" name="password" id="pw" minlength="8" maxlength="10" required autofocus>
-                            <label for="floatingPassword">비밀번호(8~10자 입력)</label>
+                            <input type="password" class="form-control rounded-4" id="floatingPassword_kds" placeholder="비밀번호" autofocus minlength="8" maxlength="10" required>
+                            <label for="floatingPassword">비밀번호</label>
                           </div>
 		  					<div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="pw2" minlength="8" maxlength="10" required>
+                            <input type="password" class="form-control rounded-4" id="Ck_floatingPassword_kds" placeholder="비밀번호 재확인" minlength="8" maxlength="10" required>
                             <label for="floatingPassword">비밀번호 재확인</label>
                           </div>
                           <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">회원가입</button>
@@ -273,26 +304,7 @@ $(document).ready(function(){
                 </div>
                </div>
              
-<script type="text/javascript">
-	function passConfirm() {
-	/* 비밀번호, 비밀번호 확인 입력창에 입력된 값을 비교해서 같다면 비밀번호 일치, 그렇지 않으면 불일치 라는 텍스트 출력.*/
-	/* document : 현재 문서를 의미함. 작성되고 있는 문서를 뜻함. */
-	/* getElementByID('아이디') : 아이디에 적힌 값을 가진 id의 value를 get을 해서 password 변수 넣기 */
-		var password = document.getElementById('pw');					//비밀번호 
-		var passwordConfirm = document.getElementById('pw2');	//비밀번호 확인 값
-		var confrimMsg = document.getElementById('confirmMsg');				//확인 메세지
-		var correctColor = "#00ff00";	//맞았을 때 출력되는 색깔.
-		var wrongColor ="#ff0000";	//틀렸을 때 출력되는 색깔
-		
-		if(password.value == passwordConfirm.value){//password = passwordConfirm 
-			confirmMsg.style.color = correctColor;
-			confirmMsg.innerHTML ="비밀번호 일치";
-		}else{
-			confirmMsg.style.color = wrongColor;
-			confirmMsg.innerHTML ="비밀번호 불일치";
-		}
-	}
-</script>
+
     
     <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/css/style.css"></script>

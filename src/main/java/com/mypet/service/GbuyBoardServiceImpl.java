@@ -73,7 +73,7 @@ public class GbuyBoardServiceImpl implements GbuyBoardService {
 		boardDAO.Gbuy_writeBoard(boardDTO);
 
 	}
-	
+
 
 
 }

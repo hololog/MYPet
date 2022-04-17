@@ -35,13 +35,14 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
    <form action="${pageContext.request.contextPath }/notice/write_noticePro" method="post">
     <div class="container py-5"name="board_code">
+    <input type="hidden" value="${sessionScope.nickname}" name="nickname">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
-	<input type="text"name="nickname"id="nicename">
+
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
@@ -52,7 +53,7 @@
           </div>
           
         </div>
-       
+          <h2>사진은 최대 2개까지 가능합니다</h2>
       </div>
       
       <hr>
@@ -70,7 +71,7 @@
 
        <div class="col-12" id="editor">
         
-       <textarea name="content" id="summernote" placeholder="내용을 입력해주세요." >
+       <textarea name="content" id="summernote"  >
       
 
        </textarea>
@@ -92,7 +93,6 @@
         </button>
       </div> 
   
-   
     <script>
     $(document).ready(function() {
     	 $('#summernote').summernote({
@@ -101,49 +101,7 @@
     	        height: 500
     	      });
     });
-   
-				
   </script>
- <script>
-	툴바생략
-	var setting = {
-            height : 300,
-            minHeight : null,
-            maxHeight : null,
-            focus : true,
-            lang : 'ko-KR',
-            toolbar : toolbar,
-            //콜백 함수
-            callbacks : { 
-            	onImageUpload : function(files, editor, welEditable) {
-            // 파일 업로드(다중업로드를 위해 반복문 사용)
-            for (var i = files.length - 1; i >= 0; i--) {
-            uploadSummernoteImageFile(files[i],
-            this);
-            		}
-            	}
-            }
-         };
-	
-        $('#summernote').summernote(setting);
-        });
-        
-        function uploadSummernoteImageFile(file, el) {
-			data = new FormData();
-			data.append("file", file);
-			$.ajax({
-				data : data,
-				type : "POST",
-				url : "${pageContext.request.contextPath }/notice/notice_noticefile",
-				contentType : false,
-				enctype : 'multipart/form-data',
-				processData : false,
-				success : function(data) {
-					$(el).summernote('editor.insertImage', data.url);
-				}
-			});
-		}
-</script>
    </form>
        <!-- 게시판 끝 -->
         

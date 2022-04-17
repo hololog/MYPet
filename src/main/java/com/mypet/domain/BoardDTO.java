@@ -7,7 +7,8 @@ public class BoardDTO {
 	private int free_board_num;
 	private int tip_board_num;
 	private int notice_num;
-	private char board_code;
+	private String board_code;
+	private String email;
 	private String nickname;
 	private String subject;
 	private String content;
@@ -17,68 +18,10 @@ public class BoardDTO {
 	private int like_count;
 	private int like_num;
 	private int user_id;
-	private int rownum;
 	private String file;
-	private int file_num;
-	private String upload;
-	private String filename;
-	private String save_filename;
-	private Timestamp file_upload_date;
-	private String ext; // 파일확장자
-	private String ImageUploader; 
 	
-	
-	public int getFile_num() {
-		return file_num;
-	}
-	public void setFile_num(int file_num) {
-		this.file_num = file_num;
-	}
-	public String getUpload() {
-		return upload;
-	}
-	public void setUpload(String upload) {
-		this.upload = upload;
-	}
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-	public String getSave_filename() {
-		return save_filename;
-	}
-	public void setSave_filename(String save_filename) {
-		this.save_filename = save_filename;
-	}
-	public Timestamp getFile_upload_date() {
-		return file_upload_date;
-	}
-	public void setFile_upload_date(Timestamp file_upload_date) {
-		this.file_upload_date = file_upload_date;
-	}
-	public String getExt() {
-		return ext;
-	}
-	public void setExt(String ext) {
-		this.ext = ext;
-	}
-	public int getReview_board_num() {
-		return review_board_num;
-	}
-	public void setReview_board_num(int review_board_num) {
-		this.review_board_num = review_board_num;
-	}
-	private int review_board_num;
 	
 
-	public int getRownum() {
-		return rownum;
-	}
-	public void setRownum(int rownum) {
-		this.rownum = rownum;
-	}
 	public String getSubject() {
 		return subject;
 	}
@@ -127,10 +70,10 @@ public class BoardDTO {
 	public void setUpdate_date(Timestamp update_date) {
 		this.update_date = update_date;
 	}
-	public char getBoard_code() {
+	public String getBoard_code() {
 		return board_code;
 	}
-	public void setBoard_code(char board_code) {
+	public void setBoard_code(String board_code) {
 		this.board_code = board_code;
 	}
 	public int getTip_board_num() {
@@ -164,11 +107,11 @@ public class BoardDTO {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	public String getImageUploader() {
-		return ImageUploader;
+	public String getEmail() {
+		return email;
 	}
-	public void setImageUploader(String imageUploader) {
-		ImageUploader = imageUploader;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	

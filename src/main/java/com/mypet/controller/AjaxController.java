@@ -213,7 +213,7 @@ public class AjaxController {
 		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myfind_boardList , HttpStatus.OK);
 		
 		return entity;
-	}	
+	}
 	
 //	@RequestMapping(value = "/main/mainjson", method = RequestMethod.GET)
 //	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {

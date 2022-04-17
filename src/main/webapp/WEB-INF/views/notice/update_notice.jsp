@@ -35,7 +35,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
      <form action="${pageContext.request.contextPath }/notice/updatePro_notice" method="post">
      <input type="hidden" name="notice_num " value="${boardDTO.notice_num }">
     <div class="container py-5" name="board_code">

@@ -4,15 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.mypet.mappers.bookmarkMapper">
-	
-	<insert id="insertBookmark">
-		insert into bookmark(find_board_num, email, board_category) 
-					values(#{find_board_num},#{email},"fi")
+	<insert id="addBookmark">
+		insert into bookmark(find_board_num, email) 
+	 	     values (#{findboardNum}, #{email})
 	</insert>
 	
-	<update id="updateBookmark">
-		update find_board set bookmark_count = bookmark_count+1 where find_board_num = #{find_board_num}
+	<update id="addBookmarkCount">
+		update find_board 
+		   set bookmark_count = bookmark_count + 1 
+		 where find_board_num = #{find_board_num}
 	</update>
 	
+	<delete id="removeBookmark">
+		delete from bookmark 
+		 where find_board_num = #{findboardNum} 
+		   and email = #{email}
+	</delete>
 	
+	<update id="removeBookmarkCount">
+		update find_board 
+		   set bookmark_count = bookmark_count - 1 
+		 where find_board_num = #{find_board_num} 
+		   and bookmark_count >= 1
+	</update>
+	
+	<select id="getBookmarkNum" resultType="int">
+		select bookmark_count 
+		  from find_board 
+		 where find_board_num = #{find_board_num}
+	</select>
 </mapper>

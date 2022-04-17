@@ -40,7 +40,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
             <!-- 제목 시작 -->
             <div class="container justify-content-center">
                 <h1 class="sub-title">상세페이지</h1>
@@ -55,8 +55,10 @@
         <!-- 검색창 종료-->
 
         <!-- 수정 삭제 목록 -->
-        <div
-            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+        <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+        <c:if test="${ ! empty sessionScope.nickname }">
+
+        <c:if test="${sessionScope.nickname eq boardDTO.nickname}">
           
 		            <button
 		                type="button"
@@ -65,19 +67,38 @@
 		            <button
 		                type="button"
 		                class="btn btn-outline-primary "
-		                onclick="location.href='${pageContext.request.contextPath }/freeboard/delete_free?free_board_num=${boardDTO.free_board_num}'">삭제</button>
-     		     
+		                onclick='del()'>삭제</button>
+		            
+		                <script type="text/javascript">
+			                function del() {
+			                	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			                        alert("삭제"); // 하고 링크된 곳으로
+			                        location.href='${pageContext.request.contextPath }/freeboard/delete_free?free_board_num=${boardDTO.free_board_num}';
+			                	}else{   //취소
+			                        alert("삭제를 취소하셨습니다");
+			                    }
+			                }   
+			                	
+                </script>
+     		      </c:if>
+        </c:if>
+
+		              
+
             <button
                 type="button"
                 class="btn btn-outline-primary "
                 onclick="location.href='${pageContext.request.contextPath }/freeboard/list_free'">목록</button>
         </div>
+       
         <!-- 수정삭제 목록 버튼 끝 -->
 
+<br>
+     
         <!-- SNS버튼 시작 -->
         <div
-            class="col-11d-flex justify-content-end align-items-center flex-wrap gap-2"
-            style="width: 100%; text-align: right; margin-bottom: 2px;">
+            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"
+            >
             <!-- 페이스북 공유 버튼 -->
            			<a href=""
 						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
@@ -102,9 +123,7 @@
 				</div>
         <!-- SNS버튼 끝 -->
         <br>
-        <!-- 안됨(202204.14) -->
 <!--         이미지 슬라이드 시작 -->
-<%-- 	<c:if test="${!empty boardDTO.filename }"> --%>
 <!--         <div > -->
 <!--              <div -->
 <!--                 id="carouselExampleIndicators" -->
@@ -136,14 +155,14 @@
 <!--                         data-bs-slide-to="2" -->
 <!--                         aria-label="Slide 3"></button> -->
 <!--                 </div> -->
-<%--                 <c:forEach begin="1" end="3"> --%>
+<%--                 <c:forEach items="${fileDTO }"> --%>
 <!--                 <div class="carousel-inner"> -->
-<!--                     <div class="carousel-item active" id="imageBoard "> -->
-<!--                         <ul class="d-block w-50  img-responsive center-block" -->
-<!--                             style=" margin: 0 auto; height: auto;"> -->
-                           
-                           
-<!--                            </ul> -->
+<!--                     <div class="carousel-item active"> -->
+<!--                         <img -->
+<%--                             src="${fileDTO.upload }" --%>
+<!--                             class="d-block w-50  img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
                             
 <!--                     </div> -->
                    
@@ -170,11 +189,11 @@
 <!--             </div> -->
 <!--         </div> -->
 <!--         </div> -->
-<%--         </c:if> --%>
         <!-- 슬라이드 쇼 끝 -->
 
          <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
+        <br>
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
@@ -185,12 +204,12 @@
 				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
 				
-				
+				<hr>
 				<br>
 				<br>
 				<div>글내용</div>
-				<br><br>
-				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br>
+				<div class="shadow-sm p-3 mb-5 bg-body rounded justify-content-center w-100" style="height:70%" ><h3>${boardDTO.content}</h3></div>
 				<br><br>
             </div>
         </div>
@@ -198,22 +217,22 @@
 
      
 				
-	<!-- 좋아요 안됨 -->
+<!-- 	좋아요버튼 실패 -->
 <%-- 		 <c:if test="${empty user_id  }"> --%>
 <!-- 		 <button onclick="nolike()"> -->
 <!-- 		 <i class="bi-heart " style="font-size:3rem; color: red; cursor: pointer;"></i></button> -->
   			
 <!-- 			<script> -->
 
-<!-- // 					function nolike() {   -->
+<!-- // 					function nolike() {  -->
 						
-<!-- // 					  alert("로그인해라");  -->
+<!-- // 					  alert("로그인해라"); -->
 						
 <%-- // 				  location.href = "${pageContext.request.contextPath }/main/main"; --%>
 						
-<!-- // 						}  -->
+<!-- // 						} -->
 						
-<!--  	</script> -->
+<!-- 	</script> -->
 <%-- 		</c:if>			 --%>
 			
 <!--           <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i> -->
@@ -262,17 +281,22 @@
              
             
 <!--            </script> -->
-			
-
-
-			
-						
+<!--            <script> -->
+<!-- //            $(document).ready(function(){ -->
+<!-- //            	alert("확인"); -->
+<!-- //            	$.ajax{ -->
+<%-- //            		url:'${pageContext.request.contextPath }/free/ajaxcomments', --%>
+<!-- //            		dataType:'json', -->
+<!-- //            		success:function(rdata){ -->
+<!-- //            	} -->
+<!-- //            	} -->
+           	
+<!-- //            	}); -->
+<!--            </script> -->
 						    <script>
 					
 // 						        $('i').on('click',function(){
-						        		
 // 						            if (heart==0 ){
-						            	
 // 						                $(this).attr('class','bi-heart-fill');
 // 						                heart++;
 						                
@@ -281,16 +305,14 @@
 // 						                heart--;
 // 						                //델리트
 // 						            }
-						
 // 						        });						        	
-						        
 						    </script>
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
-   
+               
      
 <!-- 		<script type="text/javascript"> -->
 <!-- // 		$(function(){ -->
@@ -370,7 +392,23 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-   <section class="mb-7">
+
+   
+
+<br>
+   
+   
+   <section class="container mb-7 text-center">
+        <div class="card bg-light" style="margin-top: 30px">
+            <div class="card-body">
+                <!-- Comment form-->
+                <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
+                <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
+                <!-- </form>-->
+                <!-- 댓글수, 조회수 아이콘 -->
+                         <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
+                <div class="in-line-kj">
 				<div class="card bg-light" style="margin-top: 30px">
 					<div class="card-body">
 						<div id="comment-count" style="margin-bottom: 5px">
@@ -455,19 +493,18 @@ var url_combine_tw = url_default_tw_txt + document.title +
         url_default_tw_url + url_this_page;
 </script>
 
-<script>
-function report() {
-    var result = confirm("동물신고전화 이외의 용도로 사용하지 않음을 동의하십니까?");
-    if (result) {
-        window.open(
-            '',
-            '상세사진',
-            'width=430,height=500,location=no,status=no,scrollbars=yes'
-        );
-    } else {
-        alert("동의 후 이용가능합니다. 불법개인정보 수집은 법적 처벌대상이 될수있습니다. ");
-    }
-}
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

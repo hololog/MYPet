@@ -53,6 +53,16 @@ public class MypageDAOImpl implements MypageDAO {
 	public List<MypageDTO> getmyfind_BoardList(String mylist2) {
 		return sqlSession.selectList(namespace+".getmyBoardList", mylist2);
 	}
+
+	@Override
+	public MemberDTO pwCheck(MemberDTO memberDTO) {
+		return sqlSession.selectOne(namespace + ".pwCheck", memberDTO);
+	}
+
+	@Override
+	public void pwUpdate(MemberDTO memberDTO) {
+		sqlSession.update(namespace+".pwUpdate", memberDTO);
+	}
 	
 //	@Override
 //	public void updateUimage(String email, String userImg) throws Exception {
