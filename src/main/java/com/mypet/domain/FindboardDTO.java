@@ -35,4 +35,5 @@ public class FindboardDTO {
 	private int reward;
 	private String upload; //file테이블의 save_filename 을 담을 변수
 	private String book;
+	private String fileuploadpath; // file 의 실제 uploadpath 저장용
 }
