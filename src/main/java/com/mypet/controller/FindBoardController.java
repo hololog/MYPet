@@ -164,4 +164,13 @@ public class FindBoardController {
 //		
 //		return "redirect:/findboard/list";
 //	}
+	//성기
+	@RequestMapping(value = "findboard/search")
+	public String searchList(HttpServletRequest req, Model model) {
+		String search = req.getParameter("mainSearch");
+		
+		
+		return "findboard/searchList";
+	}
+
 }
