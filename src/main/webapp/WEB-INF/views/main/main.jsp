@@ -176,20 +176,20 @@ $(document).on('click', ".result", function(){
     <!-- 검색 창 -->
     <div class="search py-3">
       <div class="container p-2 bg-white">
-        <form action="" method="get">
+        <form action="${pageContext.request.contextPath }/findboard/search" method="get">
           <div class="d-flex justify-content-around">
-            <div class="s-box1 p-2">
-              <input type="text" class="search-box1" placeholder="시/도" />
-            </div>
-            <div class="vr"></div>
-            <div class="s-box2 p-2">
-              <input type="text" class="search-box2" placeholder="시/군/구" />
-            </div>
-            <div class="vr"></div>
+<!--             <div class="s-box1 p-2"> -->
+<!--               <input type="text" class="search-box1" placeholder="시/도" /> -->
+<!--             </div> -->
+<!--             <div class="vr"></div> -->
+<!--             <div class="s-box2 p-2"> -->
+<!--               <input type="text" class="search-box2" placeholder="시/군/구" /> -->
+<!--             </div> -->
+<!--             <div class="vr"></div> -->
             <div class="s-box3 p-2">
-              <input type="text" class="search-box3" placeholder="읍/면/동" />
+              <input type="search" name="mainSearch" class="search-box3" placeholder="읍/면/동" />
             </div>
-            <button type="submit" class="btn text-white" style="background-color: #3f51b5">
+            <button type="submit" class="btn text-white" style="background-color: #3f51b5;">
               <i class="bi bi-search"></i>
             </button>
           </div>
@@ -215,7 +215,8 @@ $(document).on('click', ".result", function(){
     <!-- 갤러리 -->
     <section class="container">
       <div>
-        <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1>
+			<h1 class="sub-title" style="margin: 80px auto 70px;">최근공고</h1>
+<!--         <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1> -->
         <div class="d-flex justify-content-end">
           <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
         </div>
