@@ -202,7 +202,7 @@
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
            
                <table id="notice text-center border">
-				<tr><td>글번호 : </td><td> ${boardDTO.frview_board_num}</td></tr>
+				<tr><td>글번호 : </td><td> ${boardDTO.tip_board_num}</td></tr>
 				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td>
 				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
