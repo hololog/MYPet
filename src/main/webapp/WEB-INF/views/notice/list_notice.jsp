@@ -130,11 +130,11 @@
 
                  
 
-					<c:if test="${sessionScope.nickname  ne 'admin'}">
+<%-- 					<c:if test="${sessionScope.nickname  ne 'admin'}"> --%>
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
-                  </c:if>
+<%--                   </c:if> --%>
                   
                  <!-- 다음버튼 -->
                   <div class="text-center">
