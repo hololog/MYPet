@@ -32,13 +32,14 @@ import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.BookmarkDTO;
 import com.mypet.domain.FindboardDTO;
-import com.mypet.domain.FreecommentDTO;
 import com.mypet.domain.MemberDTO;
+import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
 import com.mypet.service.MypageService;
+import com.mypet.dao.MypageDAO;
 
 @RestController
 public class AjaxController {
@@ -50,8 +51,10 @@ public class AjaxController {
 	private FindboardService findboardService;
 	
 	@Autowired
-	private MypageService mypageService;
+	private MypageDAO mypageDAO;
 	
+	@Autowired
+	private MypageService mypageService;
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -71,30 +74,15 @@ public class AjaxController {
 		return entity;
 	}
 	
-//	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET)
-//	public ResponseEntity<FindboardDTO> ajaxboard(HttpServletRequest request) throws Exception{
-//		int num1 = Integer.parseInt(request.getParameter("num"));
-//		FindboardDTO findboardDTO = findboardService.getfindBoard(num1);
-//		
-//		ResponseEntity<FindboardDTO> fin = new ResponseEntity<FindboardDTO>(findboardDTO, HttpStatus.OK);
-//		
-//		return fin;
-//	}
-	
-//	@RequestMapping(value = "/free/ajaxcomments", method = RequestMethod.GET)
-//	public ResponseEntity<List<FreecommentDTO>> freeboardjson(FreecommentDTO freecommentDTO, HttpServletRequest request) throws Exception {
-//		
-//		PageDTO pageDTO=new PageDTO();
-//		pageDTO.setPageSize(10);
-//		pageDTO.setPageNum("1");
-//		
-//		List<FreecommentDTO> freeboardList = freecommentDAO.getfreecList(pageDTO); // 10
-//		
-//		ResponseEntity<List<FreecommentDTO>> entity=new ResponseEntity<List<FreecommentDTO>>(freeboardList , HttpStatus.OK);
-//		
-//		return entity;
-//	}
-
+	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET)
+	public ResponseEntity<FindboardDTO> ajaxboard(HttpServletRequest request) throws Exception{
+		int num1 = Integer.parseInt(request.getParameter("num"));
+		FindboardDTO findboardDTO = findboardService.getfindBoard(num1);
+		
+		ResponseEntity<FindboardDTO> fin = new ResponseEntity<FindboardDTO>(findboardDTO, HttpStatus.OK);
+		
+		return fin;
+	}
 	
 
 	//은혜
@@ -207,16 +195,40 @@ public class AjaxController {
 	
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)
-	public ResponseEntity<List<BoardDTO>> mypagejson(HttpServletRequest request){
-		PageDTO pageDTO=new PageDTO();
-		pageDTO.setPageSize(5);
-		pageDTO.setPageNum("1");
+	public ResponseEntity<List<MypageDTO>> mypagejson(MypageDTO mypageDTO, HttpServletRequest request){
+		String mylist = request.getParameter("email");
 		
-		List<BoardDTO> myboardList=mypageService.getmyBoardList(pageDTO);
-		
-		ResponseEntity<List<BoardDTO>> entity=new ResponseEntity<List<BoardDTO>>(myboardList , HttpStatus.OK);
+		List<MypageDTO> myboardList = mypageDAO.getmyBoardList(mylist);
+		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myboardList , HttpStatus.OK);
 		
 		return entity;
 	}
 	
+	// 준동
+	@RequestMapping(value = "/mypage/mypagejson2", method = RequestMethod.GET)
+	public ResponseEntity<List<MypageDTO>> mypagejson2(MypageDTO mypageDTO, HttpServletRequest request){
+		String mylist2 = request.getParameter("email");
+		
+		List<MypageDTO> myfind_boardList = mypageDAO.getmyfind_BoardList(mylist2);
+		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myfind_boardList , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+//	@RequestMapping(value = "/main/mainjson", method = RequestMethod.GET)
+//	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {
+//		
+//		BookmarkDTO bookmarkDTO = findboardService.getBookmark(findboardNum);
+////		model.addAttribute("findboardListMain", findboardListMain);
+//		
+//
+//		
+////		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
+//		
+//		
+//		ResponseEntity<List<FindboardDTO>> entity = 
+//				new ResponseEntity<List<FindboardDTO>>(findboardListMain,HttpStatus.OK);
+//		
+//		return entity;
+//	}
 }

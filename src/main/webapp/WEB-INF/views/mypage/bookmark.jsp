@@ -91,7 +91,6 @@
                     <li class="nav-item2">  
                         <a href="${pageContext.request.contextPath }/mypage/myinfo" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             내정보
                         </a>
@@ -99,24 +98,27 @@
                     <li>
                         <a href="${pageContext.request.contextPath }/mypage/mylist" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             내 글목록
                         </a>
                     </li>
-                    
+                    <li>
+                        <a href="${pageContext.request.contextPath }/mypage/mymisslist" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16">
+                            </svg>
+                            내 실종공고
+                        </a>
+                    </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/mypage/bookmark" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             즐겨찾기
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/mypage/" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/amendpwd" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             비밀번호 변경
                         </a>
@@ -124,7 +126,6 @@
                     <li>
                         <a href="${pageContext.request.contextPath }/mypage/leave" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             탈퇴
                         </a>

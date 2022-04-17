@@ -338,6 +338,7 @@
 
                 <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh" enctype="multipart/form-data">
                    <input type="hidden" value="${sessionScope.nickname}" name="nickname">
+                   <input type="hidden" value="${sessionScope.email}" name="email">
                     <div class="row g-5">
                          <!--왼쪽여백-->
                         <div class="col-md-1 col-lg-3"></div>

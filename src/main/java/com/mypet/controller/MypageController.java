@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.MemberDTO;
@@ -42,64 +46,104 @@ public class MypageController {
 		
 		@RequestMapping(value = "/mypage/mylist", method = RequestMethod.GET)
 		public String mylist(HttpServletRequest request, Model model) throws Exception {
-			String mylist = request.getParameter("email");
-//			ArrayList<MypageDTO> myboardlist = mypageService.getMember();
-			System.out.println("MypageController mylist() ");
-			
-			int pageSize=5;
-			String pageNum=request.getParameter("pageNum");
-			if(pageNum==null) {
-				pageNum="1";
-			}
-			
-			PageDTO pageDTO=new PageDTO();
-			pageDTO.setPageSize(pageSize);
-			pageDTO.setPageNum(pageNum);
-			
-			List<BoardDTO> getmyboardlist = mypageService.getmyBoardList(pageDTO);
-			int count=mypageService.getmyBoardlistCount();
-			
-			int currentPage=Integer.parseInt(pageNum);
-			int pageBlock=10;
-			int startPage=(currentPage-1)/pageBlock*pageBlock+1;
-			int endPage=startPage+pageBlock-1;
-			int pageCount=count / pageSize +  (count % pageSize == 0 ?0:1);
-			if(endPage > pageCount){
-				endPage = pageCount;
-			}
-			
-			pageDTO.setCount(count);
-			pageDTO.setPageBlock(pageBlock);
-			pageDTO.setStartPage(startPage);
-			pageDTO.setEndPage(endPage);
-			pageDTO.setPageCount(pageCount);
-			
-			model.addAttribute("getmyboardlist", getmyboardlist);
-			model.addAttribute("pageDTO", pageDTO);
 			
 			return "mypage/mylist";
 		}
-	
+		
+		@RequestMapping(value = "/mypage/update", method = RequestMethod.GET)
+		public String update(HttpSession session) throws Exception {
+			String nickname = (String)session.getAttribute("nickname");
+			mypageService.getMember(nickname);
+			return "mypage/update";
+		}
+		
+		@RequestMapping(value = "/mypage/updatePro", method = RequestMethod.POST)
+		public String updatePro(MemberDTO memberDTO, HttpSession session) throws Exception {
+			System.out.println(memberDTO.getNickname());
+			System.out.println(memberDTO.getEmail());
+			
+			MemberDTO updateCheckDTO = mypageService.updateCheck(memberDTO);
+			
+			if(updateCheckDTO == null) {
+				session.setAttribute("nickname", memberDTO.getNickname());
+				mypageService.updateMember(memberDTO);
+				return "redirect:/mypage/myinfo";
+			} else {
+				return "mypage/mypagemsg";
+			}
+		}
+		
 		@RequestMapping(value = "/mypage/leave", method = RequestMethod.GET)
-		public String leave(HttpServletRequest request, Model model) throws Exception {
-			
-			
+		public String leave() {
+			System.out.println("MypageController leave() ");
 			return "mypage/leave";
 		}
 		
-//		@RequestMapping(value = "/mypage/mylist", method = RequestMethod.GET)
-//		public String mylist(HttpServletRequest request, Model model) {
-//			String email = (String)request.getparameter("email");
-//			ArrayList<BoardDTO> mylist = memberService.getMember(email);
-//			return "mypage/mylist";
+		@RequestMapping(value = "/mypage/leavePro", method = RequestMethod.POST)
+		public String leave(MemberDTO memberDTO, HttpSession session) {
+			System.out.println("MypageController leavePro() ");
+			System.out.println(memberDTO);
+			System.out.println(memberDTO.getEmail());
+			System.out.println(memberDTO.getPassword());
+//			String leave = request.getParameter("email");
+			MemberDTO updateCheckDTO = mypageService.updateCheck(memberDTO);
+			
+			if(updateCheckDTO != null) {
+				mypageService.deleteMember(memberDTO);
+				session.invalidate();
+				return "redirect:/main";
+			} else {
+				return "member/msg";
+			}
+		}
+		
+		@RequestMapping(value = "/mypage/amendpwd", method = RequestMethod.GET)
+		public String amendpwd() {
+			System.out.println("MypageController amendpwd() ");
+			return "mypage/amendpwd";
+		}
+		
+//		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+//		@ResponseBody
+//		public int pwCheck(MemberDTO memberDTO) throws Exception{
+//			String memberPw = memberService.pwCheck(memberDTO.getEmail());
+//			if( memberDTO == null || !BCrypt.checkpw(memberDTO.getPassword(), memberDTO.getPassword())) {
+//				return 0;
+//			}
+//			return 1;
+//		}
+//		
+//		@RequestMapping(value="/pwUpdate" , method=RequestMethod.POST)
+//		public String pwUpdate(String memberId,String memberPw1,RedirectAttributes rttr,HttpSession session)throws Exception{
+//			String hashedPw = BCrypt.hashpw(memberPw1, BCrypt.gensalt());
+//			memberService.pwUpdate(memberId, hashedPw);
+//			session.invalidate();
+//			rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+//			
+//			return "redirect:/member/loginView";
 //		}
 		
-		@RequestMapping(value = "/mypage/update", method = RequestMethod.GET)
-		public String update(HttpServletRequest request, Model model) throws Exception {
-			String update = request.getParameter("email");
-			MemberDTO memberDTO = memberService.getMember(update);
-			model.addAttribute("memberDTO", memberDTO);
-			return "mypage/update";
-		}
+//		@RequestMapping(value = "/modify/image", method = RequestMethod.POST)
+//		public String userImgModify(String userId,
+//									MultipartFile file,
+//									HttpSession session,
+//									RedirectAttributes redirectAttributes) throws Exception {
+//			if (file == null) {
+//				redirectAttributes.addFlashAttribute("msg", "FAIL");
+//				return "redirect:/user/profile";
+//			}
+//			String uploadFile = UploadFileUtils.uploadFile(uimagePath, file.getOriginalFilename(), file.getBytes());
+//			String front = uploadFile.substring(0, 12);
+//			String end = uploadFile.substring(14);
+//			String userImg = front + end;
+//			MemberDTO.modifyUimage(userId, userImg);
+//			Object userObj = session.getAttribute("login");
+//			User userVO = (UserVO) userObj;
+//			userVO.setUserImg(userImg);
+//			session.setAttribute("login", userVO);
+//			redirectAttributes.addFlashAttribute("msg", "SUCCESS");
+//			return "redirect:/user/profile"; }
+
+		
 		
 }
