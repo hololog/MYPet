@@ -35,14 +35,14 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
      <form action="${pageContext.request.contextPath }/freeboard/updatePro_free" method="post">
      <input type="hidden" name="free_board_num" value="${boardDTO.free_board_num }">
     <div class="container py-5" name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글수정</h3>
         <br>
-	<input type="text"name="nickname"id="nicename" >
+	 <input type="hidden" value="${sessionScope.nickname}" name="nickname">
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
@@ -58,20 +58,11 @@
       
       <hr>
       
-      <div class="mt-3">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon01">사진</span>
-          </div>
-          <div class="custom-file">
-              &nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1">
-          </div>
-        </div>
-      </div>
+     
 
        <div class="col-12" id="editor">
         
-       <textarea name="content"  id="summernote" placeholder="내용을 입력해주세요." >
+       <textarea name="content"  id="summernote">
       ${boardDTO.content }
 
        </textarea>

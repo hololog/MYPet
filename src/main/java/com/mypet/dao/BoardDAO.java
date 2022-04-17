@@ -112,6 +112,6 @@ public interface BoardDAO {
 //file start
 	
 	
-	public void insert_freeboard_file(FileDTO fileDTO);
+//	public void insert_freeboard_file(FileDTO fileDTO);
 //file end
 }
