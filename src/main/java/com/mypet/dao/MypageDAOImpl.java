@@ -48,19 +48,18 @@ public class MypageDAOImpl implements MypageDAO {
 	public List<MypageDTO> getmyBoardList(String mylist) {
 		return sqlSession.selectList(namespace+".getmyBoardList", mylist);
 	}
-
-	@Override
-	public void updateUimage(String email, String userImg) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("email", email);
-		paramMap.put("userImg", userImg);
-		sqlSession.update(namespace + ".updateUimage", paramMap);
-
-	}
-
-//	@Override
-//	public int getmyBoardlistCount() {
-//		return sqlSession.selectOne(namespace+".getmyBoardlistCount");
-//	}
 	
+	@Override
+	public List<MypageDTO> getmyfind_BoardList(String mylist2) {
+		return sqlSession.selectList(namespace+".getmyBoardList", mylist2);
+	}
+	
+//	@Override
+//	public void updateUimage(String email, String userImg) throws Exception {
+//		Map<String, Object> paramMap = new HashMap<String, Object>();
+//		paramMap.put("email", email);
+//		paramMap.put("userImg", userImg);
+//		sqlSession.update(namespace + ".updateUimage", paramMap);
+//	}
+
 }

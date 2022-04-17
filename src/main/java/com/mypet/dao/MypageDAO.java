@@ -19,8 +19,8 @@ public interface MypageDAO {
 	
 	public List<MypageDTO> getmyBoardList(String mylist);
 	
-//	public int getmyBoardlistCount();
+	public List<MypageDTO> getmyfind_BoardList(String mylist2);
 	
-	public void updateUimage(String email, String uimage) throws Exception;
+//	public void updateUimage(String email, String uimage) throws Exception;
 
 }

@@ -38,10 +38,10 @@ public class MypageServiceImple implements MypageService {
 		return mypageDAO.updateCheck(memberDTO);
 	}
 
-	@Override
-	public void modifyUimage(String email, String uimage) throws Exception {
-		mypageDAO.updateUimage(email, uimage);
-	}
+//	@Override
+//	public void modifyUimage(String email, String uimage) throws Exception {
+//		mypageDAO.updateUimage(email, uimage);
+//	}
 
 //	@Override
 //	public List<BoardDTO> getmyboardlist(PageDTO pageDTO) {

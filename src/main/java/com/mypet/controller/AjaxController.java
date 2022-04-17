@@ -196,16 +196,24 @@ public class AjaxController {
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)
 	public ResponseEntity<List<MypageDTO>> mypagejson(MypageDTO mypageDTO, HttpServletRequest request){
-		String mylist = request.getParameter("nickname");
-//		PageDTO pageDTO=new PageDTO();
-//		pageDTO.setPageSize(5);
-//		pageDTO.setPageNum("1");
+		String mylist = request.getParameter("email");
 		
 		List<MypageDTO> myboardList = mypageDAO.getmyBoardList(mylist);
 		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myboardList , HttpStatus.OK);
 		
 		return entity;
 	}
+	
+	// 준동
+	@RequestMapping(value = "/mypage/mypagejson2", method = RequestMethod.GET)
+	public ResponseEntity<List<MypageDTO>> mypagejson2(MypageDTO mypageDTO, HttpServletRequest request){
+		String mylist2 = request.getParameter("email");
+		
+		List<MypageDTO> myfind_boardList = mypageDAO.getmyfind_BoardList(mylist2);
+		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myfind_boardList , HttpStatus.OK);
+		
+		return entity;
+	}	
 	
 //	@RequestMapping(value = "/main/mainjson", method = RequestMethod.GET)
 //	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {

@@ -63,7 +63,7 @@ $(document).ready(function(){
 			data:{"nickname":'${sessionScope.nickname}'},
 			success:function(rdata){
 				$.each(rdata,function(index,item){
-					if(item.board_code == "꿀팁"){
+					if(item.board_code == 'v'){
 						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
 					} else {
 						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/freeboard/content_free?free_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');

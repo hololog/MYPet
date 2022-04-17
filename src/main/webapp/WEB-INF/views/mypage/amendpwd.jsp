@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>mylist</title>
+<title>myinfo</title>
 <!-- css스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
@@ -54,26 +54,6 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style-jd.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sidebars.css">
-
-<script type="text/javascript">
-$(document).ready(function(){
-		$.ajax({
-			url:'${pageContext.request.contextPath }/mypage/mypagejson',
-			dataType:'json',
-			data:{"nickname":'${sessionScope.nickname}'},
-			success:function(rdata){
-				$.each(rdata,function(index,item){
-					if(item.board_code == "꿀팁"){
-						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
-					} else {
-						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/freeboard/content_free?free_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
-					}
-				});
-			}
-		});	
-	});//
-</script>
-
 </head>
 <body>
 	<div>
@@ -86,7 +66,7 @@ $(document).ready(function(){
     <!-- ------------------------------- -->
     <!-- 제목 시작 -->
     <div class="container">
-      <h1 class="sub-title">내 글목록</h1>
+      <h1 class="sub-title">내정보</h1>
       <hr>
     </div>
     <!-- 제목 종료 -->
@@ -154,27 +134,42 @@ $(document).ready(function(){
             </div>
             <!-- 사이드바 끝 -->
 
-            <!-- 게시판 시작 -->
+            <!-- 비밀번호 변경 시작 -->
             <div class=" border col" style="padding: 3%;">
-            	<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
-            	</div>
-                <div class="content">
-                    <table class="table table-hover text-start" >
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th width="7%">번호</th>
-                                <th width="11%">종류</th>
-                                <th width="65%">제목</th>
-                                <th width="9%">조회수</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table1">
-                        </tbody>
-                    </table>
+                <form action="${pageContext.request.contextPath }/mypage/amendpwdPro" method="post"
+                	class="needs-validation" novalidate="novalidate">
+                    <div class="row">
+                        <div
+                            class="d-flex flex-column justify-content-center align-items-center">
+                            <div class="col">
+                                <label for="pwd_eh" class="form-label">현재 비밀번호<span class="text-muted"></span></label>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="pwd_eh"
+                                    name="password"
+                                    placeholder="현재 비밀번호 입력">
+                            </div>
+                            <div class="col">
+                                <label for="pwd2_eh" class="form-label">변경할 비밀번호<span class="text-muted"></span></label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="pwd2_eh"
+                                    placeholder="변경할 비밀번호 입력"
+                                    required="required">
+                            </div>
+                            <div class="col">
+                                <label for="pwd2re_eh" class="form-label">변경할 비밀번호 재입력<span class="text-muted"></span></label>
+                                <input type="text" class="form-control" id="pwd2re_eh" placeholder="변경할 비밀번호 재입력">
+                            </div><br>
+                            <input type="submit" value="변경">
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        <!-- 게시판 끝 -->
+    </div>
+    <!-- 비밀번호 변경 끝 -->
   
     <!-- ------------------------------- -->
     <!-- 본문 종료-->
@@ -189,6 +184,5 @@ $(document).ready(function(){
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
   crossorigin="anonymous">
 </script>
-
 </body>
 </html>

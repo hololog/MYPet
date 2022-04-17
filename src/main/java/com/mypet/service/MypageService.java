@@ -18,12 +18,9 @@ public interface MypageService {
 	public MemberDTO getMember(String email);
 	
 	public MemberDTO updateCheck(MemberDTO memberDTO);
-	
-
-//	public int getmyBoardlistCount();
 
 //	public List<MypageDTO> getmyBoardList(BoradDTO boardDTO);
 	
-	public void modifyUimage(String email, String uimage) throws Exception;
+//	public void modifyUimage(String email, String uimage) throws Exception;
 
 }
