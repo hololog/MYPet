@@ -121,6 +121,16 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public void updatefilename() {
 		sqlSession.update(namespace +".updatefilename");
 	}
+
+	@Override
+	public int getFindBoardCount() {
+		return sqlSession.selectOne(namespace + ".getFindBoardCount");
+	}
+
+	@Override
+	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace + ".getFindSearchList", pageDTO);
+	}
 	
 	
 

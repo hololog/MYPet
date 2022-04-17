@@ -21,6 +21,11 @@
 <!-- JQuery -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+<script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/data.js"></script>
+<!-- CSS , JS -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
 	var email = '${sessionScope.email}';
@@ -31,6 +36,34 @@ $(document).ready(function(){
 			}
 		});
 	}//스크롤 로그인 모달
+});
+
+$(document).ready(function(){
+	$("#mainSearch").autocomplete({ 
+// 		source: function(request, response) {
+// 			$.ajax({
+// 				type: "get",
+// 	            url: "/json/address",
+// 	            dataType: "json",
+// 	            success: function(data) {
+// 	            	 response(
+// 	           			 $.map(data, function(item) {
+// 	           				return {
+// 	                            label: item.address,   
+// 	                            value: item,    
+// 	           				}
+// 	           			 })//
+// 	         		 );//response end
+// 	            }
+// 			}); //end ajax
+// 		},
+		source: List,
+		focus : function(event, ui) { 
+			return false;
+		},
+		minLength: 2,// 최소 글자수
+		delay: 100,	
+	});
 });
 	
 $(document).ready(function(){
@@ -187,7 +220,7 @@ $(document).on('click', ".result", function(){
 <!--             </div> -->
 <!--             <div class="vr"></div> -->
             <div class="s-box3 p-2">
-              <input type="search" name="mainSearch" class="search-box3" placeholder="읍/면/동" />
+              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="읍/면/동" />
             </div>
             <button type="submit" class="btn text-white" style="background-color: #3f51b5;">
               <i class="bi bi-search"></i>

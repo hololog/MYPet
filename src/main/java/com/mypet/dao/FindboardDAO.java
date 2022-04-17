@@ -54,5 +54,9 @@ public interface FindboardDAO {
 
 	public void update_board_num_forfile();
 
+	public int getFindBoardCount();
+
+	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO);
+
 }
 

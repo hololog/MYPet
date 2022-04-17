@@ -47,5 +47,9 @@ public interface FindboardService {
 //	public void updatefindboard(FindboardDTO findboardDTO);
 
 	public List<FindboardDTO> getfindBoardListMain(String email);
+
+	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO);
+
+	public int getFindBoardCount();
 	
 }
