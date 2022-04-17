@@ -68,7 +68,7 @@ public class FindBoardController {
 		System.out.println("순서 확인 : /findboard/write_findPro");
 		//FindboardDTO 값 들고오기 
 		FindboardDTO fbDTO = new FindboardDTO();
-		
+		fbDTO.setEmail(mtfRequest.getParameter("email"));
 		fbDTO.setAddress(mtfRequest.getParameter("address1") +" "+ 
 						mtfRequest.getParameter("address2") +" "+ 
 						mtfRequest.getParameter("address3")); 
