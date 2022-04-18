@@ -90,6 +90,26 @@
 <!-- 		select count(*) from free_board -->
 <!-- 	</select> -->
 
+	<select id="getFindboardBookmarkList" resultType="com.mypet.domain.FindboardDTO">
+		select f.*, ff.upload fileuploadpath 
+		from find_board f
+		join find_board_file ff
+		on f.find_board_num = ff.find_board_num
+		where f.find_board_num in (
+				select find_board_num from bookmark
+				where email=#{email});
+	</select>
+	
+	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
+<!-- 		select upload from find_board_file order by find_board_num desc -->
+		select ff.*
+		from find_board_file ff
+		join find_board f
+		on ff.find_board_num = f.find_board_num
+		where f.find_board_num in (
+				select find_board_num from bookmark
+				where email=#{email});
+	</select>
 
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,9 +26,8 @@
   <!-- Slick CSS -->
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css" />
-
-
-    </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   </head>
   <body>
 	<div>
     <!-- header 시작 -->
@@ -46,47 +45,48 @@
             </div>
             <!-- 제목 종료 -->
             <hr>
-            
+            <!-- 검색창 시작 -->
+            <form action="" method="get"></form>
+
+        </div>
+        <!-- 검색창 종료-->
 
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-            <c:if test="${ ! empty sessionScope.nickname }">
 
-	<c:if test="${sessionScope.nickname  eq boardDTO.nickname}">
-            
-
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/notice/update_notice?nitice_num=${boardDTO.notice_num}'">수정</button>
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick='del()'>삭제</button>
-                
-                <script type="text/javascript">
-                function del() {
-                	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-                        alert("삭제"); // 하고 링크된 곳으로
-                        location.href='${pageContext.request.contextPath }/notice/delete_notice?nitice_num=${boardDTO.nitice_num}';
-                	}else{   //취소
-                        alert("삭제를 취소하셨습니다");
-                    }
-                }   
-                	
+		<c:if test="${sessionScope.nickname  eq 'admin'}">
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick="location.href='${pageContext.request.contextPath }/notice/update_notice?notice_num=${boardDTO.notice_num}'">수정</button>
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick='del()'>삭제</button>
+		                
+		                 <script type="text/javascript">
+			                function del() {
+			                	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			                        alert("삭제"); // 하고 링크된 곳으로
+			                        location.href='${pageContext.request.contextPath }/notice/delete_notice?notice_num=${boardDTO.notice_num}';
+			                	}else{   //취소
+			                        alert("삭제를 취소하셨습니다");
+			                    }
+			                }   
+			                	
                 </script>
-                </c:if>
-                </c:if>
+                
+     		  </c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/noticew/list_notice'">목록</button>
+                onclick="location.href='${pageContext.request.contextPath }/notice/list_notice'">목록</button>
         </div>
         <!-- 수정삭제 목록 버튼 끝 -->
 <br>
         <!-- SNS버튼 시작 -->
-         <div
+          <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"
             >
             <!-- 페이스북 공유 버튼 -->
@@ -110,27 +110,20 @@
 						onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); return false;"><img
 						src="${pageContext.request.contextPath }/resources/img/kakaop.jpg"
 						title="카카오스토리로 공유하기" class="sharebtn_custom" style="width: 32px;"></a>
+
 				</div>
         <!-- SNS버튼 끝 -->
+
         <br>
 
-        <!-- 이미지 슬라이드 시작 -->
+<!--         이미지 슬라이드 시작 -->
 <!--         <div > -->
-
 <!--             <div
 <!--                 id="carouselExampleIndicators" -->
 <!--                 class="carousel slide" -->
 <!--                 data-bs-ride="carousel" -->
 <!--                 style="width: 1500px; " -->
-<!--                 > --> -->
-
-            <!-- <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                style="width: 1500px; "
-                > -->
-
+<!--                 > --> 
 <!--             <div -->
 <!--                 id="carouselExampleIndicators" -->
 <!--                 class="carousel slide" -->
@@ -199,8 +192,8 @@
 <!--             </div> -->
 <!--         </div> -->
         <!-- 슬라이드 쇼 끝 -->
-          <!-- 글 -->
-        <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
+         <!-- 글 -->
+         <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
         <br>
         <br>
         <div class="row text-center justify-content-center">
@@ -208,7 +201,7 @@
            
                <table id="notice text-center border">
 				<tr><td>글번호 : </td><td> ${boardDTO.notice_num}</td></tr>
-				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td>
+				    <td class="col-6"></td>
 				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
 				
@@ -263,7 +256,7 @@
         <!-- -->
         <!-- </div>-->
         <!-- </div>-->
-    </div>
+<!--     </div> -->
     <!-- <div id="form-commentInfo-kj">-->
     <!-- <div id="comment-count-kj">댓글 <span id="count-kj">0</span></div>-->
     <!-- <input id="comment-input-kj" placeholder="댓글을 입력해 주세요.">-->
@@ -271,7 +264,7 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-    <section class="container mb-7 text-center">
+     <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
             <div class="card-body">
                 <!-- Comment form-->
@@ -279,7 +272,7 @@
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
-                         <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">
 
@@ -343,55 +336,7 @@
         </div>
     </section>
 
-    <!-- <div class="container mt-5">-->
-    <!-- <div class="row">-->
-    <!-- <div class="col-sm-4">-->
-    <!-- <h2>About Me</h2>-->
-    <!-- <h5>Photo of me:</h5>-->
-    <!-- <div class="fakeimg">Fake Image</div>-->
-    <!-- <p>Some text about me in culpa qui officia deserunt mollit anim..</p>-->
-    <!-- <hr class="d-sm">-->
-
-    <!-- <h3 class="mt-4">참고 링크</h3>-->
-
-    <!-- <p>Lorem ipsum dolor sit ame.</p>-->
-    <!-- <ul class="nav nav-pills flex-column">-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- </ul>-->
-
-    <!-- </div>-->
-    <!-- <div class="col-sm-8">-->
-    <!-- <h2>실종시 대처방법 </h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-
-    <!-- <h2 class="mt-5">구조시 대처방법</h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-    <!-- </div>-->
-    <!-- </div>-->
-    <!-- </div>-->
+    
 
  <!-- 게시판 끝 -->
         
@@ -402,7 +347,7 @@
          <!-- footer 시작 -->
   	<jsp:include page="../inc/bottom.jsp"></jsp:include>
     <!-- footer 종료 -->
-  </div>
+  
 
 <script src="js/main.js"></script>
 <!-- 부트스트랩 스크립트 적용 -->
@@ -423,7 +368,6 @@ var url_combine_fb = url_default_fb + url_this_page;
 var url_combine_tw = url_default_tw_txt + document.title +
         url_default_tw_url + url_this_page;
 </script>
-
 
 </body>
 </html>

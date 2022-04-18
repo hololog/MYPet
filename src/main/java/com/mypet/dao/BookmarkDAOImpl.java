@@ -40,5 +40,32 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 	public int getBookmarkNum(int findboardNum) {
 		return sqlSession.selectOne(namespace + ".getBookmarkNum", findboardNum);
 	}
+	
+	//free
+	
+	@Override
+	public void FaddBookmarkCount(int free_board_num) {
+		sqlSession.update(namespace + ".FaddBookmarkCount", free_board_num);
+	}
+
+	@Override
+	public void FaddBookmark(BookmarkDTO bookmarkDTO) {
+		sqlSession.insert(namespace + ".FaddBookmark", bookmarkDTO);
+	}
+
+	@Override
+	public void FremoveBookmarkCount(int free_board_num) {
+		sqlSession.update(namespace + ".FremoveBookmarkCount", free_board_num);
+	}
+		
+	@Override
+	public void FremoveBookmark(BookmarkDTO bookmarkDTO) {
+		sqlSession.delete(namespace + ".FremoveBookmark", bookmarkDTO);
+	}
+
+	@Override
+	public int FgetBookmarkNum(int free_board_num) {
+		return sqlSession.selectOne(namespace + ".FgetBookmarkNum", free_board_num);
+	}
 
 }

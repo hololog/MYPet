@@ -21,6 +21,11 @@
 <!-- JQuery -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+<script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/data.js"></script>
+<!-- CSS , JS -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
 	var email = '${sessionScope.email}';
@@ -31,6 +36,34 @@ $(document).ready(function(){
 			}
 		});
 	}//스크롤 로그인 모달
+});
+
+$(document).ready(function(){
+	$("#mainSearch").autocomplete({ 
+// 		source: function(request, response) {
+// 			$.ajax({
+// 				type: "get",
+// 	            url: "/json/address",
+// 	            dataType: "json",
+// 	            success: function(data) {
+// 	            	 response(
+// 	           			 $.map(data, function(item) {
+// 	           				return {
+// 	                            label: item.address,   
+// 	                            value: item,    
+// 	           				}
+// 	           			 })//
+// 	         		 );//response end
+// 	            }
+// 			}); //end ajax
+// 		},
+		source: List,
+		focus : function(event, ui) { 
+			return false;
+		},
+		minLength: 2,// 최소 글자수
+		delay: 100,	
+	});
 });
 	
 $(document).ready(function(){
@@ -176,20 +209,20 @@ $(document).on('click', ".result", function(){
     <!-- 검색 창 -->
     <div class="search py-3">
       <div class="container p-2 bg-white">
-        <form action="" method="get">
+        <form action="${pageContext.request.contextPath }/findboard/search" method="get">
           <div class="d-flex justify-content-around">
-            <div class="s-box1 p-2">
-              <input type="text" class="search-box1" placeholder="시/도" />
-            </div>
-            <div class="vr"></div>
-            <div class="s-box2 p-2">
-              <input type="text" class="search-box2" placeholder="시/군/구" />
-            </div>
-            <div class="vr"></div>
+<!--             <div class="s-box1 p-2"> -->
+<!--               <input type="text" class="search-box1" placeholder="시/도" /> -->
+<!--             </div> -->
+<!--             <div class="vr"></div> -->
+<!--             <div class="s-box2 p-2"> -->
+<!--               <input type="text" class="search-box2" placeholder="시/군/구" /> -->
+<!--             </div> -->
+<!--             <div class="vr"></div> -->
             <div class="s-box3 p-2">
-              <input type="text" class="search-box3" placeholder="읍/면/동" />
+              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="읍/면/동" />
             </div>
-            <button type="submit" class="btn text-white" style="background-color: #3f51b5">
+            <button type="submit" class="btn text-white" style="background-color: #3f51b5;">
               <i class="bi bi-search"></i>
             </button>
           </div>
@@ -215,7 +248,8 @@ $(document).on('click', ".result", function(){
     <!-- 갤러리 -->
     <section class="container">
       <div>
-        <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1>
+			<h1 class="sub-title" style="margin: 80px auto 70px;">최근공고</h1>
+<!--         <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1> -->
         <div class="d-flex justify-content-end">
           <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
         </div>

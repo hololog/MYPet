@@ -2,6 +2,7 @@ package com.mypet.controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.beans.PropertyEditorSupport;
 import java.io.File;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.google.gson.JsonArray;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.FindboardDTO;
@@ -164,4 +166,55 @@ public class FindBoardController {
 //		
 //		return "redirect:/findboard/list";
 //	}
+	//성기
+	@RequestMapping(value = "findboard/search")
+	public String searchList(HttpServletRequest req, Model model) {
+		//요청값
+		String search = req.getParameter("mainSearch");
+		String pageNum = req.getParameter("pageNum");
+//		String search2 = "%"+search+"%";
+		if(pageNum == null) pageNum = "1";
+		
+		//페이징 변수 정의
+		int currentPage = Integer.parseInt(pageNum);
+		int pageSize = 5;
+		int pageBlock = 5;
+		int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+		int endPage = startPage + pageBlock-1;
+		int count = findboardService.getFindBoardCount();
+		int pageCount = count / pageSize +  (count % pageSize == 0 ? 0:1);
+		
+		if(endPage > pageCount)	endPage = pageCount;
+
+		//DTO 
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setSearch(search);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setCount(count);
+		pageDTO.setPageCount(pageCount);
+//		pageDTO.setSearch(search2);
+		
+		List<FindboardDTO> findboardSearch = findboardService.getFindSearchList(pageDTO);
+		
+		model.addAttribute("findboardSearch", findboardSearch);
+		model.addAttribute("pageDTO", pageDTO);
+		
+		return "findboard/searchList";
+	}
+	
+//	@RequestMapping(value = "/json/address", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+//	@ResponseBody
+//	public String jsonAddress(Locale locale, Model model,  HttpServletRequest request) {    
+//		String result = request.getParameter("term");
+//		System.out.println(result);
+//		List list = findboardService.searchAddress(result);
+//		
+//		JsonArray jsonarray = new JsonArray();
+//	}
+
 }

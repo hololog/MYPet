@@ -101,45 +101,44 @@ $(document).ready(function() {
 			
 </script>
 <script>
-툴바생략
-var setting = {
-        height : 300,
-        minHeight : null,
-        maxHeight : null,
-        focus : true,
-        lang : 'ko-KR',
-        toolbar : toolbar,
-        //콜백 함수
-        callbacks : { 
-        	onImageUpload : function(files, editor, welEditable) {
-        // 파일 업로드(다중업로드를 위해 반복문 사용)
-        for (var i = files.length - 1; i >= 0; i--) {
-        uploadSummernoteImageFile(files[i],
-        this);
-        		}
-        	}
-        }
-     };
+//툴바생략
+// var setting = {
+//         height : 300,
+//         minHeight : null,
+//         maxHeight : null,
+//         focus : true,
+//         lang : 'ko-KR',
+//         toolbar : toolbar,
+//         //콜백 함수
+//         callbacks : { 
+//         	onImageUpload : function(files, editor, welEditable) {
+//         // 파일 업로드(다중업로드를 위해 반복문 사용)
+//         for (var i = files.length - 1; i >= 0; i--) {
+//         uploadSummernoteImageFile(files[i],
+//         this);
+//         		}
+//         	}
+//         }
+//      };
 
-    $('#summernote').summernote(setting);
-    });
+//     $('#summernote').summernote(setting);
+//     });
     
-    function uploadSummernoteImageFile(file, el) {
-		data = new FormData();
-		data.append("file", file);
-		$.ajax({
-			data : data,
-			type : "POST",
-			url : "${pageContext.request.contextPath }/reviewboard/review_freefile",
-			contentType : false,
-			enctype : 'multipart/form-data',
-			processData : false,
-			success : function(data) {
-				$(el).summernote('editor.insertImage', data.url);
-			}
-		});
-	}
-</script>
+//     function uploadSummernoteImageFile(file, el) {
+// 		data = new FormData();
+// 		data.append("file", file);
+// 		$.ajax({
+// 			data : data,
+// 			type : "POST",
+// 			url : "${pageContext.request.contextPath }/reviewboard/review_freefile",
+// 			contentType : false,
+// 			enctype : 'multipart/form-data',
+// 			processData : false,
+// 			success : function(data) {
+// 				$(el).summernote('editor.insertImage', data.url);
+// 			}
+// 		});
+// 	}
 </script>
     
 

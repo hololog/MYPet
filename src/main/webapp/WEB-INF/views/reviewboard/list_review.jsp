@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
      <!-- font awesome -->
   <script src="https://kit.fontawesome.com/203a25fbbd.js" crossorigin="anonymous"></script>
-    <title>자유게시판/리스트</title>
+    <title>꿀팁 & 입양후기</title>
 
     
     
@@ -31,6 +31,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
+<br><br><br><br>
 <br><br><br><br>
         <!-- 제목 시작 -->
        <div class="container">
@@ -62,12 +63,11 @@
                   </thead>
                 <tbody>
                   <c:forEach var="bDTO" items="${bestreview }">
-						 <c:set var="numbest" value="${numbest + 1}"/>
                     <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
-                        <td>${numbest}</td>
+                        <td> <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
+							</td>
                         <td style="text-align: start;">
                         
-                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
                         </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -81,17 +81,7 @@
                     </tr>
                    
 					</c:forEach>                   
-                  </tbody>
-                  </table>
-                 
-                  <hr>
-                <!-- 게시판 -->
-                <div class="container mt-3">
-                    
-                  <table class="table table-hover text-center  " >
-                    
-                 
-                  <tbody>
+                
                   <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
                   <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
@@ -126,28 +116,27 @@
                   </div>
                   </form>
                   <!-- 아이디 없을때 -->
-                  <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+                 <c:if test="${empty sessionScope.nickname  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
                   	<script>
 
-				function login() { 
+						function login() {
 						
- 						  alert("로그인해라"); 
+						  alert("로그인해라");
 						
- 						  location.href = "${pageContext.request.contextPath }/main";
+						  location.href = "${pageContext.request.contextPath }/main";
 						
- 						} 
+						}
 						
- 						</script> 
+						</script>
                   </c:if>
                   
                   
-<!--                   아이디 있을때 -->
-                 <c:if test="${!empty sessionScope.nickname }">
+                  <!-- 아이디 있을때 -->
+                  <c:if test="${!empty sessionScope.nickname }">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button>
-                  </div>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button> </div>
                   </c:if>
 
                   <!-- 다음버튼 -->

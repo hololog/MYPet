@@ -1,6 +1,8 @@
 package com.mypet.dao;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
@@ -73,5 +75,16 @@ public class MypageDAOImpl implements MypageDAO {
 //		paramMap.put("userImg", userImg);
 //		sqlSession.update(namespace + ".updateUimage", paramMap);
 //	}
+	
+	@Override
+	public List<FindboardDTO> getFindboardBookmarkList(String email) {
+		System.out.println("MypageDAOImpl getFindboardBookmarkList(email)");
+		return sqlSession.selectList(namespace+".getFindboardBookmarkList", email);
+	}
+	
+	@Override
+	public List<FileDTO> getfindFileList(String email){
+		return sqlSession.selectList(namespace+".getfindFileList", email);
+	}
 
 }

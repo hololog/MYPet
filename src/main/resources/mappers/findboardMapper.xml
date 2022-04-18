@@ -128,5 +128,16 @@
 		 order by a.insert_date desc
 		 limit 8;
 	</select>
+	
+	<select id="getFindSearchList" resultType="com.mypet.domain.FindboardDTO">
+		select * 
+		  from find_board
+		 where address = #{search}
+	</select>
+	
+	<select id="getFindBoardCount" resultType="int">
+		select count(*) 
+		  from find_board
+	</select>
 
 </mapper>

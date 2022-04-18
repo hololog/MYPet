@@ -126,35 +126,37 @@
                             <!-- header 시작 -->
                             <jsp:include page="../inc/top.jsp"></jsp:include>
                             <!-- header 종료 -->
-                            <br><br><br><br><br><br>
+                            <br><br><br><br><br><br><br><br>
                                 <div class="container">
                                     <div style="text-align: center; font-family:fantasy;">
-
+										<form action="${pageContext.request.contextPath }/pay/pay_processingPro" method="post" id="pay_form">
                                         <table class="table table-responsive" style="text-align: right;">
-
+										<input type="hidden" name="Gbuy_count" value="${boardDTO.gbuy_count}">
+										<input type="hidden" name="Gbuy_num" value="${boardDTO.gbuy_num}">
                                             <tr>
                                                 <h3 style="color: #3f51b5;">배송정보</h3>
                                             </tr>
+                                            
                                             <tr>
                                                 <td >수령인</td>
                                                 <td style="text-align: center;">
-                                                    <input type="text" id="user_id" value=""></td>
+                                                    <input type="text" id="user_id" value="" name="user_id"></td>
                                                     <td></td>
 
                                                 </tr>
                                                 <tr>
                                                     <td>상품명</td>
-                                                    <td style="text-align: center;">${boardDTO.gbuy_subject}</td>
+                                                    <td style="text-align: center;"><input type="text" id="" value="${boardDTO.gbuy_subject}" name="product_name" readonly> </td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>주문수량</td>
-                                                    <td style="text-align: center;" id="product_count">${final_qty}</td>
+                                                    <td style="text-align: center;"><input type="text" id="product_count" value="${final_qty}" name="order_qty" readonly></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>주문금액</td>
-                                                    <td style="text-align: center;" id="product_total_amount">${final_price}</td>
+                                                    <td style="text-align: center;"><input type="text" id="product_total_amount" value="${final_price}" name="amount" readonly> </td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -162,10 +164,10 @@
                                                     <td>주소</td>
                                                     <div class="container">
                                                         <td style="text-align: center;">
-                                                            <input type="text" id="sample4_postcode" placeholder="우편번호">
+                                                            <input type="text" id="sample4_postcode" placeholder="우편번호" name="zipcode">
                                                                 <input type="button" onclick="sample4_execDaumPostcode()" value="주소찾기">
                                                                     <br>
-                                                                        <textarea rows="1" cols="50" id="sample4_roadAddress" placeholder="도로명주소"></textarea>
+                                                                        <textarea rows="1" cols="50" id="sample4_roadAddress" placeholder="도로명주소" name="address"></textarea>
                                                                         <textarea rows="1" cols="50" id="sample4_jibunAddress" placeholder="지번주소"></textarea>
 
                                                                         <span id="guide" style="color:#999;display:none"></span>
@@ -176,14 +178,14 @@
                                                             <tr>
                                                                 <td>상세주소</td>
                                                                 <td style="text-align: center;">
-                                                                    <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+                                                                    <input type="text" id="sample4_detailAddress" placeholder="상세주소" name="detail_address">
                                                                         <input type="text" id="sample4_extraAddress" placeholder="참고항목"></td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>전화번호</td>
                                                                         <td style="text-align: center;">
-                                                                            <input type="text" name="" id="phone_no" value=""></td>
+                                                                            <input type="text" name="phone_no" id="phone_no" value=""></td>
                                                                             <td></td>
                                                                         </tr>
                                                                     </table>
@@ -198,18 +200,20 @@
                                                                 <!-- 결제방식 선택 -->
                                                                 <div class="" style="text-align: center;">
                                                                     <div>
-                                                                        <button id="check_module" type="button" class="btn btn-success">바로 구매하기</button>
-
+                                                                   	   <input type="" id="check_module" class="btn btn-success" value="바로 구매하기" >
+<!--                                                                         <button id="check_module" type="submit" class="btn btn-success">바로 구매하기</button> -->
+															</form>
                                                                         <script>
                                                                             $("#check_module").click(function () {
                                                                                 var IMP = window.IMP; // 생략가능
                                                                                 IMP.init('imp82814328');
                                                                                 // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용 i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
                                                                                 //var userId = document.getElementByid('user_id').value;
-                                                                                var userId = $('#user_id').val();
+                                                                                var userid = $('#user_id').val();
                                                                                 var phone_no = $('#phone_no').val();
-                                                                                var postal_code = $('#sample4_postcode').val();
-                                                                                var address = $('#sample4_roadAddress').val() + $('#sample4_jibunAddress').val() + $('#sample4_detailAddress').val();                                                                            
+                                                                                var zipcode = $('#sample4_postcode').val();
+                                                                                var address = $('#sample4_roadAddress').val() + $('#sample4_jibunAddress').val() + $('#sample4_detailAddress').val();
+                                                                                var name = '${boardDTO.gbuy_subject}';
                                                                                 IMP.request_pay({
                                                                                     pg: 'inicis', // version 1.1.0부터 지원.
                                                                                     /* 'kakao':카카오페이,
@@ -235,15 +239,15 @@ https://docs.iamport.kr/implementation/payment
 참고하세요.
 나중에 포스팅 해볼게요.
  */
-                                                                                    name: '주문명:결제테스트',
+                                                                                    name: name,
                                                                                     //결제창에서 보여질 이름
                                                                                     amount: ${final_price},
                                                                                     //가격
                                                                                     buyer_email: '',
-                                                                                    buyer_name: userId,
+                                                                                    buyer_name: userid,
                                                                                     buyer_tel: phone_no,
                                                                                     buyer_addr: address,
-                                                                                    buyer_postcode: postal_code,
+                                                                                    buyer_postcode: zipcode,
                                                                                     m_redirect_url: 'https://www.yourdomain.com/payments/complete'
                                                                                     /* 모바일 결제시,
 결제가 끝나고 랜딩되는 URL을 지정
@@ -259,6 +263,15 @@ https://docs.iamport.kr/implementation/payment
                                                                                         msg += '결제 금액 : ' + rsp.paid_amount;
                                                                                         msg += '카드 승인번호 : ' + rsp.apply_num;
                                                                                         alert(msg);
+                                                                                        $("#pay_form").submit();
+                                                                                        //수정요망
+//                                                                                         location.href ='${pageContext.request.contextPath}/main';
+//                                                                                         location.href ='${pageContext.request.contextPath}/pay/pay_completed?gbuy_num=${boardDTO.gbuy_num}';
+//                                                                                                 + '&userId=' + userId + '&phone_no=' + phone_no
+//                                                                                         		+ '&postal_code=' + postal_code + '&address=' + address
+//                                                                                         		+ '&name=' + name + '&${final_price}=' + final_price;
+                                                                                        		                                                                                        		
+//                                                                                         })
                                                                                     } else {
                                                                                         var msg = '결제에 실패하였습니다.';
                                                                                         msg += '에러내용 : ' + rsp.error_msg;
@@ -282,7 +295,6 @@ https://docs.iamport.kr/implementation/payment
                                                                     <!-- footer 종료 -->
                                                                 </div>
                                                                 <!--스크립트 적용 -->
-                                                                <script src="js/main.js"></script>
                                                                 <!-- 부트스트랩 스크립트 적용 -->
                                                                 <script
                                                                     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
