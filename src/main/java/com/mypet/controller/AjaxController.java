@@ -19,7 +19,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +70,7 @@ public class AjaxController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+
 	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
 	public ResponseEntity<String> memberCheck(HttpServletRequest request) {
 		String result = "";

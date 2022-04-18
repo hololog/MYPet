@@ -70,9 +70,10 @@ public class MypageController {
 		}
 		
 		@RequestMapping(value = "/mypage/update", method = RequestMethod.GET)
-		public String update(HttpSession session) throws Exception {
-			String nickname = (String)session.getAttribute("nickname");
-			mypageService.getMember(nickname);
+		public String update(HttpSession session, Model model) throws Exception {
+			String email = (String)session.getAttribute("email");
+			MemberDTO memberDTO = mypageService.getMember(email); 
+			model.addAttribute("memberDTO",memberDTO);
 			return "mypage/update";
 		}
 		
@@ -116,7 +117,7 @@ public class MypageController {
 				
 				mypageService.updateMember(memberDTO);
 				
-				return "redirect:/mypage/myinfo";
+				return "main/main";
 			} else {
 				return "mypage/mypagemsg";
 			}

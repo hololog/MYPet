@@ -150,7 +150,7 @@
                                 	
                                 <label for="nick" class="form-label">닉네임<span class="text-muted"></span></label>
                                 <input
-                                	value="${sessionScope.nickname }"
+                                	value="${memberDTO.nickname }"
                                 	name="nickname"
                                     type="text"
                                     class="form-control"
@@ -159,7 +159,7 @@
                             <div class="col">
                                 <label for="email" class="form-label">이메일<span class="text-muted"></span></label>
                                 <input
-                                	value="${sessionScope.email }"
+                                	value="${memberDTO.email }"
                                 	name="email"
                                     type="text"
                                     class="form-control"
