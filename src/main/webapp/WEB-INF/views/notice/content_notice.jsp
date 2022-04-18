@@ -264,16 +264,76 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-     <section class="container mb-7 text-center">
+    	 <script type="text/javascript">
+       $(document).ready(function(){
+     		//북마트 클릭이벤트
+     		$('.bookmark-click').click(function(){
+     			let no = $(this).children('.fbnum-ksk').val();
+     			//빈별표 일때
+     			if($(this).children('i').attr('class') === 'bi bi-heart'){
+     				//별표 변경
+     				$(this).children('i').attr('class', 'bi bi-heart-fill');
+     				//DB에 free_like테이블과 free_board테이블에 북마크 정보 갱신
+     				$.ajax({
+     					url:"${pageContext.request.contextPath }/notice/addBookmark",
+     					data:{"notice_num" : no},
+     					success:function(rdata){
+     						if(rdata != null) {
+     							//게시물당 북마크수 화면표시
+     							$('#mark'+no).text(" "+ rdata);
+     						}
+     					}	
+     				});
+     			//꽉찬 별표 일때
+     			} else {
+     				$(this).children('i').attr('class', 'bi bi-heart');
+     				$.ajax({
+     					url:"${pageContext.request.contextPath }/notice/removeBookmark",
+     					data:{"notice_num" : no},
+     					success:function(rdata){
+     						if(rdata != null) {
+     							$('#mark'+no).html(" "+ rdata);
+     						}
+     					}	
+     				});
+     			}
+     		});
+     	});          
+       </script>
+		<br>
+   
+   
+   <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
             <div class="card-body">
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
-                <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${like_count} </i>
-                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
+              
+				<!-- 조회수 -->
+                <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
+                <!-- 좋아요 아이콘 -->
+                <!-- 로그인했을때만 클릭가능  -->
+                <c:choose>
+					<c:when test="${!empty sessionScope.email }">
+						<a type="button" class="bookmark-click">
+							<input type="hidden" value="${boardDTO.notice_num }" class="fbnum-ksk">
+							<!-- 빈하트/꽉찬하트 구분 -->
+							<c:choose>
+								<c:when test="${boardDTO.book ne 0}">
+	                            	<i class="bi bi-heart-fill" style="color: red;"></i><span id="mark${boardDTO.notice_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+								</c:when>
+								<c:otherwise>
+	                            	<i class="bi bi-heart" style="color: red;"></i><span id="mark${boardDTO.notice_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+								</c:otherwise>
+							</c:choose>
+						</a>
+					</c:when>
+					<c:otherwise>
+                   		<i class="bi bi-heart" style="color: red;"></i><span id="mark${boardDTO.notice_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+					</c:otherwise>	                          
+                </c:choose>
                 <div class="in-line-kj">
 
                     <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;

@@ -25,4 +25,27 @@ public interface BookmarkService {
 
 	public int FgetBookmarkNum(int free_board_num);
 
+	
+	//review
+		public void RaddBookmarkCount(int tip_board_num);
+
+		public void RaddBookmark(BookmarkDTO bookmarkDTO);
+
+		public void RremoveBookmarkCount(int tip_board_num);
+
+		public void RremoveBookmark(BookmarkDTO bookmarkDTO);
+
+		public int RgetBookmarkNum(int tip_board_num);
+
+		
+		//review
+	public void NaddBookmarkCount(int notice_num);
+
+	public void NaddBookmark(BookmarkDTO bookmarkDTO);
+
+	public void NremoveBookmarkCount(int notice_num);
+
+	public void NremoveBookmark(BookmarkDTO bookmarkDTO);
+
+	public int NgetBookmarkNum(int notice_num);
 }

@@ -68,5 +68,63 @@ public class BookmarkServiceImpl implements BookmarkService{
 		return bookmarkDAO.FgetBookmarkNum(free_board_num);
 	}
 	
+	//review
+	
+		@Override
+		public void RaddBookmarkCount(int tip_board_num) {
+			bookmarkDAO.RaddBookmarkCount(tip_board_num);
+		}
+
+		@Override
+		public void RaddBookmark(BookmarkDTO bookmarkDTO) {
+			bookmarkDAO.RaddBookmark(bookmarkDTO);
+		}
+
+		@Override
+		public void RremoveBookmarkCount(int tip_board_num) {
+			bookmarkDAO.RremoveBookmarkCount(tip_board_num);
+			
+		}
+
+		@Override
+		public void RremoveBookmark(BookmarkDTO bookmarkDTO) {
+			bookmarkDAO.RremoveBookmark(bookmarkDTO);
+			
+		}
+
+		@Override
+		public int RgetBookmarkNum(int tip_board_num) {
+			return bookmarkDAO.RgetBookmarkNum(tip_board_num);
+		}
+		
+		//notice
+		
+			@Override
+			public void NaddBookmarkCount(int notice_num) {
+				bookmarkDAO.NaddBookmarkCount(notice_num);
+			}
+
+			@Override
+			public void NaddBookmark(BookmarkDTO bookmarkDTO) {
+				bookmarkDAO.NaddBookmark(bookmarkDTO);
+			}
+
+			@Override
+			public void NremoveBookmarkCount(int notice_num) {
+				bookmarkDAO.NremoveBookmarkCount(notice_num);
+				
+			}
+
+			@Override
+			public void NremoveBookmark(BookmarkDTO bookmarkDTO) {
+				bookmarkDAO.NremoveBookmark(bookmarkDTO);
+				
+			}
+
+			@Override
+			public int NgetBookmarkNum(int notice_num) {
+				return bookmarkDAO.NgetBookmarkNum(notice_num);
+			}
+	
 
 }

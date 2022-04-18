@@ -113,11 +113,6 @@ public class FindboardDAOImpl implements FindboardDAO {
 	}
 
 	@Override
-	public int getFindBoardCount() {
-		return sqlSession.selectOne(namespace + ".getFindBoardCount");
-	}
-
-	@Override
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace + ".getFindSearchList", pageDTO);
 	}
@@ -131,6 +126,21 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public void update_findboard_file(FileDTO fileDTO) {
 		sqlSession.update(namespace+".update_findboard_file", fileDTO);
 	}
+
+	@Override
+	public int getFindBoardSearchCount() {
+		return sqlSession.selectOne(namespace + ".getFindBoardSearchCount");
+	}
+
+	@Override
+	public List<FileDTO> getSearchFileList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace+".getSearchFileList", pageDTO);
+	}
+
+//	@Override
+//	public List<String> wordSearchShow(Map<String, String> paraMap) {
+//		return sqlSession.selectOne(namespace + ".wordSearchShow", paraMap);
+//	}
 	
 	@Override
 	public void deletefind(int num) {

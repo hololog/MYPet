@@ -136,15 +136,29 @@
 		 limit 8
 	</select>
 	
+ 	<select id="getFindBoardSearchCount" resultType="int">
+ 		select count(*) 
+ 		  from find_board 
+ 		 where address like #{search}
+ 	</select>
+ 		
 	<select id="getFindSearchList" resultType="com.mypet.domain.FindboardDTO">
 		select * 
-		  from find_board
-		 where address like '%#{search}%'
+		from find_board 
+		where address like #{search}
+		order by find_board_num desc 
+		limit #{startRow},#{pageSize}
 	</select>
 	
-	<select id="getFindBoardCount" resultType="int">
-		select count(*) 
-		  from find_board
+	<select id="getSearchFileList" resultType="com.mypet.domain.FileDTO">
+		select * 
+		  from find_board_file    
+	     where find_board_num in (select find_board_num
+							        from find_board 
+							       where address like #{search})
+         order by find_board_num desc 
+		 limit #{startRow},#{pageSize}
+							       
 	</select>
 	
 	<delete id="deletefind">

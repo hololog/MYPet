@@ -382,16 +382,18 @@
 
 					<!-- 검색창 시작 ajax -->
 					<div class="pt-3 d-flex justify-content-center gap-3">
-						<div class="">
-							<input type="text" class="form-control" id="" value=""
-								placeholder="내 주변 검색">
-						</div>
-						<div class="">
-							<button type="submit" class="btn text-white"
-								style="background-color: #3f51b5;">
-								<i class="bi bi-search"></i>
-							</button>
-						</div>
+						<form action="${pageContext.request.contextPath }/findboard/search" method="get">
+							<div class="">
+								<input type="text" class="form-control" id="mainSearch" name="mainSearch"
+									placeholder="내 주변 검색">
+							</div>
+							<div class="">
+								<button type="submit" class="btn text-white"
+									style="background-color: #3f51b5;">
+									<i class="bi bi-search"></i>
+								</button>
+							</div>
+						</form>
 					</div>
 					<div class="form-check d-flex justify-content-center p-3">
 						<input class="form-check-input" type="checkbox" value=""

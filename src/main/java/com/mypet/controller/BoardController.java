@@ -348,11 +348,19 @@ public class BoardController {
 	}
 	//세히
 	@RequestMapping(value = "/reviewboard/content_review", method = RequestMethod.GET)
-	public String reivewboardContent(HttpServletRequest request, Model model) {
+	public String reivewboardContent(HttpServletRequest request, Model model,HttpSession session) {
 		int num=Integer.parseInt(request.getParameter("tip_board_num"));
 		boardService.updatereviewReadcount(num);
+		String email = (String)session.getAttribute("email");
 		
-		BoardDTO boardDTO=boardService.getreviewBoard(num);
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setEmail(email);
+		boardDTO.setTip_board_num(num);
+		//즐겨찾기했는지 여부=> 했으면 1리턴 / 안했으면 0리턴
+		int book = boardService.getreviewLike(boardDTO);
+		
+		boardDTO = boardService.getreviewBoard(num);
+		boardDTO.setBook(book);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
@@ -361,12 +369,21 @@ public class BoardController {
 	
 	//세히
 	@RequestMapping(value = "/notice/content_notice", method = RequestMethod.GET)
-	public String noticeContent(HttpServletRequest request, Model model) {
+	public String noticeContent(HttpServletRequest request, Model model,HttpSession session) {
 		
 		int num=Integer.parseInt(request.getParameter("notice_num"));
+		String email = (String)session.getAttribute("email");
+		
 		boardService.updatenoticeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getnoticeBoard(num);
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setEmail(email);
+		boardDTO.setNotice_num(num);
+		//즐겨찾기했는지 여부=> 했으면 1리턴 / 안했으면 0리턴
+		int book = boardService.getnoticeLike(boardDTO);
+		
+		boardDTO = boardService.getnoticeBoard(num);
+		boardDTO.setBook(book);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
