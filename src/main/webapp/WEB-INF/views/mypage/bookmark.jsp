@@ -377,7 +377,7 @@
 							</div>
 							<!-- Modal footer -->
 							<c:choose>
-							<c:when test="${sessionScope.nickname eq fb.nickname}">
+							<c:when test="${sessionScope.email eq fb.email}">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary"
 									data-bs-target="#modify_content" data-bs-toggle="modal"
@@ -386,7 +386,7 @@
 									data-bs-dismiss="modal">닫기</button>
 							</div>
 							</c:when>
-							<c:when test="${sessionScope.nickname ne fb.nickname}">
+							<c:when test="${sessionScope.email ne fb.email}">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-danger"
 									data-bs-dismiss="modal">닫기</button>

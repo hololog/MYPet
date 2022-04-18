@@ -110,7 +110,8 @@
 		where f.find_board_num in (
 				select find_board_num from bookmark
 				where email=#{email})
-		order by f.find_board_num desc limit #{startRow},#{pageSize}
+		order by f.find_board_num desc 
+		limit #{startRow},#{pageSize}
 	</select>
 	
 	<select id="getBookmarkCount" resultType="java.lang.Integer">

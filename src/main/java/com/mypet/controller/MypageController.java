@@ -175,7 +175,7 @@ public class MypageController {
 			String email = (String)session.getAttribute("email");
 			
 			//pageDTO 값 정의
-			int pageSize = 2;
+			int pageSize = 3;
 			
 			String pageNum = request.getParameter("pageNum");
 			if (pageNum == null) {
