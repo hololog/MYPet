@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mypet.domain.BoardDTO;
@@ -97,37 +96,51 @@ public class MypageController {
 			if(updateCheckDTO != null) {
 				mypageService.deleteMember(memberDTO);
 				session.invalidate();
-				return "redirect:/main";
+				return "mypage/leaveMsg";
 			} else {
 				return "member/msg";
 			}
 		}
 		
 		@RequestMapping(value = "/mypage/amendpwd", method = RequestMethod.GET)
-		public String amendpwd() {
-			System.out.println("MypageController amendpwd() ");
+		public String amendpwd(HttpSession session) throws Exception {
+			String password = (String)session.getAttribute("password");
+			System.out.println("들어옴");
+			mypageService.getMember(password);
 			return "mypage/amendpwd";
 		}
 		
-//		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
-//		@ResponseBody
-//		public int pwCheck(MemberDTO memberDTO) throws Exception{
-//			String memberPw = memberService.pwCheck(memberDTO.getEmail());
-//			if( memberDTO == null || !BCrypt.checkpw(memberDTO.getPassword(), memberDTO.getPassword())) {
-//				return 0;
-//			}
-//			return 1;
-//		}
-//		
-//		@RequestMapping(value="/pwUpdate" , method=RequestMethod.POST)
-//		public String pwUpdate(String memberId,String memberPw1,RedirectAttributes rttr,HttpSession session)throws Exception{
-//			String hashedPw = BCrypt.hashpw(memberPw1, BCrypt.gensalt());
-//			memberService.pwUpdate(memberId, hashedPw);
-//			session.invalidate();
-//			rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+//		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
+//		public void amendpwdPro(HttpServletRequest req, HttpSession session) throws Exception {
+//			String pass = req.getParameter("password");
+//			System.out.println(pass);
+			
+//			MemberDTO pwUpdateCheckDTO = mypageService.pwCheck(memberDTO);
 //			
-//			return "redirect:/member/loginView";
+//			if(pwUpdateCheckDTO != null) {
+//				session.setAttribute("password", memberDTO.getPassword());
+//				mypageService.pwUpdate(memberDTO);
+//				return "redirect:/main"	;
+//			} else {
+//				return "member/msg";
+//			}
 //		}
+		
+		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
+		public String amendpwdPro(MemberDTO memberDTO, HttpSession session) throws Exception {
+			System.out.println(memberDTO.getEmail());
+			System.out.println(memberDTO.getPassword2());
+			
+			mypageService.pwUpdate(memberDTO);
+			
+			return "/main/main";
+		}
+		
+		@RequestMapping(value = "/mypage/mymisslist", method = RequestMethod.GET)
+		public String mymisslist(HttpServletRequest request, Model model) throws Exception {
+			
+			return "mypage/mymisslist";
+		}
 		
 //		@RequestMapping(value = "/modify/image", method = RequestMethod.POST)
 //		public String userImgModify(String userId,

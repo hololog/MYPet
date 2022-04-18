@@ -24,7 +24,7 @@ public interface MypageService {
 	public MemberDTO pwCheck(MemberDTO memberDTO);
 	
 	public void pwUpdate(MemberDTO memberDTO);
-
+	
 //	public List<MypageDTO> getmyBoardList(BoradDTO boardDTO);
 	
 //	public void modifyUimage(String email, String uimage) throws Exception;

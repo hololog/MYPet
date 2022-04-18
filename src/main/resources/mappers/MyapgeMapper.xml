@@ -43,12 +43,26 @@
 		limit 10
 	</select>
 	
-	<select id="pwCheck" resultType="String">
-		select * from user where email=#{email}
+	<select id="getmyfind_BoardList" resultType="com.mypet.domain.MypageDTO">
+		select @rownum := @rownum + 1 as rownum, find_board_num as num, pet_name, detail_address, insert_date, readcount, email, bookmark_count
+		  from find_board, (select @rownum :=0) b
+		where email = #{email}
+		order by insert_date desc 
+		limit 10
+	</select>
+	
+	<select id="pwCheck" resultType="com.mypet.domain.MemberDTO">
+		<!-- select * from user where email=#{email} and password=#{password} -->
+		 select case when user_id = '' then '불일치' else '일치' end as password
+		    from (
+		 select ifnull(max(user_id), '') as user_id
+		   from user 
+		   where email=#{email} and password=#{password}
+		   ) a
 	</select>
 	
 	<update id="pwUpdate">
-		update user set password=#{password} where email=#{email}
+		update user set password=#{password2} where email=#{email}
 	</update>
 	
 <!-- 	<select id="getmyfind_BoardList" resultType="com.mypet.domain.MypageDTO"> -->

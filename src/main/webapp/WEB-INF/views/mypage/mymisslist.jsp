@@ -58,16 +58,17 @@
 <script type="text/javascript">
 $(document).ready(function(){
 		$.ajax({
-			url:'${pageContext.request.contextPath }/mypage/mypagejson',
+			url:'${pageContext.request.contextPath }/mypage/mypagejson2',
 			dataType:'json',
-			data:{"nickname":'${sessionScope.nickname}'},
+			data:{"email":'${sessionScope.email}'},
 			success:function(rdata){
 				$.each(rdata,function(index,item){
-					if(item.board_code == 'v'){
-						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
-					} else {
-						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/freeboard/content_free?free_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
-					}
+					if(item.email == '${sessionScope.email}'){
+						$('#table2').append('<tr><td>'+item.rownum+'</td><td>'+item.pet_name+'</td><td><a href="${pageContext.request.contextPath }/findboard/list">'+item.detail_address+'</a></td><td>'+item.readcount+'</td><td>'+item.bookmark_count+'</td></tr>');
+					} 
+// 					else {
+// 						$('#table2').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/freeboard/content_free?free_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
+// 					}
 				});
 			}
 		});	
@@ -86,7 +87,7 @@ $(document).ready(function(){
     <!-- ------------------------------- -->
     <!-- 제목 시작 -->
     <div class="container">
-      <h1 class="sub-title">내 글목록</h1>
+      <h1 class="sub-title">내 실종공고</h1>
       <hr>
     </div>
     <!-- 제목 종료 -->
@@ -161,14 +162,15 @@ $(document).ready(function(){
                 <div class="content">
                     <table class="table table-hover text-start" >
                         <thead>
-                            <tr style="text-align: center;">
+                            <tr>
                                 <th width="7%">번호</th>
-                                <th width="11%">종류</th>
-                                <th width="65%">제목</th>
+                                <th width="15%">이름</th>
+                                <th width="50%">정보</th>
+                                <th width="15%">즐겨찾기</th>
                                 <th width="9%">조회수</th>
                             </tr>
                         </thead>
-                        <tbody id="table1">
+                        <tbody id="table2">
                         </tbody>
                     </table>
                 </div>
