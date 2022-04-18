@@ -72,7 +72,7 @@
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="bi bi-heart-fill" style="color: red;"> ${bDTO.like_count } </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
                         <td></td>
@@ -92,7 +92,7 @@
                         <td width="30%" style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                         <i class="bi bi-heart-fill" style="color: red;"> ${bDTO.like_count } </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
                         <td width="10%">${bDTO.nickname}</td>

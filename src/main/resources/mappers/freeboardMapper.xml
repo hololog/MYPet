@@ -98,8 +98,20 @@
 		select * from notice where notice_num=#{notice_num}
 	</select>
 	
+	<select id="getnoticeLike" resultType="int">
+		SELECT count(*)
+          FROM notice_like
+		 where email = #{email} and notice_num = #{notice_num}
+	</select>
+	
 	<select id="getreviewBoard" resultType="com.mypet.domain.BoardDTO">
 		select * from tip_board where tip_board_num=#{tip_board_num}
+	</select>
+	
+	<select id="getreviewLike" resultType="int">
+		SELECT count(*)
+          FROM tip_like
+		 where email = #{email} and tip_board_num = #{tip_board_num}
 	</select>
 <!-- Board end -->	
 
@@ -175,15 +187,15 @@
 
 
 	<select id="bestfree" resultType="com.mypet.domain.BoardDTO">
-	 	select * from free_board order by readcount desc limit 3
+	 	select * from free_board order by like_count desc limit 3
 	</select>
 	
 	<select id="bestnotice" resultType="com.mypet.domain.BoardDTO">
-	 	select * from notice order by readcount desc limit 3
+	 	select * from notice order by like_count desc limit 3
 	</select>
 	
 	<select id="bestreview" resultType="com.mypet.domain.BoardDTO">
-	 	select * from tip_board order by readcount desc limit 3
+	 	select * from tip_board order by like_count desc limit 3
 	</select>
 
 
