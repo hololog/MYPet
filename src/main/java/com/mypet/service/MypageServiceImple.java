@@ -91,26 +91,44 @@ public class MypageServiceImple implements MypageService {
 //		return mypageDAO.getmyBoardList(boardDTO);
 
 	@Override
-	public List<FindboardDTO> getFindboardBookmarkList(String email) {
-	System.out.println("MypageServiceImpl getFindboardBookmarkList(String email)");
+	public List<FindboardDTO> getFindboardBookmarkList(PageDTO pageDTO) {
+	System.out.println("MypageServiceImpl getFindboardBookmarkList(pageDTO)");
 	
-	return mypageDAO.getFindboardBookmarkList(email);
+	int currentPage=Integer.parseInt(pageDTO.getPageNum());
+	int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+	int endRow=startRow+pageDTO.getPageSize()-1;
+	
+	pageDTO.setCurrentPage(currentPage);
+	pageDTO.setStartRow(startRow);
+	pageDTO.setEndRow(endRow);
+	
+	pageDTO.setStartRow(startRow-1);
+	
+	
+	return mypageDAO.getFindboardBookmarkList(pageDTO);
 	}
 	
 	@Override
-	public List<FileDTO> getfindFileList(String email){
+	public List<FileDTO> getfindFileList(PageDTO pageDTO){
 		
-//		int currentPage=Integer.parseInt(pageDTO.getPageNum());
-//		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
-//		int endRow=startRow+pageDTO.getPageSize()-1;
-//		
-//		pageDTO.setCurrentPage(currentPage);
-//		pageDTO.setStartRow(startRow);
-//		pageDTO.setEndRow(endRow);
-//		
-//		pageDTO.setStartRow(startRow-1);
-//		
-		return mypageDAO.getfindFileList(email);
+		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+		int endRow=startRow+pageDTO.getPageSize()-1;
+		
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setStartRow(startRow);
+		pageDTO.setEndRow(endRow);
+		
+		pageDTO.setStartRow(startRow-1);
+		
+		return mypageDAO.getfindFileList(pageDTO);
 	}
+
+	@Override
+	public int getBookmarkCount() {
+		return mypageDAO.getBookmarkCount();
+	}
+	
+	
 
 }
