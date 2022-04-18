@@ -63,12 +63,11 @@
                   </thead>
                 <tbody>
                   <c:forEach var="bDTO" items="${bestreview }">
-						 <c:set var="numbest" value="${numbest + 1}"/>
                     <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">
-                        <td>${numbest}</td>
+                        <td> <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
+							</td>
                         <td style="text-align: start;">
                         
-                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
                         </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -82,17 +81,7 @@
                     </tr>
                    
 					</c:forEach>                   
-                  </tbody>
-                  </table>
-                 
-                  <hr>
-                <!-- 게시판 -->
-                <div class="container mt-3">
-                    
-                  <table class="table table-hover text-center  " >
-                    
-                 
-                  <tbody>
+                
                   <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
                   <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num=${bDTO.tip_board_num}'">

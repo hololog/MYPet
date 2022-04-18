@@ -19,6 +19,7 @@ public class BoardDTO {
 	private int like_num;
 	private int user_id;
 	private String file;
+	private String book;
 	
 	
 
@@ -112,6 +113,12 @@ public class BoardDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getBook() {
+		return book;
+	}
+	public void setBook(String book) {
+		this.book = book;
 	}
 
 	

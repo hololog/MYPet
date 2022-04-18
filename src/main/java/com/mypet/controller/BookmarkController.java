@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mypet.domain.BookmarkDTO;
+import com.mypet.service.BoardService;
 import com.mypet.service.BookmarkService;
 import com.mypet.service.FindboardService;
 
@@ -26,6 +27,9 @@ public class BookmarkController {
 	
 	@Autowired
 	public FindboardService findboardService;
+	
+	@Autowired
+	public BoardService boardService;
 	
 	//빈 북마크 클릭
 	@ResponseBody
@@ -59,6 +63,40 @@ public class BookmarkController {
 		bookmarkService.removeBookmark(bookmarkDTO);
 		
 		return bookmarkService.getBookmarkNum(findboardNum);
+	}
+	
+	//세히
+	@ResponseBody
+	@RequestMapping(value = "freeboard/addBookmark")
+	public int FaddBookmark(@RequestParam int free_board_num, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+		//게시물 번호 저장
+		bookmarkDTO.setFree_board_num(free_board_num);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		
+		//실종공고테이블 북마크 개수 +1,
+		bookmarkService.FaddBookmarkCount(free_board_num);
+		//북마크 테이블 추가
+		bookmarkService.FaddBookmark(bookmarkDTO);
+		
+		return bookmarkService.FgetBookmarkNum(free_board_num);
+	}
+
+	//꽉찬 북마크 클릭
+	@ResponseBody
+	@RequestMapping(value = "freeboard/removeBookmark")
+	public int FremoveBookmark(@RequestParam int free_board_num, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+
+		bookmarkDTO.setFree_board_num(free_board_num);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		
+		//실종공고테이블 북마크 개수 -1
+		bookmarkService.FremoveBookmarkCount(free_board_num);
+		//북마크 테이블에서 제거
+		bookmarkService.FremoveBookmark(bookmarkDTO);
+		
+		return bookmarkService.FgetBookmarkNum(free_board_num);
 	}
 	
 //	@ResponseBody
