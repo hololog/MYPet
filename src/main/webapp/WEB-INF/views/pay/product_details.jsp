@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/GBuy.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/pay.css" />
     <!-- 부트스트랩 적용 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- 부트스트랩 아이콘 -->
@@ -40,7 +41,7 @@ function add () {
 			   	 sum = document.form.sum;
 				 if	(hm.value<${boardDTO.gbuy_count}){
 					 hm.value ++ ;
-					 sum.value = (parseInt(hm.value) * sell_price);
+					 sum.value = (parseInt(hm.value) * sell_price + 3000);
 				    }
 				}
 function del () {
@@ -48,7 +49,7 @@ function del () {
 				 sum = document.form.sum;
 				 if (hm.value > 1) {
 									hm.value -- ;
-									sum.value = (parseInt(hm.value) * sell_price);
+									sum.value = (parseInt(hm.value) * sell_price + 3000);
 					}
 				}
 function change () {
@@ -57,13 +58,13 @@ function change () {
 					if (hm.value >${boardDTO.gbuy_count}) {
 						hm.value =${boardDTO.gbuy_count};
 						}
-					sum.value = (parseInt(hm.value) * sell_price);
+					sum.value = (parseInt(hm.value) * sell_price + 3000);
 					}  
 function xx() {
 			  	hm = document.form.amount;
 				sum = document.form.sum;
 				hm.value="1" ;
-				sum.value = (parseInt(hm.value) * sell_price);
+				sum.value = (parseInt(hm.value) * sell_price + 3000);
 			   }
 </script>
       <!-- header 시작 -->
@@ -73,12 +74,14 @@ function xx() {
 <br>
 <div>
 	<div class="text-lg-end" style="padding-right:20%;">
-	<%String id=(String)session.getAttribute("id");	//세션값 가져오기 %>	 
- 				<% if(id != null){
- 				if(id.equals("admin")){ %>	  
-		<input type="button" value="글수정" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${boardDTO.gbuy_num}'" >
-		<input type="button" value="글삭제" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyDelete?gbuy_num=${boardDTO.gbuy_num}'" >	
-	<%}} %>
+		<input type="button" 
+			   value="글수정" 
+			   class="btn_GB" 
+			   onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${boardDTO.gbuy_num}'" >
+		<input type="button"
+		       value="글삭제" 
+		       class="btn_GB" 
+		       onclick="location.href='${pageContext.request.contextPath}/GB/GbuyDelete?gbuy_num=${boardDTO.gbuy_num}'" >	
 	</div>
 	<div style="font-family:fantasy; text-align: center; color: #3f51b5; ">
 	<br><br><br><br><br>
@@ -86,6 +89,7 @@ function xx() {
 	</div>
 	<br>
 	<br>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-6">
@@ -94,28 +98,80 @@ function xx() {
 			</div>
 			<div class="col-6" style="text-align: left; padding:0;">
 				<div>
-                    <div>제품명 :${boardDTO.gbuy_subject}</div>
+                    <div>제품명 : ${boardDTO.gbuy_subject}</div>
                     <br>
-                    <div>판매가:${boardDTO.gbuy_price}원 </div>
+                    <div>판매가 : <fmt:formatNumber value="${boardDTO.gbuy_price}"  pattern="#,###" /> 원
+                    </div>
                     <br>
-                    <div>배송비 :3,000원</div>
+                    <div>배송비 : 3,000 원</div>
                     <br>
-                    <div>목표량:${boardDTO.gbuy_tcount}</div>
+                    <div>목표량 : ${boardDTO.gbuy_tcount} 개</div>
                     <br>
-                    <div>재고수:${boardDTO.gbuy_count}</div>
+                    <div>재고수 : ${boardDTO.gbuy_count} 개</div>
                     <br>
                     <div>
                     	<div>
 							<form name="form" method="get">
 							<div>
-								수량 : <input type="hidden" name="sell_price" value="${boardDTO.gbuy_price}">
-									  <input type="text" id="final_qty" name="amount" value="1" size="3" onchange="change();" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">개
-									  <input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><input type="button" value=" reset " onclick="xx();"><br>
+								수량 : <input type="hidden" 
+											 name="sell_price" 
+											 value="${boardDTO.gbuy_price}">
+									  <input type="text" 
+									  		 id="final_qty" 
+									  		 name="amount" 
+									  		 value="1" 
+									  		 size="3" 
+									  		 onchange="change();"
+									  		 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">개
+									  <input type="button" 
+									  		 value=" + "
+									  		 onclick="add();"
+									  		 style="width:30px; 
+									         	    height:30px;
+									    	  		border:none;
+									  		  		border-right:0px; 
+									   		  		border-top:0px; 
+									  		  		boder-left:0px; 
+									   		  		boder-bottom:0px;
+									   		  		background-color:transparent;" >
+									  <input type="button" 
+									  		 value=" - "
+									  		 onclick="del();"
+									  		 style="width:30px; 
+									         	    height:30px;
+									    	  		border:none;
+									  		  		border-right:0px; 
+									   		  		border-top:0px; 
+									  		  		boder-left:0px; 
+									   		  		boder-bottom:0px;
+									   		  		background-color:transparent;">
+									  <input type="button"
+									  		 class="w-btn-reset w-btn-brown"
+									  		 value="reset"
+									  		 onclick="xx();"
+									  		 style="width:80px;"
+									  		 >
+									  <input type="hidden" 
+									  	     name="Gbuy_count" 
+									  	     value="${boardDTO.gbuy_count}"> 
 							</div>
-							<br>      <input type="hidden" name="Gbuy_count" value="${boardDTO.gbuy_count}">
+							<br>        
 							<div>
-							    금액 :<input type="text" name="sum" id="final_price" size="11" value="0" readonly>원
-<!-- 								 <fmt:formatNumber pattern="###,###" value="0" name="sum" id="final_price" size="11"  readonly />원 -->
+							    금액 : <input type="text" 
+							    			 name="sum" 
+							    			 id="final_price" 
+							    			 size="11" 
+							    			 value="0"
+							    			 style="width:100px; 
+									         	    height:30px;
+									    	  		border:none;
+									  		  		border-right:0px; 
+									   		  		border-top:0px; 
+									  		  		boder-left:0px; 
+									   		  		boder-bottom:0px;
+									   		  		background-color:transparent;" 
+							    			 readonly>원
+							    			 									   
 							</div>
 							</form>
                         </div>
@@ -123,9 +179,13 @@ function xx() {
          		</div>
          		<!-- 결제방식 선택 -->
          		<br>
-       			<div class="row" style="text-align: center;">
+       			<div class="row" style="text-align: left;">
              		<div>
-             			 <input id="btnBuy" type="button" value="구매하기" class="btn btn-success" onclick="move()"> 
+             			 <input id="btnBuy" 
+             			 	    type="button" 
+             			 	    value="구매하기" 
+             			 	    class="w-btn w-btn-buy-green" 
+             			 	    onclick="move()"> 
              		</div>
          		</div>
          		<script type="text/javascript">
@@ -139,7 +199,8 @@ function xx() {
 			</div>
             <!-- 상세페이지 영역! -->
             <!-- 더미데이터-->
-           	<h1 style="text-align: center;">상세 페이지 영역</h1>
+           	<h1 style="text-align: center;"></h1>
+           	<br><br><br><br>
             	<div class="col-12" style="text-align: center;">
                 	<img	style="width:100%; height:100%; object-fit:cover;" 
                 			src="${pageContext.request.contextPath }/resources/upload/${boardDTO.gbuy_file2}" class="img-responsive" alt="product_details">
