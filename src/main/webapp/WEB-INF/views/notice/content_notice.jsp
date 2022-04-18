@@ -54,9 +54,8 @@
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-           <c:if test="${ ! empty sessionScope.nickname }">
 
-	<c:if test="${sessionScope.nickname  eq boardDTO.nickname}">
+		<c:if test="${sessionScope.nickname  eq 'admin'}">
 		            <button
 		                type="button"
 		                class="btn btn-outline-primary "
@@ -78,7 +77,6 @@
 			                	
                 </script>
                 
-     		  </c:if>
      		  </c:if>
             <button
                 type="button"

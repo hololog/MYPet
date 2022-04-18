@@ -31,6 +31,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
+<br><br><br><br>
 <br><br><br><br>	
         <!-- 제목 시작 -->
        <div class="container">
@@ -56,7 +57,7 @@
                         <th width="3%"> </th>
                         <th width="30%" style="text-align: start;">제목</th>
                         <th></th>
-                        <th width="10%">글쓴이</th>
+                        <th width="10%"></th>
                         <th width="10%" style="text-align: start;">날짜</th>
                     </tr>
                   </thead>
@@ -75,7 +76,7 @@
                           <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
-                        <td>${bDTO.nickname}</td>
+                        <td></td>
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
@@ -130,11 +131,11 @@
 
                  
 
-<%-- 					<c:if test="${sessionScope.nickname  ne 'admin'}"> --%>
+					<c:if test="${sessionScope.nickname  eq 'admin'}">
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
-<%--                   </c:if> --%>
+                  </c:if>
                   
                  <!-- 다음버튼 -->
                   <div class="text-center">
