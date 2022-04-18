@@ -298,8 +298,19 @@
 			<!-- 신고글쓰기버튼 -->
 			<div class="row p-3">
 				<div class="col-12">
+				<c:if test="${sessionScope.nickname ne null}">
 					<a href="${pageContext.request.contextPath }/findboard/write"
 						class="btn float-end" style="border-color: #3f51b5;">실종신고</a>
+				</c:if>
+				<c:if test="${sessionScope.nickname eq null}">
+				<a class="btn float-end" style="border-color: #3f51b5;" onclick="reqlog()">실종신고</a>
+				<script>
+				function reqlog(){
+					alert("로그인 후 이용가능합니다.");
+					return;
+				}
+				</script>
+				</c:if>
 				</div>
 			</div>
 			<input type="hidden" data-addr="${findboardDTO.address}">
@@ -544,12 +555,14 @@
 									<div class="carousel-inner">
 										<!-- 사진1 -->
 										<div class="carousel-item active">
-											<c:if test="${ff.upload ne null}">
-												<img src="${ff.upload }/${ff.save_filename}"
+											<%-- <c:if test="${fileList[loop.index].upload ne null}"> --%>
+											<%-- <c:if test="${fileList[loop.index].find_board_num eq fb.find_board_num}"> --%>
+												<img src="${pageContext.request.contextPath}/resources/upload/${fileList[loop.index].save_filename}"
 													alt="first slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</c:if>
+											<%-- </c:if> --%>
+											<%-- </c:if> --%>
 										</div>
 										<!-- 사진2 -->
 										<%-- <div class="carousel-item">
@@ -630,6 +643,7 @@
 																	</tr>
 																</table>
 							</div>
+							</div>
 							<!-- Modal footer -->
 							<c:choose>
 								<c:when test="${sessionScope.nickname eq fb.nickname}">
@@ -648,6 +662,7 @@
 									</div>
 								</c:when>
 							</c:choose>
+						</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -682,9 +697,11 @@
 										<div class="col-md-10 col-lg-6">
 											<!--해결,미해결 토글버튼 (클릭시 글자도 바뀌어야 함)-->
 											<div class="row">
-												<div class="col">
+												<div class="form-check form-switch col">
 													<!--                                     <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="0" name="result"> -->
 													<!--                                     <label class="form-check-label" for="switch_eh">미해결</label> -->
+ 												 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" name="reschk">
+  												 <label class="form-check-label" for="result_n">미해결</label>
 												</div>
 												<!--사례금 유무-->
 												<div class="col input-group mb-3">
