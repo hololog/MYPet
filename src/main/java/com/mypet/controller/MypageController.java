@@ -15,9 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
 import com.mypet.service.MypageService;
 
@@ -29,6 +32,9 @@ public class MypageController {
 	
 	@Inject
 	public MypageService mypageService;
+	
+	@Inject
+	public FindboardService findboardService;
 
 		
 		@RequestMapping(value = "/mypage/myinfo", method = RequestMethod.GET)
@@ -143,7 +149,53 @@ public class MypageController {
 //			session.setAttribute("login", userVO);
 //			redirectAttributes.addFlashAttribute("msg", "SUCCESS");
 //			return "redirect:/user/profile"; }
+		
+		@RequestMapping(value = "/mypage/bookmark", method = RequestMethod.GET)
+		public String bookmark(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+			
+			System.out.println("MypageController bookmark() ");
+			String email = (String)session.getAttribute("email");
 
+			int pageSize = 5;
+
+			String pageNum = request.getParameter("pageNum");
+			if (pageNum == null) {
+				pageNum = "1";
+			}
+
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+
+			List<FindboardDTO> findboardList = mypageService.getFindboardBookmarkList(email);
+			List<FileDTO> fileList = mypageService.getfindFileList(email);
+
+//			int count = findboardService.getfindBoardCount();
+//
+//			int currentPage = Integer.parseInt(pageNum);
+//			int pageBlock = 10;
+//			int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+//			int endPage = startPage + pageBlock - 1;
+//			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+//			if (endPage > pageCount) {
+//				endPage = pageCount;
+//			}
+//
+//			pageDTO.setCount(count);
+//			pageDTO.setPageBlock(pageBlock);
+//			pageDTO.setStartPage(startPage);
+//			pageDTO.setEndPage(endPage);
+//			pageDTO.setPageCount(pageCount);
+			
+			model.addAttribute("findboardList", findboardList);
+			model.addAttribute("fileList", fileList);
+//			model.addAttribute("pageDTO", pageDTO);
+			
+//			mypageService.getFindboardBookmarkList(email);
+			
+//			}
+			return "mypage/bookmark";
+		}
 		
 		
 }

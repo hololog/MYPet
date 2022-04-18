@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.mypet.dao.MypageDAO;
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
@@ -88,5 +90,27 @@ public class MypageServiceImple implements MypageService {
 //		pageDTO.setStartRow(startRow-1);
 //		return mypageDAO.getmyBoardList(boardDTO);
 
+	@Override
+	public List<FindboardDTO> getFindboardBookmarkList(String email) {
+	System.out.println("MypageServiceImpl getFindboardBookmarkList(String email)");
+	
+	return mypageDAO.getFindboardBookmarkList(email);
+	}
+	
+	@Override
+	public List<FileDTO> getfindFileList(String email){
+		
+//		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+//		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+//		int endRow=startRow+pageDTO.getPageSize()-1;
+//		
+//		pageDTO.setCurrentPage(currentPage);
+//		pageDTO.setStartRow(startRow);
+//		pageDTO.setEndRow(endRow);
+//		
+//		pageDTO.setStartRow(startRow-1);
+//		
+		return mypageDAO.getfindFileList(email);
+	}
 
 }
