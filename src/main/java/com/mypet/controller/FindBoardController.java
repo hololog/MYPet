@@ -45,16 +45,62 @@ public class FindBoardController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+	@RequestMapping(value = "/findboard/update_findPro", method = RequestMethod.POST)
+	public String update_findBoardPro(HttpServletRequest mtfRequest ,FindboardDTO findboardDTO) throws Exception {
+		
+		findboardDTO.setAddress(mtfRequest.getParameter("address1") +" "+ 
+				mtfRequest.getParameter("address2") +" "+ 
+				mtfRequest.getParameter("address3")); 
+		findboardDTO.setDetail_address(mtfRequest.getParameter("detail_address")); // address1~3 한번에 담기
+		
+		findboardDTO.setPet_age(mtfRequest.getParameter("pet_age") + mtfRequest.getParameter("pet_age2"));
+		findboardService.updatefindBoard(findboardDTO);
+		
+		return "redirect:/findboard/list";
+	}
+	
+	@RequestMapping(value = "/findboard/update_find_filePro")
+    public String updatefindfile(MultipartHttpServletRequest mtfRequest) {
 
-//	 경진
-//	@RequestMapping(value = "/find/content", method = RequestMethod.GET)
-//	public String content_find(HttpServletRequest request, Model model) throws Exception {
-//
-//		List<FindcommentDTO> replyList = findcommentService.readComment(findboardDTO.getFind_board_num());
-//		model.addAttribute("replyList", replyList);
-//
-//		return "findboard/content";
-//	}
+	FileDTO fileDTO = new FileDTO();
+
+	List<MultipartFile> fileList = mtfRequest.getFiles("file");
+	System.out.println("fileList : " + fileList);
+	
+	String path = uploadPath; 
+	for (MultipartFile mf : fileList) {
+		
+        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+        long fileSize = mf.getSize(); // 파일 사이즈
+
+        System.out.println("originFileName : " + originFileName);
+        System.out.println("fileSize : " + fileSize);
+        
+        UUID uid = UUID.randomUUID();
+        String safeFile = uid.toString() +"_"+ originFileName;
+
+        fileDTO.setExt(originFileName.substring(originFileName.lastIndexOf(".")));
+        fileDTO.setFilename(originFileName);
+        fileDTO.setSave_filename(safeFile); // safefile넣기
+        
+        fileDTO.setUpload(path +"/"+ safeFile);
+        
+        try {
+//            mf.transferTo(new File(safeFile));
+            File uploadfile = new File(path,safeFile);
+            FileCopyUtils.copy(mf.getBytes(), uploadfile);
+            
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        findboardService.update_findboard_file(fileDTO);
+    }
+
+    return "redirect:/findboard/list";
+}
 
 	// 은혜
 	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)

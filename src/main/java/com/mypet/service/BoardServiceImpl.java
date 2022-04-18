@@ -24,6 +24,7 @@ import com.mypet.dao.BoardDAO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.domain.ReplyDTO;
 
 
 @Service
@@ -300,6 +301,24 @@ public class BoardServiceImpl implements BoardService {
         fileDTO.setFind_board_num(10000);  // 수정하기
         
         boardDAO.insert_freeboard_file(fileDTO);
+	}
+	
+	@Override
+	public List<ReplyDTO> getfreecommentList(int bnum){
+		return boardDAO.getfreecommentList(bnum);
+	}
+	
+	@Override
+	 public void freecommentIn(ReplyDTO replyDTO) {
+		
+		if(boardDAO.getfcommentMaxNum() != null) 
+			replyDTO.setComment_num(boardDAO.getfcommentMaxNum()+1);
+		else replyDTO.setComment_num(1);
+		//readcount, insertdate, boardnum 설정
+		replyDTO.setBoard_code("r");
+		replyDTO.setC_date(new Timestamp(System.currentTimeMillis()));
+		
+		boardDAO.freecommentIn(replyDTO);
 	}
 
 

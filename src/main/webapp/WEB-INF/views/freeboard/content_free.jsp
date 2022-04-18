@@ -43,6 +43,7 @@
 
             <!-- 제목 시작 -->
             <div class="container justify-content-center">
+            <input type="hidden" id="num" value="${boardDTO.free_board_num}" data-bnum="${boardDTO.free_board_num}">
                 <h1 class="sub-title">상세페이지</h1>
 
             </div>
@@ -175,7 +176,6 @@
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
-           
                <table id="notice text-center border">
 				<tr><td>글번호 : </td><td> ${boardDTO.free_board_num}</td></tr>
 				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-6"></td>
@@ -214,7 +214,7 @@
 <%-- 		</c:if>			 --%>
 			
           <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
-		  <script>
+		  <!-- <script>
 		
            var heart = 0;  
            jQuery(function($) {
@@ -259,18 +259,6 @@
              
             
            </script>
-           <script>
-           $(document).ready(function(){
-           	alert("확인");
-           	$.ajax{
-           		url:'${pageContext.request.contextPath }/free/ajaxcomments',
-           		dataType:'json',
-           		success:function(rdata){
-           	}
-           	}
-           	
-           	});
-           </script>
 			
 
 
@@ -293,7 +281,9 @@
 						
 						        });						        	
 						        
-						    </script>
+						    </script> -->
+						    
+						    
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
@@ -383,49 +373,63 @@
 				<div class="card bg-light" style="margin-top: 30px">
 					<div class="card-body">
 						<div id="comment-count" style="margin-bottom: 5px">
-							댓글 <span id="count">4</span>
+							댓글 <span id="count"></span>
 						</div>
+						
+						<form action="${pageContext.request.contextPath}/free/freecommentsIn" method="post">
+						<input type="hidden" value="${boardDTO.free_board_num}" name="board_num">
+						<input type="hidden" value="${sessionScope.nickname}" name="nickname">
 						<div class="input-group mb-3">
 							<input type="text" class="form-control"
 								placeholder="댓글을 입력해 주세요!" aria-label="Recipient's username"
-								aria-describedby="button-addon2">
+								aria-describedby="button-addon2" id="com" name="content">
+								<input type="text" style="display:none;"/>
+							<c:if test="${empty sessionScope.nickname}">
 							<button class="btn btn-outline-secondary" type="button"
 								id="button-addon2"
+								style="background-color: white; color: #3f51b5; border-color: #3f51b5" onclick="writecom()">제출</button>
+								<script>
+								function writecom(){
+									alert("댓글쓰기는 로그인 후 이용가능합니다.");
+								}
+								</script>
+							</c:if>
+							<c:if test="${!empty sessionScope.nickname}">
+							<button class="btn btn-outline-secondary" type="submit"
+								id="button-addon2"
 								style="background-color: white; color: #3f51b5; border-color: #3f51b5">제출</button>
-						</div>
-
-						<div class="d-flex mb-4">
-							<div class="flex-shrink-0">
-								<img class="rounded-circle"
-									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</c:if>
 							</div>
-							<div class="ms-3" id="commentList">
-									<div class="fw-bold"></div>
-									<p>${commentList.c_nik}</p> 
-									<p>${commentList.c_content}</p>
-									<div class="d-flex mt-4">
-										<div class="flex-shrink-0">
-											<img class="rounded-circle"
-												src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-												alt="...">
-										</div>
-										</div>
-							
-							</div>
-						</div>
+						</form>
 						<!-- Single comment-->
-						<div class="d-flex">
+						<div id="nick">
+							<!-- <div class="d-flex" >
+								<div class="flex-shrink-0">
+									<img class="rounded-circle"
+										src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+								</div>
+								<div class="ms-3">
+									<div class="fw-bold"></div>
+									
+									</div> -->
+									
+							
+						</div>
+							<!-- <div class="d-flex" style="padding:10px 0 10px 10px">
 							<div class="flex-shrink-0">
 								<img class="rounded-circle"
 									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
 							</div>
 							<div class="ms-3">
-								<div class="fw-bold">${commentList.c_nik}</div>
+							<div class="fw-bold">닉네임</div>
 								찾았습니다!! 감사합니다!!
-							</div>
-						</div>
+								</div>
+								<div style="text-align:right">
+								2022.04.17
+								</div>
+							</div> -->
 					</div>
-				</div>
+					</div>
 			</section>
 
     
@@ -474,8 +478,48 @@ function report() {
         alert("동의 후 이용가능합니다. 불법개인정보 수집은 법적 처벌대상이 될수있습니다. ");
     }
 }
-
 </script>
+<script>
+$(document).ready(function(){
+		alert("alax load");
+		$.ajax({
+		url:'${pageContext.request.contextPath}/free/ajaxcomments',
+		data: 'free_board_num='+$('#num').val(),
+		dataType:'json',
+		success:function(rdata){
+			$.each(rdata,function(index,item){
+				$('#nick').append("<div class='d-flex'>"+
+								  "	<div class='flex-shrink-0'>"+
+								  "		<img class='rounded-circle' src='https://dummyimage.com/50x50/ced4da/6c757d.jpg' alt='...'>"+
+								  " </div>"+
+								  "	<div class='ms-3'>"+
+								  "		<div class='fw-bold'>"+item.c_nik.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
+								  " </div>"+
+								  "</div>"+
+								  "<br>"
+								  );
+			});
+		},
+		error:function(er){
+			alert("실패원인 : " + er);
+		}
+	}); 
+});
+</script>
+ <script>
+$(document).ready(function(){
+	alert("count ajax");
+	$.ajax({
+		url : '${pageContext.request.contextPath}/free/ajaxcommentsfCount',
+		method:'post',
+		data : 'free_board_num='+$('#num').val(),
+		dataType:'json',
+		success:function(rdata){
+			$('#count').html(rdata);
+		}
+	});
+});
+</script> 
 
 
 

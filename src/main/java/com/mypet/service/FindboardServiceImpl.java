@@ -140,6 +140,11 @@ public class FindboardServiceImpl implements FindboardService {
         
         findboardDAO.insert_findboard_file(fileDTO);
 	}
+	
+	@Override
+	public void update_findboard_file(FileDTO fileDTO) {
+		findboardDAO.update_findboard_file(fileDTO);
+	}
 	    
 	@Override
 	public List<String> getProvinceList() {
@@ -172,4 +177,8 @@ public class FindboardServiceImpl implements FindboardService {
 		return findboardDAO.getfindBoardListMain(email);
 	}
 
+	@Override
+	public void updatefindBoard (FindboardDTO findboardDTO) {
+		findboardDAO.updatefindBoard(findboardDTO);
+	}
 }

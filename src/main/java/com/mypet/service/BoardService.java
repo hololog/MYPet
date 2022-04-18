@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.domain.ReplyDTO;
 
 public interface BoardService {
 
@@ -93,6 +94,11 @@ public interface BoardService {
 	//file start
 		public void insert_freeboard_file(FileDTO fileDTO);
 	//file end
+		
+	//comment
+	    public List<ReplyDTO> getfreecommentList(int bnum);	
+	    
+	    public void freecommentIn(ReplyDTO replyDTO);
 		
 		
 }

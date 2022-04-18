@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.FileDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.domain.ReplyDTO;
 
 
 @Repository
@@ -223,6 +224,25 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne(namespace+".getFileMaxNum");
 	}
 	
+	@Override
+	public List<ReplyDTO> getfreecommentList(int bnum){
+		return sqlSession.selectList(namespace+".getfreecommentList", bnum);
+	}
+	
+	@Override
+	public void freecommentIn(ReplyDTO replyDTO) {
+		sqlSession.insert(namespace+".freecommentIn", replyDTO);
+	}
+	
+	@Override
+	public Integer getfcommentMaxNum() {
+		return sqlSession.selectOne(namespace+".getfcommentMaxNum");
+	}
+	
+	@Override
+	public String getfreecommentCount(int bnum) {
+		return sqlSession.selectOne(namespace+".getfreecommentCount", bnum);
+	}
 	
 	
 	

@@ -43,8 +43,6 @@ public interface FindboardDAO {
 	public List<String> getTownList(AddressDTO addressDTO);
 
 	public void insert_findboard_file(FileDTO fileDTO);
-	
-	public void updatefindboard(FindboardDTO findboardDTO);
 
 	public List<FindboardDTO> getfindBoardListMain();
 
@@ -53,6 +51,10 @@ public interface FindboardDAO {
 	public void updatefilename();
 
 	public void update_board_num_forfile();
+	
+	public void updatefindBoard(FindboardDTO findboardDTO);
+	
+	public void update_findboard_file(FileDTO fileDTO);
 
 }
 

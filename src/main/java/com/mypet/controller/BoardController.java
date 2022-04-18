@@ -35,6 +35,7 @@ import com.mypet.domain.FindboardDTO;
 
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.domain.ReplyDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
@@ -131,6 +132,18 @@ public class BoardController {
 		
 		
 		return "findboard/listM";
+	}
+	
+	@RequestMapping(value = "/free/freecommentsIn", method = RequestMethod.POST)
+	public String writeFreePro(HttpServletRequest Request) throws Exception {
+		
+		ReplyDTO replyDTO = new ReplyDTO();
+		replyDTO.setBoard_num(Integer.parseInt(Request.getParameter("board_num")));
+		replyDTO.setComment(Request.getParameter("content"));
+		replyDTO.setC_nik(Request.getParameter("nickname"));
+		boardService.freecommentIn(replyDTO);
+		
+		return "redirect:/freeboard/list_free";
 	}
 //	public String find_photo(HttpServletRequest request, Model model) throws Exception {
 //		int pageSize = 5;
