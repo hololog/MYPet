@@ -161,20 +161,16 @@ function validate()
 
 <!-- 모달창 시작 -->
             <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal" style="transition: opacity 0.5s linear;">
-          
-		       <div class="modal-dialog" role="document"> 
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content rounded-5 shadow">
-                    <div class="modal-header p-5 pb-4 border-bottom-0">
+             <div class="modal-dialog" role="document">
+              <div class="modal-content rounded-5 shadow">
+               <div class="modal-header p-5 pb-4 border-bottom-0">
                       <!-- <h5 class="modal-title">Modal title</h5> -->
-                      <div>
-                         <div class="whole_modal">
+                <div class="whole_modal">
                          <!-- 닫기 버튼-->
                       	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="lg_close"></button>
-                    
-                            <h4 class="fw-bold mb-0 title_kds">실종공고를 등록할 예정인가요?</h4>
+                    	<h4 class="fw-bold mb-0 title_kds">실종공고를 등록할 예정인가요?</h4>
                    
-                    	</div>
+                    	
                     <!-- Modal body -->       
                     <div class="modal-body p-5 pt-0">
                         <form action="${pageContext.request.contextPath }/member/loginPro" class="whole_modal" method="post">
@@ -197,43 +193,47 @@ function validate()
 
 
 							<hr class="my-4">
-							<button
-								class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 "
-								type="submit">
-								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg> -->
-								네이버계정으로 로그인
-							</button>
-							<button
-								class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds"
-								type="submit">
-								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg> -->
-								카카오계정으로 로그인
-							</button>
-							<button
-								class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds"
-								type="submit">
-								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg> -->
-								구글계정으로 로그인
-							</button>
-							<div class="singin">
-								<p>
-								<h2 class="fs-5 fw-bold mb-3">
-									<a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a>
-								</h2>
-								</p>
+							
+							 <!-- 네이버로 로그인  -->
+							 
+ 							<div id="naver_id_login" align = "center">
+ 								<a id="naverIdLogin_loginButton" href="javascript:void(0)">
+								<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" style="width: 316px; height: 45px;" />
+        						</a>
+  						    </div>
+  						    <br>
+
+							<!-- 카카오계정으로 로그인 -->
+						    <div class="button-login" align ="center" >
+              					<a id="kakao-login-btn" >
+   								<img src="${pageContext.request.contextPath }/resources/img/kakao_login_medium_wide.png" title="카카계정으로 회원가입" class="kakao_login" style="width: 315px;">
+                          		</a>
+                            	</div>
+                            	<br>
+<!--                            	<a href="http://developers.kakao.com/logout">카카오 로그아웃</a> -->
+							 
+							<!-- 구글계정으로 로그인 -->
+							<div class="g-signin2" data-onsuccess="onSignIn" align ="center" style="width: 315px; height: auto;">
+								<a href="javascript:void(0)"></a>
 							</div>
+								</form>
+							
+<!-- 							<div class="singin"> -->
+<!-- 								<p> -->
+<!-- 								<h2 class="fs-5 fw-bold mb-3"> -->
+<!-- 									<a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a> -->
+<!-- 								</h2> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
 						</div>
-							</form>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-				
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-             </div>
-            </div>    
+              
+            
+               
 
       
     <!-- 회원가입 -->
@@ -247,8 +247,8 @@ function validate()
                       <!-- <h5 class="modal-title">Modal title</h5> -->
                       <div>
                          <div class="whole_modal">
-                         <!-- 닫기 버튼 -->
-                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!--                          닫기 버튼 -->
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
                          <h4 class="fw-bold mb-0 title_kds">회원가입</h4>
                     </div>
                             
@@ -281,6 +281,18 @@ function validate()
                           <p>
                           <h2 class="fs-5 fw-bold mb-3">SNS계정으로 회원가입하기</h2>
                           </p>
+                          
+                          </div>
+                          <p>
+                           <a href="/list/API/login_kakao_sync.html?ks_return_url=https%3A%2F%2Fwww.silicook.co.kr%2Fshop%2Fshopdetail.html%3Fbranduid%3D3519841%26NaPm%3Dct%253Dl2023whs%257Cci%253D692cd9a78351bf0a46e676cfb58ab2bfb06269e7%257Ctr%253Dsbtm%257Csn%253D238329%257Chk%253D132334376ed4a07159a453f979b76afa64be3468" class="link kakao">
+						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입"></a>
+						  </p>  
+						 
+						    
+						    
+						  <a href="/list/API/login_naver.html" class="link naver">
+ 							<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_naver.jpg" alt="네이버로 회원가입"> 
+						  </a>
                           </div>
                           
                           <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 " type="submit">
@@ -304,7 +316,155 @@ function validate()
                 </div>
                </div>
              
+<script>
+var testPopUp;
+function openPopUp() {
+    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+function closePopUp(){
+    testPopUp.close();
+}
 
+function naverLogout() {
+	openPopUp();
+	setTimeout(function() {
+		closePopUp();
+		}, 1000);
+	
+	
+}
+</script>
+
+<!-- 카카오 로그인//b4c6c29aa62ff98658b6232a7a02f728 -->
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<script type='text/javascript'>
+Kakao.init('b4c6c29aa62ff98658b6232a7a02f728');
+
+$("#kakao-login-btn").on("click", function(){
+    //1. 로그인 시도
+    Kakao.Auth.login({
+        success: function(authObj) {
+         
+          //2. 로그인 성공시, API 호출
+          Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+              console.log(res);
+              var id = res.id;
+			 	 scope : 'account_email';
+				
+              alert('로그인성공'+id);
+				
+// <%--               location.href=" <% --%>
+// //           			session.setAttribute("email", memberCheckDTO.getEmail());
+// //   					session.setAttribute("nickname", memberCheckDTO.getNickname());
+// 					session.setAttribute("nickname", "hjj");
+// //             		session.setAttribute("member_mid", id);
+//             		response.sendRedirect("${pageContext.request.contextPath }/main");
+// <%--             		%>"; --%>
+// location.href="${pageContext.request.contextPath }/member/loginPro2";
+
+        }
+         
+          })
+          console.log(authObj);
+//           alert(authObj);
+          var token = authObj.access_token;
+//           alert(token);
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      });
+        
+}) //
+</script>   
+
+<!-- 카카오 로그아웃    -->
+
+
+<!-- 구글계정 로그인 -->
+<script>
+function init() {
+	gapi.load('auth2', function() {
+		gapi.auth2.init();
+		options = new gapi.auth2.SigninOptionsBuilder();
+		options.setPrompt('select_account');
+        // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
+		options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
+        // 인스턴스의 함수 호출 - element에 로그인 기능 추가
+        // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
+		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
+	})
+}
+
+function onSignIn(googleUser) {
+	var access_token = googleUser.getAuthResponse().access_token
+	$.ajax({
+    	// people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
+		url: 'https://people.googleapis.com/v1/people/me'
+        // key에 자신의 API 키를 넣습니다.
+		, data: {personFields:'birthdays', key:'AIzaSyBOdmeC4SOSzXmPGLEM2vZueqiBSWKg3wk', 'access_token': access_token}
+		, method:'GET'
+	})
+	.done(function(e){
+        //프로필을 가져온다.
+		var profile = googleUser.getBasicProfile();
+		console.log(profile)
+	})
+	.fail(function(e){
+		console.log(e);
+	})
+}
+function onSignInFailure(t){		
+	console.log(t);
+}
+</script>
+// 로그아웃
+<a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+<!-- 구글 api 사용을 위한 스크립트 -->
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+
+		
+<script type="text/javascript">
+//비밀번호 재확인 입력칸에 focus했을 때
+$("#pw2").focus(function() {
+	recheck();
+});
+	
+//비밀번호 재확인 입력칸이 blur됐을 때
+$("#pw2").blur(function() {
+	recheck();
+});
+
+//비밀번호 재확인 메서드
+function recheck() {
+	var rpw = $("#pw2").val();
+	var pw = $("#pw").val();
+		
+	if(rpw == pw){
+		 $("#r_pwErr").hide();
+		changeSuccess("#pw2");
+	}else{
+		 $("#r_pwErr").show();
+		 changeError("#pw2");
+	}	
+};
+
+</script>
+
+
+
+    
     
     <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/css/style.css"></script>
