@@ -57,13 +57,14 @@ public class AjaxController {
 	private MypageService mypageService;
 	
 	@Autowired
+	private BoardService boardService;
+	
+	@Autowired
 	private BoardDAO boardDAO;
 	
     @Autowired
 	private MypageDAO mypageDAO;
 	
-	@Autowired
-	private MypageService mypageService;
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -248,8 +249,8 @@ public class AjaxController {
 	}
 	
 	// 준동
-	@RequestMapping(value="/mypage/mypagejson3" , method=RequestMethod.GET)
 	@ResponseBody
+	@RequestMapping(value="/mypage/mypagejson3" , method=RequestMethod.GET)
 	public MemberDTO pwCheck(@RequestParam String cuPassword, HttpSession session){
 		System.out.println("현재 비밀번호 확인 ajax");
 		String email = (String)session.getAttribute("email");
