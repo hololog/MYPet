@@ -75,14 +75,22 @@ public class MypageDAOImpl implements MypageDAO {
 //	}
 	
 	@Override
-	public List<FindboardDTO> getFindboardBookmarkList(String email) {
-		System.out.println("MypageDAOImpl getFindboardBookmarkList(email)");
-		return sqlSession.selectList(namespace+".getFindboardBookmarkList", email);
+	public List<FindboardDTO> getFindboardBookmarkList(PageDTO pageDTO) {
+		System.out.println("MypageDAOImpl getFindboardBookmarkList()");
+		return sqlSession.selectList(namespace+".getFindboardBookmarkList", pageDTO);
 	}
 	
 	@Override
-	public List<FileDTO> getfindFileList(String email){
-		return sqlSession.selectList(namespace+".getfindFileList", email);
+	public List<FileDTO> getfindFileList(PageDTO pageDTO){
+		return sqlSession.selectList(namespace+".getfindFileList", pageDTO);
 	}
+
+	@Override
+	public int getBookmarkCount() {
+		return sqlSession.selectOne(namespace +".getBookmarkCount");
+	}
+	
+	
+	
 
 }
