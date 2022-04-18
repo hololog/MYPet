@@ -254,7 +254,7 @@ $(document).ready(function(){
                           <div class="form-floating mb-3">
 		   				  <input type="text" class="form-control rounded-4" id="nick" name="nickname" required autofocus>
                             <label for="floatingInput_NM">닉네임</label>
-                            <br><span class="ex-plain email-alert" style="display:none; margin-left:0;">이미 사용중인 닉네임입니다</span>
+                            <span class="ex-plain email-alert" style="display :none;"> 이미 사용중인 닉네임입니다. </span>
 <!--                             <button id="nnbtn">중복확인</button> -->
                           </div>
                           <div class="form-floating mb-3">
@@ -284,16 +284,17 @@ $(document).ready(function(){
                           <p>
                           <h2 class="fs-5 fw-bold mb-3">▶ SNS계정으로 회원가입하기</h2>
                           </p>
-                          
                           </div>
+                           
+                          <div>
                           <p>
-                           <a href="/list/API/login_kakao_sync.html?ks_return_url=https%3A%2F%2Fwww.silicook.co.kr%2Fshop%2Fshopdetail.html%3Fbranduid%3D3519841%26NaPm%3Dct%253Dl2023whs%257Cci%253D692cd9a78351bf0a46e676cfb58ab2bfb06269e7%257Ctr%253Dsbtm%257Csn%253D238329%257Chk%253D132334376ed4a07159a453f979b76afa64be3468" class="link kakao">
+                           <a id="kakao-login-btn">
 						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입"></a>
 						  </p>  
+						 </div>
 						 
-						    
-						    
-						  <a href="/list/API/login_naver.html" class="link naver">
+						 <div id="naver_id_login" align = "center">
+						    <a id="naverIdLogin_loginButton" href="javascript:void(0)">
  							<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_naver.jpg" alt="네이버로 회원가입"> 
 						  </a>
                           </div>
@@ -305,6 +306,7 @@ $(document).ready(function(){
                   </div>
                 </div>
               </div>   
+            </div>   
                           
 <!-- 	네이버 로그인 -->
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
