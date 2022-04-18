@@ -221,7 +221,7 @@ $(document).on('click', ".result", function(){
 <!--             </div> -->
 <!--             <div class="vr"></div> -->
             <div class="s-box3 p-2">
-              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="읍/면/동" />
+              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="주소검색 읍면동" />
             </div>
             <button type="submit" class="btn text-white" style="background-color: #3f51b5;">
               <i class="bi bi-search"></i>
@@ -245,7 +245,7 @@ $(document).on('click', ".result", function(){
     <!-- 갤러리 -->
     <section class="container">
       <div>
-			<h1 class="sub-title" style="margin: 80px auto 70px;">최근공고</h1>
+			<h1 class="sub-title" style="margin: 50px auto 70px;">최근공고</h1>
 <!--         <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1> -->
         <div class="d-flex justify-content-end">
           <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
@@ -324,7 +324,7 @@ $(document).on('click', ".result", function(){
 
     <!-- 공동구매 소개 시작 -->
     <section class="container py-3">
-      <h1 class="title text-start mt-3 p-3">진행중인 공동구매</h1>
+      <h1 class="title text-start mt-3 p-3" style="font-size: 2em;">진행중인 공동구매</h1>
       <hr class="my-5">
       <div class="row">
         <!-- 가로 12등분 -->
@@ -335,7 +335,7 @@ $(document).on('click', ".result", function(){
             class="img-thumbnail" alt="강아지 사료" />
           </a>
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-7 p-3">
           <h3>강아지 사료</h3>
           <p>
             It is a long established fact that a reader will be distracted by the readable
@@ -359,10 +359,10 @@ $(document).on('click', ".result", function(){
 
     <!-- ABOUT US -->
     <section class="container py-3" id="main-about-ksk">
-      <h1 class="title text-end mt-3 p-3">ABOUT US</h1>
+      <h1 class="title text-end mt-3 p-3" style="font-size: 2em;">ABOUT US</h1>
       <hr class="my-5">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-8 p-3">
           <p>
             It is a long established fact that a reader will be distracted by the readable
             content of a page when looking at its layout. The point of using Lorem Ipsum is

@@ -203,13 +203,13 @@ $(document).ready(function(){
 
 
 
-
+<!-- 임시비밀번호 모달창 -->
 <div class="modal fade py-5" tabindex="-1" role="dialog" id="temp_PW" style="transition: opacity 0.5s linear;">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content rounded-5 shadow">
 			<div class="modal-header p-5 pb-4 border-bottom-0">
 				<div class="whole_modal">
-				
+				<br>	
 					<h4 class="fw-bold mb-0">임시번호가 전송될 이메일을 입력해주세요</h4>
 					<!-- 닫기 버튼
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -233,9 +233,8 @@ $(document).ready(function(){
 	</div>
 </div>
 
-<!-- 회원가입 -->
 
-    
+<!-- 회원가입 -->
             <!-- modal 시작 -->
             <div class="modal fade py-5" tabindex="-1" role="dialog" id="signup-modal" style="transition: opacity 0.5s linear;">
                 <div class="modal-dialog" role="document">
@@ -251,14 +250,17 @@ $(document).ready(function(){
                             
                     <div class="modal-body p-5 pt-0">
                         <form action="${pageContext.request.contextPath }/member/joinPro" class="whole_modal" method="post">
+                        
                           <div class="form-floating mb-3">
-		   				  <input type="text" class="form-control rounded-4 id="nickname" name="nickname" onkeyup="checkNM()" required autofocus>
+		   				  <input type="text" class="form-control rounded-4" id="nick" name="nickname" required autofocus>
                             <label for="floatingInput_NM">닉네임</label>
+                            <br><span class="ex-plain email-alert" style="display:none; margin-left:0;">이미 사용중인 닉네임입니다</span>
 <!--                             <button id="nnbtn">중복확인</button> -->
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" name="email" onkeyup="checkEmail()" required autofocus>
+                            <input type="email" class="form-control rounded-4" id="em" name="email" required autofocus>
                             <label for="floatingInput_EM">email@example.com</label>
+                            <div class="check_font" id="EM_check"></div>
                           </div>
                           <div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" name="password" id="pw" minlength="8" maxlength="10" required autofocus>
@@ -484,14 +486,7 @@ function recheck() {
 
 </script>
 
-<!-- 회원가입 환영창 -->
-<!-- <script type="text/javascript">
-function welcome() {
-	var id = $("#nickname").val();
-}
-
-		alert(id+'환영합니다');
-</script>  -->
+<!-- 회원가입 유효성 -->
 
 
 

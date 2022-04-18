@@ -129,15 +129,15 @@ public class MypageController {
 //			}
 //		}
 		
-		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
-		public String amendpwdPro(MemberDTO memberDTO, HttpSession session) throws Exception {
-			System.out.println(memberDTO.getEmail());
-			System.out.println(memberDTO.getPassword2());
-			
-			mypageService.pwUpdate(memberDTO);
-			
-			return "/main/main";
-		}
+//		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
+//		public String amendpwdPro(MemberDTO memberDTO, HttpSession session) throws Exception {
+//			System.out.println(memberDTO.getEmail());
+//			System.out.println(memberDTO.getPassword2());
+//			
+//			mypageService.pwUpdate(memberDTO);
+//			
+//			return "/main/main";
+//		}
 		
 		@RequestMapping(value = "/mypage/mymisslist", method = RequestMethod.GET)
 		public String mymisslist(HttpServletRequest request, Model model) throws Exception {
