@@ -402,7 +402,7 @@
 											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
 											data-bs-target="#find_content"
 											id="marking"> <img class="img-fluid rounded"
-											src="${fileList[loop.index].upload}" alt="실종동물사진" id="">
+											src="${pageContext.request.contextPath }/resources/upload/${fileList[loop.index].save_filename}" alt="실종동물사진" id="">
 										</a>
 									</c:when>
 									<c:when test="${fileList[loop.index].filename eq null}">
@@ -410,7 +410,7 @@
 											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
 											data-bs-target="#find_content"> <img
 											class="img-fluid rounded"
-											src="${fileList[loop.index].upload}" alt="실종동물사진" id="">
+											src="${pageContext.request.contextPath }/resources/upload/${fileList[loop.index].save_filename}" alt="실종동물사진" id="">
 										</a>
 									</c:when>
 								</c:choose>
