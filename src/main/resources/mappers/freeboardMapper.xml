@@ -88,6 +88,12 @@
 		select * from free_board where free_board_num=#{free_board_num}
 	</select>
 	
+	<select id="getfreeLike" resultType="int">
+		SELECT count(*)
+          FROM free_like
+		 where email = #{email} and free_board_num = #{free_board_num}
+	</select>
+	
 	<select id="getnoticeBoard" resultType="com.mypet.domain.BoardDTO">
 		select * from notice where notice_num=#{notice_num}
 	</select>

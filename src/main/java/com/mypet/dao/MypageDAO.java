@@ -29,7 +29,9 @@ public interface MypageDAO {
 
 //	public void updateUimage(String email, String uimage) throws Exception;
 	
-	public List<FindboardDTO> getFindboardBookmarkList(String email);
+	public List<FindboardDTO> getFindboardBookmarkList(PageDTO pageDTO);
 
-	public List<FileDTO> getfindFileList(String email);
+	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	
+	public int getBookmarkCount();
 }

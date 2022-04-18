@@ -106,6 +106,8 @@ public interface BoardDAO {
 	
 //	fileMaxNum start
 	public Integer getFileMaxNum();
+
+	public int getfreeLike(BoardDTO boardDTO);
 	
 //fileMaxNum end
 	

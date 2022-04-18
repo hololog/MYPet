@@ -161,10 +161,10 @@ $(document).ready(function(){
                 <div class="content">
                     <table class="table table-hover text-start" >
                         <thead>
-                            <tr style="text-align: center;">
+                            <tr>
                                 <th width="7%">번호</th>
                                 <th width="11%">종류</th>
-                                <th width="65%">제목</th>
+                                <th width="65%" style="text-align: center;">제목</th>
                                 <th width="9%">조회수</th>
                             </tr>
                         </thead>

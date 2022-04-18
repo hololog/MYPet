@@ -74,9 +74,9 @@ public class BookmarkController {
 		bookmarkDTO.setFree_board_num(free_board_num);
 		bookmarkDTO.setEmail((String)session.getAttribute("email"));
 		
-		//실종공고테이블 북마크 개수 +1,
+		//자유게시판테이블에 북마크 개수 +1,
 		bookmarkService.FaddBookmarkCount(free_board_num);
-		//북마크 테이블 추가
+		//free_like 테이블 추가
 		bookmarkService.FaddBookmark(bookmarkDTO);
 		
 		return bookmarkService.FgetBookmarkNum(free_board_num);
@@ -91,9 +91,9 @@ public class BookmarkController {
 		bookmarkDTO.setFree_board_num(free_board_num);
 		bookmarkDTO.setEmail((String)session.getAttribute("email"));
 		
-		//실종공고테이블 북마크 개수 -1
+		//자유게시판테이블 북마크 개수 -1
 		bookmarkService.FremoveBookmarkCount(free_board_num);
-		//북마크 테이블에서 제거
+		//free_like 테이블에서 제거
 		bookmarkService.FremoveBookmark(bookmarkDTO);
 		
 		return bookmarkService.FgetBookmarkNum(free_board_num);

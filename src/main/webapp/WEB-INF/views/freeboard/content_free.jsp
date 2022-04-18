@@ -393,64 +393,43 @@
     <!-- <div id=comments-kj></div>-->
 
 
-   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
- <c:if test="${!empty sessionScope.email }">
-	              <c:choose>
-	              	<c:when test="${boardDTO.book eq 'Y' }">
-	              		<a type="button" class="bookmark-click">
-	              		<input type="hidden" value="${boardDTO.free_board_num }" class="fbnum-ksk">
-		              		<i class="bi bi-heart-fill fa-2xx" style="position: absolute; top:10px; left: 10px; color: red;"></i>
-		             	</a>
-	              	</c:when>
-	              	<c:otherwise>
-	              		<a type="button" class="bookmark-click">
-	              		<input type="hidden" value="${boardDTO.free_board_num }" class="fbnum-ksk">
-	              			<i class="bi bi-heart fa-2x" style="position: absolute; top:10px; left: 10px; color: red;"></i>
-	              		</a>
-	              	</c:otherwise>
-	              </c:choose>
-              </c:if>
-              
-              <script type="text/javascript">
-              $(document).ready(function(){
-            		//북마트 클릭이벤트
-            		$('.bookmark-click').click(function(){
-            			let no = $(this).children('.fbnum-ksk').val();
-//            	 		console.log(no);
-            			//빈별표 일때
-            			if($(this).children('i').attr('class') === 'bi bi-heart fa-2x'){
-            				//별표 변경
-            				$(this).children('i').attr('class', 'bi bi-heart-fill fa-2x');
-            				//DB에 북마크 정보 갱신
-            				$.ajax({
-            					url:"${pageContext.request.contextPath }/freeboard/addBookmark",
-            					data:{"free_board_num" : no},
-            					success:function(rdata){
-            						if(rdata != null) {
-            							//게시물당 북마크수 화면표시
-            							$('#mark'+no).text(" "+ rdata);
-            						}
-            					}	
-            				});
-            			//꽉찬 별표 일때
-            			} else {
-            				$(this).children('i').attr('class', 'bi bi-heart-fill fa-2x');
-            				$.ajax({
-            					url:"${pageContext.request.contextPath }/freeboard/removeBookmark",
-            					data:{"free_board_num" : no},
-            					success:function(rdata){
-            						if(rdata != null) {
-            							$('#mark'+no).html(" "+ rdata);
-            						}
-            					}	
-            				});
-            			}
-            		});
-            	});          
-	              
-              </script>
-              </div>
-<br>
+     <script type="text/javascript">
+       $(document).ready(function(){
+     		//북마트 클릭이벤트
+     		$('.bookmark-click').click(function(){
+     			let no = $(this).children('.fbnum-ksk').val();
+     			//빈별표 일때
+     			if($(this).children('i').attr('class') === 'bi bi-heart'){
+     				//별표 변경
+     				$(this).children('i').attr('class', 'bi bi-heart-fill');
+     				//DB에 free_like테이블과 free_board테이블에 북마크 정보 갱신
+     				$.ajax({
+     					url:"${pageContext.request.contextPath }/freeboard/addBookmark",
+     					data:{"free_board_num" : no},
+     					success:function(rdata){
+     						if(rdata != null) {
+     							//게시물당 북마크수 화면표시
+     							$('#mark'+no).text(" "+ rdata);
+     						}
+     					}	
+     				});
+     			//꽉찬 별표 일때
+     			} else {
+     				$(this).children('i').attr('class', 'bi bi-heart');
+     				$.ajax({
+     					url:"${pageContext.request.contextPath }/freeboard/removeBookmark",
+     					data:{"free_board_num" : no},
+     					success:function(rdata){
+     						if(rdata != null) {
+     							$('#mark'+no).html(" "+ rdata);
+     						}
+     					}	
+     				});
+     			}
+     		});
+     	});          
+       </script>
+		<br>
    
    
    <section class="container mb-7 text-center">
@@ -460,13 +439,31 @@
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
-                <!-- 좋아요 아이콘 -->
-                         
               
-<!--               조회수 -->
-                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
-                          <!-- 좋아요수 -->
-                           <i class="bi bi-heart-fill" style="color: red;"></i><span id="mark${boardDTO.free_board_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+				<!-- 조회수 -->
+                <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
+                <!-- 좋아요 아이콘 -->
+                <!-- 로그인했을때만 클릭가능  -->
+                <c:choose>
+					<c:when test="${!empty sessionScope.email }">
+						<a type="button" class="bookmark-click">
+							<input type="hidden" value="${boardDTO.free_board_num }" class="fbnum-ksk">
+							<!-- 빈하트/꽉찬하트 구분 -->
+							<c:choose>
+								<c:when test="${boardDTO.book ne 0}">
+	                            	<i class="bi bi-heart-fill" style="color: red;"></i><span id="mark${boardDTO.free_board_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+								</c:when>
+								<c:otherwise>
+	                            	<i class="bi bi-heart" style="color: red;"></i><span id="mark${boardDTO.free_board_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+								</c:otherwise>
+							</c:choose>
+						</a>
+					</c:when>
+					<c:otherwise>
+                   		<i class="bi bi-heart" style="color: red;"></i><span id="mark${boardDTO.free_board_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+					</c:otherwise>	                          
+                </c:choose>
+                          
                           
                 <div class="in-line-kj">
 				<div class="card bg-light" style="margin-top: 30px">
