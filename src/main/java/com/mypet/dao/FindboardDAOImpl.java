@@ -31,11 +31,6 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectOne(namespace+".getfindBoard", num);
 	}
 	
-//	@Override
-//	public FindboardDTO bringfindBoard(int num) {
-//		return sqlSession.selectOne(namespace+".bringfindBoard", num);
-//	}
-	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
 		sqlSession.insert(namespace+".insert_findboard", findboardDTO);
@@ -83,11 +78,6 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectOne(namespace+".getfindMissBoardCount");
 	}
 	
-	@Override
-	public void updatefindboard(FindboardDTO findboardDTO) {
-		sqlSession.update(namespace+".updatefindboard", findboardDTO);
-	}
-	
 	//은혜 지역검색
 	@Override
 	public List<String> getProvinceList() {
@@ -130,6 +120,16 @@ public class FindboardDAOImpl implements FindboardDAO {
 	@Override
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace + ".getFindSearchList", pageDTO);
+	}
+	
+	@Override
+	public void updatefindBoard(FindboardDTO findboardDTO) {
+		sqlSession.update(namespace+".updatefindBoard", findboardDTO);
+	}
+	
+	@Override
+	public void update_findboard_file(FileDTO fileDTO) {
+		sqlSession.update(namespace+".update_findboard_file", fileDTO);
 	}
 	
 	

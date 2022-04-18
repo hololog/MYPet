@@ -140,6 +140,11 @@ public class FindboardServiceImpl implements FindboardService {
         
         findboardDAO.insert_findboard_file(fileDTO);
 	}
+	
+	@Override
+	public void update_findboard_file(FileDTO fileDTO) {
+		findboardDAO.update_findboard_file(fileDTO);
+	}
 	    
 	@Override
 	public List<String> getProvinceList() {
@@ -173,6 +178,10 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 
 	@Override
+	public void updatefindBoard (FindboardDTO findboardDTO) {
+		findboardDAO.updatefindBoard(findboardDTO);
+	}
+    
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO) {
 		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
 	    int endRow = startRow + pageDTO.getPageSize() - 1; 
@@ -187,5 +196,4 @@ public class FindboardServiceImpl implements FindboardService {
 	public int getFindBoardCount() {
 		return findboardDAO.getFindBoardCount();
 	}
-
 }
