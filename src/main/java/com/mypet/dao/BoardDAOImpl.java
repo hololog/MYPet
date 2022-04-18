@@ -222,6 +222,11 @@ public class BoardDAOImpl implements BoardDAO{
 	public Integer getFileMaxNum() {
 		return sqlSession.selectOne(namespace+".getFileMaxNum");
 	}
+
+	@Override
+	public int getfreeLike(BoardDTO boardDTO) {
+		return sqlSession.selectOne(namespace + ".getfreeLike", boardDTO);
+	}
 	
 	
 	

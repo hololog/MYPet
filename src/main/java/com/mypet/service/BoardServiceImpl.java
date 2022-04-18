@@ -287,6 +287,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.LikeCheck(boardDTO);
 	}
 
+	@Override
+	public int getfreeLike(BoardDTO boardDTO) {
+		return boardDAO.getfreeLike(boardDTO);
+	}
+
 	
 	
 //	@Override
