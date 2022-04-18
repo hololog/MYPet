@@ -361,13 +361,21 @@ public class BoardController {
 	}
 	//세히
 	@RequestMapping(value = "/freeboard/content_free", method = RequestMethod.GET)
-	public String freeContent(HttpServletRequest request, Model model) {
+	public String freeContent(HttpServletRequest request, Model model, HttpSession session) {
 		
 		int num=Integer.parseInt(request.getParameter("free_board_num"));
+		String email = (String)session.getAttribute("email");
 		
 		boardService.updatefreeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getfreeBoard(num);
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setEmail(email);
+		boardDTO.setFree_board_num(num);
+		//즐겨찾기했는지 여부=> 했으면 1리턴 / 안했으면 0리턴
+		int book = boardService.getfreeLike(boardDTO);
+		
+		boardDTO = boardService.getfreeBoard(num);
+		boardDTO.setBook(book);
 		
 		FileDTO fileDTO=new FileDTO();
 		
