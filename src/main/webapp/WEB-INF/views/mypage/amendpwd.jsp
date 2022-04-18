@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>myinfo</title>
+<title>amendpwd</title>
 <!-- css스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
@@ -55,6 +55,81 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style-jd.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sidebars.css">
 </head>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#pwd_eh").blur(function(){
+		// 현재 비밀번호 공백 체크
+		if($("#pwd_eh").val() == ""){
+// 			alert("현재 비밀번호를 입력해주세요");
+			$("#cuPasswordCheck").html("비밀번호를 입력해주세요");
+			$("#pwd_eh").focus();
+// 			return false
+		} else {
+			$("#cuPasswordCheck").html("");
+			
+			// 현재 비밀번호 DB랑 비교
+			$.ajax({
+				url: '${pageContext.request.contextPath }/mypage/mypagejson3',
+				dataType: 'json',
+				data: {"cuPassword":$("#pwd_eh").val()},
+				success: function(rdata){
+					$("#cuPasswordCheck").html(rdata.password);
+					if(rdata.password != "일치"){
+						$("#pwUpdate").attr('disabled', true);
+					} else {
+						$("#pwUpdate").attr('disabled', false);
+					}
+				}
+			 }); // ajax closed
+		}
+	});
+});
+
+$(document).ready(function(){
+	$("#pwUpdate").on("click", function(){
+		if($("#pwd2_eh").val() == null || $("#pwd2_eh").val() == ""){
+			alert("변경할 비밀번호를 입력해주세요");
+			$("#pwd2_eh").focus();
+			return false
+		}
+		
+		if($("#pwd2re_eh").val() == null || $("#pwd2re_eh").val() == ""){
+			alert("변경할 비밀번호를 재입력해주세요");
+			$("#pwd2re_eh").focus();
+			return false
+		}
+	
+		if ($("#pwd2_eh").val() != $("#pwd2re_eh").val()) {
+			alert("변경할 비밀번호가 일치하지 않습니다.");
+			$("#pwd2re_eh").focus();
+		} else {
+			if(!confirm("변경하시겠습니까?")) return false;
+			$("#pwUpdateForm").submit();
+		}
+	});//
+});//
+			
+// 		$.ajax({
+// 			url: '${pageContext.request.contextPath }/mypage/mypagejson4',
+// 			dataType: 'json',
+// // 			data: $("#pwUpdateForm").serializeArray(),
+// 			data: {"pwUpdate":$(#pwd2_eh).val()},
+// 			success: function(rdata){
+// 				if(rdata != null){
+// 					alert("변경 불가한 비밀번호입니다")
+// 					return;
+// 				} else {
+// 					if(confirm("변경하시겠습니까?")){
+// 						$("#pwUpdateForm").submit();
+// 					}
+// 				}
+// 			}
+// 		});	
+
+
+</script>
+
 <body>
 	<div>
     <!-- header 시작 -->
@@ -66,7 +141,7 @@
     <!-- ------------------------------- -->
     <!-- 제목 시작 -->
     <div class="container">
-      <h1 class="sub-title">내정보</h1>
+      <h1 class="sub-title">비밀번호 변경</h1>
       <hr>
     </div>
     <!-- 제목 종료 -->
@@ -137,33 +212,40 @@
             <!-- 비밀번호 변경 시작 -->
             <div class=" border col" style="padding: 3%;">
                 <form action="${pageContext.request.contextPath }/mypage/amendpwdPro" method="post"
-                	class="needs-validation" novalidate="novalidate">
-                    <div class="row">
+                	class="needs-validation" novalidate="novalidate" id="pwUpdateForm">
+                    <div class="row" style="margin-top: 8%">
                         <div
                             class="d-flex flex-column justify-content-center align-items-center">
                             <div class="col">
-                                <label for="pwd_eh" class="form-label">현재 비밀번호<span class="text-muted"></span></label>
+                                <label for="pwd_eh" class="form-label"><span class="text-muted"></span></label>
                                 <input
                                     type="password"
                                     class="form-control"
                                     id="pwd_eh"
                                     name="password"
                                     placeholder="현재 비밀번호 입력">
+                                <div id="cuPasswordCheck"></div>
                             </div>
                             <div class="col">
-                                <label for="pwd2_eh" class="form-label">변경할 비밀번호<span class="text-muted"></span></label>
+                                <label for="pwd2_eh" class="form-label"><span class="text-muted"></span></label>
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="pwd2_eh"
+                                    name="password2"
                                     placeholder="변경할 비밀번호 입력"
                                     required="required">
                             </div>
                             <div class="col">
-                                <label for="pwd2re_eh" class="form-label">변경할 비밀번호 재입력<span class="text-muted"></span></label>
-                                <input type="text" class="form-control" id="pwd2re_eh" placeholder="변경할 비밀번호 재입력">
+                                <label for="pwd2re_eh" class="form-label"><span class="text-muted"></span></label>
+                                <input
+                                	type="text"
+                                	class="form-control"
+                                	id="pwd2re_eh"
+                                	placeholder="변경할 비밀번호 재입력">
                             </div><br>
-                            <input type="submit" value="변경">
+                            <input type="submit" value="변경" id="pwUpdate" disabled="disabled">
+                            <input type="hidden" name="email" value="${sessionScope.email }">
                     </div>
                 </div>
             </form>

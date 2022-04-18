@@ -31,6 +31,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
+<br><br><br><br>
 <br><br><br><br>	
         <!-- 제목 시작 -->
        <div class="container">
@@ -56,18 +57,17 @@
                         <th width="3%"> </th>
                         <th width="30%" style="text-align: start;">제목</th>
                         <th></th>
-                        <th width="10%">글쓴이</th>
+                        <th width="10%"></th>
                         <th width="10%" style="text-align: start;">날짜</th>
                     </tr>
                   </thead>
                 <tbody>
                   <c:forEach var="bDTO" items="${bestnotice }">
-						 <c:set var="numbest" value="${numbest + 1}"/>
                     <tr onclick="location.href='${pageContext.request.contextPath }/notice/content_notice?notice_num=${bDTO.notice_num}'">
-                        <td>${numbest}</td>
+                        <td> <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span></td>
                         <td style="text-align: start;">
                         
-                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
+                       
                         </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -75,23 +75,14 @@
                           <i class="fa-regular fa-comment-dots">${like_count} </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
-                        <td>${bDTO.nickname}</td>
+                        <td></td>
                         <td style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td>
    							
                     </tr>
                    
 					</c:forEach>                   
-                  </tbody>
-                  </table>
-                 
-                  <hr>
-                <!-- 게시판 -->
-                <div class="container mt-3">
-                    
-                  <table class="table table-hover text-center  " >
-                    
-                 
-                  <tbody>
+               
+                
                   <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
                   <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/notice/content_notice?notice_num=${bDTO.notice_num}'">
@@ -130,11 +121,11 @@
 
                  
 
-<%-- 					<c:if test="${sessionScope.nickname  ne 'admin'}"> --%>
+					<c:if test="${sessionScope.nickname  eq 'admin'}">
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
                     <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/notice/write_notice'">글쓰기</button>
                   </div>
-<%--                   </c:if> --%>
+                  </c:if>
                   
                  <!-- 다음버튼 -->
                   <div class="text-center">

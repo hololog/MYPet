@@ -52,10 +52,10 @@ public class MypageDAOImpl implements MypageDAO {
 	}
 	
 	@Override
-	public List<MypageDTO> getmyfind_BoardList(String mylist2) {
-		return sqlSession.selectList(namespace+".getmyBoardList", mylist2);
+	public List<MypageDTO> getmyfind_BoardList(String email) {
+		return sqlSession.selectList(namespace+".getmyfind_BoardList", email);
 	}
-
+	
 	@Override
 	public MemberDTO pwCheck(MemberDTO memberDTO) {
 		return sqlSession.selectOne(namespace + ".pwCheck", memberDTO);
@@ -63,8 +63,10 @@ public class MypageDAOImpl implements MypageDAO {
 
 	@Override
 	public void pwUpdate(MemberDTO memberDTO) {
+		System.out.println("비번 DAO확인");
 		sqlSession.update(namespace+".pwUpdate", memberDTO);
 	}
+
 	
 //	@Override
 //	public void updateUimage(String email, String userImg) throws Exception {

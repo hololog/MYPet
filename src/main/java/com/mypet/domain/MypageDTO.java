@@ -24,4 +24,10 @@ public class MypageDTO {
 	private int user_id;
 	private int rownum;	
 	private int num;
+	private int bookmark_count;
+	private String pet_type;
+	private String pet_name;
+	private String pet_age;
+	private String pet_gender;
+	private String detail_address;
 }
