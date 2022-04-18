@@ -228,7 +228,7 @@
 						
 <!-- // 					  alert("로그인해라"); -->
 						
-// 				  location.href = "${pageContext.request.contextPath }/main/main"; --%>
+				<%--   location.href = "${pageContext.request.contextPath }/main/main";  --%>
 						
 <!-- // 						} -->
 						
@@ -498,7 +498,7 @@
 							</div>
 						</form>
 						<!-- Single comment-->
-						<div id="nick">
+						<div id="nicke">
 							<!-- <div class="d-flex" >
 								<div class="flex-shrink-0">
 									<img class="rounded-circle"
@@ -509,8 +509,9 @@
 									
 									</div> -->
 									
+								
+									
 							
-						</div>
 							<!-- <div class="d-flex" style="padding:10px 0 10px 10px">
 							<div class="flex-shrink-0">
 								<img class="rounded-circle"
@@ -524,8 +525,9 @@
 								2022.04.17
 								</div>
 							</div> -->
-					</div>
-					</div>
+							</div>
+							</div>
+							</div>
 				</div>
 				</div>
 			</section>
@@ -586,7 +588,7 @@ $(document).ready(function(){
 		dataType:'json',
 		success:function(rdata){
 			$.each(rdata,function(index,item){
-				$('#nick').append("<div class='d-flex'>"+
+				$('#nicke').append("<div class='d-flex'>"+
 								  "	<div class='flex-shrink-0'>"+
 								  "		<img class='rounded-circle' src='https://dummyimage.com/50x50/ced4da/6c757d.jpg' alt='...'>"+
 								  " </div>"+
