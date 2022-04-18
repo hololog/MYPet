@@ -3,6 +3,8 @@ package com.mypet.dao;
 import java.util.List;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
@@ -26,5 +28,8 @@ public interface MypageDAO {
 	public void pwUpdate(MemberDTO memberDTO);
 	
 //	public void updateUimage(String email, String uimage) throws Exception;
+	
+	public List<FindboardDTO> getFindboardBookmarkList(String email);
 
+	public List<FileDTO> getfindFileList(String email);
 }
