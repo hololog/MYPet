@@ -12,17 +12,18 @@
 	<select id="updateCheck" resultType="com.mypet.domain.MemberDTO">
 		select * 
 		  from user 
-		 where nickname=#{nickname}
-		 <if test="!email.equals('') and email != null">
-		   and email = #{email}
-		 </if>
-		 <if test="!password.equals('') and password != null">
-		   and password = #{password}
-		 </if>
+		 where nickname=#{nickname} and email=#{email}
+<!-- 		 <if test="!email.equals('') and email != null"> -->
+<!-- 		   and email = #{email} -->
+<!-- 		 </if> -->
+<!-- 		 <if test="!password.equals('') and password != null"> -->
+<!-- 		   and password = #{password} -->
+<!-- 		 </if> -->
 	</select>
 	
 	<update id="updateMember">
-		update user set nickname=#{nickname} where email=#{email}
+		update user set nickname=#{nickname}, profileUpload=#{profileUpload} 
+		where email=#{email}
 	</update>
 	
 	<delete id="deleteMember">
