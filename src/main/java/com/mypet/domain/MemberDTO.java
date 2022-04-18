@@ -18,4 +18,5 @@ public class MemberDTO {
 	private String member_point;
 	private Timestamp last_access;
 	private Timestamp join_date;
+	private String password2;
 }

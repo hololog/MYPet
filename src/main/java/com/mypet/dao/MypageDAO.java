@@ -19,12 +19,12 @@ public interface MypageDAO {
 	
 	public List<MypageDTO> getmyBoardList(String mylist);
 	
-	public List<MypageDTO> getmyfind_BoardList(String mylist2);
+	public List<MypageDTO> getmyfind_BoardList(String email);
 	
 	public MemberDTO pwCheck(MemberDTO memberDTO);
 	
 	public void pwUpdate(MemberDTO memberDTO);
-	
+
 //	public void updateUimage(String email, String uimage) throws Exception;
 
 }

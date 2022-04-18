@@ -47,7 +47,7 @@ public class MypageServiceImple implements MypageService {
 	public void pwUpdate(MemberDTO memberDTO) {
 		mypageDAO.pwUpdate(memberDTO);
 	}
-
+	
 //	@Override
 //	public void modifyUimage(String email, String uimage) throws Exception {
 //		mypageDAO.updateUimage(email, uimage);

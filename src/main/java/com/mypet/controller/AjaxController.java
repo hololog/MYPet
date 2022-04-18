@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -196,7 +197,7 @@ public class AjaxController {
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)
 	public ResponseEntity<List<MypageDTO>> mypagejson(MypageDTO mypageDTO, HttpServletRequest request){
-		String mylist = request.getParameter("email");
+		String mylist = request.getParameter("nickname");
 		
 		List<MypageDTO> myboardList = mypageDAO.getmyBoardList(mylist);
 		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myboardList , HttpStatus.OK);
@@ -207,13 +208,39 @@ public class AjaxController {
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson2", method = RequestMethod.GET)
 	public ResponseEntity<List<MypageDTO>> mypagejson2(MypageDTO mypageDTO, HttpServletRequest request){
-		String mylist2 = request.getParameter("email");
+		String email = request.getParameter("email");
+		System.out.println(email);
 		
-		List<MypageDTO> myfind_boardList = mypageDAO.getmyfind_BoardList(mylist2);
+		List<MypageDTO> myfind_boardList = mypageDAO.getmyfind_BoardList(email);
 		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myfind_boardList , HttpStatus.OK);
 		
 		return entity;
 	}
+	
+	// 준동
+	@RequestMapping(value="/mypage/mypagejson3" , method=RequestMethod.GET)
+	@ResponseBody
+	public MemberDTO pwCheck(@RequestParam String cuPassword, HttpSession session){
+		System.out.println("현재 비밀번호 확인 ajax");
+		String email = (String)session.getAttribute("email");
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setEmail(email);
+		memberDTO.setPassword(cuPassword);
+		System.out.println(email + cuPassword);
+		
+		MemberDTO result = mypageDAO.pwCheck(memberDTO);
+		return result;
+	}
+	
+//	@RequestMapping(value="/pwUpdate" , method=RequestMethod.POST)
+//	public String pwUpdate(String memberId,String memberPw1,RedirectAttributes rttr,HttpSession session)throws Exception{
+//		String hashedPw = BCrypt.hashpw(memberPw1, BCrypt.gensalt());
+//		memberService.pwUpdate(memberId, hashedPw);
+//		session.invalidate();
+//		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+//		
+//		return "redirect:/member/loginView";
+//	}
 	
 //	@RequestMapping(value = "/main/mainjson", method = RequestMethod.GET)
 //	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {
