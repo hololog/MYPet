@@ -125,6 +125,9 @@ $(document).ready(function(){
 </script>
 			    
 
+
+
+
 <!-- 모달창 시작 -->
             <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal" style="transition: opacity 0.5s linear;">
              <div class="modal-dialog" role="document">
@@ -154,10 +157,10 @@ $(document).ready(function(){
                           <!-- 작은 안내글
                               <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
                             -->
+                         <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">회원가입하기</a>
                          
-                       	 <h6><a href="" id="idpw_kds">비밀번호찾기</a></h6> 
-
-
+                       	 <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#temp_PW">비밀번호찾기</a> 
+                       	 
 							<hr class="my-4">
 							
 							 <!-- 네이버로 로그인  -->
@@ -179,7 +182,7 @@ $(document).ready(function(){
 <!--                            	<a href="http://developers.kakao.com/logout">카카오 로그아웃</a> -->
 							 
 							<!-- 구글계정으로 로그인 -->
-							<div class="g-signin2" data-onsuccess="onSignIn" align ="center" style="width: 315px; height: ">
+							<div class="g-signin2" data-onsuccess="onSignIn" align ="center" style="width: 315px; height: 45px; ">
 								<a href="javascript:void(0)"></a>
 							</div>
 								</form>
@@ -197,12 +200,40 @@ $(document).ready(function(){
                   </div>
                 </div>
               </div>
-              
-            
-               
 
-      
-    <!-- 회원가입 -->
+
+
+
+<div class="modal fade py-5" tabindex="-1" role="dialog" id="temp_PW" style="transition: opacity 0.5s linear;">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content rounded-5 shadow">
+			<div class="modal-header p-5 pb-4 border-bottom-0">
+				<div class="whole_modal">
+				
+					<h4 class="fw-bold mb-0">임시번호가 전송될 이메일을 입력해주세요</h4>
+					<!-- 닫기 버튼
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>-->
+					<br>	
+					<br>	
+					<div class="modal-body p-5 pt-0">
+						<div class="form-floating mb-3">
+							<input type="email" class="form-control rounded-4" placeholder="name@example.com" name="email" required="required">
+							<label for="floatingInput">E-mail</label>
+						</div>
+
+						<div class="btn_kds">
+							<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
+								type="submit">임시비밀번호 전송</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 회원가입 -->
 
     
             <!-- modal 시작 -->
@@ -221,13 +252,13 @@ $(document).ready(function(){
                     <div class="modal-body p-5 pt-0">
                         <form action="${pageContext.request.contextPath }/member/joinPro" class="whole_modal" method="post">
                           <div class="form-floating mb-3">
-		   				  <input type="text" class="form-control rounded-4 id="join" name="nickname" required autofocus>
-                            <label for="floatingInput">닉네임</label>
+		   				  <input type="text" class="form-control rounded-4 id="nickname" name="nickname" onkeyup="checkNM()" required autofocus>
+                            <label for="floatingInput_NM">닉네임</label>
 <!--                             <button id="nnbtn">중복확인</button> -->
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" name="email" required autofocus>
-                            <label for="floatingInput">email@example.com</label>
+                            <input type="email" class="form-control rounded-4" name="email" onkeyup="checkEmail()" required autofocus>
+                            <label for="floatingInput_EM">email@example.com</label>
                           </div>
                           <div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" name="password" id="pw" minlength="8" maxlength="10" required autofocus>
@@ -240,6 +271,7 @@ $(document).ready(function(){
  							<span id="r_pwErr" class="help-block" style="display :none"> 비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
                           </div>
                           <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">회원가입</button>
+                         
                           <!-- 작은 안내글
                               <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
                             -->
@@ -423,6 +455,7 @@ function onSignInFailure(t){
 <!-- 구글 api 사용을 위한 스크립트 -->
 <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 
+
 		
 <script type="text/javascript">
 //비밀번호 재확인 입력칸에 focus했을 때
@@ -451,11 +484,18 @@ function recheck() {
 
 </script>
 
+<!-- 회원가입 환영창 -->
+<!-- <script type="text/javascript">
+function welcome() {
+	var id = $("#nickname").val();
+}
+
+		alert(id+'환영합니다');
+</script>  -->
 
 
-    
-    
-    <script type="text/javascript"
+
+<script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/css/style.css"></script>
 	
 	<script type="text/javascript"

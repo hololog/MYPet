@@ -61,7 +61,8 @@ public class MemberController {
 	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
 	public String join(MemberDTO memberDTO) {
 		memberService.insertMember(memberDTO);
-		return "redirect:/main";
+//		return "redirect:/main";
+		return "member/welcomeMsg";
 	}
 	
 	
