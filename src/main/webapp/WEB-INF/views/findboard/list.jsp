@@ -293,36 +293,51 @@
 			<hr>
 		</div>
 		<!-- 제목 종료 -->
-
-		<div class="container mt-5 p-2" id="find-board">
-			<!-- 신고글쓰기버튼 -->
-			<div class="row p-3">
-				<div class="col-12">
-				<c:if test="${sessionScope.nickname ne null}">
-					<a href="${pageContext.request.contextPath }/findboard/write"
-						class="btn float-end" style="border-color: #3f51b5;">실종신고</a>
-				</c:if>
-				<c:if test="${sessionScope.nickname eq null}">
-				<a class="btn float-end" style="border-color: #3f51b5;" onclick="reqlog()">실종신고</a>
-				<script>
+		<div class="row">
+			<div class="container mt-5 p-2" id="find-board">
+				<!-- 신고글쓰기버튼 -->
+				<div class="row p-3">
+					<div class="col-12">
+						<c:if test="${sessionScope.nickname ne null}">
+							<a href="${pageContext.request.contextPath }/findboard/write"
+								class="btn float-end" style="border-color: #3f51b5;">실종신고</a>
+						</c:if>
+						<c:if test="${sessionScope.nickname eq null}">
+							<a class="btn float-end" style="border-color: #3f51b5;"
+								onclick="reqlog()">실종신고</a>
+							<script>
 				function reqlog(){
 					alert("로그인 후 이용가능합니다.");
 					return;
 				}
 				</script>
-				</c:if>
+						</c:if>
+					</div>
 				</div>
-			</div>
-			<input type="hidden" data-addr="${findboardDTO.address}">
-			<!-- 메인 -->
-			<div class="row" style="height: 1397px">
+				<input type="hidden" data-addr="${findboardDTO.address}">
+				<!-- 메인 -->
+				<div class="row" style="min-height: 1500px">
 
-				<!-- 지도 api가져올 자리 -->
-				<div id="map" style="max-width: 55%;"
-					class="mb-3 col-md-12 col-lg-7" id="map-kj"></div>
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eff268212342867ed07048385b8791c9"></script>
-				<script type="text/javascript">
+					<!-- 지도 api가져올 자리 -->
+					<div id="map" style="max-width: 55%;"
+						class="mb-3 col-md-12 col-lg-7" id="map-kj"></div>
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eff268212342867ed07048385b8791c9"></script>
+					<script>
+					$(function(){
+						$(".map-click").on("click",function(){
+							let num3 = $(this).children(".mapview").val();
+							alert(num3);
+						alert(num3);
+						    $.ajax({
+							url:"${pageContext.request.contextPath }/ajaxmap",
+							async: false,
+							data: {"find_board_num" : num3},
+							type: "get",
+							contentType :"application/json; charset:UTF-8",
+							success: function(rdata){
+								var addr = rdata;
+					 			
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					mapOption = {
 						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -346,11 +361,10 @@
 							kakao.maps.ControlPosition.RIGHT);
 
 					var geocoder = new kakao.maps.services.Geocoder();
-
-				
+					
+					
 					// 주소로 좌표를 검색합니다
-					geocoder.addressSearch('addr',function(result, status) {
-				
+					geocoder.addressSearch( addr ,function(result, status) {
 										// 정상적으로 검색이 완료됐으면 
 										if (status === kakao.maps.services.Status.OK) {
 
@@ -367,7 +381,7 @@
 											// 인포윈도우로 장소에 대한 설명을 표시합니다
 											var infowindow = new kakao.maps.InfoWindow(
 													{
-														content : '<div style="width:150px;text-align:center;padding:6px 0;">진해구</div>'
+														content : '<div style="width:150px;text-align:center;padding:6px 0;">'+addr+'</div>'
 													});
 											infowindow.open(map, marker);
 
@@ -375,118 +389,164 @@
 											map.setCenter(coords);
 										}
 									});
+							}
+						   });
+					}); 
+					});
+					
 				</script>
-				<!-- 지도 api가져올 자리 -->
-				<div class="mb-3 col-md-12 col-lg-5" style="margin-left: 20px"
-					id="finder-photo">
+					<!-- 지도 api가져올 자리 -->
+					<div class="mb-3 col-md-12 col-lg-5" style="margin-left: 20px"
+						id="finder-photo">
 
-					<!-- 검색창 시작 ajax -->
-					<div class="pt-3 d-flex justify-content-center gap-3">
-						<form action="${pageContext.request.contextPath }/findboard/search" method="get">
-							<div class="">
-								<input type="text" class="form-control" id="mainSearch" name="mainSearch"
-									placeholder="내 주변 검색">
-							</div>
-							<div class="">
-								<button type="submit" class="btn text-white"
-									style="background-color: #3f51b5;">
-									<i class="bi bi-search"></i>
-								</button>
-							</div>
-						</form>
-					</div>
-					<div class="form-check d-flex justify-content-center p-3">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault">미해결 공고만 보기</label>
-					</div>
-					<!-- 검색창 종료-->
+						<!-- 검색창 시작 ajax -->
+						<div class="pt-3 d-flex justify-content-center gap-3">
+							<form
+								action="${pageContext.request.contextPath }/findboard/search"
+								method="get">
+								<div class="col">
+									<input type="text" class="form-control" id="mainSearch"
+										name="mainSearch" placeholder="내 주변 검색">
+								</div>
+								<div class="col">
+									<button type="submit" class="btn text-white"
+										style="background-color: #3f51b5;">
+										<i class="bi bi-search"></i>
+									</button>
+								</div>
+							</form>
+						</div>
+						<div class="form-check d-flex justify-content-center p-3">
+							<input class="form-check-input" type="checkbox" value=""
+								id="flexCheckDefault"> <label class="form-check-label"
+								for="flexCheckDefault">미해결 공고만 보기</label>
+						</div>
+						<!-- 검색창 종료-->
 
-					<!-- 간략히보기 시작 5개씩 -->
-					<c:set var="num"
-						value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize}" />
-					<c:forEach var="fb" items="${findboardList}" varStatus="loop">
-						<div class="row ListSH" id="refresh">
-							<a type="hidden" data-result="${fb.result}"></a>
-							<div class="col-12 col-sm-7 p-2 position-relative">
-								<c:choose>
-									<c:when test="${fileList[loop.index].filename ne null}">
-										<a href="" data-bs-toggle="modal" class="openMod pic"
-											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
-											data-bs-target="#find_content"
-											id="marking"> <img class="img-fluid rounded"
-											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}" alt="실종동물사진" style="max-height:300px">
-										</a>
-									</c:when>
-									<c:when test="${fileList[loop.index].filename eq null}">
-										<a href="" data-bs-toggle="modal" class="openMod pic"
-											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
-											data-bs-target="#find_content"> <img
-											class="img-fluid rounded"
-											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}" alt="실종동물사진" id="">
-										</a>
-									</c:when>
-								</c:choose>
-							</div>
-
-							<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
-								<div class="row p-2">
-									<div class="col-6 col-sm-12" style="white-space:normal">
-										<h4>${fb.address}</h4>
-									</div>
-									<div class="p-1 col-6 col-sm-12">
-										<i class="bi bi-tags-fill"></i>
-										<c:choose>
-											<c:when test="${fb.pet_type eq 0}">개</c:when>
-											<c:when test="${fb.pet_type eq 1}">고양이</c:when>
-											<c:when test="${fb.pet_type eq 2}">기타</c:when>
+						<!-- 간략히보기 시작 5개씩 -->
+						<c:set var="num"
+							value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize}" />
+						<c:forEach var="fb" items="${findboardList}" varStatus="loop">
+							<div class="row ListSH" id="refresh">
+								<a type="hidden" data-result="${fb.result}"></a>
+								<div class="col-12 col-sm-7 p-2 position-relative">
+									<c:choose>
+										<c:when test="${fileList[loop.index].filename ne null}">
+											<input type="hidden" value="${fb.find_board_num}">
+											<a href="" data-bs-toggle="modal" class="openMod pic"
+												data-bs-toggle="modal" data-test="${loop.count}"
+												data-maps="${fb.find_board_num}" data-inx="${loop.index}"
+												data-bs-target="#find_content" onmouseover='mapper()'> <img
+												class="img-fluid rounded"
+												src="${pageContext.request.contextPath }/resources/upload/${fb.upload}"
+												alt="실종동물사진" style="max-height: 300px">
+											</a>
+										</c:when>
+										<c:when test="${fileList[loop.index].filename eq null}">
+											<input type="hidden" value="${fb.find_board_num}">
+											<a href="" data-bs-toggle="modal" class="openMod pic"
+												data-bs-toggle="modal" data-test="${loop.count}"
+												data-maps="${fb.find_board_num}" data-inx="${loop.index}"
+												data-bs-target="#find_content" onmouseover='mapper()'> <img
+												class="img-fluid rounded"
+												src="${pageContext.request.contextPath }/resources/upload/${fb.upload}"
+												alt="실종동물사진" id="">
+											</a>
+										</c:when>
+									</c:choose>
+								</div>
+								
+								<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
+									<div class="row p-2">
+										<div class="col-6 col-sm-12" style="white-space: normal">
+											<h4>${fb.address}</h4>
+										</div>
+										<div class="p-1 col-6 col-sm-12">
+											<i class="bi bi-tags-fill"></i>
+											<c:choose>
+												<c:when test="${fb.pet_type eq 0}">개</c:when>
+												<c:when test="${fb.pet_type eq 1}">고양이</c:when>
+												<c:when test="${fb.pet_type eq 2}">기타</c:when>
+											</c:choose>
+											/
+											<c:choose>
+												<c:when test="${fb.pet_gender eq 0}">암컷</c:when>
+												<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
+												<c:when test="${fb.pet_gender eq 2}">모름</c:when>
+											</c:choose>
+											/ ${fb.pet_age}
+										</div>
+										<div class="p-1 col-6 col-sm-12">
+											<i class="bi bi-calendar3"></i> ${fb.missing_date}
+										</div>
+										<div class="p-1 col-6 col-sm-12">
+											<i class="bi bi-geo-alt"></i> ${fb.detail_address} 부근
+										</div>
+										<div class="p-1 col-6 col-sm-12">
+											<i class="bi bi-coin"></i> 사례금 : <b>${fb.reward}</b> 만원
+										</div>
+										<div class="d-flex justify-content-between align-items-center">
+											<div>
+												<i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i>
+												<span id="mark${fb.find_board_num }" class="star-ksk">${fb.bookmark_count }</span>
+												<i class="bi bi-chat-dots"></i> <span class="chat-ksk">
+													0 </span> <i class="bi bi-eye-fill"></i><span class="eye-ksk">
+													${fb.readcount }</span>
+											</div>
+										</div>
+										<div>
+										 <c:choose>
+	              							<c:when test="${findboardListMain[loop.index].book eq 'Y'}">
+	              							<a type="button" class="bookmark-click">
+	              							<input class="bomchild" type="hidden" value="${fb.find_board_num}">
+											<input type="checkbox" class="btn-check y" checked autocomplete="on">
+											<label class="btn btn-outline-primary" for="btn-check-outlined">즐겨찾기</label>
+											</a>
+											</c:when>
+	              							<c:otherwise> 
+	              							<a type="button" class="bookmark-click">
+	              							<input class="bomchild" type="hidden" value="${fb.find_board_num}">
+	              							<input type="checkbox" class="btn-check n" autocomplete="off">
+											<label class="btn btn-outline-primary" for="btn-check-outlined">즐겨찾기</label>
+											</a>
+											 </c:otherwise>
 										</c:choose>
-										/
-										<c:choose>
-											<c:when test="${fb.pet_gender eq 0}">암컷</c:when>
-											<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
-											<c:when test="${fb.pet_gender eq 2}">모름</c:when>
-										</c:choose>
-										/ ${fb.pet_age}
-									</div>
-									<div class="p-1 col-6 col-sm-12">
-										<i class="bi bi-calendar3"></i> ${fb.missing_date}
-									</div>
-									<div class="p-1 col-6 col-sm-12">
-										<i class="bi bi-geo-alt"></i> ${fb.detail_address} 부근
-									</div>
-									<div class="p-1 col-6 col-sm-12">
-										<i class="bi bi-coin"></i> 사례금 : <b>${fb.reward}</b> 만원
+										<a type="button" class="map-click">
+											<input class="btn" type="button" style="border-color: #3f51b5;" 
+											data-mapview="${fb.find_board_num}" value="지도에서 보기" id="mapmap${loop.index}">
+											<input type="hidden" class="mapview" value="${fb.find_board_num}">
+										</a> 
+										</div>
 									</div>
 								</div>
 							</div>
+							<c:set var="num" value="${num-1 }" />
+						</c:forEach>
+
+						<!-- 페이징 -->
+						<div class="text-center">
+							<ul class="pagination justify-content-center"
+								style="margin: 20px 0">
+
+								<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
+									<li class="page-item"><a class="page-link"
+										href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
+								</c:if>
+
+								<c:forEach var="i" begin="${pageDTO.startPage }"
+									end="${pageDTO.endPage }" step="1">
+									<li class="page-item"><a class="page-link"
+										href="${pageContext.request.contextPath }/findboard/list?pageNum=${i}">
+											${i}</a></li>
+								</c:forEach>
+
+								<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
+									<li class="page-item"><a class="page-link"
+										href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">
+											▷</a></li>
+								</c:if>
+							</ul>
 						</div>
-						<c:set var="num" value="${num-1 }" />
-					</c:forEach>
-
-					<!-- 페이징 -->
-					<div class="text-center">
-						<ul class="pagination justify-content-center"
-							style="margin: 20px 0">
-
-							<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
-								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
-							</c:if>
-
-							<c:forEach var="i" begin="${pageDTO.startPage }"
-								end="${pageDTO.endPage }" step="1">
-								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${i}">
-										${i}</a></li>
-							</c:forEach>
-
-							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
-								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">
-										▷</a></li>
-							</c:if>
-						</ul>
 					</div>
 				</div>
 			</div>
@@ -540,7 +600,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<c:forEach var="fb" items="${findboardList}" varStatus="mdloop">
-					<input type="hidden" data-del="${fb.find_board_num}">
+						<input type="hidden" data-del="${fb.find_board_num}">
 						<div class="ModalSH">
 							<!-- Modal Header -->
 							<div class="modal-header">
@@ -557,28 +617,33 @@
 									<!-- 슬라이드 쇼 -->
 									<div class="carousel-inner">
 										<!-- 사진1 -->
-										
-										<input type="hidden" value="${findboardList[mdloop.index].find_board_num}">
+
+										<input type="hidden"
+											value="${findboardList[mdloop.index].find_board_num}">
 										<input type="hidden" value="${mdloop.index}">
-										<c:if test="${fb[loop.index].find_board_num eq fb.find_board_num}">
-										<div class="carousel-item active">
-												<img src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
+										<c:if
+											test="${fb[loop.index].find_board_num eq fb.find_board_num}">
+											<div class="carousel-item active">
+												<img
+													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
 													alt="first slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-										</div>
-										<div class="carousel-item">
-												<img src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
+											</div>
+											<div class="carousel-item">
+												<img
+													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
 													alt="second slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-										</div>
-										<div class="carousel-item">
-												<img src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
+											</div>
+											<div class="carousel-item">
+												<img
+													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
 													alt="third slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-										</div>
+											</div>
 										</c:if>
 										<!-- 사진2 -->
 										<%-- <div class="carousel-item">
@@ -602,94 +667,84 @@
 									</div>
 								</section>
 
-								<div >
+								<div>
 									<div style="margin-top: 10px;">
-																<table width="572" border="0" cellpadding="0"
-																	 id="line">
-																	<tr>
-																		<td class="td113"
-																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
-																			장소</td>
-																		<td style="padding-left: 10px"><b>${fb.address }</b>&nbsp;<b>${fb.address2}</b>&nbsp;<b>${fb.detail_address}</b></td>
-																		<td class="td113"
-																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
-																			날짜</td>
-																		<td style="text-align: center"><b>
-																				${fb.missing_date} </b></td>
-																	</tr>
+										<table width="572" border="0" cellpadding="0" id="line">
+											<tr>
+												<td class="td113"
+													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
+													장소</td>
+												<td style="padding-left: 10px"><b>${fb.address }</b>&nbsp;<b>${fb.address2}</b>&nbsp;<b>${fb.detail_address}</b></td>
+												<td class="td113"
+													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
+													날짜</td>
+												<td style="text-align: center"><b>
+														${fb.missing_date} </b></td>
+											</tr>
 
-																	<tr>
-																		<td class="td113"
-																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">이름</td>
-																		<td  style="padding-left: 10px"><b>${fb.pet_name}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(성별</b>
-																			: <b><c:choose>
-																					<c:when test="${fb.pet_gender eq 0}">암컷</c:when>
-																					<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
-																					<c:when test="${fb.pet_gender eq 2}">모름</c:when>
-																				</c:choose> </b>)</td>
-																	
-															 		<td class="td113" style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">종류</td>
-																	<td  style="padding-left: 10px"><b>
-																	<c:choose>
-																		<c:when test="${fb.pet_type eq 0}">개</c:when>
-																		<c:when test="${fb.pet_type eq 1}">고양이</c:when>
-																		<c:when test="${fb.pet_type eq 2}">기타</c:when>
-																	</c:choose>
-																	</b></td>
-																	</tr>
+											<tr>
+												<td class="td113"
+													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">이름</td>
+												<td style="padding-left: 10px"><b>${fb.pet_name}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(성별</b>
+													: <b><c:choose>
+															<c:when test="${fb.pet_gender eq 0}">암컷</c:when>
+															<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
+															<c:when test="${fb.pet_gender eq 2}">모름</c:when>
+														</c:choose> </b>)</td>
 
-																	<tr>
-																		<td class="td113" height="auto"
-																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">연락수단</td>
-																		<td  valign="top"
-																			style="line-height: 11pt; padding-left: 10px;"><br>
-																			${fb.content }<br> <br></td>
-																			<td class="td113"
-																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">나이</td>		
+												<td class="td113"
+													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">종류</td>
+												<td style="padding-left: 10px"><b> <c:choose>
+															<c:when test="${fb.pet_type eq 0}">개</c:when>
+															<c:when test="${fb.pet_type eq 1}">고양이</c:when>
+															<c:when test="${fb.pet_type eq 2}">기타</c:when>
+														</c:choose>
+												</b></td>
+											</tr>
 
-																	</tr>
+											<tr>
+												<td class="td113" height="auto"
+													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">연락수단</td>
+												<td valign="top"
+													style="line-height: 11pt; padding-left: 10px;"><br>
+													${fb.content }<br> <br></td>
+												<td class="td113"
+													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">나이</td>
 
-																	<tr>
-																		<td class="td113" height="auto"
-																			style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">상세설명</td>
-																		<td valign="top"
-																			style="line-height: 11pt; padding-left: 10px;"><br>
-																			${fb.content }<br> <br></td>
-																	</tr>
-																</table>
-							</div>
-							</div>
-							<!-- Modal footer -->
-							<c:choose>
-								<c:when test="${sessionScope.nickname eq fb.nickname}">
-									<div class="modal-footer">
-										<button type="button" class="btn btn-primary del"
-											data-bs-target="#modify_content" data-bs-toggle="modal"
-											data-test2="${mdloop.count}">수정하기</button>
-										<button type="button" class="btn btn-danger" onclick='deletefind()'>삭제하기</button>
-										<script type="text/javascript">
-											function deletefind(){
-												if(confirm("게시글을 삭제하시겟습니까?") == true){
-         									       alert("삭제가 완료되었습니다.");
-       										         location.href='${pageContext.request.contextPath }/findboard/delete?find_board_num=${fb.find_board_num}';
-       										         location.reload();
-       										 	}else{   
-        									       return;
-       										     } 
-												}
-										</script>
-										<button type="button" class="btn btn-danger"
-											data-bs-dismiss="modal">닫기</button>
+											</tr>
+
+											<tr>
+												<td class="td113" height="auto"
+													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">상세설명</td>
+												<td valign="top"
+													style="line-height: 11pt; padding-left: 10px;"><br>
+													${fb.content }<br> <br></td>
+											</tr>
+										</table>
 									</div>
-								</c:when>
-								<c:when test="${sessionScope.nickname ne fb.nickname}">
-									<div class="modal-footer">
-										<button type="button" class="btn btn-danger"
-											data-bs-dismiss="modal">닫기</button>
-									</div>
-								</c:when>
-							</c:choose>
-						</div>
+								</div>
+								<!-- Modal footer -->
+								<c:choose>
+									<c:when test="${sessionScope.nickname eq fb.nickname}">
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary del"
+												data-bs-target="#modify_content" data-bs-toggle="modal"
+												data-test2="${mdloop.count}">수정하기</button>
+											<button type="button" class="btn btn-danger"
+												onclick='deletefind()'>삭제하기</button>
+
+											<button type="button" class="btn btn-danger"
+												data-bs-dismiss="modal">닫기</button>
+										</div>
+									</c:when>
+									<c:when test="${sessionScope.nickname ne fb.nickname}">
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger"
+												data-bs-dismiss="modal">닫기</button>
+										</div>
+									</c:when>
+								</c:choose>
+							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -706,7 +761,8 @@
 							<!-- Modal Header -->
 							<div class="modal-header">
 								<h4 class="modal-title">
-									<a><b>${fb.pet_name}</b></a><a>(</a><a><b>${fb.address}</b></a>><a>) 수정하기</a>
+									<a><b>${fb.pet_name}</b></a><a>(</a><a><b>${fb.address}</b></a>><a>)
+										수정하기</a>
 								</h4>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 							</div>
@@ -715,8 +771,9 @@
 								<form
 									action="${pageContext.request.contextPath}/findboard/update_findPro"
 									method="post" id="f_eh" enctype="multipart/form-data">
-									<input type="hidden" value="${fb.find_board_num}" name="find_board_num">
-									<input type="hidden" value="${sessionScope.nickname}" name="nickname">
+									<input type="hidden" value="${fb.find_board_num}"
+										name="find_board_num"> <input type="hidden"
+										value="${sessionScope.nickname}" name="nickname">
 									<div class="row g-5">
 										<!--왼쪽여백-->
 										<div class="col-md-1 col-lg-3"></div>
@@ -727,8 +784,10 @@
 												<div class="form-check form-switch col">
 													<!--                                     <input class="form-check-input" type="checkbox" role="switch" id="swtich_eh" value="0" name="result"> -->
 													<!--                                     <label class="form-check-label" for="switch_eh">미해결</label> -->
- 												 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" name="reschk">
-  												 <label class="form-check-label" for="result_n">미해결</label>
+													<input class="form-check-input" type="checkbox"
+														role="switch" id="flexSwitchCheckDefault" value="1"
+														name="reschk"> <label class="form-check-label"
+														for="result_n">해결</label>
 												</div>
 												<!--사례금 유무-->
 												<div class="col input-group mb-3">
@@ -743,30 +802,30 @@
 													종류</label> <select class="form-select" id="animal_sort_eh"
 													name="pet_type">
 													<c:choose>
-													<c:when test="${fb.pet_type eq null }">
-													<option value="" selected>선택해주세요</option>
-													<option value="0">개</option>
-													<option value="1">고양이</option>
-													<option value="2">기타</option>
-													</c:when>
-													<c:when test="${fb.pet_type eq 0 }">
-													<option value="" >선택해주세요</option>
-													<option value="0" selected>개</option>
-													<option value="1">고양이</option>
-													<option value="2">기타</option>
-													</c:when>
-													<c:when test="${fb.pet_type eq 1 }">
-													<option value="" >선택해주세요</option>
-													<option value="0">개</option>
-													<option value="1" selected>고양이</option>
-													<option value="2">기타</option>
-													</c:when>
-													<c:when test="${fb.pet_type eq 2 }">
-													<option value="" >선택해주세요</option>
-													<option value="0">개</option>
-													<option value="1">고양이</option>
-													<option value="2"selected>기타</option>
-													</c:when>
+														<c:when test="${fb.pet_type eq null }">
+															<option value="" selected>선택해주세요</option>
+															<option value="0">개</option>
+															<option value="1">고양이</option>
+															<option value="2">기타</option>
+														</c:when>
+														<c:when test="${fb.pet_type eq 0 }">
+															<option value="">선택해주세요</option>
+															<option value="0" selected>개</option>
+															<option value="1">고양이</option>
+															<option value="2">기타</option>
+														</c:when>
+														<c:when test="${fb.pet_type eq 1 }">
+															<option value="">선택해주세요</option>
+															<option value="0">개</option>
+															<option value="1" selected>고양이</option>
+															<option value="2">기타</option>
+														</c:when>
+														<c:when test="${fb.pet_type eq 2 }">
+															<option value="">선택해주세요</option>
+															<option value="0">개</option>
+															<option value="1">고양이</option>
+															<option value="2" selected>기타</option>
+														</c:when>
 													</c:choose>
 												</select>
 											</div>
@@ -789,70 +848,72 @@
 											<div class="input-group mb-3">
 												<div class="input-group-text">동물 성별</div>
 												<div class="form-control">
-													 <c:choose>
-													<c:when test="${fb.pet_gender eq 0}"> 
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="0" name="pet_gender"  checked> <label
-															class="form-check-label" for="ra1_eh">암컷</label>
-													</div>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio"
-															value="1" name="pet_gender"> <label
-															class="form-check-label" for="ra2_eh">수컷</label>
-													</div>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="2" name="pet_gender"> <label
-															class="form-check-label" for="ra3_eh">모름</label>
-													</div>
-													</c:when>
-													<c:when test="${fb.pet_gender eq 1}">
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="0" name="pet_gender"> <label
-															class="form-check-label" for="ra1_eh" >암컷</label>
-													</div>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="1" name="pet_gender" checked> <label
-															class="form-check-label" for="ra2_eh" >수컷</label>
-													</div>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="2" name="pet_gender"> <label
-															class="form-check-label" for="ra3_eh">모름</label>
-													</div>
-													</c:when>
-													<c:when test="${fb.pet_gender eq 2}">
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="0" name="pet_gender"> <label
-															class="form-check-label" for="ra1_eh" >암컷</label>
-													</div>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="1" name="pet_gender"> <label
-															class="form-check-label" for="ra2_eh">수컷</label>
-													</div>
-													<div class="form-check form-check-inline">
-														<input class="form-check-input" type="radio" 
-															value="2" name="pet_gender" checked> <label
-															class="form-check-label" for="ra3_eh" >모름</label>
-													</div>
-													</c:when>
+													<c:choose>
+														<c:when test="${fb.pet_gender eq 0}">
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="0"
+																	name="pet_gender" checked> <label
+																	class="form-check-label" for="ra1_eh">암컷</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="1"
+																	name="pet_gender"> <label
+																	class="form-check-label" for="ra2_eh">수컷</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="2"
+																	name="pet_gender"> <label
+																	class="form-check-label" for="ra3_eh">모름</label>
+															</div>
+														</c:when>
+														<c:when test="${fb.pet_gender eq 1}">
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="0"
+																	name="pet_gender"> <label
+																	class="form-check-label" for="ra1_eh">암컷</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="1"
+																	name="pet_gender" checked> <label
+																	class="form-check-label" for="ra2_eh">수컷</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="2"
+																	name="pet_gender"> <label
+																	class="form-check-label" for="ra3_eh">모름</label>
+															</div>
+														</c:when>
+														<c:when test="${fb.pet_gender eq 2}">
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="0"
+																	name="pet_gender"> <label
+																	class="form-check-label" for="ra1_eh">암컷</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="1"
+																	name="pet_gender"> <label
+																	class="form-check-label" for="ra2_eh">수컷</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio" value="2"
+																	name="pet_gender" checked> <label
+																	class="form-check-label" for="ra3_eh">모름</label>
+															</div>
+														</c:when>
 													</c:choose>
 												</div>
 											</div>
 											<!--실종날짜-->
 											<div class="input-group mb-3">
 												<label class="input-group-text">실종 날짜</label> <input
-													type="date" class="form-control" name="missing_date" value="${fb.missing_date}">
+													type="date" class="form-control" name="missing_date"
+													value="${fb.missing_date}">
 											</div>
 											<!--실종지역 selectbox -->
 											<div class="input-group">
 												<label class="input-group-text">실종 지역</label> <select
-													class="form-select province" name="address1" data-test2="${num.index}">
+													class="form-select province" name="address1"
+													data-test2="${num.index}">
 													<option value="">지역</option>
 												</select> <select class="form-select city" name="address2">
 													<option selected>시</option>
@@ -879,7 +940,8 @@
 											<div class="input-group mb-3">
 												<label class="input-group-text">연락 가능 수단</label> <input
 													type="text" class="form-control"
-													placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact" value="${fb.contact }">
+													placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact"
+													value="${fb.contact }">
 											</div>
 
 											<!--(구현못함 ㅠㅠ) file 드래그앤드롭-->
@@ -907,17 +969,17 @@
 										<!--오른쪽여백-->
 										<div class="col-md-1 col-lg-3"></div>
 									</div>
-								
 
-							<!-- Modal footer -->
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary" value="글쓰기" >수정하기</button>
-								<button type="button" class="btn btn-danger"
-									data-bs-dismiss="modal">닫기</button>
+
+									<!-- Modal footer -->
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-primary" value="글쓰기">수정하기</button>
+										<button type="button" class="btn btn-danger"
+											data-bs-dismiss="modal">닫기</button>
+									</div>
+								</form>
 							</div>
-							</form>
 						</div>
-							</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -962,24 +1024,16 @@
 
 	<script>
 		$(function() {
-			$("#flexCheckDefault")
-					.click(
-							function() {
+			$("#flexCheckDefault").click(function() {
 								location.href = "${pageContext.request.contextPath }/findboard/listM";
 							});
 		});
 	</script>
-	<script>
+	<!-- <script>
 		window.onload = function relayout() {
-
-			// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
-			// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 			map.relayout();
-			//		map.setBounds(bounds);
-
 		}
-	</script>
+	</script> -->
 	<script type="text/javascript">
 	// 시/도 select
 	$(document).ready(function(){
@@ -1027,8 +1081,61 @@
 		}); //city selected
 	}); // jQuery closed	
 </script>
+	<script type="text/javascript">
+	function deletefind(){
+		if(confirm("게시글을 삭제하시겟습니까?") == true){
+			$.ajax({
+				url:"${pageContext.request.contextPath }/findboard/delete",
+					type:"get",
+					data : {"find_board_num" : ${fb.find_board_num}},
+					success: function(data){
+					location.reload();
+					alert("삭제가 완료되었습니다");
+					}
+					});
+       				}else{   
+        			return;
+       				} 
+				}
+</script>
+<script>
+$(document).ready(function(){
+	//북마트 클릭이벤트
+	$('.bookmark-click').click(function(){
+		let no = $(this).children('.bomchild').val();
+		alert(no);
+// 		console.log(no);
+		//빈별표 일때
+		if($(this).children('input').attr('class') === 'btn-check n'){
+			//DB에 북마크 정보 갱신
+			$.ajax({
+				url:"${pageContext.request.contextPath}/findboard/addBookmark",
+				data:{"findboardNum" : no},
+				success:function(rdata){
+					if(rdata != null) {
+						//게시물당 북마크수 화면표시
+						$('#mark'+no).text(" "+ rdata);
+					}
+				}	
+			});
+		//꽉찬 별표 일때
+		} else { 
+			$(this).children('input').attr('class') === 'btn-check y');
+			$.ajax({
+				url:"${pageContext.request.contextPath }/findboard/removeBookmark",
+				data:{"findboardNum" : no},
+				success:function(rdata){
+					if(rdata != null) {
+						$('#mark'+no).html(" "+ rdata);
+					}
+				}	
+			});
+		}
+	});
+});
 
-<!-- <script>
+</script>
+	<!-- <script>
 $(document).ready(function(){
 	$('.pic').mouseover(function(){
 		var inx = $(".pic").data("test");

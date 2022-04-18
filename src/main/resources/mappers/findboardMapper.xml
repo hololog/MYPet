@@ -66,7 +66,7 @@
 	</select>
 	
 	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
-		select * from find_board where result = "1" order by find_board_num desc limit #{startRow},#{pageSize}
+		select * from find_board where result = "0" order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
 	<select id="getfindBoardCount" resultType="java.lang.Integer">
@@ -164,5 +164,10 @@
 	<delete id="deletefind">
 		delete from find_board where find_board_num = #{find_board_num}
 	</delete>
+	
+	<select id="getAddr" resultType="java.lang.String">
+		select address from find_board where find_board_num = #{find_board_num}
+	
+	</select>
 
 </mapper>

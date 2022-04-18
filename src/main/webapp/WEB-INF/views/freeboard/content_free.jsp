@@ -472,7 +472,7 @@
 							댓글 <span id="count"></span>
 						</div>
 						
-						<form action="${pageContext.request.contextPath}/free/freecommentsIn" method="post">
+						<form action="${pageContext.request.contextPath}/freeboard/freecommentsIn" method="post">
 						<input type="hidden" value="${boardDTO.free_board_num}" name="board_num">
 						<input type="hidden" value="${sessionScope.nickname}" name="nickname">
 						<div class="input-group mb-3">
@@ -530,6 +530,7 @@
 							</div>
 				</div>
 				</div>
+				</div>
 			</section>
 
     
@@ -581,7 +582,6 @@ function report() {
 </script>
 <script>
 $(document).ready(function(){
-		alert("alax load");
 		$.ajax({
 		url:'${pageContext.request.contextPath}/free/ajaxcomments',
 		data: 'free_board_num='+$('#num').val(),
@@ -593,7 +593,7 @@ $(document).ready(function(){
 								  "		<img class='rounded-circle' src='https://dummyimage.com/50x50/ced4da/6c757d.jpg' alt='...'>"+
 								  " </div>"+
 								  "	<div class='ms-3'>"+
-								  "		<div class='fw-bold'>"+item.c_nik.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
+								  "		<div class='fw-bold'>"+item.c_nik+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
 								  " </div>"+
 								  "</div>"+
 								  "<br>"
@@ -608,7 +608,6 @@ $(document).ready(function(){
 </script>
  <script>
 $(document).ready(function(){
-	alert("count ajax");
 	$.ajax({
 		url : '${pageContext.request.contextPath}/free/ajaxcommentsfCount',
 		method:'post',

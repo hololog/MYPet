@@ -147,6 +147,12 @@ public class FindboardDAOImpl implements FindboardDAO {
 		sqlSession.delete(namespace+".deletefind",num);
 	}
 	
+	@Override
+	public String getAddr(int num) {
+		return sqlSession.selectOne(namespace+".getAddr",num);
+	}
+	
+	
 	
 
 

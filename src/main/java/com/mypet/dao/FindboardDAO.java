@@ -63,6 +63,9 @@ public interface FindboardDAO {
 	public int getFindBoardSearchCount();
 
 	public List<FileDTO> getSearchFileList(PageDTO pageDTO);
+	
+	// map
+		public String getAddr(int num);
 
 //	public List<String> wordSearchShow(Map<String, String> paraMap);
 

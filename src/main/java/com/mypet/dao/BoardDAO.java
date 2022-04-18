@@ -132,4 +132,6 @@ public interface BoardDAO {
 	
 	public String getfreecommentCount(int bnum);
 	
+
+	
 }

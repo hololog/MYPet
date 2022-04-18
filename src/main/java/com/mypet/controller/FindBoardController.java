@@ -54,6 +54,9 @@ public class FindBoardController {
 	@RequestMapping(value = "/findboard/update_findPro", method = RequestMethod.POST)
 	public String update_findBoardPro(HttpServletRequest mtfRequest ,FindboardDTO findboardDTO) throws Exception {
 		
+		int chkres = Integer.parseInt(mtfRequest.getParameter("reschk"));
+		System.out.println(chkres);
+		if(chkres == 1) findboardDTO.setResult(1);
 		findboardDTO.setAddress(mtfRequest.getParameter("address1") +" "+ 
 				mtfRequest.getParameter("address2") +" "+ 
 				mtfRequest.getParameter("address3")); 
