@@ -22,7 +22,11 @@
       <!-- header 시작 -->
 	  <jsp:include page="../inc/top.jsp"></jsp:include>
    	  <!-- header 종료 -->
-   	 
+   	 <!-- 제목 시작 -->
+		<div class="container">
+			<h1 class="sub-title">결제</h1>
+		</div>
+		<!-- 제목 종료 -->
 
       <div class="container">
                 <div class="container-fluid" style="text-align: center; font-family:fantasy;">
