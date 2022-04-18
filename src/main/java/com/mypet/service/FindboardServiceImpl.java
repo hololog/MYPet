@@ -181,4 +181,19 @@ public class FindboardServiceImpl implements FindboardService {
 	public void updatefindBoard (FindboardDTO findboardDTO) {
 		findboardDAO.updatefindBoard(findboardDTO);
 	}
+    
+	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO) {
+		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
+	    int endRow = startRow + pageDTO.getPageSize() - 1; 
+	    
+	    pageDTO.setStartRow(startRow);
+	    pageDTO.setEndRow(endRow);
+	    
+		return findboardDAO.getFindSearchList(pageDTO);
+	}
+
+	@Override
+	public int getFindBoardCount() {
+		return findboardDAO.getFindBoardCount();
+	}
 }

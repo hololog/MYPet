@@ -66,7 +66,7 @@
     <!-- ------------------------------- -->
     <!-- 제목 시작 -->
     <div class="container">
-      <h1 class="sub-title">내정보</h1>
+      <h1 class="sub-title">내정보 변경</h1>
       <hr>
     </div>
     <!-- 제목 종료 -->
@@ -77,15 +77,13 @@
                 class="d-flex flex-column flex-shrink-0 p-4 col-md-2 menu-jd"
                 style="min-width: 230px; max-height: 500px">
                 <div class="Info" style="display: flex;">
-                		<a href="${pageContext.request.contextPath }/mypage/myinfo">
                         <img
                             src="http://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg"
                             alt=""
                             width="70"
                             height="70"
                             class="rounded-circle me-3 align-items-center">
-                   		</a>
-                        <strong style="color: white;"><br>JunDong 님</strong>
+                        <strong style="color: white;"><br>${sessionScope.nickname } 님</strong>
                 </div>
                 <hr>
               
@@ -93,7 +91,6 @@
                     <li class="nav-item2">  
                         <a href="${pageContext.request.contextPath }/mypage/myinfo" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             내정보
                         </a>
@@ -101,24 +98,27 @@
                     <li>
                         <a href="${pageContext.request.contextPath }/mypage/mylist" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             내 글목록
                         </a>
                     </li>
-                    
+                    <li>
+                        <a href="${pageContext.request.contextPath }/mypage/mymisslist" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16">
+                            </svg>
+                            내 실종공고
+                        </a>
+                    </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/mypage/bookmark" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             즐겨찾기
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/mypage/" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/amendpwd" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             비밀번호 변경
                         </a>
@@ -126,7 +126,6 @@
                     <li>
                         <a href="${pageContext.request.contextPath }/mypage/leave" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             탈퇴
                         </a>
@@ -137,7 +136,8 @@
 
             <!-- 내정보 시작 -->
             <div class=" border col" style="padding: 3%;">
-                <form class="needs-validation" novalidate="novalidate">
+                <form action="${pageContext.request.contextPath }/mypage/updatePro" method="post"
+                	  class="needs-validation" novalidate="novalidate">
                     <div class="row">
                         <div
                             class="d-flex flex-column justify-content-center align-items-center">
@@ -147,7 +147,8 @@
                                 <label for="nick" class="form-label">닉네임<span class="text-muted"></span></label>
                                 <input
                                 	value="${sessionScope.nickname }"
-                                    type="email"
+                                	name="nickname"
+                                    type="text"
                                     class="form-control"
                                     id="nick">
                             </div>
@@ -155,13 +156,16 @@
                                 <label for="email" class="form-label">이메일<span class="text-muted"></span></label>
                                 <input
                                 	value="${sessionScope.email }"
+                                	name="email"
                                     type="text"
                                     class="form-control"
-                                    id="email">
+                                    id="email"
+                                    readonly>
                             </div>
+                            <input type="hidden" name="password" value="${memberDTO.password }">
                             <br>
                             <div id="buttons">
-	                            <input type="submit" value="수정" onclick="location.href='${pageContext.request.contextPath }/mypage/myinfo'">
+	                            <input type="submit" value="수정" >
 								<input type="reset" value="취소" onclick="location.href='${pageContext.request.contextPath }/mypage/myinfo'">
 							</div>
                     </div>

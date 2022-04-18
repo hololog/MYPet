@@ -40,7 +40,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
             <!-- 제목 시작 -->
             <div class="container justify-content-center">
             <input type="hidden" id="num" value="${boardDTO.free_board_num}" data-bnum="${boardDTO.free_board_num}">
@@ -56,8 +56,10 @@
         <!-- 검색창 종료-->
 
         <!-- 수정 삭제 목록 -->
-        <div
-            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+        <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+        <c:if test="${ ! empty sessionScope.nickname }">
+
+        <c:if test="${sessionScope.nickname eq boardDTO.nickname}">
           
 		            <button
 		                type="button"
@@ -66,19 +68,38 @@
 		            <button
 		                type="button"
 		                class="btn btn-outline-primary "
-		                onclick="location.href='${pageContext.request.contextPath }/freeboard/delete_free?free_board_num=${boardDTO.free_board_num}'">삭제</button>
-     		     
+		                onclick='del()'>삭제</button>
+		            
+		                <script type="text/javascript">
+			                function del() {
+			                	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			                        alert("삭제"); // 하고 링크된 곳으로
+			                        location.href='${pageContext.request.contextPath }/freeboard/delete_free?free_board_num=${boardDTO.free_board_num}';
+			                	}else{   //취소
+			                        alert("삭제를 취소하셨습니다");
+			                    }
+			                }   
+			                	
+                </script>
+     		      </c:if>
+        </c:if>
+
+		              
+
             <button
                 type="button"
                 class="btn btn-outline-primary "
                 onclick="location.href='${pageContext.request.contextPath }/freeboard/list_free'">목록</button>
         </div>
+       
         <!-- 수정삭제 목록 버튼 끝 -->
 
+<br>
+     
         <!-- SNS버튼 시작 -->
         <div
-            class="col-11d-flex justify-content-end align-items-center flex-wrap gap-2"
-            style="width: 100%; text-align: right; margin-bottom: 2px;">
+            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"
+            >
             <!-- 페이스북 공유 버튼 -->
            			<a href=""
 						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
@@ -104,37 +125,37 @@
         <!-- SNS버튼 끝 -->
         <br>
 <!--         이미지 슬라이드 시작 -->
-        <div >
-             <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                style="width: 1500px; "
-                > 
-            <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                >
-                <div class="carousel-indicators">
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true"
-                        aria-label="Slide 1"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
+<!--         <div > -->
+<!--              <div -->
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 style="width: 1500px; " -->
+<!--                 >  -->
+<!--             <div -->
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 > -->
+<!--                 <div class="carousel-indicators"> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="0" -->
+<!--                         class="active" -->
+<!--                         aria-current="true" -->
+<!--                         aria-label="Slide 1"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="1" -->
+<!--                         aria-label="Slide 2"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="2" -->
+<!--                         aria-label="Slide 3"></button> -->
+<!--                 </div> -->
 <%--                 <c:forEach items="${fileDTO }"> --%>
 <!--                 <div class="carousel-inner"> -->
 <!--                     <div class="carousel-item active"> -->
@@ -149,30 +170,31 @@
 <!--                 </div> -->
 <%--                 </c:forEach> --%>
 
-                <button
-                    class="carousel-control-prev carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                    class="carousel-control-next carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!--                 <button -->
+<!--                     class="carousel-control-prev carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="prev"> -->
+<!--                     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Previous</span> -->
+<!--                 </button> -->
+<!--                 <button -->
+<!--                     class="carousel-control-next carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="next"> -->
+<!--                     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Next</span> -->
+<!--                 </button> -->
 
-            </div>
-        </div>
-        </div>
+<!--             </div> -->
+<!--         </div> -->
+<!--         </div> -->
         <!-- 슬라이드 쇼 끝 -->
 
          <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
+        <br>
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
@@ -182,12 +204,12 @@
 				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
 				
-				
+				<hr>
 				<br>
 				<br>
 				<div>글내용</div>
-				<br><br>
-				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br>
+				<div class="shadow-sm p-3 mb-5 bg-body rounded justify-content-center w-100" style="height:70%" ><h3>${boardDTO.content}</h3></div>
 				<br><br>
             </div>
         </div>
@@ -195,7 +217,7 @@
 
      
 				
-	
+<!-- 	좋아요버튼 실패 -->
 <%-- 		 <c:if test="${empty user_id  }"> --%>
 <!-- 		 <button onclick="nolike()"> -->
 <!-- 		 <i class="bi-heart " style="font-size:3rem; color: red; cursor: pointer;"></i></button> -->
@@ -206,90 +228,91 @@
 						
 <!-- // 					  alert("로그인해라"); -->
 						
-<%-- // 				  location.href = "${pageContext.request.contextPath }/main/main"; --%>
+// 				  location.href = "${pageContext.request.contextPath }/main/main"; --%>
 						
 <!-- // 						} -->
 						
 <!-- 	</script> -->
 <%-- 		</c:if>			 --%>
 			
-          <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i>
-		  <!-- <script>
+<!--           <i class="bi-heart" style="font-size:5rem; color: red; cursor: pointer;"></i> -->
+<!-- 		  <script> -->
 		
-           var heart = 0;  
-           jQuery(function($) {
-        	   $('#swapHeart').on('click', function() {
-        	     var $el = $(this),
-        	       textNode = this.lastChild;
-        	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty');
-        	     $el.toggleClass('swap');
-        	   });
+<!-- //            var heart = 0;   -->
+<!-- //            jQuery(function($) { -->
+<!-- //         	   $('#swapHeart').on('click', function() { -->
+<!-- //         	     var $el = $(this), -->
+<!-- //         	       textNode = this.lastChild; -->
+<!-- //         	     $el.find('span').toggleClass('glyphicon-heart glyphicon-heart-empty'); -->
+<!-- //         	     $el.toggleClass('swap'); -->
+<!-- //         	   }); -->
         	  
-        	 });
-           function like(){
-        	   $.ajax({
-   				url:'${pageContext.request.contextPath }/freeboard/like_check',
-   				type:'POST',
-   				data:{
-   					"user_id":(${boardDTO.user_id}+1),
-   					"free_board_num":${boardDTO.free_board_num}
-   					},
-   				success:function(data){
-   					console.log(data);
-   					data = 1;
-   					console.log(data);
-   					if(rdata==1){
-   						 $('i').attr('class','bi-heart-fill');
-                        heart = 1
-   					}else{
+<!-- //         	 }); -->
+<!-- //            function like(){ -->
+<!-- //         	   $.ajax({ -->
+<%-- //    				url:'${pageContext.request.contextPath }/freeboard/like_check', --%>
+<!-- //    				type:'POST', -->
+<!-- //    				data:{ -->
+<%-- //    					"user_id":(${boardDTO.user_id}+1), --%>
+<%-- //    					"free_board_num":${boardDTO.free_board_num} --%>
+<!-- //    					}, -->
+<!-- //    				success:function(data){ -->
+<!-- //    					console.log(data); -->
+<!-- //    					data = 1; -->
+<!-- //    					console.log(data); -->
+<!-- //    					if(rdata==1){ -->
+<!-- //    						 $('i').attr('class','bi-heart-fill'); -->
+<!-- //                         heart = 1 -->
+<!-- //    					}else{ -->
    						
-   						  $('i').attr('class','bi-heart');
-                        heart = 0
-   					}
-   				}
-   			  });
-         	};
-        	like();
-           console.log(heart);
-           console.log('d2');
-           console.log(${pageContext.request.contextPath });
-           "user_id":$('#user_id').val(),
-				"free_board_num":$('#free_board_num').val()
+<!-- //    						  $('i').attr('class','bi-heart'); -->
+<!-- //                         heart = 0 -->
+<!-- //    					} -->
+<!-- //    				} -->
+<!-- //    			  }); -->
+<!-- //          	}; -->
+<!-- //         	like(); -->
+<!-- //            console.log(heart); -->
+<!-- //            console.log('d2'); -->
+<%-- //            console.log(${pageContext.request.contextPath }); --%>
+<!-- //            "user_id":$('#user_id').val(), -->
+<!-- // 				"free_board_num":$('#free_board_num').val() -->
            
              
             
-           </script>
-			
-
-
-			
-						
+<!--            </script> -->
+<!--            <script> -->
+<!-- //            $(document).ready(function(){ -->
+<!-- //            	alert("확인"); -->
+<!-- //            	$.ajax{ -->
+<%-- //            		url:'${pageContext.request.contextPath }/free/ajaxcomments', --%>
+<!-- //            		dataType:'json', -->
+<!-- //            		success:function(rdata){ -->
+<!-- //            	} -->
+<!-- //            	} -->
+           	
+<!-- //            	}); -->
+<!--            </script> -->
 						    <script>
 					
-						        $('i').on('click',function(){
-						        		
-						            if (heart==0 ){
-						            	
-						                $(this).attr('class','bi-heart-fill');
-						                heart++;
+// 						        $('i').on('click',function(){
+// 						            if (heart==0 ){
+// 						                $(this).attr('class','bi-heart-fill');
+// 						                heart++;
 						                
-						            }else if(heart==1){
-						                $(this).attr('class','bi-heart');
-						                heart--;
-						                //델리트
-						            }
-						
-						        });						        	
-						        
-						    </script> -->
-						    
-						    
+// 						            }else if(heart==1){
+// 						                $(this).attr('class','bi-heart');
+// 						                heart--;
+// 						                //델리트
+// 						            }
+// 						        });						        	
+						    </script>
                 <!-- Comment form-->
                 <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
-   
+               
      
 <!-- 		<script type="text/javascript"> -->
 <!-- // 		$(function(){ -->
@@ -369,7 +392,80 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-   <section class="mb-7">
+
+     <script type="text/javascript">
+       $(document).ready(function(){
+     		//북마트 클릭이벤트
+     		$('.bookmark-click').click(function(){
+     			let no = $(this).children('.fbnum-ksk').val();
+     			//빈별표 일때
+     			if($(this).children('i').attr('class') === 'bi bi-heart'){
+     				//별표 변경
+     				$(this).children('i').attr('class', 'bi bi-heart-fill');
+     				//DB에 free_like테이블과 free_board테이블에 북마크 정보 갱신
+     				$.ajax({
+     					url:"${pageContext.request.contextPath }/freeboard/addBookmark",
+     					data:{"free_board_num" : no},
+     					success:function(rdata){
+     						if(rdata != null) {
+     							//게시물당 북마크수 화면표시
+     							$('#mark'+no).text(" "+ rdata);
+     						}
+     					}	
+     				});
+     			//꽉찬 별표 일때
+     			} else {
+     				$(this).children('i').attr('class', 'bi bi-heart');
+     				$.ajax({
+     					url:"${pageContext.request.contextPath }/freeboard/removeBookmark",
+     					data:{"free_board_num" : no},
+     					success:function(rdata){
+     						if(rdata != null) {
+     							$('#mark'+no).html(" "+ rdata);
+     						}
+     					}	
+     				});
+     			}
+     		});
+     	});          
+       </script>
+		<br>
+   
+   
+   <section class="container mb-7 text-center">
+        <div class="card bg-light" style="margin-top: 30px">
+            <div class="card-body">
+                <!-- Comment form-->
+                <!-- <form class="mb-4"><textarea class="form-control" rows="3"-->
+                <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
+                <!-- </form>-->
+              
+				<!-- 조회수 -->
+                <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
+                <!-- 좋아요 아이콘 -->
+                <!-- 로그인했을때만 클릭가능  -->
+                <c:choose>
+					<c:when test="${!empty sessionScope.email }">
+						<a type="button" class="bookmark-click">
+							<input type="hidden" value="${boardDTO.free_board_num }" class="fbnum-ksk">
+							<!-- 빈하트/꽉찬하트 구분 -->
+							<c:choose>
+								<c:when test="${boardDTO.book ne 0}">
+	                            	<i class="bi bi-heart-fill" style="color: red;"></i><span id="mark${boardDTO.free_board_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+								</c:when>
+								<c:otherwise>
+	                            	<i class="bi bi-heart" style="color: red;"></i><span id="mark${boardDTO.free_board_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+								</c:otherwise>
+							</c:choose>
+						</a>
+					</c:when>
+					<c:otherwise>
+                   		<i class="bi bi-heart" style="color: red;"></i><span id="mark${boardDTO.free_board_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
+					</c:otherwise>	                          
+                </c:choose>
+                          
+                          
+                <div class="in-line-kj">
 				<div class="card bg-light" style="margin-top: 30px">
 					<div class="card-body">
 						<div id="comment-count" style="margin-bottom: 5px">
@@ -430,6 +526,8 @@
 							</div> -->
 					</div>
 					</div>
+				</div>
+				</div>
 			</section>
 
     

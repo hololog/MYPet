@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/modal.css" />
-
+<meta name ="google-signin-client_id" content="21012707042-i0lmmpepn86jtfkojkg5mqaqp2763412.apps.googleusercontent.com">
 <!-- header 시작 -->
 <header class="fixed-top bg-white main-header">
   <!-- 로고 + 로그인/회원가입 버튼 -->
@@ -123,58 +123,23 @@ $(document).ready(function(){
 	});
 });
 </script>
+			    
 
-<script> 
-function validate() 
-{ 
-		  var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식 
-		  var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 이메일이 적합한지 검사할 정규식 
-		  var email = document.getElementById("email"); 
-		  var pw = document.getElementById("pw"); 
-		  
-		  if(email.value=="") { 
-			  alert("이메일을 입력해 주세요"); 
-			  email.focus(); 
-			  return false; 
-			  
-		  } if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) { 
-			  return false; 
-			  
-		  }
-		  
-		  if(!check(re,pw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) { 
-			  return false; 
-		  } 
-		  
-		  if(join.pw.value != join.checkpw.value) { 
-			  alert("비밀번호가 다릅니다. 다시 확인해 주세요."); 
-			  join.checkpw.value = ""; 
-			  join.checkpw.focus(); 
-			  return false; 
-		  } 
-		  
-		  alert("회원가입이 완료되었습니다.");
-}
-</script>
-					   
-					    
+
+
 
 <!-- 모달창 시작 -->
             <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal" style="transition: opacity 0.5s linear;">
-          
-		       <div class="modal-dialog" role="document"> 
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content rounded-5 shadow">
-                    <div class="modal-header p-5 pb-4 border-bottom-0">
+             <div class="modal-dialog" role="document">
+              <div class="modal-content rounded-5 shadow">
+               <div class="modal-header p-5 pb-4 border-bottom-0">
                       <!-- <h5 class="modal-title">Modal title</h5> -->
-                      <div>
-                         <div class="whole_modal">
+                <div class="whole_modal">
                          <!-- 닫기 버튼-->
                       	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="lg_close"></button>
-                    
-                            <h4 class="fw-bold mb-0 title_kds">실종공고를 등록할 예정인가요?</h4>
+                    	<h4 class="fw-bold mb-0 title_kds">실종공고를 등록할 예정인가요?</h4>
                    
-                    	</div>
+                    	
                     <!-- Modal body -->       
                     <div class="modal-body p-5 pt-0">
                         <form action="${pageContext.request.contextPath }/member/loginPro" class="whole_modal" method="post">
@@ -192,51 +157,83 @@ function validate()
                           <!-- 작은 안내글
                               <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
                             -->
+                         <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#signup-modal">회원가입하기</a>
                          
-                       	 <h6><a href="" id="idpw_kds">비밀번호찾기</a></h6> 
-
-
+                       	 <a class="p-1 btn" data-bs-toggle="modal" data-bs-target="#temp_PW">비밀번호찾기</a> 
+                       	 
 							<hr class="my-4">
-							<button
-								class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 "
-								type="submit">
-								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg> -->
-								네이버계정으로 로그인
-							</button>
-							<button
-								class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds"
-								type="submit">
-								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg> -->
-								카카오계정으로 로그인
-							</button>
-							<button
-								class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds"
-								type="submit">
-								<!--<svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg> -->
-								구글계정으로 로그인
-							</button>
-							<div class="singin">
-								<p>
-								<h2 class="fs-5 fw-bold mb-3">
-									<a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a>
-								</h2>
-								</p>
+							
+							 <!-- 네이버로 로그인  -->
+							 
+ 							<div id="naver_id_login" align = "center">
+ 								<a id="naverIdLogin_loginButton" href="javascript:void(0)">
+								<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" style="width: 316px; height: 45px;" />
+        						</a>
+  						    </div>
+  						    <br>
+
+							<!-- 카카오계정으로 로그인 -->
+						    <div class="button-login" align ="center" >
+              					<a id="kakao-login-btn" >
+   								<img src="${pageContext.request.contextPath }/resources/img/kakao_login_medium_wide.png" title="카카계정으로 회원가입" class="kakao_login" style="width: 315px;">
+                          		</a>
+                            	</div>
+                            	<br>
+<!--                            	<a href="http://developers.kakao.com/logout">카카오 로그아웃</a> -->
+							 
+							<!-- 구글계정으로 로그인 -->
+							<div class="g-signin2" data-onsuccess="onSignIn" align ="center" style="width: 315px; height: 45px; ">
+								<a href="javascript:void(0)"></a>
 							</div>
+								</form>
+							
+<!-- 							<div class="singin"> -->
+<!-- 								<p> -->
+<!-- 								<h2 class="fs-5 fw-bold mb-3"> -->
+<!-- 									<a href="" id="nonmem_kds">▶ 비회원으로 진행하기</a> -->
+<!-- 								</h2> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
 						</div>
-							</form>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-				
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-             </div>
-            </div>    
 
-      
-    <!-- 회원가입 -->
+
+
+
+<div class="modal fade py-5" tabindex="-1" role="dialog" id="temp_PW" style="transition: opacity 0.5s linear;">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content rounded-5 shadow">
+			<div class="modal-header p-5 pb-4 border-bottom-0">
+				<div class="whole_modal">
+				
+					<h4 class="fw-bold mb-0">임시번호가 전송될 이메일을 입력해주세요</h4>
+					<!-- 닫기 버튼
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>-->
+					<br>	
+					<br>	
+					<div class="modal-body p-5 pt-0">
+						<div class="form-floating mb-3">
+							<input type="email" class="form-control rounded-4" placeholder="name@example.com" name="email" required="required">
+							<label for="floatingInput">E-mail</label>
+						</div>
+
+						<div class="btn_kds">
+							<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
+								type="submit">임시비밀번호 전송</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 회원가입 -->
 
     
             <!-- modal 시작 -->
@@ -247,30 +244,34 @@ function validate()
                       <!-- <h5 class="modal-title">Modal title</h5> -->
                       <div>
                          <div class="whole_modal">
-                         <!-- 닫기 버튼 -->
-                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!--                          닫기 버튼 -->
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
                          <h4 class="fw-bold mb-0 title_kds">회원가입</h4>
-                    </div>
+                   	 
                             
                     <div class="modal-body p-5 pt-0">
-                        <form class="whole_modal">
+                        <form action="${pageContext.request.contextPath }/member/joinPro" class="whole_modal" method="post">
                           <div class="form-floating mb-3">
-		   				  <input type="text" class="form-control rounded-4 id="join" placeholder="닉네임"  id="floatingNN_kds" required autofocus>
-                            <label for="floatingInput">닉네임</label>
+		   				  <input type="text" class="form-control rounded-4 id="nickname" name="nickname" onkeyup="checkNM()" required autofocus>
+                            <label for="floatingInput_NM">닉네임</label>
+<!--                             <button id="nnbtn">중복확인</button> -->
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" id="floatingInput_kds" placeholder="name@example.com" autofocus>
-                            <label for="floatingInput">E-mail</label>
+                            <input type="email" class="form-control rounded-4" name="email" onkeyup="checkEmail()" required autofocus>
+                            <label for="floatingInput_EM">email@example.com</label>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="floatingPassword_kds" placeholder="비밀번호" autofocus minlength="8" maxlength="10" required>
-                            <label for="floatingPassword">비밀번호</label>
+                            <input type="password" class="form-control rounded-4" name="password" id="pw" minlength="8" maxlength="10" required autofocus>
+                            <label for="floatingPassword">비밀번호(8~10자 입력)</label>
                           </div>
 		  					<div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="Ck_floatingPassword_kds" placeholder="비밀번호 재확인" minlength="8" maxlength="10" required>
+                            <input type="password" class="form-control rounded-4" id="pw2" onkeyup="checkPwd()" minlength="8" maxlength="10" required>
                             <label for="floatingPassword">비밀번호 재확인</label>
+                            <span class="glyphicon glyphicon-ok form-control-feedback" style="display :none"></span>
+ 							<span id="r_pwErr" class="help-block" style="display :none"> 비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
                           </div>
                           <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">회원가입</button>
+                         
                           <!-- 작은 안내글
                               <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
                             -->
@@ -279,22 +280,21 @@ function validate()
 
                           <div class="singin">
                           <p>
-                          <h2 class="fs-5 fw-bold mb-3">SNS계정으로 회원가입하기</h2>
+                          <h2 class="fs-5 fw-bold mb-3">▶ SNS계정으로 회원가입하기</h2>
                           </p>
-                          </div>
                           
-                          <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4 " type="submit">
-                            <svg class="bi me-1" width="16" height="16"><use xlink:href="#naver"/></svg>
-                            네이버계정으로 회원가입
-                          </button>
-                          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4 kakao_kds" type="submit">
-                            <svg class="bi me-1" width="16" height="16"><use xlink:href="#kakao"/></svg>
-                            카카오계정으로 회원가입
-                          </button>
-                          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4 google_kds" type="submit">
-                            <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"/></svg>
-                            구글계정으로 회원가입
-                          </button>
+                          </div>
+                          <p>
+                           <a href="/list/API/login_kakao_sync.html?ks_return_url=https%3A%2F%2Fwww.silicook.co.kr%2Fshop%2Fshopdetail.html%3Fbranduid%3D3519841%26NaPm%3Dct%253Dl2023whs%257Cci%253D692cd9a78351bf0a46e676cfb58ab2bfb06269e7%257Ctr%253Dsbtm%257Csn%253D238329%257Chk%253D132334376ed4a07159a453f979b76afa64be3468" class="link kakao">
+						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입"></a>
+						  </p>  
+						 
+						    
+						    
+						  <a href="/list/API/login_naver.html" class="link naver">
+ 							<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_naver.jpg" alt="네이버로 회원가입"> 
+						  </a>
+                          </div>
                           
                           </div>
                         </form>
@@ -302,19 +302,209 @@ function validate()
                     </div>
                   </div>
                 </div>
-               </div>
-             
+              </div>   
+                          
+<!-- 	네이버 로그인 -->
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<script>
 
-    
-    <script type="text/javascript"
+var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "mN9peMMHaXTpzr11fU6X", //cliendId를 입력해줍니다.
+			callbackUrl: "http://localhost:8080/naverLogin", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			isPopup: false,
+			callbackHandle: true
+		}
+	);	
+
+naverLogin.init();
+
+window.addEventListener('load', function () {
+	naverLogin.getLoginStatus(function (status) {
+		if (status) {
+			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+    		
+			console.log(naverLogin.user); 
+    		
+            if( email == undefined || email == null) {
+				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+				naverLogin.reprompt();
+				return;
+			}
+		} else {
+			console.log("callback 처리에 실패하였습니다.");
+		}
+	});
+});
+
+
+var testPopUp;
+function openPopUp() {
+    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+}
+function closePopUp(){
+    testPopUp.close();
+}
+
+function naverLogout() {
+	openPopUp();
+	setTimeout(function() {
+		closePopUp();
+		}, 1000);
+	
+	
+}
+</script>
+
+<!-- 카카오 로그인//b4c6c29aa62ff98658b6232a7a02f728 -->
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<script type='text/javascript'>
+Kakao.init('b4c6c29aa62ff98658b6232a7a02f728');
+
+$("#kakao-login-btn").on("click", function(){
+    //1. 로그인 시도
+    Kakao.Auth.login({
+        success: function(authObj) {
+         
+          //2. 로그인 성공시, API 호출
+          Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+              console.log(res);
+              var id = res.id;
+			 	 scope : 'account_email';
+				
+              alert('로그인성공'+id);
+				
+<%--               location.href=" <% --%>
+// //           			session.setAttribute("email", memberCheckDTO.getEmail());
+// //   					session.setAttribute("nickname", memberCheckDTO.getNickname());
+// 					session.setAttribute("nickname", "hjj");
+// //             		session.setAttribute("member_mid", id);
+//             		response.sendRedirect("${pageContext.request.contextPath }/main");
+<%--             		%>"; --%>
+// location.href="${pageContext.request.contextPath }/member/loginPro2";
+
+        }
+         
+          })
+          console.log(authObj);
+//           alert(authObj);
+          var token = authObj.access_token;
+//           alert(token);
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      });
+        
+}) //
+</script>   
+
+<!-- 카카오 로그아웃    -->
+
+
+<!-- 구글계정 로그인 -->
+<script>
+function init() {
+	gapi.load('auth2', function() {
+		gapi.auth2.init();
+		options = new gapi.auth2.SigninOptionsBuilder();
+		options.setPrompt('select_account');
+        // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
+		options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
+        // 인스턴스의 함수 호출 - element에 로그인 기능 추가
+        // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
+		gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
+	})
+}
+
+function onSignIn(googleUser) {
+	var access_token = googleUser.getAuthResponse().access_token
+	$.ajax({
+    	// people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
+		url: 'https://people.googleapis.com/v1/people/me'
+        // key에 자신의 API 키를 넣습니다.
+		, data: {personFields:'birthdays', key:'AIzaSyBOdmeC4SOSzXmPGLEM2vZueqiBSWKg3wk', 'access_token': access_token}
+		, method:'GET'
+	})
+	.done(function(e){
+        //프로필을 가져온다.
+		var profile = googleUser.getBasicProfile();
+		console.log(profile)
+	})
+	.fail(function(e){
+		console.log(e);
+	})
+}
+function onSignInFailure(t){		
+	console.log(t);
+}
+
+// 로그아웃
+<a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
+<!-- 구글 api 사용을 위한 스크립트 -->
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+
+
+		
+<script type="text/javascript">
+//비밀번호 재확인 입력칸에 focus했을 때
+$("#pw2").focus(function() {
+	recheck();
+});
+	
+//비밀번호 재확인 입력칸이 blur됐을 때
+$("#pw2").blur(function() {
+	recheck();
+});
+
+//비밀번호 재확인 메서드
+function recheck() {
+	var rpw = $("#pw2").val();
+	var pw = $("#pw").val();
+		
+	if(rpw == pw){
+		 $("#r_pwErr").hide();
+		changeSuccess("#pw2");
+	}else{
+		 $("#r_pwErr").show();
+		 changeError("#pw2");
+	}	
+};
+
+</script>
+
+<!-- 회원가입 환영창 -->
+<!-- <script type="text/javascript">
+function welcome() {
+	var id = $("#nickname").val();
+}
+
+		alert(id+'환영합니다');
+</script>  -->
+
+
+
+<script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/css/style.css"></script>
+	
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/script.js"></script>
 
     <!-- 모달창 종료 -->
 <!-- header 종료 -->
-<script type="text/javascript">
 
+<script type="text/javascript">
 $(document).mouseup(function (e){
   var LayerPopup = $(".whole_modal");
   if(LayerPopup.has(e.target).length === 0){

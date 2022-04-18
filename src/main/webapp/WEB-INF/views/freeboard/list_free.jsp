@@ -31,7 +31,8 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
+<br><br><br><br>
         <!-- 제목 시작 -->
        <div class="container">
             <h1 class="sub-title">자유게시판</h1>
@@ -57,12 +58,11 @@
                   </thead>
                 <tbody>
                   <c:forEach var="bDTO" items="${bestfree }">
-						 <c:set var="numbest" value="${numbest + 1}"/>
                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
-                        <td>${numbest}</td>
+                        <td><span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
+                        </td>
                         <td style="text-align: start;">
                         
-                        <span class="badge rounded-pill bg-primary"><i class="bi bi-megaphone"></i> Best</span>
                         </td>
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
@@ -75,19 +75,9 @@
    							
                     </tr>
                    
-					</c:forEach>                   
-                  </tbody>
-                  </table>
-                 
-                  <hr>
-                <!-- 게시판 -->
-                <div class="container mt-3">
-                    
-                  <table class="table table-hover text-center  " >
-                    
-                 
-                  <tbody>
-                  <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
+					</c:forEach>   
+					
+                   <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/>
                   <c:forEach var="bDTO" items="${boardList }">
                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'">
                         <td  width="4%">${num }</td>
@@ -105,21 +95,52 @@
                     </tr>
                     <c:set var="num" value="${num-1 }"/>
 					</c:forEach> 
-                   
-                    </tbody>
+					
+					            
+                  </tbody>
                   </table>
-                  <hr/>
+                 
+<!--                   <hr> -->
+                <!-- 게시판 -->
+                <div class="container mt-3">
+                    
+<!--                   <table class="table table-hover text-center"> -->
+                    
+                 
+<!--                   <tbody> -->
+<%--                   <c:set var="num" value="${pageDTO.count -(pageDTO.pageNum-1)* pageDTO.pageSize }"/> --%>
+<%--                   <c:forEach var="bDTO" items="${boardList }"> --%>
+<%--                     <tr onclick="location.href='${pageContext.request.contextPath }/freeboard/content_free?free_board_num=${bDTO.free_board_num}'"> --%>
+<%--                         <td  width="4%">${num }</td> --%>
+<!--                         <td  width="3%"></td> -->
+                        
+<%--                         <td width="30%" style="text-align: start;">${bDTO.subject}</td> --%>
+<!--                         <td style="text-align:end"><div> -->
+<!--                           댓글수, 조회수 아이콘 -->
+<%--                           <i class="fa-regular fa-comment-dots">${like_count} </i> --%>
+<%--                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i> --%>
+<!--                         </div></td> -->
+<%--                         <td width="10%">${bDTO.nickname}</td> --%>
+<%--                         <td  width="10%" style="text-align: start;"><fmt:formatDate value="${bDTO.insert_date}" pattern="yyyy.MM.dd"/> </td> --%>
+   							
+<!--                     </tr> -->
+<%--                     <c:set var="num" value="${num-1 }"/> --%>
+<%-- 					</c:forEach>  --%>
+                   
+<!--                     </tbody> -->
+<!--                   </table> -->
+<!--                   <hr/> -->
                   <!-- 검색 -->
                   
                   <form action="${pageContext.request.contextPath }/freeboard/search_free" method="get">
-                  <div class="container w-50 ">
-                    <div class="d-flex align-items-center justify-content-center ">
-
-                        <input name="search" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
-                        <button value="search" id="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
-                      
-                    </div>
-                  </div>
+	                  <div class="container w-50 ">
+	                    <div class="d-flex align-items-center justify-content-center ">
+	
+	                        <input name="search" class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+	                        <button value="search" id="search" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
+	                      
+	                    </div>
+	                  </div>
                   </form>
                  <!-- 아이디 없을때 -->
                   <c:if test="${empty sessionScope.nickname  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
@@ -127,14 +148,11 @@
                   	<script>
 
 						function login() {
-						
 						  alert("로그인해라");
-						
 						  location.href = "${pageContext.request.contextPath }/main";
-						
 						}
 						
-						</script>
+					</script>
                   </c:if>
                   
                   

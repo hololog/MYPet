@@ -9,35 +9,116 @@
 		select * from user where email=#{email}
 	</select>
 	
-	<update id="memberUpdate">
-		update member set email=#{email}
+	<select id="updateCheck" resultType="com.mypet.domain.MemberDTO">
+		select * 
+		  from user 
+		 where nickname=#{nickname}
+		 <if test="!email.equals('') and email != null">
+		   and email = #{email}
+		 </if>
+		 <if test="!password.equals('') and password != null">
+		   and password = #{password}
+		 </if>
+	</select>
+	
+	<update id="updateMember">
+		update user set nickname=#{nickname} where email=#{email}
 	</update>
 	
 	<delete id="deleteMember">
-		delete from member where email=#{email}
+		delete from user where email=#{email} and password=#{password}
 	</delete>
 	
-	<select id="getmyBoardList" resultType="com.mypet.domain.BoardDTO">
-	
-		select free_board_num, board_code, subject, readcount
-				from free_board
-				union all
-				select tip_board_num, board_code, subject, readcount
-				from tip_board
-<!-- 		select * -->
-<!-- 		from (select free_board_num as num, board_code, subject, readcount -->
-<!-- 				from free_board order by num desc -->
-<!-- 				union all -->
-<!-- 				select tip_board_num as num, board_code, subject, readcount -->
-<!-- 				from tip_board order by num desc) #{startRow},#{pageSize}; -->
-<!-- 		select * from free_board order by num desc limit #{startRow},#{pageSize} -->
-		
+	<select id="getmyBoardList" resultType="com.mypet.domain.MypageDTO">
+		select @rownum := @rownum + 1 as rownum, num, board_code, subject, readcount, nickname
+		  from (
+		   select free_board_num as num, board_code, subject, readcount, insert_date, nickname
+			from free_board
+			union all
+		   select tip_board_num as num, board_code, subject, readcount, insert_date, nickname
+			from tip_board
+		    ) a, (select @rownum :=0) b
+		where nickname = #{nickname}
+		order by insert_date desc 
+		limit 10
 	</select>
 	
-	<select id="getmyBoardlistCount" resultType="java.lang.Integer">
-		select count(*) from free_board
+	<select id="getmyfind_BoardList" resultType="com.mypet.domain.MypageDTO">
+		select @rownum := @rownum + 1 as rownum, find_board_num as num, pet_name, detail_address, insert_date, readcount, email, bookmark_count
+		  from find_board, (select @rownum :=0) b
+		where email = #{email}
+		order by insert_date desc 
+		limit 10
 	</select>
+	
+	<select id="pwCheck" resultType="com.mypet.domain.MemberDTO">
+		<!-- select * from user where email=#{email} and password=#{password} -->
+		 select case when user_id = '' then '불일치' else '일치' end as password
+		    from (
+		 select ifnull(max(user_id), '') as user_id
+		   from user 
+		   where email=#{email} and password=#{password}
+		   ) a
+	</select>
+	
+	<update id="pwUpdate">
+		update user set password=#{password2} where email=#{email}
+	</update>
+	
+<!-- 	<select id="getmyfind_BoardList" resultType="com.mypet.domain.MypageDTO"> -->
+<!-- 		select @rownum := @rownum + 1 as rownum, num -->
+	
+	
+<!-- 		select @rownum := @rownum + 1 as rownum, num, subject, readcount, nickname -->
+<!-- 		  from ( -->
+<!-- 		   select free_board_num as num, subject, readcount, insert_date, nickname -->
+<!-- 			from free_board -->
+<!-- 			union all -->
+<!-- 		   select tip_board_num as num, subject, readcount, insert_date, nickname -->
+<!-- 			from tip_board -->
+<!-- 		    ) a, (select @rownum :=0) b -->
+<!-- 		where nickname = #{nickname} -->
+<!-- 		order by insert_date desc  -->
+<!-- 		limit 10 -->
+<!-- 	</select> -->
+	
+	<update id="updateUimage">
+		UPDATE user set nickname=#{nickname} where=#{email}
+	</update>
+	
+<!-- 	<select id="getmyBoardlistCount" resultType="java.lang.Integer"> -->
+<!-- 		select count(*) from free_board -->
+<!-- 	</select> -->
 
+	<select id="getFindboardBookmarkList" resultType="com.mypet.domain.FindboardDTO">
+		select f.*, ff.upload fileuploadpath 
+		from find_board f
+		join find_board_file ff
+		on f.find_board_num = ff.find_board_num
+		where f.find_board_num in (
+				select find_board_num from bookmark
+				where email=#{email})
+		order by f.find_board_num desc limit #{startRow},#{pageSize}
+				
+	</select>
+	
+	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
+		select ff.*
+		from find_board_file ff
+		join find_board f
+		on ff.find_board_num = f.find_board_num
+		where f.find_board_num in (
+				select find_board_num from bookmark
+				where email=#{email})
+		order by f.find_board_num desc 
+		limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getBookmarkCount" resultType="java.lang.Integer">
+		select count(*)
+		  from bookmark
+		  where email =#{email}
+	</select>
 
 
 

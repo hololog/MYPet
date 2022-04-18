@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,14 +34,15 @@ import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.BookmarkDTO;
 import com.mypet.domain.FindboardDTO;
-import com.mypet.domain.FreecommentDTO;
 import com.mypet.domain.MemberDTO;
+import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
 import com.mypet.domain.ReplyDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
 import com.mypet.service.MypageService;
+import com.mypet.dao.MypageDAO;
 
 @RestController
 public class AjaxController {
@@ -52,14 +54,16 @@ public class AjaxController {
 	private FindboardService findboardService;
 	
 	@Autowired
-	private BoardService boardService;
-	
-	@Autowired
 	private MypageService mypageService;
 	
 	@Autowired
 	private BoardDAO boardDAO;
 	
+    @Autowired
+	private MypageDAO mypageDAO;
+	
+	@Autowired
+	private MypageService mypageService;
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
@@ -101,6 +105,15 @@ public class AjaxController {
 		return entity;
 	}
 	
+	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET)
+	public ResponseEntity<FindboardDTO> ajaxboard(HttpServletRequest request) throws Exception{
+		int num1 = Integer.parseInt(request.getParameter("num"));
+		FindboardDTO findboardDTO = findboardService.getfindBoard(num1);
+		
+		ResponseEntity<FindboardDTO> fin = new ResponseEntity<FindboardDTO>(findboardDTO, HttpStatus.OK);
+		
+		return fin;
+	}
 	
 
 	//은혜
@@ -213,16 +226,66 @@ public class AjaxController {
 	
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)
-	public ResponseEntity<List<BoardDTO>> mypagejson(HttpServletRequest request){
-		PageDTO pageDTO=new PageDTO();
-		pageDTO.setPageSize(5);
-		pageDTO.setPageNum("1");
+	public ResponseEntity<List<MypageDTO>> mypagejson(MypageDTO mypageDTO, HttpServletRequest request){
+		String mylist = request.getParameter("nickname");
 		
-		List<BoardDTO> myboardList=mypageService.getmyBoardList(pageDTO);
-		
-		ResponseEntity<List<BoardDTO>> entity=new ResponseEntity<List<BoardDTO>>(myboardList , HttpStatus.OK);
+		List<MypageDTO> myboardList = mypageDAO.getmyBoardList(mylist);
+		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myboardList , HttpStatus.OK);
 		
 		return entity;
 	}
 	
+	// 준동
+	@RequestMapping(value = "/mypage/mypagejson2", method = RequestMethod.GET)
+	public ResponseEntity<List<MypageDTO>> mypagejson2(MypageDTO mypageDTO, HttpServletRequest request){
+		String email = request.getParameter("email");
+		System.out.println(email);
+		
+		List<MypageDTO> myfind_boardList = mypageDAO.getmyfind_BoardList(email);
+		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myfind_boardList , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	// 준동
+	@RequestMapping(value="/mypage/mypagejson3" , method=RequestMethod.GET)
+	@ResponseBody
+	public MemberDTO pwCheck(@RequestParam String cuPassword, HttpSession session){
+		System.out.println("현재 비밀번호 확인 ajax");
+		String email = (String)session.getAttribute("email");
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setEmail(email);
+		memberDTO.setPassword(cuPassword);
+		System.out.println(email + cuPassword);
+		
+		MemberDTO result = mypageDAO.pwCheck(memberDTO);
+		return result;
+	}
+	
+//	@RequestMapping(value="/pwUpdate" , method=RequestMethod.POST)
+//	public String pwUpdate(String memberId,String memberPw1,RedirectAttributes rttr,HttpSession session)throws Exception{
+//		String hashedPw = BCrypt.hashpw(memberPw1, BCrypt.gensalt());
+//		memberService.pwUpdate(memberId, hashedPw);
+//		session.invalidate();
+//		rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+//		
+//		return "redirect:/member/loginView";
+//	}
+	
+//	@RequestMapping(value = "/main/mainjson", method = RequestMethod.GET)
+//	public ResponseEntity<List<FindboardDTO>> mainjson(HttpServletRequest request, @RequestParam("num") String findboardNum) {
+//		
+//		BookmarkDTO bookmarkDTO = findboardService.getBookmark(findboardNum);
+////		model.addAttribute("findboardListMain", findboardListMain);
+//		
+//
+//		
+////		List<BoardDTO> boardList=boardService.getBoardList(pageDTO);
+//		
+//		
+//		ResponseEntity<List<FindboardDTO>> entity = 
+//				new ResponseEntity<List<FindboardDTO>>(findboardListMain,HttpStatus.OK);
+//		
+//		return entity;
+//	}
 }

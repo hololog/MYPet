@@ -57,22 +57,21 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#btn').click(function(){
-//			alert("클릭");
 		$.ajax({
 			url:'${pageContext.request.contextPath }/mypage/mypagejson',
 			dataType:'json',
-			data:{"email":${sessionScope.email}},
+			data:{"nickname":'${sessionScope.nickname}'},
 			success:function(rdata){
 				$.each(rdata,function(index,item){
-// 					$('#table1').append('<tr><td>'+item.num+'</td><td>'+item.subject+'</td><td>'+item.name+'</td><td>'+d+'</td><td>'+item.readcount+'</td></tr>');
-					$('#table1').append('<tr><td>'+item.free_board_num+'</td><td>'+item.board_code+'</td><td>'+item.subject+'</td><td>'+item.readcount+'</td></tr>');
+					if(item.board_code == "꿀팁"){
+						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/reviewboard/content_review?tip_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
+					} else {
+						$('#table1').append('<tr><td>'+item.rownum+'</td><td>'+item.board_code+'</td><td><a href="${pageContext.request.contextPath }/freeboard/content_free?free_board_num='+item.num+'">'+item.subject+'</a></td><td>'+item.readcount+'</td></tr>');
+					}
 				});
 			}
-		});
+		});	
 	});//
-});//
-
 </script>
 
 </head>
@@ -104,48 +103,49 @@ $(document).ready(function(){
                             width="70"
                             height="70"
                             class="rounded-circle me-3 align-items-center">
-                        <strong style="color: white;"><br>JunDong 님</strong>
+                        <strong style="color: white;"><br>${sessionScope.nickname } 님</strong>
                 </div>
                 <hr>
               
                 <ul class="nav nav-pills flex-column mb-auto sidebar1" id="sdb">
                     <li class="nav-item2">  
-                        <a href="${pageContext.request.contextPath }/myinfo" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/myinfo" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             내정보
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/mylist" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/mylist" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             내 글목록
                         </a>
                     </li>
-                    
                     <li>
-                        <a href="${pageContext.request.contextPath }/bookmark" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/mymisslist" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
+                            </svg>
+                            내 실종공고
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/mypage/bookmark" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16">
                             </svg>
                             즐겨찾기
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/amendpwd" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             비밀번호 변경
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/leave" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/leave" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
-                                <use href="#"/>
                             </svg>
                             탈퇴
                         </a>
@@ -156,58 +156,19 @@ $(document).ready(function(){
 
             <!-- 게시판 시작 -->
             <div class=" border col" style="padding: 3%;">
+            	<div class="col-4 d-flex justify-content-end align-items-center flex-wrap gap-2">
+            	</div>
                 <div class="content">
-                <input type="button" value="글조회" id="btn">
                     <table class="table table-hover text-start" >
                         <thead>
-                            <tr style="text-align: center;">
+                            <tr>
                                 <th width="7%">번호</th>
-                                <th width="65%">종류</th>
-                                <th width="11%">제목</th>
+                                <th width="11%">종류</th>
+                                <th width="65%" style="text-align: center;">제목</th>
                                 <th width="9%">조회수</th>
                             </tr>
                         </thead>
                         <tbody id="table1">
-                            <!-- <tr>
-                                <td>1</td>
-                                <td>치와와</td>
-                                <td>2022.03.22</td>
-                                <td>123</td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>요크셔테리어</td>
-                                <td>2022.03.23</td>
-                                <td></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>불독</td>
-                                <td>2022.03.24</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>치와와</td>
-                                <td>2022.03.22</td>
-                                <td></td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td>요크셔테리어</td>
-                                <td>2022.03.23</td>
-                                <td></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td>불독</td>
-                                <td>2022.03.24</td>
-                                <td></td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -228,5 +189,6 @@ $(document).ready(function(){
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
   crossorigin="anonymous">
 </script>
+
 </body>
 </html>

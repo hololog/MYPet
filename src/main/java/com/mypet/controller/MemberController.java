@@ -58,10 +58,11 @@ public class MemberController {
 	}
 	
 	//회원가입
-	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/joinPro", method = RequestMethod.POST)
 	public String join(MemberDTO memberDTO) {
 		memberService.insertMember(memberDTO);
-		return "redirect:/main";
+//		return "redirect:/main";
+		return "member/welcomeMsg";
 	}
 	
 	

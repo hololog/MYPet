@@ -288,19 +288,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.LikeCheck(boardDTO);
 	}
 
-	
 	@Override
-	public void insert_freeboard_file(FileDTO fileDTO) {
-		//fileDTO
-		if(boardDAO.getFileMaxNum() != null) 
-			fileDTO.setFile_num(boardDAO.getFileMaxNum()+1);
-		else fileDTO.setFile_num(1);  
-        
-		fileDTO.setBoard_code('r');
-        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
-        fileDTO.setFind_board_num(10000);  // 수정하기
-        
-        boardDAO.insert_freeboard_file(fileDTO);
+	public int getfreeLike(BoardDTO boardDTO) {
+		return boardDAO.getfreeLike(boardDTO);
 	}
 	
 	@Override
@@ -320,6 +310,22 @@ public class BoardServiceImpl implements BoardService {
 		
 		boardDAO.freecommentIn(replyDTO);
 	}
+
+	
+	
+//	@Override
+//	public void insert_freeboard_file(FileDTO fileDTO) {
+//		//fileDTO
+//		if(boardDAO.getFileMaxNum() != null) 
+//			fileDTO.setFile_num(boardDAO.getFileMaxNum()+1);
+//		else fileDTO.setFile_num(1);  
+//        
+//		fileDTO.setBoard_code('r');
+//        fileDTO.setFile_upload_date(new Timestamp(System.currentTimeMillis()));
+//        fileDTO.setFind_board_num(10000);  // 수정하기
+//        
+//        boardDAO.insert_freeboard_file(fileDTO);
+//	}
 
 
 	

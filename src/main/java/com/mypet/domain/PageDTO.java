@@ -17,10 +17,18 @@ public class PageDTO {
 	private int endPage;
 	private int count;
 	private int pageCount;
+	
+	private String email; //은혜 추가 ㅠㅠ 
 
 	
 	
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getPageSize() {
 		return pageSize;
 	}

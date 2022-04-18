@@ -33,4 +33,36 @@
 		  from find_board 
 		 where find_board_num = #{find_board_num}
 	</select>
+	
+	<!-- free -->
+	
+	<insert id="FaddBookmark">
+		insert into free_like(free_board_num, email) 
+	 	     values (#{free_board_num}, #{email})
+	</insert>
+	
+	<update id="FaddBookmarkCount">
+		update free_board 
+		   set like_count = like_count + 1 
+		 where free_board_num = #{free_board_num}
+	</update>
+	
+	<delete id="FremoveBookmark">
+		delete from free_like
+		 where free_board_num = #{free_board_num} 
+		   and email = #{email}
+	</delete>
+	
+	<update id="FremoveBookmarkCount">
+		update free_board 
+		   set like_count = like_count - 1 
+		 where free_board_num = #{free_board_num} 
+		   and like_count >= 1
+	</update>
+	
+	<select id="FgetBookmarkNum" resultType="int">
+		select like_count
+		  from free_board 
+		 where free_board_num = #{free_board_num}
+	</select>
 </mapper>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,9 +26,8 @@
   <!-- Slick CSS -->
   <link rel="stylesheet" href="css/slick.css">
   <link rel="stylesheet" href="css/slick-theme.css" />
-
-
-    </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   </head>
   <body>
 	<div>
     <!-- header 시작 -->
@@ -38,7 +37,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
             <!-- 제목 시작 -->
             <div class="container justify-content-center">
                 <h1 class="sub-title">상세페이지</h1>
@@ -46,173 +45,178 @@
             </div>
             <!-- 제목 종료 -->
             <hr>
-            
+            <!-- 검색창 시작 -->
+            <form action="" method="get"></form>
+
+        </div>
+        <!-- 검색창 종료-->
 
         <!-- 수정 삭제 목록 -->
         <div
             class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-            <c:if test="${ ! empty sessionScope.id }">
 
-		<c:if test="${sessionScope.id eq boardDTO.nickname}">
+		<c:if test="${sessionScope.nickname  eq 'admin'}">
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick="location.href='${pageContext.request.contextPath }/notice/update_notice?notice_num=${boardDTO.notice_num}'">수정</button>
+		            <button
+		                type="button"
+		                class="btn btn-outline-primary "
+		                onclick='del()'>삭제</button>
+		                
+		                 <script type="text/javascript">
+			                function del() {
+			                	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			                        alert("삭제"); // 하고 링크된 곳으로
+			                        location.href='${pageContext.request.contextPath }/notice/delete_notice?notice_num=${boardDTO.notice_num}';
+			                	}else{   //취소
+			                        alert("삭제를 취소하셨습니다");
+			                    }
+			                }   
+			                	
+                </script>
+                
+     		  </c:if>
             <button
                 type="button"
                 class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/notice/update_notice?nitice_num=${boardDTO.notice_num}'">수정</button>
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/notice/delete_notice?nitice_num=${boardDTO.nitice_num}'">삭제</button>
-                </c:if>
-                </c:if>
-            <button
-                type="button"
-                class="btn btn-outline-primary "
-                onclick="location.href='${pageContext.request.contextPath }/noticew/list_notice'">목록</button>
+                onclick="location.href='${pageContext.request.contextPath }/notice/list_notice'">목록</button>
         </div>
         <!-- 수정삭제 목록 버튼 끝 -->
-
+<br>
         <!-- SNS버튼 시작 -->
-        <div
-            class="col-11d-flex justify-content-end align-items-center flex-wrap gap-2"
-            style="width: 100%; text-align: right; margin-bottom: 2px;">
+          <div
+            class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"
+            >
             <!-- 페이스북 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600');">
-                <img
-                    src="../img/face.png"
-                    title="페이스북으로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+           			<a href=""
+						onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/face.png"
+						title="페이스북으로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 트위터 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); ">
-                <img
-                    src="../img/twit.png"
-                    title="트위터로 공유하기"
-                    class="sharebtn_custom"
-                    style="width: 32px;"></a>
+					<!-- 트위터 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); return false;">
+						<img
+						src="${pageContext.request.contextPath }/resources/img/twit.png"
+						title="트위터로 공유하기" class="sharebtn_custom" style="width: 32px;">
+					</a>
 
-            <!-- 카카오 스토리 공유 버튼 -->
-            <a
-                href=""
-                onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); "><img
-                src="../img/kakaop.jpg"
-                title="카카오스토리로 공유하기"
-                class="sharebtn_custom"
-                style="width: 32px;"></a>
-        </div>
+					<!-- 카카오 스토리 공유 버튼 -->
+					<a href=""
+						onclick="window.open(url_combine_ks, '', 'scrollbars=no, width=600, height=600'); return false;"><img
+						src="${pageContext.request.contextPath }/resources/img/kakaop.jpg"
+						title="카카오스토리로 공유하기" class="sharebtn_custom" style="width: 32px;"></a>
+
+				</div>
         <!-- SNS버튼 끝 -->
+
         <br>
 
-        <!-- 이미지 슬라이드 시작 -->
-        <div >
-            <!-- <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                style="width: 1500px; "
-                > -->
-            <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-                >
-                <div class="carousel-indicators">
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true"
-                        aria-label="Slide 1"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button
-                        type="button"
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img
-                            src="img/dog1.jpg"
-                            class="d-block w-50  img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img
-                            src="img/dog2.jpg"
-                            class="d-block w-50 img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img
-                            src="img/dog3.jpg"
-                            class="d-block w-50 img-responsive center-block"
-                            style=" margin: 0 auto; height: auto;"
-                            alt="...">
-                    </div>
-                </div>
+<!--         이미지 슬라이드 시작 -->
+<!--         <div > -->
+<!--             <div
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 style="width: 1500px; " -->
+<!--                 > --> 
+<!--             <div -->
+<!--                 id="carouselExampleIndicators" -->
+<!--                 class="carousel slide" -->
+<!--                 data-bs-ride="carousel" -->
+<!--                 > -->
+<!--                 <div class="carousel-indicators"> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="0" -->
+<!--                         class="active" -->
+<!--                         aria-current="true" -->
+<!--                         aria-label="Slide 1"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="1" -->
+<!--                         aria-label="Slide 2"></button> -->
+<!--                     <button -->
+<!--                         type="button" -->
+<!--                         data-bs-target="#carouselExampleIndicators" -->
+<!--                         data-bs-slide-to="2" -->
+<!--                         aria-label="Slide 3"></button> -->
+<!--                 </div> -->
+<!--                 <div class="carousel-inner"> -->
+<!--                     <div class="carousel-item active"> -->
+<!--                         <img -->
+<!--                             src="img/dog1.jpg" -->
+<!--                             class="d-block w-50  img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                     <div class="carousel-item"> -->
+<!--                         <img -->
+<!--                             src="img/dog2.jpg" -->
+<!--                             class="d-block w-50 img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                     <div class="carousel-item"> -->
+<!--                         <img -->
+<!--                             src="img/dog3.jpg" -->
+<!--                             class="d-block w-50 img-responsive center-block" -->
+<!--                             style=" margin: 0 auto; height: auto;" -->
+<!--                             alt="..."> -->
+<!--                     </div> -->
+<!--                 </div> -->
 
-                <button
-                    class="carousel-control-prev carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button
-                    class="carousel-control-next carousel-dark"
-                    type="button"
-                    data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!--                 <button -->
+<!--                     class="carousel-control-prev carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="prev"> -->
+<!--                     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Previous</span> -->
+<!--                 </button> -->
+<!--                 <button -->
+<!--                     class="carousel-control-next carousel-dark" -->
+<!--                     type="button" -->
+<!--                     data-bs-target="#carouselExampleIndicators" -->
+<!--                     data-bs-slide="next"> -->
+<!--                     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--                     <span class="visually-hidden">Next</span> -->
+<!--                 </button> -->
 
-            </div>
-        </div>
+<!--             </div> -->
+<!--         </div> -->
         <!-- 슬라이드 쇼 끝 -->
-          <!-- 글 -->
+         <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
+        <br>
         <br>
         <div class="row text-center justify-content-center">
             <div class="col-md-10 col-xl-8 col-12 " style="margin-top: 10px;">
+           
                <table id="notice text-center border">
 				<tr><td>글번호 : </td><td> ${boardDTO.notice_num}</td></tr>
-				    <tr><td>글쓴이 : </td><td> ${boardDTO.nickname}</td><td class="col-7"></td>
-				     <td>작성일 : </td><td><fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
+				    <td class="col-6"></td>
+				     <td>작성일 : </td><td> <fmt:formatDate value="${boardDTO.insert_date}" pattern="yyyy.MM.dd"/></td></tr>
 				</table>
+				
+				<hr>
 				<br>
 				<br>
 				<div>글내용</div>
-				<br><br>
-				<div class="justify-content-center"><h3>${boardDTO.content}</h3></div>
+				<br>
+				<div class="shadow-sm p-3 mb-5 bg-body rounded justify-content-center w-100" style="height:70%" ><h3>${boardDTO.content}</h3></div>
 				<br><br>
             </div>
         </div>
         <!-- 글끝 -->
 
-        <!-- 제보 버튼 -->
-        <div style="text-align: center; margin-bottom: 10px">
-            <span
-                class="btn btn-primary"
-                role="button"
-                style="color: white"
-                onclick="report()">제보하기</span>
-            <p class="arrow_box">연락수단 확인하고 글쓴이에게 제보하기!</p>
-        </div>
-        <!-- 제보버튼 끝 -->
+      
 
         <!-- <div class="row">-->
         <!-- <div class="col-md-12 col-xl-8">-->
@@ -252,7 +256,7 @@
         <!-- -->
         <!-- </div>-->
         <!-- </div>-->
-    </div>
+<!--     </div> -->
     <!-- <div id="form-commentInfo-kj">-->
     <!-- <div id="comment-count-kj">댓글 <span id="count-kj">0</span></div>-->
     <!-- <input id="comment-input-kj" placeholder="댓글을 입력해 주세요.">-->
@@ -260,7 +264,7 @@
     <!-- </div>-->
     <!-- <div id=comments-kj></div>-->
 
-    <section class="container mb-7 text-center">
+     <section class="container mb-7 text-center">
         <div class="card bg-light" style="margin-top: 30px">
             <div class="card-body">
                 <!-- Comment form-->
@@ -268,8 +272,8 @@
                 <!-- placeholder="댓글을 입력해 주세요!"></textarea>-->
                 <!-- </form>-->
                 <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots"> ${bDTO.like_count} </i>
-                          <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
+                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="fa-regular fa-eye"> ${boardDTO.readcount} </i>
                 <div class="in-line-kj">
 
                     <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
@@ -332,55 +336,7 @@
         </div>
     </section>
 
-    <!-- <div class="container mt-5">-->
-    <!-- <div class="row">-->
-    <!-- <div class="col-sm-4">-->
-    <!-- <h2>About Me</h2>-->
-    <!-- <h5>Photo of me:</h5>-->
-    <!-- <div class="fakeimg">Fake Image</div>-->
-    <!-- <p>Some text about me in culpa qui officia deserunt mollit anim..</p>-->
-    <!-- <hr class="d-sm">-->
-
-    <!-- <h3 class="mt-4">참고 링크</h3>-->
-
-    <!-- <p>Lorem ipsum dolor sit ame.</p>-->
-    <!-- <ul class="nav nav-pills flex-column">-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- <li class="nav-item">-->
-    <!-- <a class="nav-link" href="#">Link</a>-->
-    <!-- </li>-->
-    <!-- </ul>-->
-
-    <!-- </div>-->
-    <!-- <div class="col-sm-8">-->
-    <!-- <h2>실종시 대처방법 </h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-
-    <!-- <h2 class="mt-5">구조시 대처방법</h2>-->
-    <!-- <h5>Title description</h5>-->
-    <!-- <p>Some text..</p>-->
-    <!-- <p>Sunt in culpa qui officia deserunt mollit anim id est laborum
-    consectetur adipiscing-->
-    <!-- elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    enim ad-->
-    <!-- minim veniam, quis nostrud exercitation ullamco.</p>-->
-    <!-- </div>-->
-    <!-- </div>-->
-    <!-- </div>-->
+    
 
  <!-- 게시판 끝 -->
         
@@ -391,7 +347,7 @@
          <!-- footer 시작 -->
   	<jsp:include page="../inc/bottom.jsp"></jsp:include>
     <!-- footer 종료 -->
-  </div>
+  
 
 <script src="js/main.js"></script>
 <!-- 부트스트랩 스크립트 적용 -->
@@ -413,19 +369,5 @@ var url_combine_tw = url_default_tw_txt + document.title +
         url_default_tw_url + url_this_page;
 </script>
 
-<script>
-function report() {
-    var result = confirm("동물신고전화 이외의 용도로 사용하지 않음을 동의하십니까?");
-    if (result) {
-        window.open(
-            '',
-            '상세사진',
-            'width=430,height=500,location=no,status=no,scrollbars=yes'
-        );
-    } else {
-        alert("동의 후 이용가능합니다. 불법개인정보 수집은 법적 처벌대상이 될수있습니다. ");
-    }
-}
-</script>
 </body>
 </html>

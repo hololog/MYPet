@@ -107,13 +107,15 @@ public interface BoardDAO {
 	
 //	fileMaxNum start
 	public Integer getFileMaxNum();
+
+	public int getfreeLike(BoardDTO boardDTO);
 	
 //fileMaxNum end
 	
 //file start
 	
 	
-	public void insert_freeboard_file(FileDTO fileDTO);
+//	public void insert_freeboard_file(FileDTO fileDTO);
 //file end
 	
 //comment

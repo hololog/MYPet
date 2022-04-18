@@ -90,9 +90,11 @@ public interface BoardService {
 		public List<BoardDTO> bestreview(PageDTO pageDTO);
 	//like start	
 		public BoardDTO LikeCheck(BoardDTO boardDTO);
+
+		public int getfreeLike(BoardDTO boardDTO);
 		
 	//file start
-		public void insert_freeboard_file(FileDTO fileDTO);
+//		public void insert_freeboard_file(FileDTO fileDTO);
 	//file end
 		
 	//comment

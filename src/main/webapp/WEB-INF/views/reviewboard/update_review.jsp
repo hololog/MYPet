@@ -35,14 +35,14 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
      <form action="${pageContext.request.contextPath }/reviewboard/updatePro_review" method="post">
      <input type="hidden" name="tip_board_num" value="${boardDTO.tip_board_num }">
     <div class="container py-5" name="board_code">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글수정</h3>
         <br>
-	<input type="text"name="nickname"id="nicename" >
+	 <input type="hidden" value="${sessionScope.nickname}" name="nickname">
       <div class="row g-3">
         <div class="col-sm-9">
           <div class="input-group mb-3">
