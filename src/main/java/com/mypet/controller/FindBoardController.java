@@ -1,8 +1,10 @@
 package com.mypet.controller;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 import java.beans.PropertyEditorSupport;
 import java.io.File;
@@ -17,6 +19,8 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -253,14 +257,27 @@ public class FindBoardController {
 		return "findboard/searchList";
 	}
 	
-//	@RequestMapping(value = "/json/address", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 //	@ResponseBody
-//	public String jsonAddress(Locale locale, Model model,  HttpServletRequest request) {    
-//		String result = request.getParameter("term");
-//		System.out.println(result);
-//		List list = findboardService.searchAddress(result);
+//	@RequestMapping(value="/json/address", method=RequestMethod.GET)
+//	public String jsonAddress(HttpServletRequest request) {
+//				
+//		String searchWord = request.getParameter("searchWord");
 //		
-//		JsonArray jsonarray = new JsonArray();
+//		Map<String, String> paraMap = new HashMap<>();
+//		paraMap.put("searchWord", searchWord);
+//		
+//		List<String> wordList = findboardService.wordSearchSHow(paraMap);
+//		
+//		JSONArray jsonArr = new JSONArray(); 
+//		
+//		if(wordList != null) {
+//			for(String word : wordList) {
+//				JSONObject jsonObj = new JSONObject();
+//				jsonObj.put("word", word);			
+//				jsonArr.add(jsonObj);
+//			}
+//		}
+//		return jsonArr.toString();
 //	}
 
 }

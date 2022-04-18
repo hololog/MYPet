@@ -35,12 +35,17 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-<br><br><br><br>
+<!-- <br><br><br><br> -->
+<!-- 제목 시작 -->
+		<div class="container">
+			<h1 class="sub-title">글작성</h1>
+		</div>
+		<!-- 제목 종료 -->
      <form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
     <div class="container py-5" name="board_code">
-      <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
-        글작성</h3>
-        <br>
+<!--       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;"> -->
+<!--         글작성</h3> -->
+<!--         <br> -->
 	   <input type="hidden" value="${sessionScope.nickname}" name="nickname">
       <div class="row g-3">
         <div class="col-sm-9">
