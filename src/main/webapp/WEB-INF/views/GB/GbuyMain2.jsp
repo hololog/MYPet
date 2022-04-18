@@ -34,6 +34,40 @@
 	src="${pageContext.request.contextPath }/resources/script/main.js"></script>
 </head>
 <body>
+<script>
+$(function(){
+// 	이미지 클릭시 해당 이미지 모달
+	$(".imgC").click(function(){
+		$(".modal").show();
+		// 해당 이미지 가겨오기
+		var imgSrc = $(this).children("img").attr("src");
+		var imgAlt = $(this).children("img").attr("alt");
+		$(".modalBox img").attr("src", imgSrc);
+		$(".modalBox img").attr("alt", imgAlt);
+		
+		// 해당 이미지 텍스트 가져오기
+		var imgTit =  $(this).children("p").text();
+		$(".modalBox p").text(imgTit);
+		
+   // 해당 이미지에 alt값을 가져와 제목으로
+		//$(".modalBox p").text(imgAlt);
+	});
+	
+	//.modal안에 button을 클릭하면 .modal닫기
+	$(".modal button").click(function(){
+		$(".modal").hide();
+	});
+	
+	//.modal밖에 클릭시 닫힘
+	$(".modal").click(function (e) {
+    if (e.target.className != "modal") {
+      return false;
+    } else {
+      $(".modal").hide();
+    }
+  });
+});
+</script>
 	<div>
 		<!-- header 시작 -->
 		<jsp:include page="../inc/top.jsp"></jsp:include>
@@ -52,53 +86,67 @@
 	<!-- 게시판 -->
 
                 <div class="container mt-3">
-                    <div class="text-lg-end" style="border: 1px solid red;">
-<%--  			<%String id=(String)session.getAttribute("id");	//세션값 가져오기  --%>
-<%--  			%>			  --%>
+                    <div class="text-lg-end" >
+ 			<%String id=(String)session.getAttribute("id");	//세션값 가져오기 %>
+ 				<% if(id != null){
+ 				if(id.equals("admin")){ %>
 			<input type="button" value="글쓰기" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'">	
 			<input type="button" value="박스리스트" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain'">	
-<%-- 			<%} %> --%>
+			<%}} %>
 		</div>
-                  <table class="table table-hover text-center  " >
+                  <table class="table table-hover text-center  " style="margin: auto;" >
                     <thead>
                       <tr>
-                        <th width="4%">번호${boardDTO.gbuy_num}</th>
-                        <th width="5%">상품명${boardDTO.gbuy_subject}</th>
-                        <th width="5%">목표수${boardDTO.gbuy_num}</th>
-                        <th width="5%">재고수${boardDTO.gbuy_tcount}</th>
+                        <th width="4%">번호</th>
+                        <th width="4%"></th>
+                        <th width="5%">상품명</th>
+                        <th width="5%">목표수</th>
+                        <th width="5%">재고수</th>
                         <th width=10%>진행상황</th>
-                        <th width="5%">재품가격${boardDTO.gbuy_num}</th>
-                        <th width="3%">수정하기${boardDTO.gbuy_num}</th>
-                        <th width="7%">판매날짜${boardDTO.gbuy_num}</th>
+                        <th width="5%">wp품가격</th>
+                         <% if(id != null){
+							if(id.equals("admin")){ %>
+                        <th width="3%">수정하기</th>
+                        <th width="3%">삭제하기</th>
+                         <%}} %>
+                        <th width="7%">등록일</th>
                     </tr>
                   </thead>
                   <tbody>
                   <c:forEach var="GDTO" items="${GbuyboardList}">
                     <tr>
                         <th>${GDTO.gbuy_num}</th>
+                        <th class="imgC"><img style="width:90%; height:100%;" 
+    							 			  src="${pageContext.request.contextPath }/resources/upload/${GDTO.gbuy_file}" >
+    									 <div src="${pageContext.request.contextPath }/resources/upload/${GDTO.gbuy_file}  "></div>
+                		</th>
                         <th>${GDTO.gbuy_subject}</th>
                         <th>${GDTO.gbuy_tcount}</th>
                         <th>${GDTO.gbuy_count}</th>
                         <th><div class=""style="border: 1px solid black;">
 						<div class="progress-bar" id="" role="progressbar"
 							style="width: ${((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100)}%" aria-valuenow="100" aria-valuemin="0"
-							aria-valuemax="100">판매 : <fmt:formatNumber value="${(((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100))}"/> %</div>
+							aria-valuemax="100"><fmt:formatNumber value="${(((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100))}"/> %</div>
 					</div></th>
                         <th>${GDTO.gbuy_price}</th>
-                        <th><input type="button" value="글수정" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${boardDTO.gbuy_num}'" ></th>
-                        <th>${GDTO.gbuy_date}</th>
+                         <% if(id != null){
+ 							if(id.equals("admin")){ %>
+                        <th><input type="button" value="글수정" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${GDTO.gbuy_num}'" ></th>
+                        <th><input type="button" value="글삭제" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyDelete?gbuy_num=${GDTO.gbuy_num}'" ></th>
+                        	<%}} %>
+                        <th><fmt:formatDate value="${GDTO.gbuy_date}" pattern="yyyy-MM-dd"/></th>
                     </tr>
 					</c:forEach> 
                     </tbody>
                   </table>
                   <hr/>
-                  <!-- 검색 -->
-                  <div class="container w-50 ">
-                    <div class="d-flex align-items-center justify-content-center ">
-                        <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
-                        <button id="searchBtn" class=" flex-shrink-0 btn btn-outline-primary" type="submit">검색</button>
-                    </div>
-                  </div>
+       	    <div class="modal">
+			<button>&times;</button>
+			<div class="modalBox">
+				<img src="${pageContext.request.contextPath }/resources/upload/${GDTO.gbuy_file}" alt="${pageContext.request.contextPath }/resources/upload/${GDTO.gbuy_file}">
+				<p></p>
+			</div>
+		</div>
                   <!-- 다음버튼 -->
                   <div class="text-center">
                         <ul class="pagination justify-content-center" style="margin:20px 0">

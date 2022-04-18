@@ -47,7 +47,33 @@ function readURL2(input) {
   }
 }
 </script>
+<!--빈칸없이하기 -->
+<script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$('#p2').submit(function(){
+//  			alert("전송");
+				// 아이디 비밀번호 이름 이메일 비어있으면 제어
+				if($('#pname').val()==""){
+					alert("상품명 입력하세요");
+					$('#pname').focus();
+					return false;
+				}
+				
+				if($('#pprice').val()==""){
+					alert("가격을 입력하세요");
+					$('#pprice').focus();
+					return false;
+				}
+				if($('#b').val()==""){
+					alert("수량을 입력하세요");
+					$('#b').focus();
+					return false;
+				}
+				
 
+ 		});//
+ });
+</script>
 <body>
 	<div>
 	<!-- 본문 시작-->
@@ -56,27 +82,27 @@ function readURL2(input) {
     <!-- header 종료 -->
 		<!-- 제목 시작 -->
         <div class="container" >
-			<h1 class="sub-title">판매등록</h1>
+			<h1 class="sub-title">물품 수정</h1>
             <hr>
         </div>
     	<!-- 제목 종료 -->
-<form action="${pageContext.request.contextPath }/GB/GbuyUpdatePro">
+<form action="${pageContext.request.contextPath }/GB/GbuyUpdatePro" id="p2">
 <input type="hidden" name="gbuy_num" value="${boardDTO.gbuy_num}">
-            <div class="container p-2" style="border: 1px solid red;">
+            <div class="container p-2" >
                 <div class="container col-md-10">
                 <div class="container row col-md-12">
                     <!--파일 미리보기 img-->
-                    <div class=" col-md-6" id=kpo style="border: 1px solid red;">
+                    <div class=" col-md-6" id=kpo >
                             <!--상품명-->
                             <br><br>
                             <div class="col input-group mb-3 ">
                            		<label class="input-group-text">상품이름</label>
-                                <input type="text" name="Gbuy_subject" class="form-control" value="${boardDTO.gbuy_subject}">
+                                <input type="text" id="pname"name="Gbuy_subject" class="form-control" value="${boardDTO.gbuy_subject}">
                             </div>
                         <!--가격-->
                             <div class="col input-group mb-3 ">
                            		<label class="input-group-text">상품가격</label>
-                            	<input type="text" name="Gbuy_price" class="form-control" value="${boardDTO.gbuy_price}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            	<input type="text" id="pprice" name="Gbuy_price" class="form-control" value="${boardDTO.gbuy_price}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                              	<label class="input-group-text">원</label>
                         	</div>
                             <div class="col input-group mb-3 ">
@@ -89,22 +115,26 @@ function readURL2(input) {
                        		</div>
                     </div>
                     <div class="col-md-6 btn text-lg-end ">
-             			<img style="width: 300px;" class="preview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image" >
-      					<input type="file" name="Gbuy_file" onchange="readURL(this);">
+             			<img style="width: 300px;" class="preview" src="${pageContext.request.contextPath }/resources/upload/${boardDTO.gbuy_file}">
+      					<input type="file" id="pfile" name="Gbuy_file"  accept='.gif, .jpg, .png' onchange="readURL(this);">
     				</div>
                         <br>
                         <!--상품등록 결정 버튼-->
                         <p>
+                         	<%String id=(String)session.getAttribute("id");	//세션값 가져오기%>	 
+ 							<% if(id != null){
+ 						       if(id.equals("admin")){ %> 
                         	<input type="submit" value="수정완료" class="btn btn-primary btn-lg">
 							<input type="button" value="수정취소" class="btn btn-primary btn-lg" onclick="history.back(-1);">
+							<%}} %>
                         </p>
                 </div>
                	</div>
            </div>
 						<!--상세설명-이미지파일--->
                 <div class="col12"style="text-align: center;">
-					<img style="width: 1000px;" class="preview2" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-					<input style="display: block;" type="file" name="Gbuy_file2" onchange="readURL2(this);" >
+					<input style="display: block; padding-left:25%" type="file" id="pfile2" name="Gbuy_file2" onchange="readURL2(this);" >
+					<img style="width: 1000px;" class="preview2" src="${pageContext.request.contextPath }/resources/upload/${boardDTO.gbuy_file2}">
                 </div>
 </form>
     <!-- 공동구매끝 -->
