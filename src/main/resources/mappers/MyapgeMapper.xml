@@ -97,18 +97,27 @@
 		on f.find_board_num = ff.find_board_num
 		where f.find_board_num in (
 				select find_board_num from bookmark
-				where email=#{email});
+				where email=#{email})
+		order by f.find_board_num desc limit #{startRow},#{pageSize}
+				
 	</select>
 	
 	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
-<!-- 		select upload from find_board_file order by find_board_num desc -->
 		select ff.*
 		from find_board_file ff
 		join find_board f
 		on ff.find_board_num = f.find_board_num
 		where f.find_board_num in (
 				select find_board_num from bookmark
-				where email=#{email});
+				where email=#{email})
+		order by f.find_board_num desc 
+		limit #{startRow},#{pageSize}
+	</select>
+	
+	<select id="getBookmarkCount" resultType="java.lang.Integer">
+		select count(*)
+		  from bookmark
+		  where email =#{email}
 	</select>
 
 

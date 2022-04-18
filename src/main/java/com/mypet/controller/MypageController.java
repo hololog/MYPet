@@ -1,6 +1,9 @@
 package com.mypet.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -167,44 +170,47 @@ public class MypageController {
 		public String bookmark(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 			
 			System.out.println("MypageController bookmark() ");
+			
+			// email, pageDTO 담아줄 객체 
 			String email = (String)session.getAttribute("email");
-
-			int pageSize = 5;
-
+			
+			//pageDTO 값 정의
+			int pageSize = 3;
+			
 			String pageNum = request.getParameter("pageNum");
 			if (pageNum == null) {
 				pageNum = "1";
 			}
-
+			
 			PageDTO pageDTO = new PageDTO();
+			pageDTO.setEmail(email);
 			pageDTO.setPageSize(pageSize);
 			pageDTO.setPageNum(pageNum);
 
-			List<FindboardDTO> findboardList = mypageService.getFindboardBookmarkList(email);
-			List<FileDTO> fileList = mypageService.getfindFileList(email);
+			int count = mypageService.getBookmarkCount();
 
-//			int count = findboardService.getfindBoardCount();
-//
-//			int currentPage = Integer.parseInt(pageNum);
-//			int pageBlock = 10;
-//			int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
-//			int endPage = startPage + pageBlock - 1;
-//			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-//			if (endPage > pageCount) {
-//				endPage = pageCount;
-//			}
-//
-//			pageDTO.setCount(count);
-//			pageDTO.setPageBlock(pageBlock);
-//			pageDTO.setStartPage(startPage);
-//			pageDTO.setEndPage(endPage);
-//			pageDTO.setPageCount(pageCount);
+			int currentPage = Integer.parseInt(pageNum); // 현재페이지 int 로 변경
+			int pageBlock = 5;
+			int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+			int endPage = startPage + pageBlock - 1;
+			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+			if (endPage > pageCount) {
+				endPage = pageCount;
+			}
+
+			pageDTO.setCount(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+
+			List<FindboardDTO> findboardList = mypageService.getFindboardBookmarkList(pageDTO);
+			List<FileDTO> fileList = mypageService.getfindFileList(pageDTO);
 			
 			model.addAttribute("findboardList", findboardList);
 			model.addAttribute("fileList", fileList);
-//			model.addAttribute("pageDTO", pageDTO);
+			model.addAttribute("pageDTO", pageDTO);
 			
-//			mypageService.getFindboardBookmarkList(email);
 			
 //			}
 			return "mypage/bookmark";

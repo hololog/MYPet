@@ -148,14 +148,14 @@
 					
 						<div class="row ListSH" id="refresh">
 							<a type="hidden" data-result="${fb.result}"></a>
-<!-- 							<div class="col-12 col-sm-7 p-2 position-relative"> -->
+							<div class="col-12 col-sm-7 p-2 position-relative">
 								<c:choose>
 									<c:when test="${fileList[loop.index].filename ne null}">
 										<a href="" data-bs-toggle="modal" class="openMod"
 											data-bs-toggle="modal" 
 											data-bs-target="#find_content" 
 											id="marking"> <img class="img-fluid rounded"
-											src="${fb.upload}"
+											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}"
 											alt="실종동물사진" id="">
 										</a>
 									</c:when>
@@ -164,13 +164,12 @@
 											data-bs-toggle="modal" data-test="${loop.count}"
 											data-bs-target="#find_content"> <img
 											class="img-fluid rounded"
-											src="${fb.upload}"
+											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}"
 											alt="실종동물사진" id="">
 									</a>
 									</c:when>
-									
 								</c:choose>
-								
+							</div>
 							<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
 								<div class="row p-2">
 									<div class="col-6 col-sm-12">
@@ -217,26 +216,25 @@
 
 							<c:if test="${ pageDTO.startPage > pageDTO.pageBlock }">
 								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
+									href="${pageContext.request.contextPath}/mypage/bookmark?pageNum=${pageDTO.startPage-pageDTO.pageBlock}">◁</a></li>
 							</c:if>
 
 							<c:forEach var="i" begin="${pageDTO.startPage }"
 								end="${pageDTO.endPage }" step="1">
 								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${i}">
+									href="${pageContext.request.contextPath }/mypage/bookmark?pageNum=${i}">
 										${i}</a></li>
 							</c:forEach>
 
 							<c:if test="${pageDTO.endPage < pageDTO.pageCount }">
 								<li class="page-item"><a class="page-link"
-									href="${pageContext.request.contextPath }/findboard/list?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">
+									href="${pageContext.request.contextPath}/mypage/bookmark?pageNum=${pageDTO.startPage+pageDTO.pageBlock}">
 										▷</a></li>
 							</c:if>
 						</ul>
 					</div> 
 					<!--페이징 close -->
 				</div>
-        
         
         <!-- 즐겨찾기 수정 끝 -->
   
@@ -266,7 +264,7 @@
 										<div class="carousel-item active">
 											<c:if test="${ff.upload ne null}">
 												<img
-													src="${ff.upload }/${ff.save_filename}"
+													src="${ff.upload}"
 													alt="first slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
@@ -379,7 +377,7 @@
 							</div>
 							<!-- Modal footer -->
 							<c:choose>
-							<c:when test="${sessionScope.nickname eq fb.nickname}">
+							<c:when test="${sessionScope.email eq fb.email}">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary"
 									data-bs-target="#modify_content" data-bs-toggle="modal"
@@ -388,7 +386,7 @@
 									data-bs-dismiss="modal">닫기</button>
 							</div>
 							</c:when>
-							<c:when test="${sessionScope.nickname ne fb.nickname}">
+							<c:when test="${sessionScope.email ne fb.email}">
 							<div class="modal-footer">
 								<button type="button" class="btn btn-danger"
 									data-bs-dismiss="modal">닫기</button>
