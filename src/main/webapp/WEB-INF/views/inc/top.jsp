@@ -133,20 +133,16 @@ $(document).ready(function(){
 
 <!-- 모달창 시작 -->
             <div class="modal fade py-5" tabindex="-1" role="dialog" id="login-modal" style="transition: opacity 0.5s linear;">
-          
-		       <div class="modal-dialog" role="document"> 
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content rounded-5 shadow">
-                    <div class="modal-header p-5 pb-4 border-bottom-0">
+             <div class="modal-dialog" role="document">
+              <div class="modal-content rounded-5 shadow">
+               <div class="modal-header p-5 pb-4 border-bottom-0">
                       <!-- <h5 class="modal-title">Modal title</h5> -->
-                      <div>
-                         <div class="whole_modal">
+                <div class="whole_modal">
                          <!-- 닫기 버튼-->
                       	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="lg_close"></button>
-                    
-                            <h4 class="fw-bold mb-0 title_kds">실종공고를 등록할 예정인가요?</h4>
+                    	<h4 class="fw-bold mb-0 title_kds">실종공고를 등록할 예정인가요?</h4>
                    
-                    	</div>
+                    	
                     <!-- Modal body -->       
                     <div class="modal-body p-5 pt-0">
                         <form action="${pageContext.request.contextPath }/member/loginPro" class="whole_modal" method="post">
@@ -178,24 +174,22 @@ $(document).ready(function(){
         						</a>
   						    </div>
   						    <br>
-								
 
 							<!-- 카카오계정으로 로그인 -->
-
 						    <div class="button-login" align ="center" >
               					<a id="kakao-login-btn" >
    								<img src="${pageContext.request.contextPath }/resources/img/kakao_login_medium_wide.png" title="카카계정으로 회원가입" class="kakao_login" style="width: 315px;">
                           		</a>
-                          		
                             	</div>
-<!--                             	<a href="http://developers.kakao.com/logout">카카오 로그아웃</a> -->
-                            </div>
-                            	
+                            	<br>
+<!--                            	<a href="http://developers.kakao.com/logout">카카오 로그아웃</a> -->
+							 
 							<!-- 구글계정으로 로그인 -->
-							
-							<div class="g-signin2" data-onsuccess="onSignIn" align ="center" style="width: 315px;">
+							<div class="g-signin2" data-onsuccess="onSignIn" align ="center" style="width: 315px; height: ">
 								<a href="javascript:void(0)"></a>
 							</div>
+								</form>
+							
 <!-- 							<div class="singin"> -->
 <!-- 								<p> -->
 <!-- 								<h2 class="fs-5 fw-bold mb-3"> -->
@@ -203,16 +197,13 @@ $(document).ready(function(){
 <!-- 								</h2> -->
 <!-- 								</p> -->
 <!-- 							</div> -->
-							</form>
 						</div>
-                       
-                   
-				
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
             
                
 
@@ -229,7 +220,7 @@ $(document).ready(function(){
                       <div>
                          <div class="whole_modal">
 <!--                          닫기 버튼 -->
-<!--                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
                          <h4 class="fw-bold mb-0 title_kds">회원가입</h4>
                     </div>
                             
@@ -267,11 +258,13 @@ $(document).ready(function(){
                           </p>
                           
                           </div>
+                          <p>
                            <a href="/list/API/login_kakao_sync.html?ks_return_url=https%3A%2F%2Fwww.silicook.co.kr%2Fshop%2Fshopdetail.html%3Fbranduid%3D3519841%26NaPm%3Dct%253Dl2023whs%257Cci%253D692cd9a78351bf0a46e676cfb58ab2bfb06269e7%257Ctr%253Dsbtm%257Csn%253D238329%257Chk%253D132334376ed4a07159a453f979b76afa64be3468" class="link kakao">
-						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입">
-						   </a>
-						    <br>
-						    <br>
+						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입"></a>
+						  </p>  
+						 
+						    
+						    
 						  <a href="/list/API/login_naver.html" class="link naver">
  							<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_naver.jpg" alt="네이버로 회원가입"> 
 						  </a>
@@ -355,17 +348,25 @@ $("#kakao-login-btn").on("click", function(){
               console.log(res);
               var id = res.id;
 			 	 scope : 'account_email';
-				alert('로그인성공');
-              location.href=" <%
-     			 
-            		session.setAttribute("member_mid", "5235268");
-            		response.sendRedirect("${pageContext.request.contextPath }/main");
-            		%>";
+				
+              alert('로그인성공'+id);
+				
+<%--               location.href=" <% --%>
+// //           			session.setAttribute("email", memberCheckDTO.getEmail());
+// //   					session.setAttribute("nickname", memberCheckDTO.getNickname());
+// 					session.setAttribute("nickname", "hjj");
+// //             		session.setAttribute("member_mid", id);
+//             		response.sendRedirect("${pageContext.request.contextPath }/main");
+<%--             		%>"; --%>
+// location.href="${pageContext.request.contextPath }/member/loginPro2";
+
         }
          
           })
           console.log(authObj);
+//           alert(authObj);
           var token = authObj.access_token;
+//           alert(token);
         },
         fail: function(err) {
           alert(JSON.stringify(err));
