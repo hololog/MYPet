@@ -14,5 +14,15 @@ public interface BookmarkDAO {
 
 	public int getBookmarkNum(int findboardNum);
 
+	//free
+		public void FaddBookmarkCount(int free_board_num);
+
+		public void FaddBookmark(BookmarkDTO bookmarkDTO);
+
+		public void FremoveBookmarkCount(int free_board_num);
+
+		public void FremoveBookmark(BookmarkDTO bookmarkDTO);
+
+		public int FgetBookmarkNum(int free_board_num);
 
 }
