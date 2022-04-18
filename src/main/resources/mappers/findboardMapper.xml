@@ -62,7 +62,7 @@
 	</select>
 	
 	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
-		select * from find_board_file order by find_board_num desc limit #{startRow},#{pageSize}
+		select * from find_board_file order by find_board_num desc
 	</select>
 	
 	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
@@ -146,5 +146,9 @@
 		select count(*) 
 		  from find_board
 	</select>
+	
+	<delete id="deletefind">
+		delete from find_board where find_board_num = #{find_board_num}
+	</delete>
 
 </mapper>

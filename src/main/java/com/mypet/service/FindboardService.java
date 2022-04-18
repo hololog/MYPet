@@ -26,7 +26,7 @@ public interface FindboardService {
 
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
-	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	public List<FileDTO> getfindFileList();
 	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
@@ -53,4 +53,7 @@ public interface FindboardService {
 	public void updatefindBoard (FindboardDTO findboardDTO);
 	
 	public void update_findboard_file(FileDTO fileDTO);
+	
+	public void deletefind(int num);
+	
 }

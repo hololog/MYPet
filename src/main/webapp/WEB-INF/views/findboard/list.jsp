@@ -413,7 +413,7 @@
 											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
 											data-bs-target="#find_content"
 											id="marking"> <img class="img-fluid rounded"
-											src="${pageContext.request.contextPath }/resources/upload/${fileList[loop.index].save_filename}" alt="실종동물사진" id="">
+											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}" alt="실종동물사진" style="max-height:300px">
 										</a>
 									</c:when>
 									<c:when test="${fileList[loop.index].filename eq null}">
@@ -421,7 +421,7 @@
 											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
 											data-bs-target="#find_content"> <img
 											class="img-fluid rounded"
-											src="${pageContext.request.contextPath }/resources/upload/${fileList[loop.index].save_filename}" alt="실종동물사진" id="">
+											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}" alt="실종동물사진" id="">
 										</a>
 									</c:when>
 								</c:choose>
@@ -538,6 +538,7 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<c:forEach var="fb" items="${findboardList}" varStatus="mdloop">
+					<input type="hidden" data-del="${fb.find_board_num}">
 						<div class="ModalSH">
 							<!-- Modal Header -->
 							<div class="modal-header">
@@ -554,16 +555,29 @@
 									<!-- 슬라이드 쇼 -->
 									<div class="carousel-inner">
 										<!-- 사진1 -->
+										
+										<input type="hidden" value="${findboardList[mdloop.index].find_board_num}">
+										<input type="hidden" value="${mdloop.index}">
+										<c:if test="${fb[loop.index].find_board_num eq fb.find_board_num}">
 										<div class="carousel-item active">
-											<%-- <c:if test="${fileList[loop.index].upload ne null}"> --%>
-											<%-- <c:if test="${fileList[loop.index].find_board_num eq fb.find_board_num}"> --%>
-												<img src="${pageContext.request.contextPath}/resources/upload/${fileList[loop.index].save_filename}"
+												<img src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
 													alt="first slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											<%-- </c:if> --%>
-											<%-- </c:if> --%>
 										</div>
+										<div class="carousel-item">
+												<img src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
+													alt="second slide" class="d-block w-100"
+													style="width: 100%; height: 100%; max-height: 550px;"
+													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
+										</div>
+										<div class="carousel-item">
+												<img src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
+													alt="third slide" class="d-block w-100"
+													style="width: 100%; height: 100%; max-height: 550px;"
+													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
+										</div>
+										</c:if>
 										<!-- 사진2 -->
 										<%-- <div class="carousel-item">
 											<img
@@ -584,7 +598,6 @@
 										</button>
 										<!-- 슬라이드 이동버튼 끝 -->
 									</div>
-									<br>
 								</section>
 
 								<div >
@@ -648,9 +661,21 @@
 							<c:choose>
 								<c:when test="${sessionScope.nickname eq fb.nickname}">
 									<div class="modal-footer">
-										<button type="button" class="btn btn-primary"
+										<button type="button" class="btn btn-primary del"
 											data-bs-target="#modify_content" data-bs-toggle="modal"
-											data-test2="${mdloop.count}" >수정하기</button>
+											data-test2="${mdloop.count}">수정하기</button>
+										<button type="button" class="btn btn-danger" onclick='deletefind()'>삭제하기</button>
+										<script type="text/javascript">
+											function deletefind(){
+												if(confirm("게시글을 삭제하시겟습니까?") == true){
+         									       alert("삭제가 완료되었습니다.");
+       										         location.href='${pageContext.request.contextPath }/findboard/delete?find_board_num=${fb.find_board_num}';
+       										         location.reload();
+       										 	}else{   
+        									       return;
+       										     } 
+												}
+										</script>
 										<button type="button" class="btn btn-danger"
 											data-bs-dismiss="modal">닫기</button>
 									</div>
@@ -1000,6 +1025,7 @@
 		}); //city selected
 	}); // jQuery closed	
 </script>
+
 <!-- <script>
 $(document).ready(function(){
 	$('.pic').mouseover(function(){

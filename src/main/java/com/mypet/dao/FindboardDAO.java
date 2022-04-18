@@ -28,7 +28,7 @@ public interface FindboardDAO {
 	
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
-	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	public List<FileDTO> getfindFileList();
 	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
@@ -59,6 +59,8 @@ public interface FindboardDAO {
 	public int getFindBoardCount();
 
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO);
+	
+	public void deletefind(int num);
 
 }
 

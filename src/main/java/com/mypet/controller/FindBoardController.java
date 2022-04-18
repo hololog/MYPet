@@ -107,6 +107,14 @@ public class FindBoardController {
 
     return "redirect:/findboard/list";
 }
+	
+	@RequestMapping(value = "/findboard/delete", method = RequestMethod.GET)
+	public String delete_findBoard(HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("find_board_num"));
+		findboardService.deletefind(num);
+		System.out.println(num);
+		return "findboard/list";
+	}
 
 	// 은혜
 	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)
