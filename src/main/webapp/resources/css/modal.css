@@ -14,17 +14,15 @@
     }
   }
 
-
-
 .btn-close{
 	float: right;
-	color: #3f51b5;
 }
 
-.help-block {
-	color: #3f51b5;
-	font-size: small;
+#lg_close {
+	fo: #3f51b5;
 }
+
+
 
 .modal-wrapper {
     position: fixed;
@@ -52,8 +50,11 @@
 
 }
 
-/* .whole_modal { */
-/* } */
+.whole_modal {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
 .modal-inner {
     position: absolute;

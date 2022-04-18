@@ -21,6 +21,11 @@
 <!-- JQuery -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>
+<script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/data.js"></script>
+<!-- CSS , JS -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
 	var email = '${sessionScope.email}';
@@ -32,6 +37,34 @@ $(document).ready(function(){
 		});
 	}//스크롤 로그인 모달
 });
+
+$(document).ready(function(){
+	$("#mainSearch").autocomplete({ 
+// 		source: function(request, response) {
+// 			$.ajax({
+// 				type: "get",
+// 	            url: "/json/address",
+// 	            dataType: "json",
+// 	            success: function(data) {
+// 	            	 response(
+// 	           			 $.map(data, function(item) {
+// 	           				return {
+// 	                            label: item.address,   
+// 	                            value: item,    
+// 	           				}
+// 	           			 })//
+// 	         		 );//response end
+// 	            }
+// 			}); //end ajax
+// 		},
+		source: List,
+		focus : function(event, ui) { 
+			return false;
+		},
+		minLength: 2,// 최소 글자수
+		delay: 100,	
+	});
+});
 	
 $(document).ready(function(){
 	//북마트 클릭이벤트
@@ -40,12 +73,15 @@ $(document).ready(function(){
 // 		console.log(no);
 		//빈별표 일때
 		if($(this).children('i').attr('class') === 'fa-regular fa-star fa-2x'){
+			//별표 변경
 			$(this).children('i').attr('class', 'fa-solid fa-star fa-2x');
+			//DB에 북마크 정보 갱신
 			$.ajax({
 				url:"${pageContext.request.contextPath }/findboard/addBookmark",
 				data:{"findboardNum" : no},
 				success:function(rdata){
 					if(rdata != null) {
+						//게시물당 북마크수 화면표시
 						$('#mark'+no).text(" "+ rdata);
 					}
 				}	
@@ -66,54 +102,51 @@ $(document).ready(function(){
 	});
 });
 
-// $("#displayList").hide();
-// // 검색어의 길이가 바뀔 때마다 호출
-// var wordLength = $(this).val().trim().length;
-// if(wordLength == 0){
-// 			$("#displayList").hide();
-// 		} else {
-// 			$.ajax({
-// 				url:"/wordSearchShow.action",
-// 				type:"get",
-// 				data:{"searchType": $("#searchType").val(),
-// 					  "searchWord": $("#searchWord").val() },
-// 				dataType:"json",
-// 				success:function(json){
-// 					if(json.length > 0){
-// 						// 검색된 데이터가 있는 경우
-// 						var html = "";
-// 						$.each(json, function(index, item){
-// 							var word = item.word;
-//                             // 검색목록들과 검색단어를 모두 소문자로 바꾼 후 검색단어가 나타난 곳의 index를 표시.
-// 							var index = word.toLowerCase().indexOf( $("#searchWord").val().toLowerCase() );
-// 							// jaVa -> java
-// 							var len = $("#searchWord").val().length;
-// 							// 검색한 단어를 파랑색으로 표현
-// 							var result = word.substr(0, index) + "<span style='color:blue;'>"+word.substr(index, len)+"</span>" + word.substr(index+len);
-// 							html += "<span class='result' style='cursor:pointer;'>" + result + "</span><br>";
-// 						});
-						
-// 						var input_width = $("#searchWord").css("width"); // 검색어 input 태그 width 알아오기
-// 						$("#displayList").css({"width":input_width}); // 검색 결과의 width와 일치시키기
-// 						$("#displayList").html(html);
-// 						$("#displayList").show();
-// 					}
-					
-// 				},
-// 				error: function(request, status, error){
-// 	                alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-// 	            }
+$("#displayList").hide();
+// 검색어의 길이가 바뀔 때마다 호출
+var wordLength = $(this).val().trim().length;
+if(wordLength == 0){
+	$("#displayList").hide();
+} else {
+	$.ajax({
+		url:"/wordSearchShow.action",
+		type:"get",
+		data:{"searchType": $("#searchType").val(),
+			  "searchWord": $("#searchWord").val() },
+		dataType:"json",
+		success:function(json){
+			if(json.length > 0){
+				// 검색된 데이터가 있는 경우
+				var html = "";
+				$.each(json, function(index, item){
+					var word = item.word;
+                          // 검색목록들과 검색단어를 모두 소문자로 바꾼 후 검색단어가 나타난 곳의 index를 표시.
+					var index = word.toLowerCase().indexOf( $("#searchWord").val().toLowerCase() );
+					// jaVa -> java
+					var len = $("#searchWord").val().length;
+					// 검색한 단어를 파랑색으로 표현
+					var result = word.substr(0, index) + "<span style='color:blue;'>"+word.substr(index, len)+"</span>" + word.substr(index+len);
+					html += "<span class='result' style='cursor:pointer;'>" + result + "</span><br>";
+				});
 				
-// 			});
-
-// 		}
-        
-//         // 자동완성 목록을 클릭하면 검색하기
-// 	$(document).on('click', ".result", function(){
-// 		var word = $(this).text();
-// 		$("#searchWord").val(word);
-// 		goSearch(); // 검색기능
-// 	});
+				var input_width = $("#searchWord").css("width"); // 검색어 input 태그 width 알아오기
+				$("#displayList").css({"width":input_width}); // 검색 결과의 width와 일치시키기
+				$("#displayList").html(html);
+				$("#displayList").show();
+			}
+		},
+		error: function(request, status, error){
+               alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+           }
+	});
+}
+	
+// 자동완성 목록을 클릭하면 검색하기
+$(document).on('click', ".result", function(){
+	var word = $(this).text();
+	$("#searchWord").val(word);
+	goSearch(); // 검색기능
+});
 </script>
 </head>
 <body>
@@ -176,20 +209,20 @@ $(document).ready(function(){
     <!-- 검색 창 -->
     <div class="search py-3">
       <div class="container p-2 bg-white">
-        <form action="" method="get">
+        <form action="${pageContext.request.contextPath }/findboard/search" method="get">
           <div class="d-flex justify-content-around">
-            <div class="s-box1 p-2">
-              <input type="text" class="search-box1" placeholder="시/도" />
-            </div>
-            <div class="vr"></div>
-            <div class="s-box2 p-2">
-              <input type="text" class="search-box2" placeholder="시/군/구" />
-            </div>
-            <div class="vr"></div>
+<!--             <div class="s-box1 p-2"> -->
+<!--               <input type="text" class="search-box1" placeholder="시/도" /> -->
+<!--             </div> -->
+<!--             <div class="vr"></div> -->
+<!--             <div class="s-box2 p-2"> -->
+<!--               <input type="text" class="search-box2" placeholder="시/군/구" /> -->
+<!--             </div> -->
+<!--             <div class="vr"></div> -->
             <div class="s-box3 p-2">
-              <input type="text" class="search-box3" placeholder="읍/면/동" />
+              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="읍/면/동" />
             </div>
-            <button type="submit" class="btn text-white" style="background-color: #3f51b5">
+            <button type="submit" class="btn text-white" style="background-color: #3f51b5;">
               <i class="bi bi-search"></i>
             </button>
           </div>
@@ -199,23 +232,24 @@ $(document).ready(function(){
     <!-- 검색 종료 -->
     
 	<%-- 글검색 폼 --%>
-<!-- 	<form name="searchFrm" style="margin-top: 20px;"> -->
-<!-- 		<select name="searchType" id="searchType"> -->
-<!-- 			<option value="subject">제목</option> -->
-<!-- 			<option value="name">글쓴이</option> -->
-<!-- 		</select> -->
-<!-- 		<input type="text" id="searchWord" name="searchWord" size="100" autocomplete="off"> -->
-<!-- 		<input type="hidden" style="display: none;"> -->
-<!-- 		<button type="button" class="btn btn-secondary btn-sm" onclick="goSearch()">검색</button> -->
-<!-- 	</form> -->
+	<form name="searchFrm" style="margin-top: 20px;">
+		<select name="searchType" id="searchType">
+			<option value="subject">제목</option>
+			<option value="name">글쓴이</option>
+		</select>
+		<input type="text" id="searchWord" name="searchWord" size="100" autocomplete="off">
+		<input type="hidden" style="display: none;">
+		<button type="button" class="btn btn-secondary btn-sm" onclick="goSearch()">검색</button>
+	</form>
 	<%-- 검색어 자동완성이 보여질 구역 --%>
-<!-- 	<div id="displayList" style="border: solid 1px gray; height: 100px; overflow: auto; margin-left: 77px; margin-top; -1px; border-top: 0px;"> -->
-<!-- 	</div> -->
+	<div id="displayList" style="border: solid 1px gray; height: 100px; overflow: auto; margin-left: 77px; margin-top; -1px; border-top: 0px;">
+	</div>
 	
     <!-- 갤러리 -->
     <section class="container">
       <div>
-        <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1>
+			<h1 class="sub-title" style="margin: 80px auto 70px;">최근공고</h1>
+<!--         <h1 class="title text-center m-4 p-3" style="font-weight: bold;">최근 공고</h1> -->
         <div class="d-flex justify-content-end">
           <a href="${pageContext.request.contextPath }/findboard/list">더보기</a> 
         </div>
@@ -224,7 +258,6 @@ $(document).ready(function(){
          <!-- 메인에 실종공고 8개  -->
          <c:forEach var="flist" items="${findboardListMain }">
           <div class="col">
-          	
             <div class="card">
               <a href="${pageContext.request.contextPath }/findboard/list">
               	<img src="${pageContext.request.contextPath }/resources/upload/${flist.upload}" class="card-img-top" alt="실종동물사진" />
@@ -244,7 +277,6 @@ $(document).ready(function(){
 	              		</a>
 	              	</c:otherwise>
 	              </c:choose>
-              	
               </c:if>
               <div class="card-body">
                 <h5 class="card-title">

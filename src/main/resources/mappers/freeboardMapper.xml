@@ -14,7 +14,7 @@
 	
 	<insert id="writenoticeBoard">
 		insert into notice (notice_num, board_code, subject, content,insert_date) values
-        ( #{notice_num},'n', #{subject}, #{content},  #{insert_date}  )
+        ( #{notice_num},"공지", #{subject}, #{content},  #{insert_date}  )
  
 	</insert>
 	
@@ -26,10 +26,10 @@
 <!-- write insert end -->
 
 <!-- file start -->
-	<insert id="insert_freeboard_file">
-		insert into free_board_file(file_num, board_num, board_code, upload, filename, save_filename, file_upload_date)
-		values (#{file_num},#{free_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date})
-	</insert>
+<!-- 	<insert id="insert_freeboard_file"> -->
+<!-- 		insert into free_board_file(file_num, board_num, board_code, upload, filename, save_filename, file_upload_date) -->
+<!-- 		values (#{file_num},#{free_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date}) -->
+<!-- 	</insert> -->
 	
 <!-- file end -->
 
@@ -85,11 +85,7 @@
 	
 <!-- Board start -->	
 	<select id="getfreeBoard" resultType="com.mypet.domain.BoardDTO">
-		select *
-		from free_board a
-		join free_board_file b
-		where  a.free_board_num=#{free_board_num} 
-		or b.board_num=#{free_board_num}
+		select * from free_board where free_board_num=#{free_board_num}
 	</select>
 	
 	<select id="getnoticeBoard" resultType="com.mypet.domain.BoardDTO">
@@ -190,6 +186,21 @@
 	<select id="freeLikeCheck" resultType="com.mypet.domain.BoardDTO">
 	 	select count(*) from free_like where user_id = #{user_id} and free_board_num = #{free_board_num}
 	</select>
+	
+	
+	<!-- Reply -->
+	<select id="getfreecList" resultType="com.mypet.domain.FreecommentDTO">
+		select * from comment where board_code='r' and board_num = #{free_board_num}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 	
 

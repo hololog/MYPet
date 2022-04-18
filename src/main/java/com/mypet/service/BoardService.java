@@ -91,9 +91,7 @@ public interface BoardService {
 		public BoardDTO LikeCheck(BoardDTO boardDTO);
 		
 	//file start
-		public void insert_freeboard_file(BoardDTO boardDTO);
-		
-//		public FileDTO getfreefileNum(int num);
+//		public void insert_freeboard_file(FileDTO fileDTO);
 	//file end
 		
 		

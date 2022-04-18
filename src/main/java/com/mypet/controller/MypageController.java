@@ -10,13 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
 import com.mypet.service.MypageService;
 
@@ -28,6 +32,9 @@ public class MypageController {
 	
 	@Inject
 	public MypageService mypageService;
+	
+	@Inject
+	public FindboardService findboardService;
 
 		
 		@RequestMapping(value = "/mypage/myinfo", method = RequestMethod.GET)
@@ -96,6 +103,32 @@ public class MypageController {
 			}
 		}
 		
+		@RequestMapping(value = "/mypage/amendpwd", method = RequestMethod.GET)
+		public String amendpwd() {
+			System.out.println("MypageController amendpwd() ");
+			return "mypage/amendpwd";
+		}
+		
+//		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+//		@ResponseBody
+//		public int pwCheck(MemberDTO memberDTO) throws Exception{
+//			String memberPw = memberService.pwCheck(memberDTO.getEmail());
+//			if( memberDTO == null || !BCrypt.checkpw(memberDTO.getPassword(), memberDTO.getPassword())) {
+//				return 0;
+//			}
+//			return 1;
+//		}
+//		
+//		@RequestMapping(value="/pwUpdate" , method=RequestMethod.POST)
+//		public String pwUpdate(String memberId,String memberPw1,RedirectAttributes rttr,HttpSession session)throws Exception{
+//			String hashedPw = BCrypt.hashpw(memberPw1, BCrypt.gensalt());
+//			memberService.pwUpdate(memberId, hashedPw);
+//			session.invalidate();
+//			rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+//			
+//			return "redirect:/member/loginView";
+//		}
+		
 //		@RequestMapping(value = "/modify/image", method = RequestMethod.POST)
 //		public String userImgModify(String userId,
 //									MultipartFile file,
@@ -116,7 +149,53 @@ public class MypageController {
 //			session.setAttribute("login", userVO);
 //			redirectAttributes.addFlashAttribute("msg", "SUCCESS");
 //			return "redirect:/user/profile"; }
+		
+		@RequestMapping(value = "/mypage/bookmark", method = RequestMethod.GET)
+		public String bookmark(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+			
+			System.out.println("MypageController bookmark() ");
+			String email = (String)session.getAttribute("email");
 
+			int pageSize = 5;
+
+			String pageNum = request.getParameter("pageNum");
+			if (pageNum == null) {
+				pageNum = "1";
+			}
+
+			PageDTO pageDTO = new PageDTO();
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+
+			List<FindboardDTO> findboardList = mypageService.getFindboardBookmarkList(email);
+			List<FileDTO> fileList = mypageService.getfindFileList(email);
+
+//			int count = findboardService.getfindBoardCount();
+//
+//			int currentPage = Integer.parseInt(pageNum);
+//			int pageBlock = 10;
+//			int startPage = (currentPage - 1) / pageBlock * pageBlock + 1;
+//			int endPage = startPage + pageBlock - 1;
+//			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+//			if (endPage > pageCount) {
+//				endPage = pageCount;
+//			}
+//
+//			pageDTO.setCount(count);
+//			pageDTO.setPageBlock(pageBlock);
+//			pageDTO.setStartPage(startPage);
+//			pageDTO.setEndPage(endPage);
+//			pageDTO.setPageCount(pageCount);
+			
+			model.addAttribute("findboardList", findboardList);
+			model.addAttribute("fileList", fileList);
+//			model.addAttribute("pageDTO", pageDTO);
+			
+//			mypageService.getFindboardBookmarkList(email);
+			
+//			}
+			return "mypage/bookmark";
+		}
 		
 		
 }

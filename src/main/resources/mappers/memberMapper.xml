@@ -9,7 +9,6 @@
 				  values(#{user_id}, #{email}, #{nickname}, #{password}, #{join_date})
 	</insert>
 	
-	
 	<select id="memberCheck" resultType="com.mypet.domain.MemberDTO">
 		select * from user where email=#{email} and password=#{password}
 	</select>

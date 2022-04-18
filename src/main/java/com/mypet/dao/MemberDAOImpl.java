@@ -10,7 +10,6 @@ import com.mypet.domain.MemberDTO;
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 
-
 	@Inject
 	private SqlSession sqlSession;
 	
@@ -20,7 +19,6 @@ public class MemberDAOImpl implements MemberDAO{
 	public void insertMember(MemberDTO memberDTO) {
 		sqlSession.insert(namespace + ".insertMember", memberDTO);
 	}
-	
 
 	@Override
 	public MemberDTO memberCheck(MemberDTO memberDTO) {

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
@@ -19,11 +21,16 @@ public interface MypageService {
 	
 	public MemberDTO updateCheck(MemberDTO memberDTO);
 	
-
-//	public int getmyBoardlistCount();
+	public MemberDTO pwCheck(MemberDTO memberDTO);
+	
+	public void pwUpdate(MemberDTO memberDTO);
 
 //	public List<MypageDTO> getmyBoardList(BoradDTO boardDTO);
 	
-	public void modifyUimage(String email, String uimage) throws Exception;
+//	public void modifyUimage(String email, String uimage) throws Exception;
+	
+	public List<FindboardDTO>getFindboardBookmarkList(String email);
+	
+	public List<FileDTO> getfindFileList(String email);
 
 }

@@ -4,35 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.mypet.mappers.findboardMapper">
-
+	
 	<!-- 은혜 실종공고 글쓰기 insert -->
 	<insert id="insert_findboard">
 		insert into find_board(board_code, nickname, title, content, readcount, pet_type,
 								missing_date, pet_name, pet_age, pet_gender, address, address2, result, 
-								insert_date, delete_date, detail_address, reward, email)
+								insert_date, delete_date, detail_address, reward, email, contact)
 		values ('f',#{nickname},"title",
 				#{content},#{readcount},#{pet_type},#{missing_date},
 				#{pet_name},#{pet_age},#{pet_gender},#{address},#{address2},
-				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward}, #{email})
+				#{result},#{insert_date},#{delete_date},#{detail_address},#{reward}, #{email}, #{contact})
 	</insert>
 	
+	<update id="updatefilename">
+	update find_board 
+	set upload = (select save_filename
+					from (select save_filename 
+					from find_board_file f
+					join find_board find
+                    on f.find_board_num = find.find_board_num 
+                    order by file_num desc limit 1
+                    ) as tmp)
+	where upload is null;
+	</update>
+		
 	<insert id="update_boardNum_forfile">
 		update find_board_file
 		set find_board_num = (select max(find_board_num) from find_board)
-		where find_board_num = 0
+		where find_board_num = 0 and board_code = 'f'
 	</insert>
 	
 	<!-- 은혜 실종공고 글쓰기 파일첨부 -->
 	<insert id="insert_findboard_file">
 		insert into find_board_file(file_num, find_board_num, board_code, upload, filename, save_filename, file_upload_date, ext)
-		values (#{file_num},
-				#{find_board_num},
-				#{board_code},
-				#{upload},
-				#{filename},
-				#{save_filename},
-				#{file_upload_date},
-				#{ext})
+		values (#{file_num},#{find_board_num},#{board_code},#{upload},#{filename},#{save_filename},#{file_upload_date},#{ext})
 	</insert>
 	
 
@@ -52,9 +57,10 @@
 	</select>
 	
 	<!-- 댓글조회 -->
-	<select id="readComment" resultType="com.mypet.domain.FindcommentDTO"> 
-		SELECT * FROM find_comment
-		where find_board_num = #{find_board_num}
+	<select id="readComment" resultType="com.mypet.domain.FindboardDTO"> <!-- FindcommentDTO -->
+<!-- 		SELECT * FROM find_comment -->
+		SELECT * FROM find_board
+		where find_board_num = 1
 	</select>
 	
 	<!-- 게시글 가져오기(모달용) -->
@@ -67,7 +73,7 @@
 	</select>
 	
 	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
-		select concat(upload,"\\",filename) as upload from find_board_file order by find_board_num desc limit #{startRow},#{pageSize}
+		select concat(upload,"\\",save_filename) as upload from find_board_file order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
 	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
@@ -120,7 +126,18 @@
 		 ) b
 		 ON a.find_board_num = b.find_board_num
 		 order by a.insert_date desc
-		 limit 8
+		 limit 8;
+	</select>
+	
+	<select id="getFindSearchList" resultType="com.mypet.domain.FindboardDTO">
+		select * 
+		  from find_board
+		 where address = #{search}
+	</select>
+	
+	<select id="getFindBoardCount" resultType="int">
+		select count(*) 
+		  from find_board
 	</select>
 
 </mapper>

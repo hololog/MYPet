@@ -12,8 +12,6 @@ import com.mypet.domain.MemberDTO;
 @Service
 public class MemberServiceImpl implements MemberService{
 
-
-
 	@Inject
 	private MemberDAO memberDAO;
 	
@@ -29,8 +27,7 @@ public class MemberServiceImpl implements MemberService{
 		memberDTO.setJoin_date(new Timestamp(System.currentTimeMillis()));
 		memberDAO.insertMember(memberDTO);
 	}
-	
-	
+
 	@Override
 	public MemberDTO memberCheck(MemberDTO memberDTO) {
 		return memberDAO.memberCheck(memberDTO);

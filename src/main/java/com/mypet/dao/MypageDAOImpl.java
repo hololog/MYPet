@@ -1,6 +1,8 @@
 package com.mypet.dao;
 
 import com.mypet.domain.BoardDTO;
+import com.mypet.domain.FileDTO;
+import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
@@ -48,19 +50,39 @@ public class MypageDAOImpl implements MypageDAO {
 	public List<MypageDTO> getmyBoardList(String mylist) {
 		return sqlSession.selectList(namespace+".getmyBoardList", mylist);
 	}
-
+	
 	@Override
-	public void updateUimage(String email, String userImg) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("email", email);
-		paramMap.put("userImg", userImg);
-		sqlSession.update(namespace + ".updateUimage", paramMap);
-
+	public List<MypageDTO> getmyfind_BoardList(String mylist2) {
+		return sqlSession.selectList(namespace+".getmyBoardList", mylist2);
 	}
 
+	@Override
+	public MemberDTO pwCheck(MemberDTO memberDTO) {
+		return sqlSession.selectOne(namespace + ".pwCheck", memberDTO);
+	}
+
+	@Override
+	public void pwUpdate(MemberDTO memberDTO) {
+		sqlSession.update(namespace+".pwUpdate", memberDTO);
+	}
+	
 //	@Override
-//	public int getmyBoardlistCount() {
-//		return sqlSession.selectOne(namespace+".getmyBoardlistCount");
+//	public void updateUimage(String email, String userImg) throws Exception {
+//		Map<String, Object> paramMap = new HashMap<String, Object>();
+//		paramMap.put("email", email);
+//		paramMap.put("userImg", userImg);
+//		sqlSession.update(namespace + ".updateUimage", paramMap);
 //	}
 	
+	@Override
+	public List<FindboardDTO> getFindboardBookmarkList(String email) {
+		System.out.println("MypageDAOImpl getFindboardBookmarkList(email)");
+		return sqlSession.selectList(namespace+".getFindboardBookmarkList", email);
+	}
+	
+	@Override
+	public List<FileDTO> getfindFileList(String email){
+		return sqlSession.selectList(namespace+".getfindFileList", email);
+	}
+
 }

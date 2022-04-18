@@ -57,11 +57,7 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectOne(namespace+".getFileMaxNum");
 	}
 	
-	@Override
-	public void update_board_num_forfile() {
-		sqlSession.update(namespace+".update_boardNum_forfile");
-	}
-
+	
 	@Override
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO) {
 		return sqlSession.selectList(namespace+".getfindBoardList", pageDTO);
@@ -114,12 +110,31 @@ public class FindboardDAOImpl implements FindboardDAO {
 	@Override
 	public List<FindboardDTO> getfindBoardListMain(String email) {
 		return sqlSession.selectList(namespace + ".getfindBoardListMain", email);
+	}	
+
+	@Override
+	public void update_board_num_forfile() {
+		sqlSession.update(namespace +".update_boardNum_forfile");
 	}
 
-//	@Override
-//	public String getUpload() {
-//		return sqlSession.selectOne(namespace +".getUpload");
-//	}	
+	@Override
+	public void updatefilename() {
+		sqlSession.update(namespace +".updatefilename");
+	}
+
+	@Override
+	public int getFindBoardCount() {
+		return sqlSession.selectOne(namespace + ".getFindBoardCount");
+	}
+
+	@Override
+	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO) {
+		return sqlSession.selectList(namespace + ".getFindSearchList", pageDTO);
+	}
+	
+	
+
+
 	
 	
 	

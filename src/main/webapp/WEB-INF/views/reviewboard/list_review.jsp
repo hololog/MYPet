@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
      <!-- font awesome -->
   <script src="https://kit.fontawesome.com/203a25fbbd.js" crossorigin="anonymous"></script>
-    <title>자유게시판/리스트</title>
+    <title>꿀팁 & 입양후기</title>
 
     
     
@@ -31,7 +31,8 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-
+<br><br><br><br>
+<br><br><br><br>
         <!-- 제목 시작 -->
        <div class="container">
             <h1 class="sub-title">꿀팁 & 입양후기</h1>
@@ -126,29 +127,29 @@
                   </div>
                   </form>
                   <!-- 아이디 없을때 -->
-<%--                   <c:if test="${empty user_id  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2"> --%>
-<!--                     <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div> -->
-<!--                   	<script> -->
+                 <c:if test="${empty sessionScope.nickname  }"><div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
+                    <button type="button" class="btn btn-outline-primary " onclick="login()">글쓰기</button> </div>
+                  	<script>
 
-<!-- // 						function login() { -->
+						function login() {
 						
-<!-- // 						  alert("로그인해라"); -->
+						  alert("로그인해라");
 						
-<%-- // 						  location.href = "${pageContext.request.contextPath }/main/main"; --%>
+						  location.href = "${pageContext.request.contextPath }/main";
 						
-<!-- // 						} -->
+						}
 						
-<!-- 						</script> -->
-<%--                   </c:if> --%>
+						</script>
+                  </c:if>
                   
                   
-<!--                   아이디 있을때 -->
-<%--                   <c:if test="${!empty user_id }"> --%>
+                  <!-- 아이디 있을때 -->
+                  <c:if test="${!empty sessionScope.nickname }">
                   <!-- 글쓰기버튼 -->
                   <div class="col-11 d-flex justify-content-end align-items-center flex-wrap gap-2">
-                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button>
-                  </div>
-<%--                   </c:if> --%>
+                    <button type="button" class="btn btn-outline-primary " onclick="location.href='${pageContext.request.contextPath }/reviewboard/write_review'">글쓰기</button> </div>
+                  </c:if>
+
                   <!-- 다음버튼 -->
                   <div class="text-center clear">
                         <div class="pagination justify-content-center" style="margin:20px 0">

@@ -38,7 +38,7 @@ public interface FindboardService {
 
 	public List<String> getTownList(AddressDTO addressDTO);
 
-	public void insert_findboard_file(FileDTO fileDTO); 
+	public void insert_findboard_file(FileDTO fileDTO);
 
 	public List<FindboardDTO> getfindBoardListMain();
 
@@ -47,5 +47,9 @@ public interface FindboardService {
 //	public void updatefindboard(FindboardDTO findboardDTO);
 
 	public List<FindboardDTO> getfindBoardListMain(String email);
+
+	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO);
+
+	public int getFindBoardCount();
 	
 }
