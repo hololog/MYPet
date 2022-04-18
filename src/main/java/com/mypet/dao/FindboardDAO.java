@@ -56,9 +56,13 @@ public interface FindboardDAO {
 	
 	public void update_findboard_file(FileDTO fileDTO);
 
-	public int getFindBoardCount();
-
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO);
+
+	public int getFindBoardSearchCount();
+
+	public List<FileDTO> getSearchFileList(PageDTO pageDTO);
+
+//	public List<String> wordSearchShow(Map<String, String> paraMap);
 
 }
 

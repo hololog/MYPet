@@ -221,7 +221,7 @@ $(document).on('click', ".result", function(){
 <!--             </div> -->
 <!--             <div class="vr"></div> -->
             <div class="s-box3 p-2">
-              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="주소검색 읍면동" />
+              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="내 주변 검색" />
             </div>
             <button type="submit" class="btn text-white" style="background-color: #3f51b5;">
               <i class="bi bi-search"></i>
