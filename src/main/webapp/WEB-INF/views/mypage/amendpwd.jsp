@@ -226,23 +226,29 @@ $(document).ready(function(){
                                     placeholder="현재 비밀번호 입력">
                                 <div id="cuPasswordCheck"></div>
                             </div>
+                            <br>
                             <div class="col">
-                                <label for="pwd2_eh" class="form-label"><span class="text-muted"></span></label>
+                                <label for="pwd2_eh" class="form-label">변경할 비밀번호 입력<span class="text-muted"></span></label>
                                 <input
-                                    type="text"
+                                    type="password"
                                     class="form-control"
                                     id="pwd2_eh"
                                     name="password2"
-                                    placeholder="변경할 비밀번호 입력"
-                                    required="required">
+                                    placeholder="8~10자 입력"
+                                    minlength="8"
+                                    maxlength="10"
+                                    required>
                             </div>
                             <div class="col">
-                                <label for="pwd2re_eh" class="form-label"><span class="text-muted"></span></label>
+                                <label for="pwd2re_eh" class="form-label">변경할 비밀번호 재입력<span class="text-muted"></span></label>
                                 <input
-                                	type="text"
+                                	type="password"
                                 	class="form-control"
                                 	id="pwd2re_eh"
-                                	placeholder="변경할 비밀번호 재입력">
+                                	placeholder="8~10자 재입력"
+                                	minlength="8"
+                                	maxlength="10"
+                                	required>
                             </div><br>
                             <input type="submit" value="변경" id="pwUpdate" disabled="disabled">
                             <input type="hidden" name="email" value="${sessionScope.email }">

@@ -165,7 +165,7 @@ $(document).ready(function(){
                             <tr>
                                 <th width="7%">번호</th>
                                 <th width="15%">이름</th>
-                                <th width="50%">정보</th>
+                                <th width="50%" style="text-align: center;">정보</th>
                                 <th width="15%">즐겨찾기</th>
                                 <th width="9%">조회수</th>
                             </tr>
