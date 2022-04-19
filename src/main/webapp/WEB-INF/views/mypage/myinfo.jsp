@@ -143,30 +143,32 @@
                             <div class="col" style="padding-top: 5%">
 <!--                             vertical-align -->
                             <img
-                            src="http://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg"
+                            src="${pageContext.request.contextPath }/resources/upload/${memberDTO.profileUpload}"
                             alt=""
                             width="90"
                             height="90"
                             class="rounded-circle me-3 align-items-center" style="margin-left: 25%"><br><br>
                                 <label for="email" class="form-label">닉네임<span class="text-muted"></span></label>
                                 <input
-                                	value="${sessionScope.nickname }"
-                                    type="email"
+                                	value="${memberDTO.nickname}"
+                                    type="text"
                                     class="form-control"
-                                    id="email"
+                                    id="nickname"
                                     readonly>
+                                 
                             </div>
                             <div class="col">
                                 <label for="address" class="form-label">이메일<span class="text-muted"></span></label>
                                 <input
-                                	value="${sessionScope.email }"
+                                	value="${memberDTO.email}"
                                     type="text"
                                     class="form-control"
-                                    id="address"
+                                    id="email"
                                     readonly>
                             </div>
+                            <input type="hidden" data-test="${mypageDTO.nickname}" id="ses">
                             <br>
-                            <input type="button" value="수정하기" onclick="location.href='${pageContext.request.contextPath }/mypage/update'">
+                            <input type="button" value="수정하기" onclick="location.href='${pageContext.request.contextPath }/mypage/update?email=${sessionScope.email}'">
                     </div>
                 </div>
             </form>
@@ -187,5 +189,6 @@
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
   crossorigin="anonymous">
 </script>
+
 </body>
 </html>

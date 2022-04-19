@@ -28,7 +28,7 @@ public interface FindboardDAO {
 	
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
-	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	public List<FileDTO> getfindFileList();
 	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
@@ -56,9 +56,18 @@ public interface FindboardDAO {
 	
 	public void update_findboard_file(FileDTO fileDTO);
 
-	public int getFindBoardCount();
-
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO);
+	
+	public void deletefind(int num);
+
+	public int getFindBoardSearchCount();
+
+	public List<FileDTO> getSearchFileList(PageDTO pageDTO);
+	
+	// map
+		public String getAddr(int num);
+
+//	public List<String> wordSearchShow(Map<String, String> paraMap);
 
 }
 

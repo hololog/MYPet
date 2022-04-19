@@ -107,8 +107,13 @@ public interface BoardDAO {
 	
 //	fileMaxNum start
 	public Integer getFileMaxNum();
-
+	
+//like
 	public int getfreeLike(BoardDTO boardDTO);
+	
+	public int getreviewLike(BoardDTO boardDTO);
+	
+	public int getnoticeLike(BoardDTO boardDTO);
 	
 //fileMaxNum end
 	
@@ -126,5 +131,23 @@ public interface BoardDAO {
 	public Integer getfcommentMaxNum();
 	
 	public String getfreecommentCount(int bnum);
+	//review
+	public List<ReplyDTO> getreviewcommentList(int bnum);
+	
+	public void reviewcommentIn(ReplyDTO replyDTO);
+	
+	public Integer getRcommentMaxNum();
+	
+	public String getreviewcommentCount(int bnum);
+	//notice
+	public List<ReplyDTO> getnoticecommentList(int bnum);
+	
+	public void noticecommentIn(ReplyDTO replyDTO);
+	
+	public Integer getNcommentMaxNum();
+	
+	public String getnoticecommentCount(int bnum);
+	
+
 	
 }

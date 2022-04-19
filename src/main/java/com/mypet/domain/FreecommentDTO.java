@@ -17,7 +17,7 @@ public class FreecommentDTO {
 
 	@Override
 	public String toString() {
-		return "FreecommentDTO [free_board_num=" + free_board_num + ", comment_num=" + comment_num + ", c_content="
+		return "FreecommentDTO [free_board_num=" + free_board_num +  ", comment_num=" + comment_num + ", c_content="
 				+ c_content + ", c_nik=" + c_nik + ", c_date=" + c_date + ", c_rdate" + c_rdate + "]";
 	}
 }

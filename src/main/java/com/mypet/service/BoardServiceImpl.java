@@ -287,12 +287,23 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDTO LikeCheck(BoardDTO boardDTO) {
 		return boardDAO.LikeCheck(boardDTO);
 	}
-
+//like
 	@Override
 	public int getfreeLike(BoardDTO boardDTO) {
 		return boardDAO.getfreeLike(boardDTO);
 	}
 	
+	@Override
+	public int getnoticeLike(BoardDTO boardDTO) {
+		return boardDAO.getnoticeLike(boardDTO);
+	}
+	
+	@Override
+	public int getreviewLike(BoardDTO boardDTO) {
+		return boardDAO.getreviewLike(boardDTO);
+	}
+	
+
 	@Override
 	public List<ReplyDTO> getfreecommentList(int bnum){
 		return boardDAO.getfreecommentList(bnum);
@@ -305,10 +316,46 @@ public class BoardServiceImpl implements BoardService {
 			replyDTO.setComment_num(boardDAO.getfcommentMaxNum()+1);
 		else replyDTO.setComment_num(1);
 		//readcount, insertdate, boardnum 설정
-		replyDTO.setBoard_code("r");
+		replyDTO.setBoard_code("자유");
 		replyDTO.setC_date(new Timestamp(System.currentTimeMillis()));
 		
 		boardDAO.freecommentIn(replyDTO);
+	}
+	//review
+	@Override
+	public List<ReplyDTO> getreviewcommentList(int bnum){
+		return boardDAO.getreviewcommentList(bnum);
+	}
+	
+	@Override
+	 public void reviewcommentIn(ReplyDTO replyDTO) {
+		
+		if(boardDAO.getRcommentMaxNum() != null) 
+			replyDTO.setComment_num(boardDAO.getRcommentMaxNum()+1);
+		else replyDTO.setComment_num(1);
+		//readcount, insertdate, boardnum 설정
+		replyDTO.setBoard_code("꿀팁");
+		replyDTO.setC_date(new Timestamp(System.currentTimeMillis()));
+		
+		boardDAO.reviewcommentIn(replyDTO);
+	}
+	//notice
+	@Override
+	public List<ReplyDTO> getnoticecommentList(int bnum){
+		return boardDAO.getnoticecommentList(bnum);
+	}
+	
+	@Override
+	 public void noticecommentIn(ReplyDTO replyDTO) {
+		
+		if(boardDAO.getNcommentMaxNum() != null) 
+			replyDTO.setComment_num(boardDAO.getNcommentMaxNum()+1);
+		else replyDTO.setComment_num(1);
+		//readcount, insertdate, boardnum 설정
+		replyDTO.setBoard_code("공지");
+		replyDTO.setC_date(new Timestamp(System.currentTimeMillis()));
+		
+		boardDAO.noticecommentIn(replyDTO);
 	}
 
 	

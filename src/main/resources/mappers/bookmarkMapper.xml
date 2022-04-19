@@ -65,4 +65,69 @@
 		  from free_board 
 		 where free_board_num = #{free_board_num}
 	</select>
+	
+	<!-- review -->
+	
+	<insert id="RaddBookmark">
+		insert into tip_like(tip_board_num, email) 
+	 	     values (#{tip_board_num}, #{email})
+	</insert>
+	
+	<update id="RaddBookmarkCount">
+		update tip_board 
+		   set like_count = like_count + 1 
+		 where tip_board_num = #{tip_board_num}
+	</update>
+	
+	<delete id="RremoveBookmark">
+		delete from tip_like
+		 where tip_board_num = #{tip_board_num} 
+		   and email = #{email}
+	</delete>
+	
+	<update id="RremoveBookmarkCount">
+		update tip_board 
+		   set like_count = like_count - 1 
+		 where tip_board_num = #{tip_board_num} 
+		   and like_count >= 1
+	</update>
+	
+	<select id="RgetBookmarkNum" resultType="int">
+		select like_count
+		  from tip_board 
+		 where tip_board_num = #{tip_board_num}
+	</select>
+	
+	<!-- notice -->
+	
+	<insert id="NaddBookmark">
+		insert into notice_like(notice_num, email) 
+	 	     values (#{notice_num}, #{email})
+	</insert>
+	
+	<update id="NaddBookmarkCount">
+		update notice 
+		   set like_count = like_count + 1 
+		 where notice_num = #{notice_num}
+	</update>
+	
+	<delete id="NremoveBookmark">
+		delete from notice_like
+		 where notice_num = #{notice_num} 
+		   and email = #{email}
+	</delete>
+	
+	<update id="NremoveBookmarkCount">
+		update notice 
+		   set like_count = like_count - 1 
+		 where notice_num = #{notice_num} 
+		   and like_count >= 1
+	</update>
+	
+	<select id="NgetBookmarkNum" resultType="int">
+		select like_count
+		  from notice 
+		 where notice_num = #{notice_num}
+	</select>
+	
 </mapper>

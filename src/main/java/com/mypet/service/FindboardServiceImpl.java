@@ -75,19 +75,19 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 	
 	@Override
-	public List<FileDTO> getfindFileList(PageDTO pageDTO){
+	public List<FileDTO> getfindFileList(){
 		
-		int currentPage=Integer.parseInt(pageDTO.getPageNum());
-		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
-		int endRow=startRow+pageDTO.getPageSize()-1;
+//		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+//		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+//		int endRow=startRow+pageDTO.getPageSize()-1;
+//		
+//		pageDTO.setCurrentPage(currentPage);
+//		pageDTO.setStartRow(startRow);
+//		pageDTO.setEndRow(endRow);
+//		
+//		pageDTO.setStartRow(startRow-1);
 		
-		pageDTO.setCurrentPage(currentPage);
-		pageDTO.setStartRow(startRow);
-		pageDTO.setEndRow(endRow);
-		
-		pageDTO.setStartRow(startRow-1);
-		
-		return findboardDAO.getfindFileList(pageDTO);
+		return findboardDAO.getfindFileList();
 	}
 	
 	@Override
@@ -105,6 +105,7 @@ public class FindboardServiceImpl implements FindboardService {
 		
 		return findboardDAO.getfindMissBoardList(pageDTO);
 	}
+
 	
 	@Override
 	public void insert_findboard(FindboardDTO findboardDTO) {
@@ -181,19 +182,42 @@ public class FindboardServiceImpl implements FindboardService {
 	public void updatefindBoard (FindboardDTO findboardDTO) {
 		findboardDAO.updatefindBoard(findboardDTO);
 	}
+
+//	@Override
+//	public List<String> wordSearchShow(Map<String, String> paraMap) {
+//		return findboardDAO.wordSearchShow(paraMap);
+//	}
+
+	@Override
+	public int getFindBoardSearchCount() {
+		return findboardDAO.getFindBoardSearchCount();
+	}
     
+	@Override
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO) {
 		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
 	    int endRow = startRow + pageDTO.getPageSize() - 1; 
 	    
-	    pageDTO.setStartRow(startRow);
+	    pageDTO.setStartRow(startRow - 1);
 	    pageDTO.setEndRow(endRow);
 	    
 		return findboardDAO.getFindSearchList(pageDTO);
 	}
-
+	
 	@Override
-	public int getFindBoardCount() {
-		return findboardDAO.getFindBoardCount();
+	public List<FileDTO> getSearchFileList(PageDTO pageDTO) {
+		
+		int startRow = (pageDTO.getCurrentPage() - 1) * pageDTO.getPageSize() + 1;
+		int endRow = startRow + pageDTO.getPageSize() - 1;
+		
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		
+		return findboardDAO.getSearchFileList(pageDTO);
+	}
+	
+	@Override
+	public void deletefind(int num) {
+		findboardDAO.deletefind(num);
 	}
 }

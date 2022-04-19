@@ -54,6 +54,9 @@ public class FindBoardController {
 	@RequestMapping(value = "/findboard/update_findPro", method = RequestMethod.POST)
 	public String update_findBoardPro(HttpServletRequest mtfRequest ,FindboardDTO findboardDTO) throws Exception {
 		
+		int chkres = Integer.parseInt(mtfRequest.getParameter("reschk"));
+		System.out.println(chkres);
+		if(chkres == 1) findboardDTO.setResult(1);
 		findboardDTO.setAddress(mtfRequest.getParameter("address1") +" "+ 
 				mtfRequest.getParameter("address2") +" "+ 
 				mtfRequest.getParameter("address3")); 
@@ -107,6 +110,14 @@ public class FindBoardController {
 
     return "redirect:/findboard/list";
 }
+	
+	@RequestMapping(value = "/findboard/delete", method = RequestMethod.GET)
+	public String delete_findBoard(HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("find_board_num"));
+		findboardService.deletefind(num);
+		System.out.println(num);
+		return "findboard/list";
+	}
 
 	// 은혜
 	@RequestMapping(value = "/findboard/write", method = RequestMethod.GET)
@@ -218,11 +229,11 @@ public class FindBoardController {
 //	}
 	//성기
 	@RequestMapping(value = "findboard/search")
-	public String searchList(HttpServletRequest req, Model model) {
+	public String searchList(HttpServletRequest req, Model model) throws Exception {
 		//요청값
 		String search = req.getParameter("mainSearch");
 		String pageNum = req.getParameter("pageNum");
-//		String search2 = "%"+search+"%";
+		String search2 = "%"+search+"%";
 		if(pageNum == null) pageNum = "1";
 		
 		//페이징 변수 정의
@@ -231,14 +242,14 @@ public class FindBoardController {
 		int pageBlock = 5;
 		int startPage = (currentPage-1)/pageBlock*pageBlock+1;
 		int endPage = startPage + pageBlock-1;
-		int count = findboardService.getFindBoardCount();
+		int count = findboardService.getFindBoardSearchCount();
 		int pageCount = count / pageSize +  (count % pageSize == 0 ? 0:1);
 		
 		if(endPage > pageCount)	endPage = pageCount;
 
 		//DTO 
 		PageDTO pageDTO = new PageDTO();
-		pageDTO.setSearch(search);
+		pageDTO.setSearch(search2);
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		pageDTO.setPageSize(pageSize);
@@ -247,15 +258,19 @@ public class FindBoardController {
 		pageDTO.setEndPage(endPage);
 		pageDTO.setCount(count);
 		pageDTO.setPageCount(pageCount);
-//		pageDTO.setSearch(search2);
 		
 		List<FindboardDTO> findboardSearch = findboardService.getFindSearchList(pageDTO);
 		
-		model.addAttribute("findboardSearch", findboardSearch);
+		List<FileDTO> searchFileList = findboardService.getSearchFileList(pageDTO);
+
+		
+		model.addAttribute("findboardList", findboardSearch);
+		model.addAttribute("fileList", searchFileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
 		return "findboard/searchList";
 	}
+	
 	
 //	@ResponseBody
 //	@RequestMapping(value="/json/address", method=RequestMethod.GET)
@@ -266,7 +281,7 @@ public class FindBoardController {
 //		Map<String, String> paraMap = new HashMap<>();
 //		paraMap.put("searchWord", searchWord);
 //		
-//		List<String> wordList = findboardService.wordSearchSHow(paraMap);
+//		List<String> wordList = findboardService.wordSearchShow(paraMap);
 //		
 //		JSONArray jsonArr = new JSONArray(); 
 //		

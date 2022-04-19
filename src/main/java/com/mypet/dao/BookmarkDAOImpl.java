@@ -67,5 +67,59 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 	public int FgetBookmarkNum(int free_board_num) {
 		return sqlSession.selectOne(namespace + ".FgetBookmarkNum", free_board_num);
 	}
+	
+	//review
+	
+		@Override
+		public void RaddBookmarkCount(int tip_board_num) {
+			sqlSession.update(namespace + ".RaddBookmarkCount", tip_board_num);
+		}
+
+		@Override
+		public void RaddBookmark(BookmarkDTO bookmarkDTO) {
+			sqlSession.insert(namespace + ".RaddBookmark", bookmarkDTO);
+		}
+
+		@Override
+		public void RremoveBookmarkCount(int tip_board_num) {
+			sqlSession.update(namespace + ".RremoveBookmarkCount", tip_board_num);
+		}
+			
+		@Override
+		public void RremoveBookmark(BookmarkDTO bookmarkDTO) {
+			sqlSession.delete(namespace + ".RremoveBookmark", bookmarkDTO);
+		}
+
+		@Override
+		public int RgetBookmarkNum(int tip_board_num) {
+			return sqlSession.selectOne(namespace + ".RgetBookmarkNum", tip_board_num);
+		}	
+		
+		//review
+		
+			@Override
+			public void NaddBookmarkCount(int notice_num) {
+				sqlSession.update(namespace + ".NaddBookmarkCount", notice_num);
+			}
+
+			@Override
+			public void NaddBookmark(BookmarkDTO bookmarkDTO) {
+				sqlSession.insert(namespace + ".NaddBookmark", bookmarkDTO);
+			}
+
+			@Override
+			public void NremoveBookmarkCount(int notice_num) {
+				sqlSession.update(namespace + ".NremoveBookmarkCount", notice_num);
+			}
+				
+			@Override
+			public void NremoveBookmark(BookmarkDTO bookmarkDTO) {
+				sqlSession.delete(namespace + ".NremoveBookmark", bookmarkDTO);
+			}
+
+			@Override
+			public int NgetBookmarkNum(int notice_num) {
+				return sqlSession.selectOne(namespace + ".NgetBookmarkNum", notice_num);
+			}		
 
 }

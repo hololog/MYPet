@@ -228,7 +228,7 @@
 						
 <!-- // 					  alert("로그인해라"); -->
 						
-// 				  location.href = "${pageContext.request.contextPath }/main/main"; --%>
+<%-- // 				  location.href = "${pageContext.request.contextPath }/main/main"; --%> 
 						
 <!-- // 						} -->
 						
@@ -472,7 +472,7 @@
 							댓글 <span id="count"></span>
 						</div>
 						
-						<form action="${pageContext.request.contextPath}/free/freecommentsIn" method="post">
+						<form action="${pageContext.request.contextPath}/freeboard/freecommentsIn" method="post">
 						<input type="hidden" value="${boardDTO.free_board_num}" name="board_num">
 						<input type="hidden" value="${sessionScope.nickname}" name="nickname">
 						<div class="input-group mb-3">
@@ -498,7 +498,7 @@
 							</div>
 						</form>
 						<!-- Single comment-->
-						<div id="nick">
+						<div id="nicke">
 							<!-- <div class="d-flex" >
 								<div class="flex-shrink-0">
 									<img class="rounded-circle"
@@ -509,8 +509,10 @@
 									
 									</div> -->
 									
+								
+									
 							
-						</div>
+						
 							<!-- <div class="d-flex" style="padding:10px 0 10px 10px">
 							<div class="flex-shrink-0">
 								<img class="rounded-circle"
@@ -524,8 +526,11 @@
 								2022.04.17
 								</div>
 							</div> -->
-					</div>
-					</div>
+							</div>
+							</div>
+							</div>
+				</div>
+				</div>
 				</div>
 				</div>
 			</section>
@@ -579,19 +584,18 @@ function report() {
 </script>
 <script>
 $(document).ready(function(){
-		alert("alax load");
 		$.ajax({
-		url:'${pageContext.request.contextPath}/free/ajaxcomments',
+		url:'${pageContext.request.contextPath}/freeboard/ajaxcomments',
 		data: 'free_board_num='+$('#num').val(),
 		dataType:'json',
 		success:function(rdata){
 			$.each(rdata,function(index,item){
-				$('#nick').append("<div class='d-flex'>"+
+				$('#nicke').append("<div class='d-flex'>"+
 								  "	<div class='flex-shrink-0'>"+
 								  "		<img class='rounded-circle' src='https://dummyimage.com/50x50/ced4da/6c757d.jpg' alt='...'>"+
 								  " </div>"+
 								  "	<div class='ms-3'>"+
-								  "		<div class='fw-bold'>"+item.c_nik.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
+								  "		<div class='fw-bold'>"+item.c_nik+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
 								  " </div>"+
 								  "</div>"+
 								  "<br>"
@@ -606,9 +610,8 @@ $(document).ready(function(){
 </script>
  <script>
 $(document).ready(function(){
-	alert("count ajax");
 	$.ajax({
-		url : '${pageContext.request.contextPath}/free/ajaxcommentsfCount',
+		url : '${pageContext.request.contextPath}/freeboard/ajaxcommentsfCount',
 		method:'post',
 		data : 'free_board_num='+$('#num').val(),
 		dataType:'json',

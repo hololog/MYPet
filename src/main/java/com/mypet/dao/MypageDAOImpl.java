@@ -26,8 +26,8 @@ public class MypageDAOImpl implements MypageDAO {
 	
 
 	@Override
-	public MemberDTO getMember(String email) {
-		return sqlSession.selectOne(namespace + ".getMember", email);
+	public MemberDTO getMember(String myinfo) {
+		return sqlSession.selectOne(namespace + ".getMember", myinfo);
 	}
 	
 	@Override
@@ -38,6 +38,9 @@ public class MypageDAOImpl implements MypageDAO {
 	@Override
 	public void updateMember(MemberDTO memberDTO) {
 		System.out.println("DAO확인");
+		System.out.println(memberDTO.getEmail());
+		System.out.println(memberDTO.getNickname());
+		System.out.println(memberDTO.getProfileUpload());
 		sqlSession.update(namespace+".updateMember", memberDTO);
 	}
 

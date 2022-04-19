@@ -93,14 +93,29 @@ public interface BoardService {
 
 		public int getfreeLike(BoardDTO boardDTO);
 		
+		public int getreviewLike(BoardDTO boardDTO);
+		
+		public int getnoticeLike(BoardDTO boardDTO);
+		
 	//file start
 //		public void insert_freeboard_file(FileDTO fileDTO);
 	//file end
 		
 	//comment
+		//free
 	    public List<ReplyDTO> getfreecommentList(int bnum);	
 	    
 	    public void freecommentIn(ReplyDTO replyDTO);
+	    
+	    //review
+	    public List<ReplyDTO> getreviewcommentList(int bnum);	
+	    
+	    public void reviewcommentIn(ReplyDTO replyDTO);
+	    
+	    //notice
+	    public List<ReplyDTO> getnoticecommentList(int bnum);	
+	    
+	    public void noticecommentIn(ReplyDTO replyDTO);
 		
 		
 }
