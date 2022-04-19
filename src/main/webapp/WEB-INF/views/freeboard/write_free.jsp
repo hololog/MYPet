@@ -42,6 +42,7 @@
 		</div>
 		<!-- 제목 종료 -->
      <form action="${pageContext.request.contextPath }/freeboard/write_freePro" method="post">
+     <input type="hidden" value="${sessionScope.email }" name="email">
     <div class="container py-5" name="board_code">
 <!--       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;"> -->
 <!--         글작성</h3> -->

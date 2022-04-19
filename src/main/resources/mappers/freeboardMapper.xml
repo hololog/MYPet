@@ -6,8 +6,8 @@
 <mapper namespace="com.mypet.mappers.freeboardMapper">
 <!-- insert start -->
 	<insert id="writefreeBoard">
-		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date) values
-        ( #{free_board_num},"자유", #{subject}, #{content}, #{nickname}, #{insert_date} )
+		insert into free_board (free_board_num, board_code, subject, content, nickname,insert_date, email) values
+        ( #{free_board_num},"자유", #{subject}, #{content}, #{nickname}, #{insert_date}, #{email} )
  
 	</insert>
 	
@@ -19,8 +19,8 @@
 	</insert>
 	
 	<insert id="writereviewBoard">
-		insert into tip_board (tip_board_num, board_code, subject, content, nickname,insert_date) values
-        ( #{tip_board_num},"꿀팁", #{subject}, #{content}, #{nickname}, #{insert_date}  )
+		insert into tip_board (tip_board_num, board_code, subject, content, nickname,insert_date, email) values
+        ( #{tip_board_num},"꿀팁", #{subject}, #{content}, #{nickname}, #{insert_date}, #{email}  )
  
 	</insert>
 <!-- write insert end -->

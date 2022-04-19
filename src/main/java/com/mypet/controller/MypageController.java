@@ -78,7 +78,7 @@ public class MypageController {
 		}
 		
 		@RequestMapping(value = "/mypage/updatePro", method = RequestMethod.POST)
-		public String updatePro(MultipartHttpServletRequest multi) throws Exception {
+		public String updatePro(MultipartHttpServletRequest multi, HttpSession session) throws Exception {
 //			System.out.println(memberDTO.getNickname());
 //			System.out.println(memberDTO.getEmail());
 			
@@ -116,6 +116,12 @@ public class MypageController {
 			        }
 				
 				mypageService.updateMember(memberDTO);
+				
+				MemberDTO updatememberDTO = mypageService.getMember(memberDTO.getEmail());
+				
+				session.setAttribute("email", updatememberDTO.getEmail());
+				session.setAttribute("nickname", updatememberDTO.getNickname());
+				session.setAttribute("profileUpload", updatememberDTO.getProfileUpload());
 				
 				return "main/main";
 			} else {
@@ -155,58 +161,22 @@ public class MypageController {
 			return "mypage/amendpwd";
 		}
 		
-//		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
-//		public void amendpwdPro(HttpServletRequest req, HttpSession session) throws Exception {
-//			String pass = req.getParameter("password");
-//			System.out.println(pass);
-			
-//			MemberDTO pwUpdateCheckDTO = mypageService.pwCheck(memberDTO);
-//			
-//			if(pwUpdateCheckDTO != null) {
-//				session.setAttribute("password", memberDTO.getPassword());
-//				mypageService.pwUpdate(memberDTO);
-//				return "redirect:/main"	;
-//			} else {
-//				return "member/msg";
-//			}
-//		}
 		
-//		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
-//		public String amendpwdPro(MemberDTO memberDTO, HttpSession session) throws Exception {
-//			System.out.println(memberDTO.getEmail());
-//			System.out.println(memberDTO.getPassword2());
-//			
-//			mypageService.pwUpdate(memberDTO);
-//			
-//			return "/main/main";
-//		}
+		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
+		public String amendpwdPro(MemberDTO memberDTO, HttpSession session) throws Exception {
+			System.out.println(memberDTO.getEmail());
+			System.out.println(memberDTO.getPassword2());
+			
+			mypageService.pwUpdate(memberDTO);
+			
+			return "redirect:/main";
+		}
 		
 		@RequestMapping(value = "/mypage/mymisslist", method = RequestMethod.GET)
 		public String mymisslist(HttpServletRequest request, Model model) throws Exception {
 			
 			return "mypage/mymisslist";
 		}
-		
-//		@RequestMapping(value = "/modify/image", method = RequestMethod.POST)
-//		public String userImgModify(String userId,
-//									MultipartFile file,
-//									HttpSession session,
-//									RedirectAttributes redirectAttributes) throws Exception {
-//			if (file == null) {
-//				redirectAttributes.addFlashAttribute("msg", "FAIL");
-//				return "redirect:/user/profile";
-//			}
-//			String uploadFile = UploadFileUtils.uploadFile(uimagePath, file.getOriginalFilename(), file.getBytes());
-//			String front = uploadFile.substring(0, 12);
-//			String end = uploadFile.substring(14);
-//			String userImg = front + end;
-//			MemberDTO.modifyUimage(userId, userImg);
-//			Object userObj = session.getAttribute("login");
-//			User userVO = (UserVO) userObj;
-//			userVO.setUserImg(userImg);
-//			session.setAttribute("login", userVO);
-//			redirectAttributes.addFlashAttribute("msg", "SUCCESS");
-//			return "redirect:/user/profile"; }
 		
 		@RequestMapping(value = "/mypage/bookmark", method = RequestMethod.GET)
 		public String bookmark(HttpServletRequest request, Model model, HttpSession session) throws Exception {

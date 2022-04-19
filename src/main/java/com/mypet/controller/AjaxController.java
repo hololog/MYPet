@@ -247,9 +247,9 @@ public class AjaxController {
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)
 	public ResponseEntity<List<MypageDTO>> mypagejson(MypageDTO mypageDTO, HttpServletRequest request){
-		String mylist = request.getParameter("nickname");
+		String email = request.getParameter("email");
 		
-		List<MypageDTO> myboardList = mypageDAO.getmyBoardList(mylist);
+		List<MypageDTO> myboardList = mypageDAO.getmyBoardList(email);
 		ResponseEntity<List<MypageDTO>> entity=new ResponseEntity<List<MypageDTO>>(myboardList , HttpStatus.OK);
 		
 		return entity;

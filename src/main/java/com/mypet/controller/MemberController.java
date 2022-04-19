@@ -49,6 +49,7 @@ public class MemberController {
 		if (memberCheckDTO != null) {
 			session.setAttribute("email", memberCheckDTO.getEmail());
 			session.setAttribute("nickname", memberCheckDTO.getNickname());
+			session.setAttribute("profileUpload", memberDTO.getProfileUpload());
 //			return "redirect:/main";
 			return "member/loginMsg";
 			
