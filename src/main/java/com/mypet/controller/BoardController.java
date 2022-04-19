@@ -70,7 +70,7 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 
 		List<FindboardDTO> findboardList = findboardService.getfindBoardList(pageDTO);
-		List<FileDTO> fileList = findboardService.getfindFileList();
+//		List<FileDTO> fileList = findboardService.getfindFileList(pageDTO);
 		List<FindboardDTO> findboardListMain = findboardService.getfindBoardListMain(email);
 		
 
@@ -92,7 +92,7 @@ public class BoardController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("findboardList", findboardList);
-		model.addAttribute("fileList", fileList);
+//		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
 		model.addAttribute("findboardListMain", findboardListMain);
 		
@@ -115,7 +115,7 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 
 		List<FindboardDTO> findmissboardList = findboardService.getfindMissBoardList(pageDTO);
-		List<FileDTO> fileList = findboardService.getfindFileList();
+//		List<FileDTO> fileList = findboardService.getfindFileList(pageDTO);
 		
 		int count = findboardService.getfindMissBoardCount();
 
@@ -135,7 +135,7 @@ public class BoardController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("findmissboardList", findmissboardList);
-		model.addAttribute("fileList", fileList);
+//		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
 		

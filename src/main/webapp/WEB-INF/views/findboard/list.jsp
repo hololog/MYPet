@@ -115,166 +115,150 @@
 }
 </style>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						var objDragAndDrop = $(".dragAndDropDiv");
-
-						$(document).on("dragenter", ".dragAndDropDiv",
-								function(e) {
-									e.stopPropagation();
-									e.preventDefault();
-									$(this).css('border', '2px solid #0B85A1');
-								});
-						$(document).on("dragover", ".dragAndDropDiv",
-								function(e) {
-									e.stopPropagation();
-									e.preventDefault();
-								});
-						$(document).on("drop", ".dragAndDropDiv", function(e) {
-
-							$(this).css('border', '2px dotted #0B85A1');
-							e.preventDefault();
-							var files = e.originalEvent.dataTransfer.files;
-
-							handleFileUpload(files, objDragAndDrop);
-						});
-
-						$(document).on('dragenter', function(e) {
-							e.stopPropagation();
-							e.preventDefault();
-						});
-						$(document).on('dragover', function(e) {
-							e.stopPropagation();
-							e.preventDefault();
-							objDragAndDrop.css('border', '2px dotted #0B85A1');
-						});
-						$(document).on('drop', function(e) {
-							e.stopPropagation();
-							e.preventDefault();
-						});
-						//drag 영역 클릭시 파일 선택창
-						/* objDragAndDrop.on('click', function(e) {
-							$('input[type=file]').trigger('click');
-						});
-
-						$('input[type=file]').on('change', function(e) {
-							var files = e.originalEvent.target.files;
-							handleFileUpload(files, objDragAndDrop);
-						});
-						function handleFileUpload(files, obj) {
-							for (var i = 0; i < files.length; i++) {
-								var fd = new FormData();
-								fd.append('file', files[i]);
-
-								var status = new createStatusbar(obj); //Using this we can set progress.
-								status.setFileNameSize(files[i].name,
-										files[i].size);
-								sendFileToServer(fd, status);
-
-							}
-						} */
-
-						var rowCount = 0;
-						function createStatusbar(obj) {
-
-							rowCount++;
-							var row = "odd";
-							if (rowCount % 2 == 0)
-								row = "even";
-							this.statusbar = $("<div class='statusbar "+row+"'></div>");
-							this.filename = $("<div class='filename'></div>")
-									.appendTo(this.statusbar);
-							this.size = $("<div class='filesize'></div>")
-									.appendTo(this.statusbar);
-							this.progressBar = $(
-									"<div class='progressBar'><div></div></div>")
-									.appendTo(this.statusbar);
-							this.abort = $("<div class='abort'>중지</div>")
-									.appendTo(this.statusbar);
-
-							obj.after(this.statusbar);
-
-							this.setFileNameSize = function(name, size) {
-								var sizeStr = "";
-								var sizeKB = size / 1024;
-								if (parseInt(sizeKB) > 1024) {
-									var sizeMB = sizeKB / 1024;
-									sizeStr = sizeMB.toFixed(2) + " MB";
-								} else {
-									sizeStr = sizeKB.toFixed(2) + " KB";
-								}
-
-								this.filename.html(name);
-								this.size.html(sizeStr);
-							}
-
-							this.setProgress = function(progress) {
-								var progressBarWidth = progress
-										* this.progressBar.width() / 100;
-								this.progressBar.find('div').animate({
-									width : progressBarWidth
-								}, 10).html(progress + "% ");
-								if (parseInt(progress) >= 100) {
-									this.abort.hide();
-								}
-							}
-							this.setAbort = function(jqxhr) {
-								var sb = this.statusbar;
-								this.abort.click(function() {
-									jqxhr.abort();
-									sb.hide();
-								});
-							}
-						}
-
-						function sendFileToServer(formData, status) {
-							var uploadURL = '${pageContext.request.contextPath }/findboard/update_find_filePro'; //Upload URL
-							var extraData = {}; //Extra Data.
-							var jqXHR = $
-									.ajax({
-										xhr : function() {
-											var xhrobj = $.ajaxSettings.xhr();
-											if (xhrobj.upload) {
-												xhrobj.upload
-														.addEventListener(
-																'progress',
-																function(event) {
-																	var percent = 0;
-																	var position = event.loaded
-																			|| event.position;
-																	var total = event.total;
-																	if (event.lengthComputable) {
-																		percent = Math
-																				.ceil(position
-																						/ total
-																						* 100);
-																	}
-																	//Set progress
-																	status
-																			.setProgress(percent);
-																}, false);
-											}
-											return xhrobj;
-										},
-										url : uploadURL,
-										type : "POST",
-										contentType : false,
-										processData : false,
-										cache : false,
-										data : formData,
-										success : function(data) {
-											status.setProgress(100);
-
-											//$("#status1").append("File upload Done<br>");           
-										}
-									});
-
-							status.setAbort(jqXHR);
-						}
-
-					});
-</script>
+            $(document).ready(function(){
+                var objDragAndDrop = $(".dragAndDropDiv");
+                
+                $(document).on("dragenter",".dragAndDropDiv",function(e){
+                    e.stopPropagation();
+                    e.preventDefault();
+                    $(this).css('border', '2px solid #0B85A1');
+                });
+                $(document).on("dragover",".dragAndDropDiv",function(e){
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+                $(document).on("drop",".dragAndDropDiv",function(e){
+                    
+                    $(this).css('border', '2px dotted #0B85A1');
+                    e.preventDefault();
+                    var files = e.originalEvent.dataTransfer.files;
+                
+                    handleFileUpload(files,objDragAndDrop);
+                });
+                
+                $(document).on('dragenter', function (e){
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+                $(document).on('dragover', function (e){
+                  e.stopPropagation();
+                  e.preventDefault();
+                  objDragAndDrop.css('border', '2px dotted #0B85A1');
+                });
+                $(document).on('drop', function (e){
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+                
+                //drag 영역 클릭시 파일 선택창
+                /* objDragAndDrop.on('click',function (e){
+                    $('input[type=file]').trigger('click');
+                }); */
+    
+				
+                $('input[type=file]').on('change', function(e) {
+                    var files = e.originalEvent.target.files;
+                    handleFileUpload(files,objDragAndDrop);
+                });
+                
+				function handleFileUpload(files,obj)
+                {
+                   for (var i = 0; i < files.length; i++) 
+                   {
+                        var fd = new FormData();
+                        fd.append('file', files[i]);
+                 
+                        var status = new createStatusbar(obj); //Using this we can set progress.
+                        status.setFileNameSize(files[i].name,files[i].size);
+                      	sendFileToServer(fd,status);
+                 
+                   }
+                }
+                
+                var rowCount=0;
+                function createStatusbar(obj){
+                        
+                    rowCount++;
+                    var row="odd";
+                    if(rowCount %2 ==0) row ="even";
+                    this.statusbar = $("<div class='statusbar "+row+"'></div>");
+                    this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
+                    this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
+                    this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
+                    this.abort = $("<div class='abort'>삭제</div>").appendTo(this.statusbar);
+                    
+                    
+                    obj.after(this.statusbar);
+                 
+                    this.setFileNameSize = function(name,size){
+                        var sizeStr="";
+                        var sizeKB = size/1024;
+                        if(parseInt(sizeKB) > 1024){
+                            var sizeMB = sizeKB/1024;
+                            sizeStr = sizeMB.toFixed(2)+" MB";
+                        }else{
+                            sizeStr = sizeKB.toFixed(2)+" KB";
+                        }
+                 
+                        this.filename.html(name);
+                        this.size.html(sizeStr);
+                    }
+                    
+                    this.setProgress = function(progress){       
+                        var progressBarWidth =progress*this.progressBar.width()/ 100;  
+                        this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
+                       
+                       
+                    }
+					this.setAbort = function(jqxhr){
+                        var sb = this.statusbar;
+                        this.abort.click(function()
+                        {
+                            jqxhr.abort();
+                            sb.hide();
+                        });
+                    }
+                }
+                
+                function sendFileToServer(formData,status)
+                {
+                    var uploadURL = '${pageContext.request.contextPath }/findboard/write_find_filePro'; //Upload URL
+                    var extraData ={}; //Extra Data.
+                    var jqXHR=$.ajax({
+                            xhr: function() {
+                            var xhrobj = $.ajaxSettings.xhr();
+                            if (xhrobj.upload) {
+                                    xhrobj.upload.addEventListener('progress', function(event) {
+                                        var percent = 0;
+                                        var position = event.loaded || event.position;
+                                        var total = event.total;
+                                        if (event.lengthComputable) {
+                                            percent = Math.ceil(position / total * 100);
+                                        }
+                                        //Set progress
+                                        status.setProgress(percent);
+                                    }, false);
+                                }
+                            return xhrobj;
+                        },
+                        url: uploadURL,
+                        type: "POST",
+                        contentType:false,
+                        processData: false,
+                        cache: false,
+                        data: formData,
+                        success: function(data){
+                            status.setProgress(100);
+                 
+                            //$("#status1").append("File upload Done<br>");           
+                        }
+                    }); 
+                 
+                    status.setAbort(jqXHR);
+                }
+                
+            });
+        </script>
 
 
 </head>
@@ -595,9 +579,9 @@
 
 		<!-- The Modal -->
 
-		<div class="modal fade  modal-dialog-scrollable" id="find_content"
+		<div class="modal fade  modal-dialog-scrollable " id="find_content"
 			aria-labelledby="ModalToggleLabel" tabindex="-1">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
 				<div class="modal-content">
 					<c:forEach var="fb" items="${findboardList}" varStatus="mdloop">
 						<input type="hidden" data-del="${fb.find_board_num}">
@@ -614,34 +598,13 @@
 								<div style="margin_bottom: 10px"></div>
 								<section id="slider" class="carousel slide"
 									data-bs-ride="carousel">
-									<!-- 슬라이드 쇼 -->
-									<div class="carousel-inner">
 										<!-- 사진1 -->
-										<input type="hidden"
-											value="${findboardList[mdloop.index].find_board_num}">
 										<input type="hidden" value="${mdloop.index}">
-										
-											<div class="carousel-item active">
 												<img
-													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
+													src="${pageContext.request.contextPath}/resources/upload/${fb.upload}"
 													alt="first slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</div>
-											<div class="carousel-item">
-												<img
-													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
-													alt="second slide" class="d-block w-100"
-													style="width: 100%; height: 100%; max-height: 550px;"
-													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</div>
-											<div class="carousel-item">
-												<img
-													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
-													alt="third slide" class="d-block w-100"
-													style="width: 100%; height: 100%; max-height: 550px;"
-													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</div>
 										<!-- 사진2 -->
 										<%-- <div class="carousel-item">
 											<img
@@ -651,17 +614,6 @@
 												onclick="window.open(this.src,'상세사진','width=430,height=500,location=no,status=no,scrollbars=yes')">
 										</div> --%>
 
-										<!-- 슬라이드 이동버튼 -->
-										<button class="carousel-control-prev" type="button"
-											data-bs-target="#slider" data-bs-slide="prev">
-											<span class="carousel-control-prev-icon"></span>
-										</button>
-										<button class="carousel-control-next" type="button"
-											data-bs-target="#slider" data-bs-slide="next">
-											<span class="carousel-control-next-icon"></span>
-										</button>
-										<!-- 슬라이드 이동버튼 끝 -->
-									</div>
 								</section>
 
 								<div>
@@ -671,18 +623,18 @@
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
 													장소</td>
-												<td style="padding-left: 10px"><b>${fb.address }</b>&nbsp;<b>${fb.address2}</b>&nbsp;<b>${fb.detail_address}</b></td>
+												<td class="td114" style="padding-left: 10px"><b>${fb.address }</b>&nbsp;<b>${fb.address2}</b>&nbsp;<b>${fb.detail_address}</b></td>
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
 													날짜</td>
-												<td style="text-align: center"><b>
-														${fb.missing_date} </b></td>
+												<td class="td115">
+														${fb.missing_date} </td>
 											</tr>
 
 											<tr>
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">이름</td>
-												<td style="padding-left: 10px"><b>${fb.pet_name}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(성별</b>
+												<td class="td114" style="padding-left: 10px"><b>${fb.pet_name}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(성별</b>
 													: <b><c:choose>
 															<c:when test="${fb.pet_gender eq 0}">암컷</c:when>
 															<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
@@ -691,7 +643,7 @@
 
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">종류</td>
-												<td style="padding-left: 10px"><b> <c:choose>
+												<td class="td115" style="padding-left: 10px"><b> <c:choose>
 															<c:when test="${fb.pet_type eq 0}">개</c:when>
 															<c:when test="${fb.pet_type eq 1}">고양이</c:when>
 															<c:when test="${fb.pet_type eq 2}">기타</c:when>
@@ -702,12 +654,14 @@
 											<tr>
 												<td class="td113" height="auto"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">연락수단</td>
-												<td valign="top"
+												<td class="td114" valign="top"
 													style="line-height: 11pt; padding-left: 10px;"><br>
-													${fb.content }<br> <br></td>
+													${fb.contact }<br> <br></td>
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">나이</td>
-
+													<td class="td115">
+													${fb.pet_age}
+													</td>
 											</tr>
 
 											<tr>
@@ -758,10 +712,9 @@
 							<!-- Modal Header -->
 							<div class="modal-header">
 								<h4 class="modal-title">
-									<a><b>${fb.pet_name}</b></a><a>(</a><a><b>${fb.address}</b></a>><a>)
+									<a><b>${fb.pet_name}</b></a><a>(</a><a><b>${fb.address}</b></a>)<a>)
 										수정하기</a>
 								</h4>
-								<input type="text" value="${num.count}">
 								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 							</div>
 							<!-- Modal body -->
@@ -939,7 +892,7 @@
 												<label class="input-group-text">연락 가능 수단</label> <input
 													type="text" class="form-control"
 													placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact"
-													value="${fb.contact }">
+													value="${fb.contact}">
 											</div>
 
 											<!--(구현못함 ㅠㅠ) file 드래그앤드롭-->
@@ -957,10 +910,9 @@
 
 											<!-- 기본 multiple file 전달 -->
 											<div id="fileUpload" class="dragAndDropDiv">
-												업로드할 이미지를 드래그하여 넣기 <br> (1장씩 첨부, 최대 3장)
+												업로드할 이미지를 드래그하여 넣기 <br>(최대 1장)
 											</div>
-											<input type="file" name="fileUpload" id="fileUpload"
-												style="display: none;" multiple />
+											<input type="file" name="fileUpload" id="fileUpload" style="display:none;" accept="image/jpg, image/gif, image/jpeg, image/png" multiple />
 
 											<!--submit 버튼-->
 										</div>

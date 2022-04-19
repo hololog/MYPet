@@ -133,6 +133,16 @@ box-kj {
 	width:113px;
 }
 
+.td114{
+	width:400px;
+}
+
+.td115{
+	width:150px;
+	padding-left:10px;
+	text-align:left;
+}
+
 #line{
 	width:100%;
 }

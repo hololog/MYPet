@@ -27,7 +27,7 @@ public interface FindboardService {
 
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
-	public List<FileDTO> getfindFileList();
+//	public List<FileDTO> getfindFileList(PageDTO pageDTO);
 	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
