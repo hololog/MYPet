@@ -18,8 +18,21 @@
 .help-block {
 	font-size: small;
 	color: #3f51b5;
+	
 }
 
+.dup {
+	margin-top: 3px;
+	font-size: small;
+	float: right;
+   
+}
+
+.dup2 {
+	margin-top: 3px;
+	font-size: small;
+	float: right;
+}
 .btn-close{
 	float: right;
 }
@@ -57,7 +70,7 @@
 }
 
 .whole_modal {
-    justify-content: center;
+     justify-content: center; 
     align-items: center;
     text-align: center;
 }
