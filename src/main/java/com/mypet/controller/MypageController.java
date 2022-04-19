@@ -84,13 +84,14 @@ public class MypageController {
 			
 			MemberDTO memberDTO = new MemberDTO();
 			MultipartFile file = multi.getFile("profile");
+			
+			memberDTO.setNickname(multi.getParameter("nickname"));
+			memberDTO.setEmail(multi.getParameter("email"));
+			
 			MemberDTO updateCheckDTO = mypageService.updateCheck(memberDTO);
 			
+			System.out.println(updateCheckDTO);
 			if(updateCheckDTO == null) {
-				
-				memberDTO.setNickname(multi.getParameter("nickname"));
-				memberDTO.setEmail(multi.getParameter("email"));
-				
 				
 				//path 설정, 원본파일명 변수에 담기
 				String path=uploadPath;
@@ -115,6 +116,7 @@ public class MypageController {
 			            e.printStackTrace();
 			        }
 				
+				
 				mypageService.updateMember(memberDTO);
 				
 				MemberDTO updatememberDTO = mypageService.getMember(memberDTO.getEmail());
@@ -123,11 +125,9 @@ public class MypageController {
 				session.setAttribute("nickname", updatememberDTO.getNickname());
 				session.setAttribute("profileUpload", updatememberDTO.getProfileUpload());
 				
-				return "main/main";
-			} else {
-				return "mypage/mypagemsg";
+					return "redirect:/main";
+				} else {return "mypage/mypagemsg";}
 			}
-		}
 		
 		@RequestMapping(value = "/mypage/leave", method = RequestMethod.GET)
 		public String leave() {

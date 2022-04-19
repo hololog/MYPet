@@ -12,7 +12,7 @@
 	<select id="updateCheck" resultType="com.mypet.domain.MemberDTO">
 		select * 
 		  from user 
-		 where nickname=#{nickname} and email=#{email}
+		 where nickname=#{nickname}
 <!-- 		 <if test="!email.equals('') and email != null"> -->
 <!-- 		   and email = #{email} -->
 <!-- 		 </if> -->
