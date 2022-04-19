@@ -194,6 +194,7 @@
         <!-- 슬라이드 쇼 끝 -->
          <!-- 글 -->
          <h3 class="justify-content-center text-center font-weight-bold">${boardDTO.subject}</h3>
+         <input type="hidden" id="num" value="${boardDTO.notice_num}">
         <br>
         <br>
         <div class="row text-center justify-content-center">
@@ -334,67 +335,73 @@
                    		<i class="bi bi-heart" style="color: red;"></i><span id="mark${boardDTO.notice_num }" class="star-ksk"> ${boardDTO.like_count }</span> 
 					</c:otherwise>	                          
                 </c:choose>
-                <div class="in-line-kj">
-
-                    <input type="text" id="name-kj" placeholder="댓글을 입력해 주세요!">&nbsp;
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary "
-                        onclick="location.href=''">등록</button>
-                </div>
-                <!-- <div class="input-group mb-3"> <input type="text" class="form-control"
-                placeholder="Recipient's username" aria-label="Recipient's username"
-                aria-describedby="button-addon2"> <button class="btn btn-outline-secondary"
-                type="button" id="button-addon2">Button</button> </div> -->
-                <div class="justify-content-center container mx-5">
-                    <div class="d-flex mb-4 ">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3">
-                            <div class="fw-bold">익명1<p style="font-size: x-small;">2022.03.30</p></div>
-                            꼭 찾으셧으면 좋겟어요 ㅠㅠ
-
-                            <div class="d-flex mt-4 ">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명2</div><p style="font-size: x-small;">2022.03.30</p>
-                                    그러게요 ㅠㅠ
-                                </div>
-                            </div>
-                            <!-- Child comment 2-->
-                            <div class="d-flex mt-4 mx-5">
-                                <div class="flex-shrink-0"><img
-                                    class="rounded-circle"
-                                    src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                    alt="..."></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold">익명3</div><p style="font-size: x-small;">2022.03.30</p>
-                                    33
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single comment-->
-                    <div class="row-vh d-flex flex-row">
-                        <div class="flex-shrink-0"><img
-                            class="rounded-circle"
-                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                            alt="..."></div>
-                        <div class="ms-3 row">
-                            <div class="fw-bold">글작성자</div><p style="font-size: x-small;">2022.03.30</p>
-                            찾았습니다!! 감사합니다!!
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                
+                
+              <div class="in-line-kj">
+				<div class="card bg-light" style="margin-top: 30px">
+					<div class="card-body">
+						<div id="comment-count" style="margin-bottom: 5px">
+							댓글 <span id="noticecount"></span>
+						</div>
+						
+						<form action="${pageContext.request.contextPath}/notice/noticecommentsIn" method="post">
+						<input type="hidden" value="${boardDTO.notice_num}" name="board_num">
+						<input type="hidden" value="${sessionScope.nickname}" name="nickname">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control"
+								placeholder="댓글을 입력해 주세요!" aria-label="Recipient's username"
+								aria-describedby="button-addon2" id="com" name="content">
+								<input type="text" style="display:none;"/>
+							<c:if test="${empty sessionScope.nickname}">
+							<button class="btn btn-outline-secondary" type="button"
+								id="button-addon2"
+								style="background-color: white; color: #3f51b5; border-color: #3f51b5" onclick="writecom()">제출</button>
+								<script>
+								function writecom(){
+									alert("댓글쓰기는 로그인 후 이용가능합니다.");
+								}
+								</script>
+							</c:if>
+							<c:if test="${!empty sessionScope.nickname}">
+							<button class="btn btn-outline-secondary" type="submit"
+								id="button-addon2"
+								style="background-color: white; color: #3f51b5; border-color: #3f51b5">제출</button>
+							</c:if>
+							</div>
+						</form>
+						<!-- Single comment-->
+						<div id="nicke">
+							<!-- <div class="d-flex" >
+								<div class="flex-shrink-0">
+									<img class="rounded-circle"
+										src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+								</div>
+								<div class="ms-3">
+									<div class="fw-bold"></div>
+									
+									</div> -->
+									
+							
+						
+							<!-- <div class="d-flex" style="padding:10px 0 10px 10px">
+							<div class="flex-shrink-0">
+								<img class="rounded-circle"
+									src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="...">
+							</div>
+							<div class="ms-3">
+							<div class="fw-bold">닉네임</div>
+								찾았습니다!! 감사합니다!!
+								</div>
+								<div style="text-align:right">
+								2022.04.17
+								</div>
+							</div> -->
+					</div>
+					</div>
+				</div>
+				</div>
+				</div>
+			</section>
 
     
 
@@ -428,6 +435,45 @@ var url_combine_fb = url_default_fb + url_this_page;
 var url_combine_tw = url_default_tw_txt + document.title +
         url_default_tw_url + url_this_page;
 </script>
-
+<script>
+$(document).ready(function(){
+		$.ajax({
+		url:'${pageContext.request.contextPath}/notice/ajaxcomments',
+		data: 'notice_num='+$('#num').val(),
+		dataType:'json',
+		success:function(rdata){
+			$.each(rdata,function(index,item){
+				$('#nicke').append("<div class='d-flex'>"+
+								  "	<div class='flex-shrink-0'>"+
+								  "		<img class='rounded-circle' src='https://dummyimage.com/50x50/ced4da/6c757d.jpg' alt='...'>"+
+								  " </div>"+
+								  "	<div class='ms-3'>"+
+								  "		<div class='fw-bold'>"+item.c_nik.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
+								  " </div>"+
+								  "</div>"+
+								  "<br>"
+								  );
+			});
+		},
+		error:function(er){
+			
+			alert("실패원인 : " + er);
+		}
+	}); 
+});
+</script>
+ <script>
+$(document).ready(function(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/notice/ajaxcommentsfCount',
+		method:'post',
+		data : 'notice_num='+$('#num').val(),
+		dataType:'json',
+		success:function(rdata){
+			$('#noticecount').html(rdata);
+		}
+	});
+});
+</script> 
 </body>
 </html>

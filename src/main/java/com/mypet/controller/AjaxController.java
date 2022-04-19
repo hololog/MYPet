@@ -88,7 +88,7 @@ public class AjaxController {
 	}	
 	
 	//경진
-	@RequestMapping(value = "/free/ajaxcomments", method = RequestMethod.GET)
+	@RequestMapping(value = "/freeboard/ajaxcomments", method = RequestMethod.GET)
 	public ResponseEntity<List<ReplyDTO>> freecommentjson(HttpServletRequest request){
 		int bnum = Integer.parseInt(request.getParameter("free_board_num"));
 		List<ReplyDTO> freecommentList = boardService.getfreecommentList(bnum); // 10
@@ -99,10 +99,57 @@ public class AjaxController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/free/ajaxcommentsfCount", method = RequestMethod.POST)
+	@RequestMapping(value = "/freeboard/ajaxcommentsfCount", method = RequestMethod.POST)
 	public ResponseEntity<String> freecommentCount(HttpServletRequest request){
 		int bnum = Integer.parseInt(request.getParameter("free_board_num"));
 		String result = boardDAO.getfreecommentCount(bnum);
+		System.out.println("수신완료");
+		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	
+	//review
+	@RequestMapping(value = "/reviewboard/ajaxcomments", method = RequestMethod.GET)
+	public ResponseEntity<List<ReplyDTO>> reviewcommentjson(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("tip_board_num"));
+		List<ReplyDTO> reviewcommentList = boardService.getreviewcommentList(bnum); // 10
+		
+		ResponseEntity<List<ReplyDTO>> entity=new ResponseEntity<List<ReplyDTO>>(reviewcommentList , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/reviewboard/ajaxcommentsfCount", method = RequestMethod.POST)
+	public ResponseEntity<String> reviewcommentCount(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("tip_board_num"));
+		String result = boardDAO.getreviewcommentCount(bnum);
+		System.out.println("수신완료");
+		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	
+	//notice
+	@RequestMapping(value = "/notice/ajaxcomments", method = RequestMethod.GET)
+	public ResponseEntity<List<ReplyDTO>> noticecommentjson(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("notice_num"));
+		System.out.println(bnum);
+		List<ReplyDTO> noticecommentList = boardService.getnoticecommentList(bnum); // 10
+		
+		ResponseEntity<List<ReplyDTO>> entity=new ResponseEntity<List<ReplyDTO>>(noticecommentList , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/notice/ajaxcommentsfCount", method = RequestMethod.POST)
+	public ResponseEntity<String> noticecommentCount(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("notice_num"));
+		String result = boardDAO.getnoticecommentCount(bnum);
 		System.out.println("수신완료");
 		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
 		

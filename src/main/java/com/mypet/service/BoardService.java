@@ -102,9 +102,20 @@ public interface BoardService {
 	//file end
 		
 	//comment
+		//free
 	    public List<ReplyDTO> getfreecommentList(int bnum);	
 	    
 	    public void freecommentIn(ReplyDTO replyDTO);
+	    
+	    //review
+	    public List<ReplyDTO> getreviewcommentList(int bnum);	
+	    
+	    public void reviewcommentIn(ReplyDTO replyDTO);
+	    
+	    //notice
+	    public List<ReplyDTO> getnoticecommentList(int bnum);	
+	    
+	    public void noticecommentIn(ReplyDTO replyDTO);
 		
 		
 }

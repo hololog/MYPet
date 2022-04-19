@@ -133,17 +133,50 @@ public class BoardController {
 		
 		return "findboard/listM";
 	}
-	
-	@RequestMapping(value = "/free/freecommentsIn", method = RequestMethod.POST)
+	//free
+	@RequestMapping(value = "/freeboard/freecommentsIn", method = RequestMethod.POST)
 	public String writeFreePro(HttpServletRequest Request) throws Exception {
 		
+		String pnum = Request.getParameter("board_num");
+		int Pnum = Integer.parseInt(Request.getParameter("board_num"));
+		System.out.println(pnum + "//" + Pnum);
 		ReplyDTO replyDTO = new ReplyDTO();
 		replyDTO.setBoard_num(Integer.parseInt(Request.getParameter("board_num")));
 		replyDTO.setComment(Request.getParameter("content"));
 		replyDTO.setC_nik(Request.getParameter("nickname"));
 		boardService.freecommentIn(replyDTO);
 		
-		return "redirect:/freeboard/list_free";
+		return "redirect:content_free?free_board_num="+pnum;
+	}
+	//notice
+	@RequestMapping(value = "/notice/noticecommentsIn", method = RequestMethod.POST)
+	public String writeNoticePro(HttpServletRequest Request) throws Exception {
+		
+		String pnum = Request.getParameter("board_num");
+		int Pnum = Integer.parseInt(Request.getParameter("board_num"));
+		System.out.println(pnum + "//" + Pnum);
+		ReplyDTO replyDTO = new ReplyDTO();
+		replyDTO.setBoard_num(Integer.parseInt(Request.getParameter("board_num")));
+		replyDTO.setComment(Request.getParameter("content"));
+		replyDTO.setC_nik(Request.getParameter("nickname"));
+		boardService.noticecommentIn(replyDTO);
+		
+		return "redirect:content_notice?notice_num="+pnum;
+	}
+	//review
+	@RequestMapping(value = "/reviewboard/reviewcommentsIn", method = RequestMethod.POST)
+	public String writeReviewPro(HttpServletRequest Request) throws Exception {
+		
+		String pnum = Request.getParameter("board_num");
+		int Pnum = Integer.parseInt(Request.getParameter("board_num"));
+		System.out.println(pnum + "//" + Pnum);
+		ReplyDTO replyDTO = new ReplyDTO();
+		replyDTO.setBoard_num(Integer.parseInt(Request.getParameter("board_num")));
+		replyDTO.setComment(Request.getParameter("content"));
+		replyDTO.setC_nik(Request.getParameter("nickname"));
+		boardService.reviewcommentIn(replyDTO);
+		
+		return "redirect:content_review?tip_board_num="+pnum;
 	}
 //	public String find_photo(HttpServletRequest request, Model model) throws Exception {
 //		int pageSize = 5;
