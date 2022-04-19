@@ -292,10 +292,10 @@
 					alert("사례금을 입력하세요");
 					return false;
 				} 
-				if($('#animal_sort_eh').val()=="" || $('#animal_sort_eh').val()==null){
-					alert("동물 종류를 선택해 주세요");
-					return false;
-				}
+// 				if($('#animal_sort_eh').val()=="" || $('#animal_sort_eh').val()==null){
+// 					alert("동물 종류를 선택해 주세요");
+// 					return false;
+// 				}
 				if($('#pet_name').val()=="" || $('#pet_name').val()==null){
 					alert("동물 이름을 입력해 주세요");
 					$('#pet_name').focus();
@@ -331,10 +331,10 @@
 					$('#contact').focus();
 					return false;
 				}
-				if($('#fileUpload').val()=="" || $('#fileUpload').val()==null){
-					alert("반려동물의 사진을 업로드 해주세요");
-					return false;
-				}	
+// 				if($('#fileUpload').val()=="" || $('#fileUpload').val()==null){
+// 					alert("반려동물의 사진을 업로드 해주세요");
+// 					return false;
+// 				}	
  			});//
  		});//	
  		</script>
@@ -460,7 +460,7 @@
                              
                              <!-- 기본 multiple file 전달 -->
                              <div id="fileUpload" class="dragAndDropDiv">업로드할 사진 드래그(최대1장)</div>
-        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" accept="image/jpg, image/gif, image/jpeg, image/png">
+        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" accept="image/jpg, image/gif, image/jpeg, image/png" multiple />
 
                             <!--submit 버튼-->
                             <div class="text-center p-2">
