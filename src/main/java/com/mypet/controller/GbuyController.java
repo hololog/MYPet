@@ -67,7 +67,7 @@ public class GbuyController {
    public String GMain(HttpServletRequest request, Model model) {
       System.out.println("BoardController list(1) ");
       // 한화면에 보여줄 글개수 설정
-      int pageSize=6;
+      int pageSize=3;
       // pageNum 파라미터값 가져오기 => 없으면 1페이지 설정
       String pageNum=request.getParameter("pageNum");
       if(pageNum==null) {
@@ -155,7 +155,7 @@ public class GbuyController {
       public String Gbuy_Main2(HttpServletRequest request, Model model) {
          System.out.println("BoardController GbuyMain2() ");
          // 한화면에 보여줄 글개수 설정
-         int pageSize=9;
+         int pageSize=4;
          // pageNum 파라미터값 가져오기 => 없으면 1페이지 설정
          String pageNum=request.getParameter("pageNum");
          if(pageNum==null) {
