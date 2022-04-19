@@ -252,13 +252,13 @@ $(document).ready(function(){
                         <form action="${pageContext.request.contextPath }/member/joinPro" class="whole_modal" method="post">
                         
                           <div class="form-floating mb-3">
-		   				  <input type="text" class="form-control rounded-4" id="nick" name="nickname" required autofocus>
+		   				  <input type="text" class="form-control rounded-4" id="nickname" name="nickname" required autofocus>
                             <label for="floatingInput_NM">닉네임</label>
                             <span class="ex-plain email-alert" style="display :none;"> 이미 사용중인 닉네임입니다. </span>
-<!--                             <button id="nnbtn">중복확인</button> -->
+                            <button id="idck">중복확인</button>
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" id="em" name="email" required autofocus>
+                            <input type="email" class="form-control rounded-4" id="email" name="email" required autofocus>
                             <label for="floatingInput_EM">email@example.com</label>
                             <div class="check_font" id="EM_check"></div>
                           </div>
@@ -286,7 +286,7 @@ $(document).ready(function(){
                           </p>
                           </div>
                            
-                          <div>
+                          <div class="button-login" align ="center">
                           <p>
                            <a id="kakao-login-btn">
 						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입"></a>
@@ -489,6 +489,55 @@ function recheck() {
 </script>
 
 <!-- 회원가입 유효성 -->
+<!--id  -->
+<script type="text/javascript">
+//아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
+var idck = 0;
+$(function() {
+    //idck 버튼을 클릭했을 때 
+    $("#idck").click(function() {
+        
+        //userid 를 param.
+        var userid =  $("#nickname").val(); 
+        
+        $.ajax({
+            async: true,
+            type : 'POST',
+            data : nickname,
+            url : "idcheck.do",
+            dataType : "json",
+            contentType: "application/json; charset=UTF-8",
+            success : function(data) {
+                if (data.cnt > 0) {
+                    
+                    alert("이미 존재하는 닉네임입니다.");
+                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+                    $("#divInputId").addClass("has-error")
+                    $("#divInputId").removeClass("has-success")
+                    $("#nickname").focus();
+                    
+                
+                } else {
+                    alert("사용가능한 아이디입니다.");
+                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+                    $("#divInputId").addClass("has-success")
+                    $("#divInputId").removeClass("has-error")
+                    $("#email").focus();
+                    //아이디가 중복하지 않으면  idck = 1 
+                    idck = 1;
+                    
+                }
+            },
+            error : function(error) {
+                
+                alert("error : " + error);
+            }
+        });
+    });
+});
+</script>
+
+
 
 
 
