@@ -15,6 +15,8 @@
 	href="${pageContext.request.contextPath }/resources/css/main.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/GBuy.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/pay.css" />	
 <!-- 부트스트랩 적용 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -87,12 +89,10 @@ $(function(){
 
                 <div class="container mt-3">
                     <div class="text-lg-end" >
- 			<%String id=(String)session.getAttribute("id");	//세션값 가져오기 %>
- 				<% if(id != null){
- 				if(id.equals("admin")){ %>
-			<input type="button" value="글쓰기" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'">	
-			<input type="button" value="박스리스트" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain'">	
-			<%}} %>
+		<c:if test="${sessionScope.nickname eq 'admin'}">
+			<input type="button" value="글쓰기" class="w-btn w-btn-indigo" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'"> &nbsp;	
+			<input type="button" value="박스리스트" class="w-btn w-btn-indigo" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain'">	
+		</c:if>	
 		</div>
                   <table class="table table-hover text-center  " style="margin: auto;" >
                     <thead>
@@ -103,12 +103,11 @@ $(function(){
                         <th width="5%">목표수</th>
                         <th width="5%">재고수</th>
                         <th width=10%>진행상황</th>
-                        <th width="5%">wp품가격</th>
-                         <% if(id != null){
-							if(id.equals("admin")){ %>
+                        <th width="5%">제품가격</th>
+		<c:if test="${sessionScope.nickname eq 'admin'}">
                         <th width="3%">수정하기</th>
                         <th width="3%">삭제하기</th>
-                         <%}} %>
+		</c:if>
                         <th width="7%">등록일</th>
                     </tr>
                   </thead>
@@ -129,11 +128,10 @@ $(function(){
 							aria-valuemax="100"><fmt:formatNumber value="${(((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100))}"/> %</div>
 					</div></th>
                         <th>${GDTO.gbuy_price}</th>
-                         <% if(id != null){
- 							if(id.equals("admin")){ %>
+		<c:if test="${sessionScope.nickname eq 'admin'}">
                         <th><input type="button" value="글수정" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${GDTO.gbuy_num}'" ></th>
                         <th><input type="button" value="글삭제" class="btn_GB" onclick="location.href='${pageContext.request.contextPath}/GB/GbuyDelete?gbuy_num=${GDTO.gbuy_num}'" ></th>
-                        	<%}} %>
+		</c:if>
                         <th><fmt:formatDate value="${GDTO.gbuy_date}" pattern="yyyy-MM-dd"/></th>
                     </tr>
 					</c:forEach> 

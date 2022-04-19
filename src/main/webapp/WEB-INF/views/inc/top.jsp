@@ -86,7 +86,6 @@
 		</c:when>
 		<c:otherwise>
 			<div class="d-flex justify-content-end align-items-center flex-wrap gap-2">
-			<span>${sessionScope.nickname }님 반갑습니다.</span>
 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage/myinfo?email=${sessionScope.email}">마이페이지</a>
 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
 		 	</div>
@@ -252,20 +251,27 @@ $(document).ready(function(){
                         <form action="${pageContext.request.contextPath }/member/joinPro" class="whole_modal" method="post">
                         
                           <div class="form-floating mb-3">
-		   				  <input type="text" class="form-control rounded-4" id="nick" name="nickname" required autofocus>
+		   				  <input type="text" class="form-control rounded-4" id="nickname" name="nickname" required autofocus>
                             <label for="floatingInput_NM">닉네임</label>
-                            <span class="ex-plain email-alert" style="display :none;"> 이미 사용중인 닉네임입니다. </span>
-<!--                             <button id="nnbtn">중복확인</button> -->
+                            <input type="button" value="중복확인" class="dup" style="size: 5px;">
+                            <label></label><div id="divdup">중복확인</div>
                           </div>
+                          
+
+                          
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" id="em" name="email" required autofocus>
+                            <input type="email" class="form-control rounded-4" id="email" name="email" required autofocus>
                             <label for="floatingInput_EM">email@example.com</label>
-                            <div class="check_font" id="EM_check"></div>
+<!--                             <div class="check_font" id="EM_check"></div> -->
+							<input type="button" value="중복확인" class="dup2">
+                            <label></label><div id="divdup2">중복확인</div>
                           </div>
+                          
                           <div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" name="password" id="pw" minlength="8" maxlength="10" required autofocus>
                             <label for="floatingPassword">비밀번호(8~10자 입력)</label>
                           </div>
+                          
 		  					<div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" id="pw2" onkeyup="checkPwd()" minlength="8" maxlength="10" required>
                             <label for="floatingPassword">비밀번호 재확인</label>
@@ -286,7 +292,7 @@ $(document).ready(function(){
                           </p>
                           </div>
                            
-                          <div>
+                          <div class="button-login" align ="center">
                           <p>
                            <a id="kakao-login-btn">
 						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입"></a>
@@ -299,8 +305,8 @@ $(document).ready(function(){
 						  </a>
                           </div>
                           
-                          </div>
-                        </form>
+                        	</form>
+                         </div>
                       </div>
                     </div>
                   </div>
@@ -489,8 +495,49 @@ function recheck() {
 </script>
 
 <!-- 회원가입 유효성 -->
+<!-- id  -->
+ <script type="text/javascript">
+ 	//아이디 중복체크
+	// class="dup" 버튼을 클릭했을때 
+	$('.dup').click(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath }/member/userCheck2",
+			data:{"nickname":$('#nickname').val()},
+			success:function(rdata){
+				if(rdata=='idok'){
+					rdata="사용가능한 닉네임";
+				}else{
+					rdata="존재하는 닉네임";
+				}
+				// id="divdup" 에 리턴받은 값 넣기
+				$('#divdup').html(rdata);
+			}
+		});
 
+	});	 
+</script>
 
+<!-- email  -->
+ <script type="text/javascript">
+ 	//이메일 중복체크
+	// class="dup2" 버튼을 클릭했을때 
+	$('.dup2').click(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath }/member/userCheck",
+			data:{"nickname":$('#nickname').val()},
+			success:function(rdata){
+				if(rdata=='idok2'){
+					rdata="사용가능한 이메일";
+				}else{
+					rdata="이미 존재하는 이메일";
+				}
+				// id="divdup" 에 리턴받은 값 넣기
+				$('#divdup2').html(rdata);
+			}
+		});
+
+	});	 
+</script>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/css/style.css"></script>

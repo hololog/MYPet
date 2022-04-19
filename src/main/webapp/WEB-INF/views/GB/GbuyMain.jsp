@@ -15,6 +15,8 @@
 	href="${pageContext.request.contextPath }/resources/css/main.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/GBuy.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/pay.css" />	
 <!-- 부트스트랩 적용 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -55,12 +57,10 @@
 	<!-- 글쓰기버튼 -->
 	<div class="container" >
 		<div class="text-lg-end">
- 			<%String id=(String)session.getAttribute("id");	//세션값 가져오기 %>	 
- 				<% if(id != null){
-  				if(id.equals("admin")){ %>	 
-			<input type="button" value="글쓰기" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'">	
-			<input type="button" value="리스트" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain2'">	
-				<%}} %>
+		<c:if test="${sessionScope.nickname eq 'admin'}">
+			<input type="button" value="글쓰기" class="w-btn w-btn-indigo" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'"> &nbsp;
+			<input type="button" value="리스트" class="w-btn w-btn-indigo" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain2'"> <br>
+		</c:if>	
 		</div>
 		<!--상품-->
 		<c:forEach var="GDTO" items="${GbuyboardList}">
@@ -104,12 +104,7 @@
 		</div>
  	</c:forEach>
  			<div class="text-lg-end"> 
-			<% if(id != null){
-				if(id.equals("admin")){ %>	 
-			<input type="button" value="글쓰기" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyWrite'">
-			<input type="button" value="리스트" class="btn_GB" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain2'">	
-			<%}
-			}%>
+
 		</div>
     	<div class="text-center">
 			<ul class="pagination justify-content-center" style="margin:20px">

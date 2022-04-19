@@ -34,6 +34,7 @@
 	src="${pageContext.request.contextPath }/resources/script/main.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eff268212342867ed07048385b8791c9&libraries=services"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 <style>
@@ -293,8 +294,9 @@
 			<hr>
 		</div>
 		<!-- 제목 종료 -->
-		<div class="row">
-			<div class="container mt-5 p-2" id="find-board">
+
+		<div class="container mt-5 p-2" id="find-board">
+			<div class="row">
 				<!-- 신고글쓰기버튼 -->
 				<div class="row p-3">
 					<div class="col-12">
@@ -316,7 +318,7 @@
 				</div>
 				<input type="hidden" data-addr="${findboardDTO.address}">
 				<!-- 메인 -->
-				<div class="row" style="min-height: 1500px">
+				<div class="row" style="min-height: 1000px">
 
 					<!-- 지도 api가져올 자리 -->
 					<div id="map" style="max-width: 55%;"
@@ -324,19 +326,7 @@
 					<script type="text/javascript"
 						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eff268212342867ed07048385b8791c9"></script>
 					<script>
-					$(function(){
-						$(".map-click").on("click",function(){
-							let num3 = $(this).children(".mapview").val();
-							alert(num3);
-						alert(num3);
-						    $.ajax({
-							url:"${pageContext.request.contextPath }/ajaxmap",
-							async: false,
-							data: {"find_board_num" : num3},
-							type: "get",
-							contentType :"application/json; charset:UTF-8",
-							success: function(rdata){
-								var addr = rdata;
+					
 					 			
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					mapOption = {
@@ -362,6 +352,17 @@
 
 					var geocoder = new kakao.maps.services.Geocoder();
 					
+					$(function(){
+						$(".map-click").on("click",function(){
+							let num3 = $(this).children(".mapview").val();
+						    $.ajax({
+							url:"${pageContext.request.contextPath }/ajaxmap",
+							async: false,
+							data: {"find_board_num" : num3},
+							type: "get",
+							contentType :"application/json; charset:UTF-8",
+							success: function(rdata){
+								var addr = rdata;
 					
 					// 주소로 좌표를 검색합니다
 					geocoder.addressSearch( addr ,function(result, status) {
@@ -387,13 +388,13 @@
 
 											// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 											map.setCenter(coords);
+											map.relayout();
 										}
 									});
 							}
 						   });
 					}); 
 					});
-					
 				</script>
 					<!-- 지도 api가져올 자리 -->
 					<div class="mb-3 col-md-12 col-lg-5" style="margin-left: 20px"
@@ -439,7 +440,7 @@
 												data-bs-target="#find_content" onmouseover='mapper()'> <img
 												class="img-fluid rounded"
 												src="${pageContext.request.contextPath }/resources/upload/${fb.upload}"
-												alt="실종동물사진" style="max-height: 300px">
+												alt="실종동물사진" style="max-height: 250px">
 											</a>
 										</c:when>
 										<c:when test="${fileList[loop.index].filename eq null}">
@@ -455,7 +456,7 @@
 										</c:when>
 									</c:choose>
 								</div>
-								
+
 								<div class="col-12 col-sm-5 p-2" id="find-info-ksk">
 									<div class="row p-2">
 										<div class="col-6 col-sm-12" style="white-space: normal">
@@ -485,37 +486,36 @@
 										<div class="p-1 col-6 col-sm-12">
 											<i class="bi bi-coin"></i> 사례금 : <b>${fb.reward}</b> 만원
 										</div>
-										<div class="d-flex justify-content-between align-items-center">
-											<div>
-												<i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i>
-												<span id="mark${fb.find_board_num }" class="star-ksk">${fb.bookmark_count }</span>
-												<i class="bi bi-chat-dots"></i> <span class="chat-ksk">
-													0 </span> <i class="bi bi-eye-fill"></i><span class="eye-ksk">
-													${fb.readcount }</span>
-											</div>
-										</div>
+										
 										<div>
-										 <c:choose>
-	              							<c:when test="${findboardListMain[loop.index].book eq 'Y'}">
-	              							<a type="button" class="bookmark-click">
-	              							<input class="bomchild" type="hidden" value="${fb.find_board_num}">
-											<input type="checkbox" class="btn-check y" checked autocomplete="on">
-											<label class="btn btn-outline-primary" for="btn-check-outlined">즐겨찾기</label>
+											<c:if test="${!empty sessionScope.email }">
+												<c:choose>
+													<c:when test="${findboardListMain[loop.index].book eq 'Y' }">
+														<a type="button" class="bookmark-click" style="vertical-align:top"> <input
+															type="hidden" value="${fb.find_board_num }"
+															class="fbnum-ksk"> <i
+															class="fa-solid fa-star fa-2x"
+															style="top: 10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+														</a>
+														 <span id="mark${findboardListMain[loop.index].find_board_num }" class="star-ksk"> ${findboardListMain[loop.index].bookmark_count }</span> 
+													</c:when>
+													<c:otherwise>
+														<a type="button" class="bookmark-click" style="vertical-align:top"> <input
+															type="hidden" value="${fb.find_board_num }"
+															class="fbnum-ksk"> <i
+															class="fa-regular fa-star fa-2x"
+															style="top: 10px; left: 10px; color: rgba(245, 212, 22, 0.788);"></i>
+														</a>
+														<span id="mark${findboardListMain[loop.index].find_board_num }" class="star-ksk"> ${findboardListMain[loop.index].bookmark_count }</span>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+											<a type="button" class="map-click"> <input class="btn"
+												type="button" style="border-color: #3f51b5;"
+												data-mapview="${fb.find_board_num}" value="위치보기"
+												id="mapmap${loop.index}"> <input type="hidden"
+												class="mapview" value="${fb.find_board_num}">
 											</a>
-											</c:when>
-	              							<c:otherwise> 
-	              							<a type="button" class="bookmark-click">
-	              							<input class="bomchild" type="hidden" value="${fb.find_board_num}">
-	              							<input type="checkbox" class="btn-check n" autocomplete="off">
-											<label class="btn btn-outline-primary" for="btn-check-outlined">즐겨찾기</label>
-											</a>
-											 </c:otherwise>
-										</c:choose>
-										<a type="button" class="map-click">
-											<input class="btn" type="button" style="border-color: #3f51b5;" 
-											data-mapview="${fb.find_board_num}" value="지도에서 보기" id="mapmap${loop.index}">
-											<input type="hidden" class="mapview" value="${fb.find_board_num}">
-										</a> 
 										</div>
 									</div>
 								</div>
@@ -764,6 +764,7 @@
 									<a><b>${fb.pet_name}</b></a><a>(</a><a><b>${fb.address}</b></a>><a>)
 										수정하기</a>
 								</h4>
+								<input type="text" value="${num.count}">
 								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 							</div>
 							<!-- Modal body -->
@@ -913,7 +914,7 @@
 											<div class="input-group">
 												<label class="input-group-text">실종 지역</label> <select
 													class="form-select province" name="address1"
-													data-test2="${num.index}">
+													data-test3="${num.count}">
 													<option value="">지역</option>
 												</select> <select class="form-select city" name="address2">
 													<option selected>시</option>
@@ -1051,7 +1052,8 @@
 		}); // provicne selected
 		
 		$('.province').change(function(){//province 변경 이벤트발생시 ajax 실행
-			var exp3=$(".province").data("test2");
+			var exp3=$(".province").data("test3");
+		alert(exp3);
 			$.ajax({
 				url:'${pageContext.request.contextPath }/findboard/citySelect',
 				data:{"province":$('.province').eq(exp3-1).val()},// request.setParameter("province", #province의 값)의 같음
@@ -1066,10 +1068,11 @@
 		}); //city selected
 		
 		$('.city').change(function(){//city 변경 이벤트발생시 ajax 실행
-			var exp3=$(".province").data("test2");
+			var exp4=$(".province").data("test3");
+			alert(exp4);
 			$.ajax({
 				url:'${pageContext.request.contextPath }/findboard/townSelect',
-				data:{"city":$('.city').eq(exp3-1).val(),"province":$('.province').eq(exp3-1).val()},// request.setParameter("city", #city의 값)의 같음
+				data:{"city":$('.city').eq(exp4).val(),"province":$('.province').eq(exp4).val()},// request.setParameter("city", #city의 값)의 같음
 				dataType:'json',
 				success:function(rdata){
 					$('.town').html("<option selected>동</option>");//화면초기화
@@ -1098,18 +1101,20 @@
        				} 
 				}
 </script>
-<script>
+	<script>
 $(document).ready(function(){
 	//북마트 클릭이벤트
 	$('.bookmark-click').click(function(){
-		let no = $(this).children('.bomchild').val();
+		let no = $(this).children('.fbnum-ksk').val();
 		alert(no);
 // 		console.log(no);
 		//빈별표 일때
-		if($(this).children('input').attr('class') === 'btn-check n'){
+		if($(this).children('i').attr('class') === 'fa-regular fa-star fa-2x'){
+			//별표 변경
+			$(this).children('i').attr('class', 'fa-solid fa-star fa-2x');
 			//DB에 북마크 정보 갱신
 			$.ajax({
-				url:"${pageContext.request.contextPath}/findboard/addBookmark",
+				url:"${pageContext.request.contextPath }/findboard/addBookmark",
 				data:{"findboardNum" : no},
 				success:function(rdata){
 					if(rdata != null) {
@@ -1119,8 +1124,8 @@ $(document).ready(function(){
 				}	
 			});
 		//꽉찬 별표 일때
-		} else { 
-			$(this).children('input').attr('class') === 'btn-check y');
+		} else {
+			$(this).children('i').attr('class', 'fa-regular fa-star fa-2x');
 			$.ajax({
 				url:"${pageContext.request.contextPath }/findboard/removeBookmark",
 				data:{"findboardNum" : no},
@@ -1133,7 +1138,15 @@ $(document).ready(function(){
 		}
 	});
 });
-
+</script>
+<script>
+$(function() {
+	$('#find_content').on('show.bs.modal', function(e) {
+		var exp = $(e.relatedTarget).data('test');
+		$.ajax
+		
+	});
+});
 </script>
 	<!-- <script>
 $(document).ready(function(){

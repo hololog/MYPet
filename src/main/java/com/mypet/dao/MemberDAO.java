@@ -10,6 +10,8 @@ public interface MemberDAO {
 	
 	public MemberDTO getMember(String email);
 	
+	public MemberDTO getMember2(String nickname);
+	
 	public Integer getUserMaxNum();
 	
 }

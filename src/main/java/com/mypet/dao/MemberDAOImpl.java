@@ -29,6 +29,11 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberDTO getMember(String email) {
 		return sqlSession.selectOne(namespace + ".getMember", email); 
 	}
+	
+	@Override
+	public MemberDTO getMember2(String nickname) {
+		return sqlSession.selectOne(namespace + ".getMember", nickname); 
+	}
 
 	@Override
 	public Integer getUserMaxNum() {

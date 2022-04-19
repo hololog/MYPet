@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -144,12 +145,10 @@ function readURL2(input) {
                         <br>
                         <!--상품등록 결정 버튼-->
                         <p>
-                         	<%String id=(String)session.getAttribute("id");	//세션값 가져오기 %>	 
- 							<% if(id != null){
- 							   if(id.equals("admin")){ %>
+							<c:if test="${sessionScope.nickname eq 'admin'}">
                         	<input type="submit" value="판매등록" class="btn btn-primary btn-lg">
 							<input type="button" value="취소" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/GB/GbuyMain'">
-							<%}} %>
+                        	</c:if>
                         </p>
                     </div>
                 	</div>

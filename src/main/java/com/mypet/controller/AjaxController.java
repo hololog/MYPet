@@ -92,7 +92,7 @@ public class AjaxController {
 	}	
 	
 	//경진
-	@RequestMapping(value = "/free/ajaxcomments", method = RequestMethod.GET)
+	@RequestMapping(value = "/freeboard/ajaxcomments", method = RequestMethod.GET)
 	public ResponseEntity<List<ReplyDTO>> freecommentjson(HttpServletRequest request){
 		int bnum = Integer.parseInt(request.getParameter("free_board_num"));
 		List<ReplyDTO> freecommentList = boardService.getfreecommentList(bnum); // 10
@@ -103,7 +103,7 @@ public class AjaxController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/free/ajaxcommentsfCount", method = RequestMethod.POST)
+	@RequestMapping(value = "/freeboard/ajaxcommentsfCount", method = RequestMethod.POST)
 	public ResponseEntity<String> freecommentCount(HttpServletRequest request){
 		int bnum = Integer.parseInt(request.getParameter("free_board_num"));
 		String result = boardDAO.getfreecommentCount(bnum);
@@ -113,7 +113,54 @@ public class AjaxController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET )
+	
+	//review
+	@RequestMapping(value = "/reviewboard/ajaxcomments", method = RequestMethod.GET)
+	public ResponseEntity<List<ReplyDTO>> reviewcommentjson(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("tip_board_num"));
+		List<ReplyDTO> reviewcommentList = boardService.getreviewcommentList(bnum); // 10
+		
+		ResponseEntity<List<ReplyDTO>> entity=new ResponseEntity<List<ReplyDTO>>(reviewcommentList , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/reviewboard/ajaxcommentsfCount", method = RequestMethod.POST)
+	public ResponseEntity<String> reviewcommentCount(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("tip_board_num"));
+		String result = boardDAO.getreviewcommentCount(bnum);
+		System.out.println("수신완료");
+		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	
+	//notice
+	@RequestMapping(value = "/notice/ajaxcomments", method = RequestMethod.GET)
+	public ResponseEntity<List<ReplyDTO>> noticecommentjson(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("notice_num"));
+		System.out.println(bnum);
+		List<ReplyDTO> noticecommentList = boardService.getnoticecommentList(bnum); // 10
+		
+		ResponseEntity<List<ReplyDTO>> entity=new ResponseEntity<List<ReplyDTO>>(noticecommentList , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/notice/ajaxcommentsfCount", method = RequestMethod.POST)
+	public ResponseEntity<String> noticecommentCount(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("notice_num"));
+		String result = boardDAO.getnoticecommentCount(bnum);
+		System.out.println("수신완료");
+		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET)
 	public ResponseEntity<FindboardDTO> ajaxboard(HttpServletRequest request) throws Exception{
 		int num1 = Integer.parseInt(request.getParameter("num"));
 		FindboardDTO findboardDTO = findboardService.getfindBoard(num1);
@@ -202,47 +249,41 @@ public class AjaxController {
 //    }
 	
 	//다슬
-//	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
-//	public ResponseEntity<String> memberCheck(HttpServletRequest request){
-//		String result="";
-//		String id=request.getParameter("id");
-//		MemberDTO memberDTO=memberService.getMember(id);
-//		if(memberDTO!=null) {
-//			result="iddup";
-//		}else {
-//			result="idok";
-//		}
-//		ResponseEntity<String> entity=new ResponseEntity<String>(result, HttpStatus.OK);
-//		
-//		return entity;
-//		
-//		@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
-//		public ResponseEntity<String> memberCheck(HttpServletRequest request){
-//			String result="";
-//			String email=request.getParameter("email");
-//			MemberDTO memberDTO=memberService.getMemberEmail(email);
-//			if(memberDTO!=null) {
-//				result="emaildup";
-//			}else {
-//				result="emailok";
-//			}
-//			ResponseEntity<String> entity=new ResponseEntity<String>(result, HttpStatus.OK);
-//			
-//			return entity;
-//		}
-//		
-//		@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
-//		public ResponseEntity<List<MemberDTO>> memberjson(HttpServletRequest request){
-//			
-//			List<MemberDTO> memberList=memberService.getMemberList();
-//			
-//	ResponseEntity<List<MemberDTO>> entity=new ResponseEntity<List<MemberDTO>>(memberList , HttpStatus.OK);
-//			
-//			return entity;
-//		}
-		
-		
-//	}
+	@RequestMapping(value = "/member/userCheck2", method = RequestMethod.GET)
+	public ResponseEntity<String> userCheck2(HttpServletRequest request) {
+		System.out.println("AjaxController userCheck2() ");
+		String result="";
+		String nickname=request.getParameter("nickname");
+		MemberDTO memberDTO =memberService.getMember2(nickname);
+		if(memberDTO!=null) {
+			//아이디 일치 => 아이디 중복
+			result="iddup";
+		}else {
+			//아이디 틀림 => 아이디 사용가능
+			result="idok";
+		}
+		ResponseEntity<String> entity=new ResponseEntity<String>(result,HttpStatus.OK);
+		return entity;
+	}
+	
+	// 이메일 중복
+	@RequestMapping(value = "/member/userCheck", method = RequestMethod.GET)
+	public ResponseEntity<String> userCheck(HttpServletRequest request) {
+		System.out.println("AjaxController userCheck2() ");
+		String result="";
+		String email=request.getParameter("email");
+		MemberDTO memberDTO =memberService.getMember(email);
+		if(memberDTO!=null) {
+			//이메일 일치 => 이메일 중복
+			result="iddup";
+		}else {
+			//이메일 틀림 => 이메일 사용가능
+			result="idok2";
+		}
+		ResponseEntity<String> entity=new ResponseEntity<String>(result,HttpStatus.OK);
+		return entity;
+	}
+
 	
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)

@@ -9,5 +9,7 @@ public interface MemberService {
 	public MemberDTO memberCheck(MemberDTO memberDTO);
 	
 	public MemberDTO getMember(String email);
+	
+	public MemberDTO getMember2(String nickname);
 
 }
