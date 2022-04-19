@@ -75,7 +75,7 @@ function xx() {
 	<br>
 	<div>
 	<div style="font-family:fantasy; text-align: center; color: #3f51b5; ">
-	<br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
 	 <h2>공동구매 진행중! (${boardDTO.gbuy_count}/${boardDTO.gbuy_tcount})</h2>
 	</div>
 	<br>

@@ -11,6 +11,7 @@
 <!-- css스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/GBuy.css" />
 <!-- 부트스트랩 적용 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
@@ -329,7 +330,7 @@ $(document).on('click', ".result", function(){
       <hr class="my-5">
       <div class="row">
         <!-- 가로 12등분 -->
-        <div class="col-sm-5">
+        <div class="col-sm-12">
 		<c:forEach var="GDTO" items="${GbuyboardList}">
 		<div class="row g-0 border rounded overflow-hidden flex-row mb-4 shadow-sm h-250 position-relative"  style="position: relative;">
 			<c:if test="${GDTO.gbuy_count == 0 }"><div class="LK_end"></div></c:if>
@@ -371,7 +372,9 @@ $(document).on('click', ".result", function(){
 		</div>
  	</c:forEach>
  	</div>
-      </div>
+    </div>
+    
+    
     </section>
     <!-- 공동구매 소개 종료 -->
 
