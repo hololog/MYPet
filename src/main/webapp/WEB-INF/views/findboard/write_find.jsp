@@ -185,7 +185,7 @@
                  
                         var status = new createStatusbar(obj); //Using this we can set progress.
                         status.setFileNameSize(files[i].name,files[i].size);
-                        sendFileToServer(fd,status);
+                      	sendFileToServer(fd,status);
                  
                    }
                 }
@@ -200,7 +200,8 @@
                     this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
                     this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
                     this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
-                    this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);
+                    this.abort = $("<div class='abort'>삭제</div>").appendTo(this.statusbar);
+                    
                     
                     obj.after(this.statusbar);
                  
@@ -221,10 +222,8 @@
                     this.setProgress = function(progress){       
                         var progressBarWidth =progress*this.progressBar.width()/ 100;  
                         this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
-                        if(parseInt(progress) >= 100)
-                        {
-                            this.abort.hide();
-                        }
+                       
+                       
                     }
 					this.setAbort = function(jqxhr){
                         var sb = this.statusbar;
@@ -292,10 +291,10 @@
 					alert("사례금을 입력하세요");
 					return false;
 				} 
-				if($('#animal_sort_eh').val()=="" || $('#animal_sort_eh').val()==null){
-					alert("동물 종류를 선택해 주세요");
-					return false;
-				}
+// 				if($('#animal_sort_eh').val()=="" || $('#animal_sort_eh').val()==null){
+// 					alert("동물 종류를 선택해 주세요");
+// 					return false;
+// 				}
 				if($('#pet_name').val()=="" || $('#pet_name').val()==null){
 					alert("동물 이름을 입력해 주세요");
 					$('#pet_name').focus();
@@ -331,10 +330,10 @@
 					$('#contact').focus();
 					return false;
 				}
-				if($('#fileUpload').val()=="" || $('#fileUpload').val()==null){
+				if($('.statusbar').length ==0){
 					alert("반려동물의 사진을 업로드 해주세요");
 					return false;
-				}	
+				}
  			});//
  		});//	
  		</script>
@@ -460,7 +459,7 @@
                              
                              <!-- 기본 multiple file 전달 -->
                              <div id="fileUpload" class="dragAndDropDiv">업로드할 사진 드래그(최대1장)</div>
-        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" accept="image/jpg, image/gif, image/jpeg, image/png">
+        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" accept="image/jpg, image/gif, image/jpeg, image/png" multiple />
 
                             <!--submit 버튼-->
                             <div class="text-center p-2">
