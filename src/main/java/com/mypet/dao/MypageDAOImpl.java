@@ -50,8 +50,8 @@ public class MypageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public List<MypageDTO> getmyBoardList(String mylist) {
-		return sqlSession.selectList(namespace+".getmyBoardList", mylist);
+	public List<MypageDTO> getmyBoardList(String email) {
+		return sqlSession.selectList(namespace+".getmyBoardList", email);
 	}
 	
 	@Override

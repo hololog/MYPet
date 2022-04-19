@@ -12,7 +12,7 @@
 	<select id="updateCheck" resultType="com.mypet.domain.MemberDTO">
 		select * 
 		  from user 
-		 where nickname=#{nickname} and email=#{email}
+		 where nickname=#{nickname}
 <!-- 		 <if test="!email.equals('') and email != null"> -->
 <!-- 		   and email = #{email} -->
 <!-- 		 </if> -->
@@ -31,15 +31,15 @@
 	</delete>
 	
 	<select id="getmyBoardList" resultType="com.mypet.domain.MypageDTO">
-		select @rownum := @rownum + 1 as rownum, num, board_code, subject, readcount, nickname
+		select @rownum := @rownum + 1 as rownum, num, board_code, subject, readcount, email
 		  from (
-		   select free_board_num as num, board_code, subject, readcount, insert_date, nickname
+		   select free_board_num as num, board_code, subject, readcount, insert_date, email
 			from free_board
 			union all
-		   select tip_board_num as num, board_code, subject, readcount, insert_date, nickname
+		   select tip_board_num as num, board_code, subject, readcount, insert_date, email
 			from tip_board
 		    ) a, (select @rownum :=0) b
-		where nickname = #{nickname}
+		where email = #{email}
 		order by insert_date desc 
 		limit 10
 	</select>

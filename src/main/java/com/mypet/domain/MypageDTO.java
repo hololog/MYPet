@@ -29,5 +29,7 @@ public class MypageDTO {
 	private String pet_name;
 	private String pet_age;
 	private String pet_gender;
+	private String title;
 	private String detail_address;
+	
 }

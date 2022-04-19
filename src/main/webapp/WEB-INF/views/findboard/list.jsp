@@ -617,12 +617,10 @@
 									<!-- 슬라이드 쇼 -->
 									<div class="carousel-inner">
 										<!-- 사진1 -->
-
 										<input type="hidden"
 											value="${findboardList[mdloop.index].find_board_num}">
 										<input type="hidden" value="${mdloop.index}">
-										<c:if
-											test="${fb[loop.index].find_board_num eq fb.find_board_num}">
+										
 											<div class="carousel-item active">
 												<img
 													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
@@ -644,7 +642,6 @@
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
 											</div>
-										</c:if>
 										<!-- 사진2 -->
 										<%-- <div class="carousel-item">
 											<img

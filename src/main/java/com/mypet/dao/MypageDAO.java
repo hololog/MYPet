@@ -19,7 +19,7 @@ public interface MypageDAO {
 	
 	public void deleteMember(MemberDTO memberDTO);
 	
-	public List<MypageDTO> getmyBoardList(String mylist);
+	public List<MypageDTO> getmyBoardList(String email);
 	
 	public List<MypageDTO> getmyfind_BoardList(String email);
 	
