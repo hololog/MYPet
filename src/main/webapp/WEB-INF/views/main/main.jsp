@@ -32,7 +32,7 @@ $(document).ready(function(){
 	var email = '${sessionScope.email}';
 	if(email == "" || email == null){
 		$(window).scroll(function(){
-			if($(window).scrollTop()==900){
+			if($(window).scrollTop()<900 && $(window).scrollTop()>850 ) {
 				$("#login-modal").modal('show');
 			}
 		});
