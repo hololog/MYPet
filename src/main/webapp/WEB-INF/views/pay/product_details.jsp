@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -73,16 +74,6 @@ function xx() {
       <!-- 제품이미지 -->
 	<br>
 	<div>
-	<div class="text-lg-end" style="padding-right:20%;">
-		<input type="button" 
-			   value="글수정" 
-			   class="btn_GB" 
-			   onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${boardDTO.gbuy_num}'" >
-		<input type="button"
-		       value="글삭제" 
-		       class="btn_GB" 
-		       onclick="location.href='${pageContext.request.contextPath}/GB/GbuyDelete?gbuy_num=${boardDTO.gbuy_num}'" >	
-	</div>
 	<div style="font-family:fantasy; text-align: center; color: #3f51b5; ">
 	<br><br><br><br><br>
 	 <h2>공동구매 진행중! (${boardDTO.gbuy_count}/${boardDTO.gbuy_tcount})</h2>
