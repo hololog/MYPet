@@ -41,6 +41,7 @@
      <form action="${pageContext.request.contextPath }/reviewboard/write_reviewPro" method="post">
     <div class="container py-5" name="board_code">
     <input type="hidden" value="${sessionScope.nickname}" name="nickname">
+    <input type="hidden" value="${sessionScope.email}" name="email">
       <h3 class="text-center  nav justify-content-center bg-light" style="color: #3f51b5;">
         글작성</h3>
         <br>
