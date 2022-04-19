@@ -181,7 +181,7 @@
                  
                         var status = new createStatusbar(obj); //Using this we can set progress.
                         status.setFileNameSize(files[i].name,files[i].size);
-                        sendFileToServer(fd,status);
+                      	sendFileToServer(fd,status);
                  
                    }
                 }
@@ -196,7 +196,8 @@
                     this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
                     this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
                     this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
-                    this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);
+                    this.abort = $("<div class='abort'>삭제</div>").appendTo(this.statusbar);
+                    
                     
                     obj.after(this.statusbar);
                  
@@ -217,10 +218,8 @@
                     this.setProgress = function(progress){       
                         var progressBarWidth =progress*this.progressBar.width()/ 100;  
                         this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
-                        if(parseInt(progress) >= 100)
-                        {
-                            this.abort.hide();
-                        }
+                       
+                       
                     }
 					this.setAbort = function(jqxhr){
                         var sb = this.statusbar;
