@@ -65,7 +65,7 @@ public class BookmarkController {
 		return bookmarkService.getBookmarkNum(findboardNum);
 	}
 	
-	//세히
+	//free
 	@ResponseBody
 	@RequestMapping(value = "freeboard/addBookmark")
 	public int FaddBookmark(@RequestParam int free_board_num, HttpSession session) {
@@ -98,6 +98,76 @@ public class BookmarkController {
 		
 		return bookmarkService.FgetBookmarkNum(free_board_num);
 	}
+	
+	//review
+	
+	@ResponseBody
+	@RequestMapping(value = "reviewboard/addBookmark")
+	public int RaddBookmark(@RequestParam int tip_board_num, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+		//게시물 번호 저장
+		bookmarkDTO.setTip_board_num(tip_board_num);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		
+		//자유게시판테이블에 북마크 개수 +1,
+		bookmarkService.RaddBookmarkCount(tip_board_num);
+		//free_like 테이블 추가
+		bookmarkService.RaddBookmark(bookmarkDTO);
+		
+		return bookmarkService.RgetBookmarkNum(tip_board_num);
+	}
+
+	//꽉찬 북마크 클릭
+	@ResponseBody
+	@RequestMapping(value = "reviewboard/removeBookmark")
+	public int RremoveBookmark(@RequestParam int tip_board_num, HttpSession session) {
+		BookmarkDTO bookmarkDTO = new BookmarkDTO();
+
+		bookmarkDTO.setTip_board_num(tip_board_num);
+		bookmarkDTO.setEmail((String)session.getAttribute("email"));
+		
+		//자유게시판테이블 북마크 개수 -1
+		bookmarkService.RremoveBookmarkCount(tip_board_num);
+		//free_like 테이블에서 제거
+		bookmarkService.RremoveBookmark(bookmarkDTO);
+		
+		return bookmarkService.RgetBookmarkNum(tip_board_num);
+	}
+	
+	//notice
+	
+		@ResponseBody
+		@RequestMapping(value = "notice/addBookmark")
+		public int NaddBookmark(@RequestParam int notice_num, HttpSession session) {
+			BookmarkDTO bookmarkDTO = new BookmarkDTO();
+			//게시물 번호 저장
+			bookmarkDTO.setNotice_num(notice_num);
+			bookmarkDTO.setEmail((String)session.getAttribute("email"));
+			
+			//자유게시판테이블에 북마크 개수 +1,
+			bookmarkService.NaddBookmarkCount(notice_num);
+			//free_like 테이블 추가
+			bookmarkService.NaddBookmark(bookmarkDTO);
+			
+			return bookmarkService.NgetBookmarkNum(notice_num);
+		}
+
+		//꽉찬 북마크 클릭
+		@ResponseBody
+		@RequestMapping(value = "notice/removeBookmark")
+		public int NremoveBookmark(@RequestParam int notice_num, HttpSession session) {
+			BookmarkDTO bookmarkDTO = new BookmarkDTO();
+
+			bookmarkDTO.setNotice_num(notice_num);
+			bookmarkDTO.setEmail((String)session.getAttribute("email"));
+			
+			//자유게시판테이블 북마크 개수 -1
+			bookmarkService.NremoveBookmarkCount(notice_num);
+			//free_like 테이블에서 제거
+			bookmarkService.NremoveBookmark(bookmarkDTO);
+			
+			return bookmarkService.NgetBookmarkNum(notice_num);
+		}	
 	
 //	@ResponseBody
 //	@RequestMapping(value="/wordSearchShow", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")

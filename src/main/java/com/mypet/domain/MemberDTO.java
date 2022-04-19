@@ -19,4 +19,5 @@ public class MemberDTO {
 	private Timestamp last_access;
 	private Timestamp join_date;
 	private String password2;
+	private String profileUpload;
 }

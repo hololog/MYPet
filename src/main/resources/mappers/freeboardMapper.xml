@@ -98,8 +98,20 @@
 		select * from notice where notice_num=#{notice_num}
 	</select>
 	
+	<select id="getnoticeLike" resultType="int">
+		SELECT count(*)
+          FROM notice_like
+		 where email = #{email} and notice_num = #{notice_num}
+	</select>
+	
 	<select id="getreviewBoard" resultType="com.mypet.domain.BoardDTO">
 		select * from tip_board where tip_board_num=#{tip_board_num}
+	</select>
+	
+	<select id="getreviewLike" resultType="int">
+		SELECT count(*)
+          FROM tip_like
+		 where email = #{email} and tip_board_num = #{tip_board_num}
 	</select>
 <!-- Board end -->	
 
@@ -175,15 +187,15 @@
 
 
 	<select id="bestfree" resultType="com.mypet.domain.BoardDTO">
-	 	select * from free_board order by readcount desc limit 3
+	 	select * from free_board order by like_count desc limit 3
 	</select>
 	
 	<select id="bestnotice" resultType="com.mypet.domain.BoardDTO">
-	 	select * from notice order by readcount desc limit 3
+	 	select * from notice order by like_count desc limit 3
 	</select>
 	
 	<select id="bestreview" resultType="com.mypet.domain.BoardDTO">
-	 	select * from tip_board order by readcount desc limit 3
+	 	select * from tip_board order by like_count desc limit 3
 	</select>
 
 
@@ -198,7 +210,30 @@
 	<select id="getfreecList" resultType="com.mypet.domain.FreecommentDTO">
 		select * from comment where board_code='r' and board_num = #{free_board_num}
 	</select>
+	<!-- 댓글 --> 
+	<select id="getfreecommentList" resultType="com.mypet.domain.ReplyDTO">
+	SELECT board_num, comment_num, recomment_num, board_code
+		,CASE WHEN LAG(RN) OVER(PARTITION BY RN) IS NOT NULL THEN CONCAT('`ㄴ',c_nik) ELSE c_nik END AS c_nik
+        ,CASE WHEN LAG(RN) OVER(PARTITION BY RN) IS NOT NULL THEN CONCAT('`',comment) ELSE comment END AS comment
+	FROM (
+	SELECT board_num, comment_num, recomment_num, board_code, c_nik, comment, DENSE_RANK() OVER(PARTITION BY board_num ORDER BY comment_num DESC) AS RN
+	FROM reply
+    WHERE board_num = #{free_board_num} AND board_code = 'r'
+	ORDER BY comment_num DESC, recomment_num
+	) A
+	</select>
+	<insert id="freecommentIn">
+		insert into reply (board_num, comment_num, recomment_num, board_code, comment, c_nik, c_date) 
+		values (#{board_num}, #{comment_num}, #{recomment_num}, #{board_code}, #{comment}, #{c_nik}, default)
+	</insert>
 	
+	<select id="getfcommentMaxNum" resultType="java.lang.Integer">
+		select max(comment_num) from reply
+	</select>
+	
+	<select id="getfreecommentCount" resultType="java.lang.String">
+		select count(*) from reply where board_num = #{board_num} 
+	</select>
 	
 	
 	

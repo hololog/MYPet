@@ -19,7 +19,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.mypet.dao.BoardDAO;
+import com.mypet.dao.FindboardDAO;
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.BookmarkDTO;
@@ -36,6 +40,7 @@ import com.mypet.domain.FindboardDTO;
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.MypageDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.domain.ReplyDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
@@ -52,13 +57,24 @@ public class AjaxController {
 	private FindboardService findboardService;
 	
 	@Autowired
-	private MypageDAO mypageDAO;
+	private MypageService mypageService;
 	
 	@Autowired
-	private MypageService mypageService;
+	private BoardService boardService;
+	
+	@Autowired
+	private BoardDAO boardDAO;
+	
+    @Autowired
+	private MypageDAO mypageDAO;
+    
+    @Autowired
+    private FindboardDAO findboardDAO;
+	
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+
 	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
 	public ResponseEntity<String> memberCheck(HttpServletRequest request) {
 		String result = "";
@@ -73,9 +89,31 @@ public class AjaxController {
 		ResponseEntity<String> entity = new ResponseEntity<String>(result, HttpStatus.OK);
 
 		return entity;
+	}	
+	
+	//경진
+	@RequestMapping(value = "/free/ajaxcomments", method = RequestMethod.GET)
+	public ResponseEntity<List<ReplyDTO>> freecommentjson(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("free_board_num"));
+		List<ReplyDTO> freecommentList = boardService.getfreecommentList(bnum); // 10
+		
+		ResponseEntity<List<ReplyDTO>> entity=new ResponseEntity<List<ReplyDTO>>(freecommentList , HttpStatus.OK);
+		
+		return entity;
 	}
 	
-	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "/free/ajaxcommentsfCount", method = RequestMethod.POST)
+	public ResponseEntity<String> freecommentCount(HttpServletRequest request){
+		int bnum = Integer.parseInt(request.getParameter("free_board_num"));
+		String result = boardDAO.getfreecommentCount(bnum);
+		System.out.println("수신완료");
+		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
+		
+		return entity;
+	}
+	
+	@RequestMapping(value = "/ajaxfindboard", method = RequestMethod.GET )
 	public ResponseEntity<FindboardDTO> ajaxboard(HttpServletRequest request) throws Exception{
 		int num1 = Integer.parseInt(request.getParameter("num"));
 		FindboardDTO findboardDTO = findboardService.getfindBoard(num1);
@@ -83,6 +121,18 @@ public class AjaxController {
 		ResponseEntity<FindboardDTO> fin = new ResponseEntity<FindboardDTO>(findboardDTO, HttpStatus.OK);
 		
 		return fin;
+	}
+	
+	@RequestMapping(value = "/ajaxmap", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<String> ajaxmap(HttpServletRequest request) throws Exception{
+		int num = Integer.parseInt(request.getParameter("find_board_num"));
+		System.out.println(num);
+		String result = findboardDAO.getAddr(num);
+		System.out.println(result);
+		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
+		
+		return entity;
 	}
 	
 
@@ -218,8 +268,8 @@ public class AjaxController {
 	}
 	
 	// 준동
-	@RequestMapping(value="/mypage/mypagejson3" , method=RequestMethod.GET)
 	@ResponseBody
+	@RequestMapping(value="/mypage/mypagejson3" , method=RequestMethod.GET)
 	public MemberDTO pwCheck(@RequestParam String cuPassword, HttpSession session){
 		System.out.println("현재 비밀번호 확인 ajax");
 		String email = (String)session.getAttribute("email");

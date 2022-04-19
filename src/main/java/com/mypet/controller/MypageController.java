@@ -1,19 +1,26 @@
 package com.mypet.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mypet.domain.BoardDTO;
@@ -37,12 +44,16 @@ public class MypageController {
 	
 	@Inject
 	public FindboardService findboardService;
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
 
 		
 		@RequestMapping(value = "/mypage/myinfo", method = RequestMethod.GET)
 		public String myinfo(HttpServletRequest request, Model model) throws Exception {
 			String myinfo = request.getParameter("email");
 			MemberDTO memberDTO = memberService.getMember(myinfo);
+			
 			model.addAttribute("memberDTO", memberDTO);
 			return "mypage/myinfo";
 		}
@@ -59,23 +70,54 @@ public class MypageController {
 		}
 		
 		@RequestMapping(value = "/mypage/update", method = RequestMethod.GET)
-		public String update(HttpSession session) throws Exception {
-			String nickname = (String)session.getAttribute("nickname");
-			mypageService.getMember(nickname);
+		public String update(HttpSession session, Model model) throws Exception {
+			String email = (String)session.getAttribute("email");
+			MemberDTO memberDTO = mypageService.getMember(email); 
+			model.addAttribute("memberDTO",memberDTO);
 			return "mypage/update";
 		}
 		
 		@RequestMapping(value = "/mypage/updatePro", method = RequestMethod.POST)
-		public String updatePro(MemberDTO memberDTO, HttpSession session) throws Exception {
-			System.out.println(memberDTO.getNickname());
-			System.out.println(memberDTO.getEmail());
+		public String updatePro(MultipartHttpServletRequest multi) throws Exception {
+//			System.out.println(memberDTO.getNickname());
+//			System.out.println(memberDTO.getEmail());
 			
+			MemberDTO memberDTO = new MemberDTO();
+			MultipartFile file = multi.getFile("profile");
 			MemberDTO updateCheckDTO = mypageService.updateCheck(memberDTO);
 			
 			if(updateCheckDTO == null) {
-				session.setAttribute("nickname", memberDTO.getNickname());
+				
+				memberDTO.setNickname(multi.getParameter("nickname"));
+				memberDTO.setEmail(multi.getParameter("email"));
+				
+				
+				//path 설정, 원본파일명 변수에 담기
+				String path=uploadPath;
+				String originFileName = file.getOriginalFilename(); // 원본 파일 명
+				 
+			        System.out.println("originFileName : " + originFileName);
+			        
+			        //원본파일명 -> 중복 불가능한 파일명 만들기(=실제 저장 파일명)
+			        UUID uid = UUID.randomUUID();
+			        String safeFile = uid.toString() +"_"+ originFileName;
+			        
+			        //실제저장파일명 memberDTO에 set 해주기
+			        memberDTO.setProfileUpload(safeFile);
+			        
+			        //실제 파일 저장하기
+			        try {
+			            File uploadfile = new File(path,safeFile);
+			            FileCopyUtils.copy(file.getBytes(), uploadfile);
+			        } catch (IllegalStateException e) {
+			            e.printStackTrace();
+			        } catch (IOException e) {
+			            e.printStackTrace();
+			        }
+				
 				mypageService.updateMember(memberDTO);
-				return "redirect:/mypage/myinfo";
+				
+				return "main/main";
 			} else {
 				return "mypage/mypagemsg";
 			}
@@ -129,15 +171,15 @@ public class MypageController {
 //			}
 //		}
 		
-		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
-		public String amendpwdPro(MemberDTO memberDTO, HttpSession session) throws Exception {
-			System.out.println(memberDTO.getEmail());
-			System.out.println(memberDTO.getPassword2());
-			
-			mypageService.pwUpdate(memberDTO);
-			
-			return "/main/main";
-		}
+//		@RequestMapping(value = "/mypage/amendpwdPro", method = RequestMethod.POST)
+//		public String amendpwdPro(MemberDTO memberDTO, HttpSession session) throws Exception {
+//			System.out.println(memberDTO.getEmail());
+//			System.out.println(memberDTO.getPassword2());
+//			
+//			mypageService.pwUpdate(memberDTO);
+//			
+//			return "/main/main";
+//		}
 		
 		@RequestMapping(value = "/mypage/mymisslist", method = RequestMethod.GET)
 		public String mymisslist(HttpServletRequest request, Model model) throws Exception {

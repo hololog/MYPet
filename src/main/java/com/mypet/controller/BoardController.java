@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -35,6 +36,7 @@ import com.mypet.domain.FindboardDTO;
 
 import com.mypet.domain.MemberDTO;
 import com.mypet.domain.PageDTO;
+import com.mypet.domain.ReplyDTO;
 import com.mypet.service.BoardService;
 import com.mypet.service.FindboardService;
 import com.mypet.service.MemberService;
@@ -53,9 +55,11 @@ public class BoardController {
 	private String uploadPath;
 	
 	@RequestMapping(value = "/findboard/list", method = RequestMethod.GET)
-	public String findboard(HttpServletRequest request, Model model) throws Exception {
+	public String findboard(HttpServletRequest request, HttpSession session, Model model) throws Exception {
 		int pageSize = 5;
 
+		String email = (String)session.getAttribute("email");
+		
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null) {
 			pageNum = "1";
@@ -66,7 +70,9 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 
 		List<FindboardDTO> findboardList = findboardService.getfindBoardList(pageDTO);
-		List<FileDTO> fileList = findboardService.getfindFileList(pageDTO);
+		List<FileDTO> fileList = findboardService.getfindFileList();
+		List<FindboardDTO> findboardListMain = findboardService.getfindBoardListMain(email);
+		
 
 		int count = findboardService.getfindBoardCount();
 
@@ -88,10 +94,11 @@ public class BoardController {
 		model.addAttribute("findboardList", findboardList);
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("findboardListMain", findboardListMain);
 		
 		
 		
-		return "findboard/list";
+		return "/findboard/list";
 	}
 	
 	@RequestMapping(value = "/findboard/listM", method = RequestMethod.GET)
@@ -108,7 +115,8 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 
 		List<FindboardDTO> findmissboardList = findboardService.getfindMissBoardList(pageDTO);
-
+		List<FileDTO> fileList = findboardService.getfindFileList();
+		
 		int count = findboardService.getfindMissBoardCount();
 
 		int currentPage = Integer.parseInt(pageNum);
@@ -127,10 +135,24 @@ public class BoardController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("findmissboardList", findmissboardList);
+		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
 		
 		return "findboard/listM";
+	}
+	
+	@RequestMapping(value = "/freeboard/freecommentsIn", method = RequestMethod.POST)
+	public String writeFreePro(HttpServletRequest Request) throws Exception {
+		
+		String pnum = Request.getParameter("board_num");
+		ReplyDTO replyDTO = new ReplyDTO();
+		replyDTO.setBoard_num(Integer.parseInt(Request.getParameter("board_num")));
+		replyDTO.setComment(Request.getParameter("content"));
+		replyDTO.setC_nik(Request.getParameter("nickname"));
+		boardService.freecommentIn(replyDTO);
+		
+		return "redirect:content_free?free_board_num="+pnum;
 	}
 //	public String find_photo(HttpServletRequest request, Model model) throws Exception {
 //		int pageSize = 5;
@@ -335,11 +357,19 @@ public class BoardController {
 	}
 	//세히
 	@RequestMapping(value = "/reviewboard/content_review", method = RequestMethod.GET)
-	public String reivewboardContent(HttpServletRequest request, Model model) {
+	public String reivewboardContent(HttpServletRequest request, Model model,HttpSession session) {
 		int num=Integer.parseInt(request.getParameter("tip_board_num"));
 		boardService.updatereviewReadcount(num);
+		String email = (String)session.getAttribute("email");
 		
-		BoardDTO boardDTO=boardService.getreviewBoard(num);
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setEmail(email);
+		boardDTO.setTip_board_num(num);
+		//즐겨찾기했는지 여부=> 했으면 1리턴 / 안했으면 0리턴
+		int book = boardService.getreviewLike(boardDTO);
+		
+		boardDTO = boardService.getreviewBoard(num);
+		boardDTO.setBook(book);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		
@@ -348,12 +378,21 @@ public class BoardController {
 	
 	//세히
 	@RequestMapping(value = "/notice/content_notice", method = RequestMethod.GET)
-	public String noticeContent(HttpServletRequest request, Model model) {
+	public String noticeContent(HttpServletRequest request, Model model,HttpSession session) {
 		
 		int num=Integer.parseInt(request.getParameter("notice_num"));
+		String email = (String)session.getAttribute("email");
+		
 		boardService.updatenoticeReadcount(num);
 		
-		BoardDTO boardDTO=boardService.getnoticeBoard(num);
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setEmail(email);
+		boardDTO.setNotice_num(num);
+		//즐겨찾기했는지 여부=> 했으면 1리턴 / 안했으면 0리턴
+		int book = boardService.getnoticeLike(boardDTO);
+		
+		boardDTO = boardService.getnoticeBoard(num);
+		boardDTO.setBook(book);
 		
 		model.addAttribute("boardDTO", boardDTO);
 		

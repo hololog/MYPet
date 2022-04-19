@@ -7,8 +7,8 @@ public class BookmarkDTO {
 	int bookmarkNum;
 	int findboardNum;
 	int free_board_num;
-	int review_board_num;
-	int noticenum;
+	int tip_board_num;
+	int notice_num;
 	String email;
 	String boardCategory;
 }

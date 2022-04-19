@@ -51,6 +51,7 @@
 	    }
 	    
 	</style>
+	
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style-jd.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/sidebars.css">
@@ -136,17 +137,20 @@
 
             <!-- 내정보 시작 -->
             <div class=" border col" style="padding: 3%;">
-                <form action="${pageContext.request.contextPath }/mypage/updatePro" method="post"
+                <form action="${pageContext.request.contextPath }/mypage/updatePro" method="post" enctype="multipart/form-data"
                 	  class="needs-validation" novalidate="novalidate">
+                <input type="hidden" value="${sessionScope.email}">
                     <div class="row">
                         <div
                             class="d-flex flex-column justify-content-center align-items-center">
                             <div class="col" style="padding-top: 8%">
-                                <label for="profile" class="form-label">프로필사진<span class="text-muted"></span></label><br>
+                                <label for="profile" class="form-label">
+                  				
+                                <input type="file" id="profile" name="profile">프로필사진<span class="text-muted"></span></label><br>
                                 	
                                 <label for="nick" class="form-label">닉네임<span class="text-muted"></span></label>
                                 <input
-                                	value="${sessionScope.nickname }"
+                                	value="${memberDTO.nickname }"
                                 	name="nickname"
                                     type="text"
                                     class="form-control"
@@ -155,7 +159,7 @@
                             <div class="col">
                                 <label for="email" class="form-label">이메일<span class="text-muted"></span></label>
                                 <input
-                                	value="${sessionScope.email }"
+                                	value="${memberDTO.email }"
                                 	name="email"
                                     type="text"
                                     class="form-control"

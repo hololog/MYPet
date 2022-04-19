@@ -87,7 +87,7 @@
 		<c:otherwise>
 			<div class="d-flex justify-content-end align-items-center flex-wrap gap-2">
 				<span>${sessionScope.nickname }님 반갑습니다.</span>
-	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage/myinfo">마이페이지</a>
+	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/mypage/myinfo?email=${sessionScope.email}">마이페이지</a>
 	     		<a class="p-1 btn" href="${pageContext.request.contextPath }/member/logout">로그아웃</a>
 		 	</div>
 		</c:otherwise>
@@ -203,13 +203,13 @@ $(document).ready(function(){
 
 
 
-
+<!-- 임시비밀번호 모달창 -->
 <div class="modal fade py-5" tabindex="-1" role="dialog" id="temp_PW" style="transition: opacity 0.5s linear;">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content rounded-5 shadow">
 			<div class="modal-header p-5 pb-4 border-bottom-0">
 				<div class="whole_modal">
-				
+				<br>	
 					<h4 class="fw-bold mb-0">임시번호가 전송될 이메일을 입력해주세요</h4>
 					<!-- 닫기 버튼
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -233,9 +233,8 @@ $(document).ready(function(){
 	</div>
 </div>
 
-<!-- 회원가입 -->
 
-    
+<!-- 회원가입 -->
             <!-- modal 시작 -->
             <div class="modal fade py-5" tabindex="-1" role="dialog" id="signup-modal" style="transition: opacity 0.5s linear;">
                 <div class="modal-dialog" role="document">
@@ -251,14 +250,17 @@ $(document).ready(function(){
                             
                     <div class="modal-body p-5 pt-0">
                         <form action="${pageContext.request.contextPath }/member/joinPro" class="whole_modal" method="post">
+                        
                           <div class="form-floating mb-3">
-		   				  <input type="text" class="form-control rounded-4 id="nickname" name="nickname" onkeyup="checkNM()" required autofocus>
+		   				  <input type="text" class="form-control rounded-4" id="nick" name="nickname" required autofocus>
                             <label for="floatingInput_NM">닉네임</label>
+                            <span class="ex-plain email-alert" style="display :none;"> 이미 사용중인 닉네임입니다. </span>
 <!--                             <button id="nnbtn">중복확인</button> -->
                           </div>
                           <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" name="email" onkeyup="checkEmail()" required autofocus>
+                            <input type="email" class="form-control rounded-4" id="em" name="email" required autofocus>
                             <label for="floatingInput_EM">email@example.com</label>
+                            <div class="check_font" id="EM_check"></div>
                           </div>
                           <div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" name="password" id="pw" minlength="8" maxlength="10" required autofocus>
@@ -282,16 +284,17 @@ $(document).ready(function(){
                           <p>
                           <h2 class="fs-5 fw-bold mb-3">▶ SNS계정으로 회원가입하기</h2>
                           </p>
-                          
                           </div>
+                           
+                          <div>
                           <p>
-                           <a href="/list/API/login_kakao_sync.html?ks_return_url=https%3A%2F%2Fwww.silicook.co.kr%2Fshop%2Fshopdetail.html%3Fbranduid%3D3519841%26NaPm%3Dct%253Dl2023whs%257Cci%253D692cd9a78351bf0a46e676cfb58ab2bfb06269e7%257Ctr%253Dsbtm%257Csn%253D238329%257Chk%253D132334376ed4a07159a453f979b76afa64be3468" class="link kakao">
+                           <a id="kakao-login-btn">
 						  	<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_kakao.jpg" alt="카카오로 회원가입"></a>
 						  </p>  
+						 </div>
 						 
-						    
-						    
-						  <a href="/list/API/login_naver.html" class="link naver">
+						 <div id="naver_id_login" align = "center">
+						    <a id="naverIdLogin_loginButton" href="javascript:void(0)">
  							<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_sns_join_naver.jpg" alt="네이버로 회원가입"> 
 						  </a>
                           </div>
@@ -303,6 +306,7 @@ $(document).ready(function(){
                   </div>
                 </div>
               </div>   
+            </div>   
                           
 <!-- 	네이버 로그인 -->
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
@@ -484,14 +488,7 @@ function recheck() {
 
 </script>
 
-<!-- 회원가입 환영창 -->
-<!-- <script type="text/javascript">
-function welcome() {
-	var id = $("#nickname").val();
-}
-
-		alert(id+'환영합니다');
-</script>  -->
+<!-- 회원가입 유효성 -->
 
 
 

@@ -3,6 +3,7 @@ package com.mypet.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +27,7 @@ public interface FindboardService {
 
 	public List<FindboardDTO> getfindBoardList(PageDTO pageDTO);
 	
-	public List<FileDTO> getfindFileList(PageDTO pageDTO);
+	public List<FileDTO> getfindFileList();
 	
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO);
 	
@@ -43,13 +44,21 @@ public interface FindboardService {
 	public List<FindboardDTO> getfindBoardListMain();
 
 	public BookmarkDTO getBookmark(String findboardNum);
-	
-//	public void updatefindboard(FindboardDTO findboardDTO);
 
 	public List<FindboardDTO> getfindBoardListMain(String email);
 
 	public List<FindboardDTO> getFindSearchList(PageDTO pageDTO);
 
-	public int getFindBoardCount();
+	public void updatefindBoard (FindboardDTO findboardDTO);
 	
+	public void update_findboard_file(FileDTO fileDTO);
+	
+	public void deletefind(int num);
+	
+
+	public int getFindBoardSearchCount();
+
+	public List<FileDTO> getSearchFileList(PageDTO pageDTO);
+
+//	public List<String> wordSearchShow(Map<String, String> paraMap);
 }

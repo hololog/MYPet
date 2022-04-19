@@ -31,8 +31,7 @@
         <!-- ------------------------------- -->
         <!-- 본문 시작-->
         <!-- ------------------------------- -->
-<br><br><br><br>
-<br><br><br><br>
+
         <!-- 제목 시작 -->
        <div class="container">
             <h1 class="sub-title">자유게시판</h1>
@@ -67,7 +66,7 @@
                         <td style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                         <i class="bi bi-heart-fill" style="color: red;"> ${bDTO.like_count } </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
                         <td>${bDTO.nickname}</td>
@@ -86,7 +85,7 @@
                         <td width="30%" style="text-align: start;">${bDTO.subject}</td>
                         <td style="text-align:end"><div>
                           <!-- 댓글수, 조회수 아이콘 -->
-                          <i class="fa-regular fa-comment-dots">${like_count} </i>
+                          <i class="bi bi-heart-fill" style="color: red;"> ${bDTO.like_count } </i>
                           <i class="fa-regular fa-eye"> ${bDTO.readcount} </i>
                         </div></td>
                         <td width="10%">${bDTO.nickname}</td>

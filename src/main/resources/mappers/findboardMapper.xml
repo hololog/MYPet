@@ -56,31 +56,20 @@
 		select * from find_board where find_board_num=#{find_board_num}
 	</select>
 	
-	<!-- 댓글조회 -->
-	<select id="readComment" resultType="com.mypet.domain.FindboardDTO"> <!-- FindcommentDTO -->
-<!-- 		SELECT * FROM find_comment -->
-		SELECT * FROM find_board
-		where find_board_num = 1
-	</select>
-	
-	<!-- 게시글 가져오기(모달용) -->
-	<select id="bringfindBoard" resultType="com.mypet.domain.FindboardDTO">
-		SELECT * FROM find_board
-	</select>
-	
+	<!-- 게시글 가져오기(모달용) -->	
 	<select id="getfindBoardList" resultType="com.mypet.domain.FindboardDTO">
 		select * from find_board order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
 	<select id="getfindFileList" resultType="com.mypet.domain.FileDTO">
-		select concat(upload,"\\",save_filename) as upload from find_board_file order by find_board_num desc limit #{startRow},#{pageSize}
+		select * from find_board_file order by find_board_num desc
 	</select>
 	
 	<select id="getfindMissBoardList" resultType="com.mypet.domain.FindboardDTO">
-		select * from find_board where result = "1" order by find_board_num desc limit #{startRow},#{pageSize}
+		select * from find_board where result = "0" order by find_board_num desc limit #{startRow},#{pageSize}
 	</select>
 	
-		<select id="getfindBoardCount" resultType="java.lang.Integer">
+	<select id="getfindBoardCount" resultType="java.lang.Integer">
 		select count(*) from find_board
 	</select>
 	
@@ -89,20 +78,38 @@
 	</select>
 	
 	<!-- 게시글 수정(모달) -->
-	<update id="updatefindboard">
+	<update id="updatefindBoard">
 		update find_board 
-		set pet_type=#{pet_type},
-		pet_name=#{pet_name},
-		pet_age=#{pet_age},
-		pet_gender=#{pet_gender},
-		missing_date=#{missing_date},
-		address=#{address},
-		address2=#{daaress2},
-		detail_address=#{detail_address},
-		content=#{content},
-		contact=#{contact},
+		set board_code = #{board_code}, 
+		nickname = #{nickname}, 
+		title = #{title}, 
+		content = #{content},  
+		pet_type = #{pet_type},
+		missing_date = #{missing_date}, 
+		pet_name = #{pet_name}, 
+		pet_age = #{pet_age}, 
+		pet_gender = #{pet_gender}, 
+		address = #{address}, 
+		address2 = #{address2}, 
+		result  = #{result},
+		delete_date = #{delete_date}, 
+		detail_address = #{detail_address}, 
+		reward = #{reward}, 
+		contact = #{contact}
 		where find_board_num=#{find_board_num}
 	</update>
+	
+	<update id="update_findboard_file">
+		update find_board_file
+		set upload = #{upload}, 
+		filename = #{filename}, 
+		save_filename = #{save_filename}, 
+		file_upload_date = #{file_upload_date},
+		ext = #{ext}
+		where find_board_num = #{find_board_num}
+	</update>
+	
+	
 
 	<!-- 은혜 실공공고 글쓰기 지역검색 -->
 	<select id="getProvinceList" resultType="Hashmap">
@@ -129,15 +136,38 @@
 		 limit 8
 	</select>
 	
+ 	<select id="getFindBoardSearchCount" resultType="int">
+ 		select count(*) 
+ 		  from find_board 
+ 		 where address like #{search}
+ 	</select>
+ 		
 	<select id="getFindSearchList" resultType="com.mypet.domain.FindboardDTO">
 		select * 
-		  from find_board
-		 where address like '%#{search}%'
+		from find_board 
+		where address like #{search}
+		order by find_board_num desc 
+		limit #{startRow},#{pageSize}
 	</select>
 	
-	<select id="getFindBoardCount" resultType="int">
-		select count(*) 
-		  from find_board
+	<select id="getSearchFileList" resultType="com.mypet.domain.FileDTO">
+		select * 
+		  from find_board_file    
+	     where find_board_num in (select find_board_num
+							        from find_board 
+							       where address like #{search})
+         order by find_board_num desc 
+		 limit #{startRow},#{pageSize}
+							       
+	</select>
+	
+	<delete id="deletefind">
+		delete from find_board where find_board_num = #{find_board_num}
+	</delete>
+	
+	<select id="getAddr" resultType="java.lang.String">
+		select address from find_board where find_board_num = #{find_board_num}
+	
 	</select>
 
 </mapper>
