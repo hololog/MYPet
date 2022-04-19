@@ -331,10 +331,10 @@
 					$('#contact').focus();
 					return false;
 				}
-// 				if($('#fileUpload').val()=="" || $('#fileUpload').val()==null){
-// 					alert("반려동물의 사진을 업로드 해주세요");
-// 					return false;
-// 				}	
+				if($('.statusbar').length ==0){
+					alert("반려동물의 사진을 업로드 해주세요");
+					return false;
+				}
  			});//
  		});//	
  		</script>
