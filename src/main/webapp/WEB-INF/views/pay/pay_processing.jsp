@@ -109,17 +109,16 @@
 function characterCheck(obj){
 var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
 if( regExp.test(obj.value) ){
-	alert("특수문자는 입력할 수 없습니다.");
 	obj.value = obj.value.substring(0 , obj.value.length - obj.value.length );
 	}
 }
-//특수문자 입력 방지(전화번호)
+// 특수문자 입력 방지(전화번호)
 function characterCheck_phone(obj){
-var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
-if( regExp.test(obj.value) ){
-	alert("숫자만 입력하세요.");
-		obj.value = obj.value.substring(0 , obj.value.length - obj.value.length );
-	}
+
+document.querySelector('input[name="phone_no"]').addEventListener('input', function(e){
+	e.target.value = e.target.value.replace(/[^0-9]/g,'');
+})
+
 }
 
 
