@@ -124,7 +124,15 @@ function xx() {
 									  		 size="3" 
 									  		 onchange="change();"
 									  		 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-									  		 style="background-color:transparent;">개
+									  		 style="width:30px; 
+									         	    height:30px;
+									    	  		border:none;
+									  		  		border-right:0px; 
+									   		  		border-top:0px; 
+									  		  		boder-left:0px; 
+									   		  		boder-bottom:0px;
+									   		  		background-color:transparent;"
+									  		 readonly>개
 									  <input type="button" 
 									  		 value=" + "
 									  		 onclick="add();"
