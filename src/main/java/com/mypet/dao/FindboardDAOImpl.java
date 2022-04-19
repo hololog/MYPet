@@ -58,10 +58,10 @@ public class FindboardDAOImpl implements FindboardDAO {
 		return sqlSession.selectList(namespace+".getfindBoardList", pageDTO);
 }
 	
-	@Override
-	public List<FileDTO> getfindFileList(){
-		return sqlSession.selectList(namespace+".getfindFileList");
-	}
+//	@Override
+//	public List<FileDTO> getfindFileList(PageDTO pageDTO){
+//		return sqlSession.selectList(namespace+".getfindFileList",pageDTO);
+//	}
 	
 	@Override
 	public List<FindboardDTO> getfindMissBoardList(PageDTO pageDTO) {

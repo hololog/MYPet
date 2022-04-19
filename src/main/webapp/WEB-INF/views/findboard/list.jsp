@@ -595,9 +595,9 @@
 
 		<!-- The Modal -->
 
-		<div class="modal fade  modal-dialog-scrollable" id="find_content"
+		<div class="modal fade  modal-dialog-scrollable " id="find_content"
 			aria-labelledby="ModalToggleLabel" tabindex="-1">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
 				<div class="modal-content">
 					<c:forEach var="fb" items="${findboardList}" varStatus="mdloop">
 						<input type="hidden" data-del="${fb.find_board_num}">
@@ -614,34 +614,13 @@
 								<div style="margin_bottom: 10px"></div>
 								<section id="slider" class="carousel slide"
 									data-bs-ride="carousel">
-									<!-- 슬라이드 쇼 -->
-									<div class="carousel-inner">
 										<!-- 사진1 -->
-										<input type="hidden"
-											value="${findboardList[mdloop.index].find_board_num}">
 										<input type="hidden" value="${mdloop.index}">
-										
-											<div class="carousel-item active">
 												<img
-													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
+													src="${pageContext.request.contextPath}/resources/upload/${fb.upload}"
 													alt="first slide" class="d-block w-100"
 													style="width: 100%; height: 100%; max-height: 550px;"
 													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</div>
-											<div class="carousel-item">
-												<img
-													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
-													alt="second slide" class="d-block w-100"
-													style="width: 100%; height: 100%; max-height: 550px;"
-													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</div>
-											<div class="carousel-item">
-												<img
-													src="${pageContext.request.contextPath}/resources/upload/${fl.save_filename}"
-													alt="third slide" class="d-block w-100"
-													style="width: 100%; height: 100%; max-height: 550px;"
-													onclick="window.open(this.src,'상세사진','width=630,height=600,location=no,status=no,scrollbars=yes')">
-											</div>
 										<!-- 사진2 -->
 										<%-- <div class="carousel-item">
 											<img
@@ -651,17 +630,6 @@
 												onclick="window.open(this.src,'상세사진','width=430,height=500,location=no,status=no,scrollbars=yes')">
 										</div> --%>
 
-										<!-- 슬라이드 이동버튼 -->
-										<button class="carousel-control-prev" type="button"
-											data-bs-target="#slider" data-bs-slide="prev">
-											<span class="carousel-control-prev-icon"></span>
-										</button>
-										<button class="carousel-control-next" type="button"
-											data-bs-target="#slider" data-bs-slide="next">
-											<span class="carousel-control-next-icon"></span>
-										</button>
-										<!-- 슬라이드 이동버튼 끝 -->
-									</div>
 								</section>
 
 								<div>
@@ -671,18 +639,18 @@
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
 													장소</td>
-												<td style="padding-left: 10px"><b>${fb.address }</b>&nbsp;<b>${fb.address2}</b>&nbsp;<b>${fb.detail_address}</b></td>
+												<td class="td114" style="padding-left: 10px"><b>${fb.address }</b>&nbsp;<b>${fb.address2}</b>&nbsp;<b>${fb.detail_address}</b></td>
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">잃어버린
 													날짜</td>
-												<td style="text-align: center"><b>
-														${fb.missing_date} </b></td>
+												<td class="td115">
+														${fb.missing_date} </td>
 											</tr>
 
 											<tr>
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">이름</td>
-												<td style="padding-left: 10px"><b>${fb.pet_name}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(성별</b>
+												<td class="td114" style="padding-left: 10px"><b>${fb.pet_name}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(성별</b>
 													: <b><c:choose>
 															<c:when test="${fb.pet_gender eq 0}">암컷</c:when>
 															<c:when test="${fb.pet_gender eq 1}">수컷</c:when>
@@ -691,7 +659,7 @@
 
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">종류</td>
-												<td style="padding-left: 10px"><b> <c:choose>
+												<td class="td115" style="padding-left: 10px"><b> <c:choose>
 															<c:when test="${fb.pet_type eq 0}">개</c:when>
 															<c:when test="${fb.pet_type eq 1}">고양이</c:when>
 															<c:when test="${fb.pet_type eq 2}">기타</c:when>
@@ -702,12 +670,14 @@
 											<tr>
 												<td class="td113" height="auto"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">연락수단</td>
-												<td valign="top"
+												<td class="td114" valign="top"
 													style="line-height: 11pt; padding-left: 10px;"><br>
-													${fb.content }<br> <br></td>
+													${fb.contact }<br> <br></td>
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">나이</td>
-
+													<td class="td115">
+													${fb.pet_age}
+													</td>
 											</tr>
 
 											<tr>
@@ -939,7 +909,7 @@
 												<label class="input-group-text">연락 가능 수단</label> <input
 													type="text" class="form-control"
 													placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact"
-													value="${fb.contact }">
+													value="${fb.contact}">
 											</div>
 
 											<!--(구현못함 ㅠㅠ) file 드래그앤드롭-->
