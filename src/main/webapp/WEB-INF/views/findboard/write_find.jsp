@@ -164,15 +164,18 @@
                     e.stopPropagation();
                     e.preventDefault();
                 });
+                
                 //drag 영역 클릭시 파일 선택창
                 objDragAndDrop.on('click',function (e){
                     $('input[type=file]').trigger('click');
                 });
- 
+    
+				
                 $('input[type=file]').on('change', function(e) {
                     var files = e.originalEvent.target.files;
                     handleFileUpload(files,objDragAndDrop);
                 });
+                
 				function handleFileUpload(files,obj)
                 {
                    for (var i = 0; i < files.length; i++) 
@@ -275,84 +278,67 @@
                 
 
 	<!-- 유효성 검사 -->
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script>
 	<script type="text/javascript">
-	
-	$(function(){
-		$('.check').on('change', function(){
-			var checkText="";
-			var thisVal = $(this).val();
-			var number = /[0-9]/;
-			
-			switch($(this).attr("name")){
-				case "pet_type":
-					if(thisVal.val()==""){
-						checkText = "동물 종류를 선탁하세요.";
-					}
-					break;
-				if(checkText !=""){
-					$(this).siblings("p").html(checkText);
-				}
-			}
-			
-			
-			
-		}); // .check end
-	});//end
+		var ptn_num = /[0-9]/;	// 숫자 
+// 	var ptn_eng = /[a-zA-Z]/;	// 문자 
+// 	var ptn_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+// 	var ptn_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+
  	$(document).ready(function(){
- 		$('#f_eh').submit(function(){				
-				if($('#animal_sort_eh').val()==""){
+ 		$('#f_eh').submit(function(){
+				if($('#reward').val()==null || $('#reward').val()==""){
+					alert("사례금을 입력하세요");
+					return false;
+				} 
+				if($('#animal_sort_eh').val()=="" || $('#animal_sort_eh').val()==null){
 					alert("동물 종류를 선택해 주세요");
 					return false;
 				}
-				if($('#pet_name')).val()==""){
+				if($('#pet_name').val()=="" || $('#pet_name').val()==null){
 					alert("동물 이름을 입력해 주세요");
 					$('#pet_name').focus();
 					return false;
 				}
-// 				if($("input[name=pet_age]").val()==""){
-// 					alert("동물 나이를 입력해 주세요");
-// 					$('#pet_age').focus();
-// 					return false;
-// 				}
-				if($("input:radio[name=pet_gender]").is('checked')==false){
+				if($("input[name=pet_gender]:radio:checked").length <1){
 					alert("동물 성별을 체크해 주세요");
 					return false;
 				}
-				if($('#missing_date').val()==""){
+				if($('#missing_date').val()=="" || $('#missing_date').val()==null){
 					alert("실종날짜를 선택해 주세요");
 					return false;
 				}
-				if($('#province').val()==""){
-					alert("실종지역을 기입해 주세요");
-					$('#province').focus();
+				if($('#province').val()=="" || $('#province').val()==null){
+					alert("실종지역을 선택해 주세요");
 					return false;
 				} 
-				if($('#city').is('onclick')==true && ('#province').val()==""){
-					alert("시/도 먼저 선택해 주세요");
-					$('#province').focus();
+				if($('#province').val()!="" && $('#city').val()==null){
+					alert("시를 선택해 주세요");
 					return false;
-				}if($('#town').is('onclick')==true && ('#province').val()=="" || ('#city').val()==""){
-						alert("hmmm");
-						$('#province').focus();
-						return false;
-				}
-				if($('#ta_eh').val()==""){
+				} 
+				if($('#town').val()=="" || $('#town').val()==null){
+					alert("동을 선택해 주세요");
+					return false;
+				} 
+				if($('#ta_eh').val()=="" || $('#ta_eh').val()==null){
 					alert("상세 설명을 추가해 주세요");
 					$('#ta_eh').focus();
 					return false;
 				}
-				if($('#contact')).val()==""){
+				if($('#contact').val()=="" || $('#contact').val()==null){
 					alert("연락수단을 추가해 주세요");
 					$('#contact').focus();
 					return false;
 				}
-				if($('#fileUpload').val()==""){
-					alert("반려동물의 사진을 최소 1장 업로드 해주세요");
+				if($('#fileUpload').val()=="" || $('#fileUpload').val()==null){
+					alert("반려동물의 사진을 업로드 해주세요");
 					return false;
-				}
+				}	
  			});//
- 		});//		
-	</script>
+ 		});//	
+ 		</script>
+		
  
 </head>
   <body class="bg-light">
@@ -369,7 +355,7 @@
 			<!-- 본문 시작 -->
             <div class="container p-5">
 
-                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh" enctype="multipart/form-data" onsubmit="submit">
                    <input type="hidden" value="${sessionScope.nickname}" name="nickname">
                    <input type="hidden" value="${sessionScope.email}" name="email">
                     <div class="row g-5">
@@ -473,8 +459,8 @@
                            
                              
                              <!-- 기본 multiple file 전달 -->
-                             <div id="fileUpload" class="dragAndDropDiv">업로드할 이미지를 드래그하여 넣기 <br> (1장씩 첨부, 최대 3장)</div>
-        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
+                             <div id="fileUpload" class="dragAndDropDiv">업로드할 사진 드래그(최대1장)</div>
+        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" accept="image/jpg, image/gif, image/jpeg, image/png">
 
                             <!--submit 버튼-->
                             <div class="text-center p-2">
