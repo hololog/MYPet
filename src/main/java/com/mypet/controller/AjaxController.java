@@ -249,47 +249,41 @@ public class AjaxController {
 //    }
 	
 	//다슬
-//	@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
-//	public ResponseEntity<String> memberCheck(HttpServletRequest request){
-//		String result="";
-//		String id=request.getParameter("id");
-//		MemberDTO memberDTO=memberService.getMember(id);
-//		if(memberDTO!=null) {
-//			result="iddup";
-//		}else {
-//			result="idok";
-//		}
-//		ResponseEntity<String> entity=new ResponseEntity<String>(result, HttpStatus.OK);
-//		
-//		return entity;
-//		
-//		@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
-//		public ResponseEntity<String> memberCheck(HttpServletRequest request){
-//			String result="";
-//			String email=request.getParameter("email");
-//			MemberDTO memberDTO=memberService.getMemberEmail(email);
-//			if(memberDTO!=null) {
-//				result="emaildup";
-//			}else {
-//				result="emailok";
-//			}
-//			ResponseEntity<String> entity=new ResponseEntity<String>(result, HttpStatus.OK);
-//			
-//			return entity;
-//		}
-//		
-//		@RequestMapping(value = "/member/memberCheck", method = RequestMethod.GET)
-//		public ResponseEntity<List<MemberDTO>> memberjson(HttpServletRequest request){
-//			
-//			List<MemberDTO> memberList=memberService.getMemberList();
-//			
-//	ResponseEntity<List<MemberDTO>> entity=new ResponseEntity<List<MemberDTO>>(memberList , HttpStatus.OK);
-//			
-//			return entity;
-//		}
-		
-		
-//	}
+	@RequestMapping(value = "/member/userCheck2", method = RequestMethod.GET)
+	public ResponseEntity<String> userCheck2(HttpServletRequest request) {
+		System.out.println("AjaxController userCheck2() ");
+		String result="";
+		String nickname=request.getParameter("nickname");
+		MemberDTO memberDTO =memberService.getMember2(nickname);
+		if(memberDTO!=null) {
+			//아이디 일치 => 아이디 중복
+			result="iddup";
+		}else {
+			//아이디 틀림 => 아이디 사용가능
+			result="idok";
+		}
+		ResponseEntity<String> entity=new ResponseEntity<String>(result,HttpStatus.OK);
+		return entity;
+	}
+	
+	// 이메일 중복
+	@RequestMapping(value = "/member/userCheck", method = RequestMethod.GET)
+	public ResponseEntity<String> userCheck(HttpServletRequest request) {
+		System.out.println("AjaxController userCheck2() ");
+		String result="";
+		String email=request.getParameter("email");
+		MemberDTO memberDTO =memberService.getMember(email);
+		if(memberDTO!=null) {
+			//이메일 일치 => 이메일 중복
+			result="iddup";
+		}else {
+			//이메일 틀림 => 이메일 사용가능
+			result="idok2";
+		}
+		ResponseEntity<String> entity=new ResponseEntity<String>(result,HttpStatus.OK);
+		return entity;
+	}
+
 	
 	// 준동
 	@RequestMapping(value = "/mypage/mypagejson", method = RequestMethod.GET)

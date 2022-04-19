@@ -17,6 +17,11 @@
 		select * from user where email=#{email}
 	</select>
 	
+	<select id="getMember2" resultType="com.mypet.domain.MemberDTO">
+		select * from user where nickname=#{nickname}
+	</select>
+	
+	
 	<select id="getUserMaxNum" resultType="java.lang.Integer">
 		select max(user_id) from user
 	</select>
