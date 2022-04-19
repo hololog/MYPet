@@ -12,6 +12,7 @@ import com.mypet.domain.MemberDTO;
 @Service
 public class MemberServiceImpl implements MemberService{
 
+
 	@Inject
 	private MemberDAO memberDAO;
 	
@@ -38,4 +39,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.getMember(email);
 	}
 
+	@Override
+	public MemberDTO getMember2(String nickname) {
+		return memberDAO.getMember(nickname);
+	}
+	
 }

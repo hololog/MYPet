@@ -78,18 +78,18 @@
                 style="min-width: 230px; max-height: 500px">
                 <div class="Info" style="display: flex;">
                         <img
-                            src="http://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg"
+                            src="${pageContext.request.contextPath }/resources/upload/${memberDTO.profileUpload}"
                             alt=""
                             width="70"
                             height="70"
                             class="rounded-circle me-3 align-items-center">
-                        <strong style="color: white;"><br>${sessionScope.nickname } 님</strong>
+                        <strong style="color: white;"><br>${memberDTO.nickname } 님</strong>
                 </div>
                 <hr>
               
                 <ul class="nav nav-pills flex-column mb-auto sidebar1" id="sdb">
                     <li class="nav-item2">  
-                        <a href="${pageContext.request.contextPath }/mypage/myinfo" class="nav-link text-white">
+                        <a href="${pageContext.request.contextPath }/mypage/myinfo?email=${sessionScope.email}" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16">
                             </svg>
                             내정보

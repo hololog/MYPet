@@ -107,7 +107,7 @@
 <script>
 // 특수문자 입력 방지(이름 주소)
 function characterCheck(obj){
-var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
+var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
 if( regExp.test(obj.value) ){
 	obj.value = obj.value.substring(0 , obj.value.length - obj.value.length );
 	}

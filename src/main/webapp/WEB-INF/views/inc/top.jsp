@@ -253,18 +253,25 @@ $(document).ready(function(){
                           <div class="form-floating mb-3">
 		   				  <input type="text" class="form-control rounded-4" id="nickname" name="nickname" required autofocus>
                             <label for="floatingInput_NM">닉네임</label>
-                            <span class="ex-plain email-alert" style="display :none;"> 이미 사용중인 닉네임입니다. </span>
-                            <button id="idck">중복확인</button>
+                            <input type="button" value="중복확인" class="dup" style="size: 5px;">
+                            <label></label><div id="divdup">중복확인</div>
                           </div>
+                          
+
+                          
                           <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-4" id="email" name="email" required autofocus>
                             <label for="floatingInput_EM">email@example.com</label>
-                            <div class="check_font" id="EM_check"></div>
+<!--                             <div class="check_font" id="EM_check"></div> -->
+							<input type="button" value="중복확인" class="dup2">
+                            <label></label><div id="divdup2">중복확인</div>
                           </div>
+                          
                           <div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" name="password" id="pw" minlength="8" maxlength="10" required autofocus>
                             <label for="floatingPassword">비밀번호(8~10자 입력)</label>
                           </div>
+                          
 		  					<div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-4" id="pw2" onkeyup="checkPwd()" minlength="8" maxlength="10" required>
                             <label for="floatingPassword">비밀번호 재확인</label>
@@ -298,8 +305,8 @@ $(document).ready(function(){
 						  </a>
                           </div>
                           
-                          </div>
-                        </form>
+                        	</form>
+                         </div>
                       </div>
                     </div>
                   </div>
@@ -488,57 +495,49 @@ function recheck() {
 </script>
 
 <!-- 회원가입 유효성 -->
-<!--id  -->
-<script type="text/javascript">
-//아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
-var idck = 0;
-$(function() {
-    //idck 버튼을 클릭했을 때 
-    $("#idck").click(function() {
-        
-        //userid 를 param.
-        var userid =  $("#nickname").val(); 
-        
-        $.ajax({
-            async: true,
-            type : 'POST',
-            data : nickname,
-            url : "idcheck.do",
-            dataType : "json",
-            contentType: "application/json; charset=UTF-8",
-            success : function(data) {
-                if (data.cnt > 0) {
-                    
-                    alert("이미 존재하는 닉네임입니다.");
-                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-                    $("#divInputId").addClass("has-error")
-                    $("#divInputId").removeClass("has-success")
-                    $("#nickname").focus();
-                    
-                
-                } else {
-                    alert("사용가능한 아이디입니다.");
-                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-                    $("#divInputId").addClass("has-success")
-                    $("#divInputId").removeClass("has-error")
-                    $("#email").focus();
-                    //아이디가 중복하지 않으면  idck = 1 
-                    idck = 1;
-                    
-                }
-            },
-            error : function(error) {
-                
-                alert("error : " + error);
-            }
-        });
-    });
-});
+<!-- id  -->
+ <script type="text/javascript">
+ 	//아이디 중복체크
+	// class="dup" 버튼을 클릭했을때 
+	$('.dup').click(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath }/member/userCheck2",
+			data:{"nickname":$('#nickname').val()},
+			success:function(rdata){
+				if(rdata=='idok'){
+					rdata="사용가능한 닉네임";
+				}else{
+					rdata="존재하는 닉네임";
+				}
+				// id="divdup" 에 리턴받은 값 넣기
+				$('#divdup').html(rdata);
+			}
+		});
+
+	});	 
 </script>
 
+<!-- email  -->
+ <script type="text/javascript">
+ 	//이메일 중복체크
+	// class="dup2" 버튼을 클릭했을때 
+	$('.dup2').click(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath }/member/userCheck",
+			data:{"nickname":$('#nickname').val()},
+			success:function(rdata){
+				if(rdata=='idok2'){
+					rdata="사용가능한 이메일";
+				}else{
+					rdata="이미 존재하는 이메일";
+				}
+				// id="divdup" 에 리턴받은 값 넣기
+				$('#divdup2').html(rdata);
+			}
+		});
 
-
-
+	});	 
+</script>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/css/style.css"></script>
