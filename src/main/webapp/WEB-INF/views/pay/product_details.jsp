@@ -71,8 +71,8 @@ function xx() {
 	<jsp:include page="../inc/top.jsp"></jsp:include>
    	  <!-- header 종료 -->
       <!-- 제품이미지 -->
-<br>
-<div>
+	<br>
+	<div>
 	<div class="text-lg-end" style="padding-right:20%;">
 		<input type="button" 
 			   value="글수정" 
