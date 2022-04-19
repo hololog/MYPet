@@ -269,7 +269,7 @@ public class AjaxController {
 	// 이메일 중복
 	@RequestMapping(value = "/member/userCheck", method = RequestMethod.GET)
 	public ResponseEntity<String> userCheck(HttpServletRequest request) {
-		System.out.println("AjaxController userCheck2() ");
+		System.out.println("AjaxController userCheck() ");
 		String result="";
 		String email=request.getParameter("email");
 		MemberDTO memberDTO =memberService.getMember(email);
