@@ -268,10 +268,50 @@ public class FindBoardController {
 		model.addAttribute("fileList", searchFileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
-		return "findboard/searchList";
+		return "findboard/list";
 	}
 	
-	
+	@RequestMapping(value = "findboard/select", method = RequestMethod.GET)
+	public String selectFindBoard(HttpServletRequest req, Model model) throws Exception {
+		int num =Integer.parseInt(req.getParameter("num"));
+		String pageNum = req.getParameter("pageNum");
+		if(pageNum == null) pageNum = "1";
+
+		int currentPage = Integer.parseInt(pageNum);
+		int pageSize = 5;
+		int pageBlock = 5;
+		int startPage = (currentPage-1)/pageBlock*pageBlock+1;
+		int endPage = startPage + pageBlock-1;
+		int count = findboardService.getFindBoardSelectCount(num);
+		int pageCount = count / pageSize +  (count % pageSize == 0 ? 0:1);
+		
+		if(endPage > pageCount)	endPage = pageCount;
+
+		//DTO 
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setCount(count);
+		pageDTO.setPageCount(pageCount);
+		pageDTO.setNum(num);
+		
+		List<FindboardDTO> findboardSearch = findboardService.getFindSelectList(pageDTO);
+//		List<FindboardDTO> findboardSearch = findboardService.getFindSelectList(pageDTO);
+		
+		List<FileDTO> searchFileList = findboardService.getSearchFileList(pageDTO);
+//		List<FileDTO> searchFileList = findboardService.getSearchFileList(pageDTO);
+
+		
+		model.addAttribute("findboardList", findboardSearch);
+		model.addAttribute("fileList", searchFileList);
+		model.addAttribute("pageDTO", pageDTO);
+		
+		return "findboard/list";
+	}
 //	@ResponseBody
 //	@RequestMapping(value="/json/address", method=RequestMethod.GET)
 //	public String jsonAddress(HttpServletRequest request) {

@@ -10,7 +10,7 @@ public class PageDTO {
 	
 	private String search;	
 
-
+	private int num;
 
 	private int pageBlock;
 	private int startPage;
@@ -94,6 +94,12 @@ public class PageDTO {
 	}
 	public void setSearch(String search) {
 		this.search = search;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 

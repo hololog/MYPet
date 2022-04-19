@@ -10,6 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>상세페이지</title>
 <!-- css스타일 적용 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/style.css" />
 <link rel="stylesheet"

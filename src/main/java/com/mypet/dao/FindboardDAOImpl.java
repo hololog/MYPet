@@ -151,6 +151,16 @@ public class FindboardDAOImpl implements FindboardDAO {
 	public String getAddr(int num) {
 		return sqlSession.selectOne(namespace+".getAddr",num);
 	}
+
+	@Override
+	public int getFindBoardSelectCount(int num) {
+		return sqlSession.selectOne(namespace + ".getFindBoardSelectCount", num);
+	}
+
+	@Override
+	public List<FindboardDTO> getFindSelectList(PageDTO pageDTO) {
+		return  sqlSession.selectList(namespace + ".getFindSelectList", pageDTO);
+	}
 	
 	
 	

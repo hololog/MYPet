@@ -220,4 +220,18 @@ public class FindboardServiceImpl implements FindboardService {
 	public void deletefind(int num) {
 		findboardDAO.deletefind(num);
 	}
+
+
+
+	@Override
+	public int getFindBoardSelectCount(int num) {
+		return findboardDAO.getFindBoardSelectCount(num);
+	}
+
+
+
+	@Override
+	public List<FindboardDTO> getFindSelectList(PageDTO pageDTO) {
+		return findboardDAO.getFindSelectList(pageDTO);
+	}
 }

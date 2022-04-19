@@ -141,6 +141,12 @@
  		  from find_board 
  		 where address like #{search}
  	</select>
+ 	
+ 	<select id="getFindBoardSelectCount" resultType="int">
+ 		select count(*) 
+ 		  from find_board 
+ 		 where find_board_num = #{num}
+ 	</select>
  		
 	<select id="getFindSearchList" resultType="com.mypet.domain.FindboardDTO">
 		select * 
@@ -149,6 +155,14 @@
 		order by find_board_num desc 
 		limit #{startRow},#{pageSize}
 	</select>
+
+ 	<select id="getFindSelectList" resultType="com.mypet.domain.FindboardDTO">
+ 		select * 
+		from find_board 
+		where find_board_num = #{num}
+		order by find_board_num desc 
+		limit #{startRow},#{pageSize}
+ 	</select>
 	
 	<select id="getSearchFileList" resultType="com.mypet.domain.FileDTO">
 		select * 
