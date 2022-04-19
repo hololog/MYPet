@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -54,9 +55,11 @@ public class BoardController {
 	private String uploadPath;
 	
 	@RequestMapping(value = "/findboard/list", method = RequestMethod.GET)
-	public String findboard(HttpServletRequest request, Model model) throws Exception {
+	public String findboard(HttpServletRequest request, HttpSession session, Model model) throws Exception {
 		int pageSize = 5;
 
+		String email = (String)session.getAttribute("email");
+		
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null) {
 			pageNum = "1";
@@ -67,7 +70,9 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 
 		List<FindboardDTO> findboardList = findboardService.getfindBoardList(pageDTO);
-		List<FileDTO> fileList = findboardService.getfindFileList(pageDTO);
+		List<FileDTO> fileList = findboardService.getfindFileList();
+		List<FindboardDTO> findboardListMain = findboardService.getfindBoardListMain(email);
+		
 
 		int count = findboardService.getfindBoardCount();
 
@@ -89,10 +94,11 @@ public class BoardController {
 		model.addAttribute("findboardList", findboardList);
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("findboardListMain", findboardListMain);
 		
 		
 		
-		return "findboard/list";
+		return "/findboard/list";
 	}
 	
 	@RequestMapping(value = "/findboard/listM", method = RequestMethod.GET)
@@ -109,7 +115,8 @@ public class BoardController {
 		pageDTO.setPageNum(pageNum);
 
 		List<FindboardDTO> findmissboardList = findboardService.getfindMissBoardList(pageDTO);
-
+		List<FileDTO> fileList = findboardService.getfindFileList();
+		
 		int count = findboardService.getfindMissBoardCount();
 
 		int currentPage = Integer.parseInt(pageNum);
@@ -128,12 +135,13 @@ public class BoardController {
 		pageDTO.setPageCount(pageCount);
 		
 		model.addAttribute("findmissboardList", findmissboardList);
+		model.addAttribute("fileList", fileList);
 		model.addAttribute("pageDTO", pageDTO);
 		
 		
 		return "findboard/listM";
 	}
-	//free
+	
 	@RequestMapping(value = "/freeboard/freecommentsIn", method = RequestMethod.POST)
 	public String writeFreePro(HttpServletRequest Request) throws Exception {
 		

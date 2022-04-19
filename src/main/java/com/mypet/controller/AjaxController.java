@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.mypet.dao.BoardDAO;
+import com.mypet.dao.FindboardDAO;
 import com.mypet.domain.AddressDTO;
 import com.mypet.domain.BoardDTO;
 import com.mypet.domain.BookmarkDTO;
@@ -66,6 +67,9 @@ public class AjaxController {
 	
     @Autowired
 	private MypageDAO mypageDAO;
+    
+    @Autowired
+    private FindboardDAO findboardDAO;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
@@ -164,6 +168,18 @@ public class AjaxController {
 		ResponseEntity<FindboardDTO> fin = new ResponseEntity<FindboardDTO>(findboardDTO, HttpStatus.OK);
 		
 		return fin;
+	}
+	
+	@RequestMapping(value = "/ajaxmap", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public ResponseEntity<String> ajaxmap(HttpServletRequest request) throws Exception{
+		int num = Integer.parseInt(request.getParameter("find_board_num"));
+		System.out.println(num);
+		String result = findboardDAO.getAddr(num);
+		System.out.println(result);
+		ResponseEntity <String>entity=new ResponseEntity<String> (result , HttpStatus.OK);
+		
+		return entity;
 	}
 	
 

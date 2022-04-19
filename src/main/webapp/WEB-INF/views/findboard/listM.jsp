@@ -64,7 +64,7 @@
 				</div>
 			</div>
 			<!-- 메인 -->
-			<div class="row" style="height: 1397px">
+			<div class="row" style="height: 1500px">
 
 				<!-- 지도 api가져올 자리 -->
 				<!-- <div class="mb-3 col-md-12 col-lg-7" id="map-frame-ksk"
@@ -172,19 +172,19 @@
 							<div class="col-12 col-sm-7 p-2 position-relative">
 								<c:choose>
 									<c:when test="${fileList[loop.index].filename ne null}">
-										<a href="" data-bs-toggle="modal" class="openMod"
-											data-bs-toggle="modal" data-test="${loop.count}"
-											data-bs-target="#find_content" onmouseover=mapmark()
+										<a href="" data-bs-toggle="modal" class="openMod pic"
+											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
+											data-bs-target="#find_content"
 											id="marking"> <img class="img-fluid rounded"
-											src="${fileList[loop.index].upload}" alt="실종동물사진" id="">
+											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}" alt="실종동물사진" style="max-height:300px">
 										</a>
 									</c:when>
 									<c:when test="${fileList[loop.index].filename eq null}">
-										<a href="" data-bs-toggle="modal" class="openMod"
-											data-bs-toggle="modal" data-test="${loop.count}"
+										<a href="" data-bs-toggle="modal" class="openMod pic"
+											data-bs-toggle="modal" data-test="${loop.count}" data-map="${fb.address}" data-inx="${loop.index}"
 											data-bs-target="#find_content"> <img
 											class="img-fluid rounded"
-											src="${fileList[loop.index].upload}" alt="실종동물사진" id="">
+											src="${pageContext.request.contextPath }/resources/upload/${fb.upload}" alt="실종동물사진" id="">
 										</a>
 									</c:when>
 								</c:choose>

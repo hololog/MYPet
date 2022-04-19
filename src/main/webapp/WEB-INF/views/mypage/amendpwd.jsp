@@ -88,8 +88,15 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$("#pwUpdate").on("click", function(){
+		
 		if($("#pwd2_eh").val() == null || $("#pwd2_eh").val() == ""){
 			alert("변경할 비밀번호를 입력해주세요");
+			$("#pwd2_eh").focus();
+			return false
+		}
+		
+		if(8 > $("#pwd2_eh").val().length || $("#pwd2_eh").val().length > 10){
+			alert("8~10자 입력하세요");
 			$("#pwd2_eh").focus();
 			return false
 		}
@@ -103,6 +110,7 @@ $(document).ready(function(){
 		if ($("#pwd2_eh").val() != $("#pwd2re_eh").val()) {
 			alert("변경할 비밀번호가 일치하지 않습니다.");
 			$("#pwd2re_eh").focus();
+			return false
 		} else {
 			if(!confirm("변경하시겠습니까?")) return false;
 			$("#pwUpdateForm").submit();
@@ -246,7 +254,7 @@ $(document).ready(function(){
                                 	class="form-control"
                                 	id="pwd2re_eh"
                                 	placeholder="8~10자 재입력"
-                                	minlength="8"
+                                	ng-minlength="8"
                                 	maxlength="10"
                                 	required>
                             </div><br>

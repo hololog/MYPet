@@ -509,6 +509,8 @@
 									
 									</div> -->
 									
+								
+									
 							
 						
 							<!-- <div class="d-flex" style="padding:10px 0 10px 10px">
@@ -524,8 +526,10 @@
 								2022.04.17
 								</div>
 							</div> -->
-					</div>
-					</div>
+							</div>
+							</div>
+							</div>
+				</div>
 				</div>
 				</div>
 				</div>
@@ -580,7 +584,6 @@ function report() {
 </script>
 <script>
 $(document).ready(function(){
-		alert("alax load");
 		$.ajax({
 		url:'${pageContext.request.contextPath}/freeboard/ajaxcomments',
 		data: 'free_board_num='+$('#num').val(),
@@ -592,7 +595,7 @@ $(document).ready(function(){
 								  "		<img class='rounded-circle' src='https://dummyimage.com/50x50/ced4da/6c757d.jpg' alt='...'>"+
 								  " </div>"+
 								  "	<div class='ms-3'>"+
-								  "		<div class='fw-bold'>"+item.c_nik.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
+								  "		<div class='fw-bold'>"+item.c_nik+"</div>"+item.comment.replace('`','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')+
 								  " </div>"+
 								  "</div>"+
 								  "<br>"
@@ -607,7 +610,6 @@ $(document).ready(function(){
 </script>
  <script>
 $(document).ready(function(){
-	alert("count ajax");
 	$.ajax({
 		url : '${pageContext.request.contextPath}/freeboard/ajaxcommentsfCount',
 		method:'post',

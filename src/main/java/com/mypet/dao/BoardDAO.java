@@ -148,4 +148,6 @@ public interface BoardDAO {
 	
 	public String getnoticecommentCount(int bnum);
 	
+
+	
 }

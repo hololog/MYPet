@@ -75,19 +75,19 @@ public class FindboardServiceImpl implements FindboardService {
 	}
 	
 	@Override
-	public List<FileDTO> getfindFileList(PageDTO pageDTO){
+	public List<FileDTO> getfindFileList(){
 		
-		int currentPage=Integer.parseInt(pageDTO.getPageNum());
-		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
-		int endRow=startRow+pageDTO.getPageSize()-1;
+//		int currentPage=Integer.parseInt(pageDTO.getPageNum());
+//		int startRow = (currentPage-1)*pageDTO.getPageSize()+1;
+//		int endRow=startRow+pageDTO.getPageSize()-1;
+//		
+//		pageDTO.setCurrentPage(currentPage);
+//		pageDTO.setStartRow(startRow);
+//		pageDTO.setEndRow(endRow);
+//		
+//		pageDTO.setStartRow(startRow-1);
 		
-		pageDTO.setCurrentPage(currentPage);
-		pageDTO.setStartRow(startRow);
-		pageDTO.setEndRow(endRow);
-		
-		pageDTO.setStartRow(startRow-1);
-		
-		return findboardDAO.getfindFileList(pageDTO);
+		return findboardDAO.getfindFileList();
 	}
 	
 	@Override
@@ -215,5 +215,9 @@ public class FindboardServiceImpl implements FindboardService {
 		
 		return findboardDAO.getSearchFileList(pageDTO);
 	}
-
+	
+	@Override
+	public void deletefind(int num) {
+		findboardDAO.deletefind(num);
+	}
 }

@@ -109,8 +109,8 @@
 function characterCheck(obj){
 var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
 if( regExp.test(obj.value) ){
-	alert("특수문자는 입력하실수 없습니다.");
-	obj.value = obj.value.substring(0 , obj.value.length - 1 );
+	alert("특수문자는 입력할 수 없습니다.");
+	obj.value = obj.value.substring(0 , obj.value.length - obj.value.length );
 	}
 }
 //특수문자 입력 방지(전화번호)
@@ -118,7 +118,7 @@ function characterCheck_phone(obj){
 var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
 if( regExp.test(obj.value) ){
 	alert("숫자만 입력하세요.");
-		obj.value = obj.value.substring(0 , obj.value.length - 1 );
+		obj.value = obj.value.substring(0 , obj.value.length - obj.value.length );
 	}
 }
 
@@ -153,7 +153,6 @@ if( regExp.test(obj.value) ){
 
 						<tr>
 							<td>수령인</td>
-							
 							<td style="text-align: center;">
 								<input type="text"
 							    	   id="user_id" 
@@ -162,7 +161,8 @@ if( regExp.test(obj.value) ){
 									   style="width:400px; 
 										      height:30px;"
 									   onkeyup="characterCheck(this)"
-									   onkeydown="characterCheck(this)">
+									   onkeydown="characterCheck(this)"
+									   autocomplete="off">
 							</td>
 						</tr>
 						<tr>
@@ -179,7 +179,8 @@ if( regExp.test(obj.value) ){
 			                                  border-top:0px; 
 			                                  boder-left:0px; 
 			                                  boder-bottom:0px;
-			                                  background-color:transparent;"
+			                                  background-color:transparent;
+			                                  outline:none;"
 			                           readonly>
 							</td>
 						</tr>
@@ -197,7 +198,8 @@ if( regExp.test(obj.value) ){
 									   border-top:0px; 
 									   boder-left:0px; 
 									   boder-bottom:0px;
-									   background-color:transparent;"
+									   background-color:transparent;
+									   outline:none;"
 								readonly>
 							</td>
 						</tr>
@@ -220,7 +222,8 @@ if( regExp.test(obj.value) ){
 									   		  border-top:0px; 
 									  		  boder-left:0px; 
 									   		  boder-bottom:0px;
-									   		  background-color:transparent;"
+									   		  background-color:transparent;
+									   		  outline:none;"
 									   readonly>	   
 							</td>
 						</tr>
@@ -266,7 +269,8 @@ if( regExp.test(obj.value) ){
 								   name="detail_address"
 								   style="width:400px; height:30px;"
 								   onkeyup="characterCheck(this)"
-								   onkeydown="characterCheck(this)">
+								   onkeydown="characterCheck(this)"
+								   autocomplete="off">
 							<input type="hidden"
 								   id="sample4_extraAddress"
 								   placeholder="참고항목"
@@ -284,7 +288,8 @@ if( regExp.test(obj.value) ){
 									   style="width:400px; height:30px;"										
 									   value=""
 									   onkeyup="characterCheck_phone(this)"
-								   	   onkeydown="characterCheck_phone(this)">
+								   	   onkeydown="characterCheck_phone(this)"
+								   	   autocomplete="off">
 							</td>
 						</tr>
 					</table>
@@ -377,7 +382,7 @@ if( regExp.test(obj.value) ){
 	    	   }
 	    		
 		</script>
-			
+					&nbsp;&nbsp;
 					<a href="javascript:history.back();">
 						<input type="button" class="w-btn w-btn-indigo" value="취소하기">
 					</a>
