@@ -11,6 +11,7 @@
 <!-- css스타일 적용 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/GBuy.css" />
 <!-- 부트스트랩 적용 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
@@ -329,28 +330,51 @@ $(document).on('click', ".result", function(){
       <hr class="my-5">
       <div class="row">
         <!-- 가로 12등분 -->
-        <div class="col-sm-5">
-          <a href="${pageContext.request.contextPath }/pay/product_details"> 
-         	<img
-            src="https://shop-phinf.pstatic.net/20201228_290/1609112167826pkx0d_JPEG/10247995466374241_827126827.jpg?type=m510"
-            class="img-thumbnail" alt="강아지 사료" />
-          </a>
-        </div>
-        <div class="col-sm-7 p-3">
-          <h3>강아지 사료</h3>
-          <p>
-            It is a long established fact that a reader will be distracted by the readable
-            content of a page when looking at its layout. The point of using Lorem Ipsum is
-            that it has a more-or-less normal distribution of letters
-          </p>
-          <div class="progress">
-            <div class="progress-bar" style="width: 15%; background-color: #3f51b5;" > 20명</div>
-            <div class="progress-bar progress-bar-striped progress-bar-animated .active bg-success" role="progressbar" style="width: 85%"></div>
-          </div>
-          <br>
-          <a href="${pageContext.request.contextPath }/pay/product_details" class="btn">구매하러가기</a>
-        </div>
-      </div>
+        <div class="col-sm-12">
+		<c:forEach var="GDTO" items="${GbuyboardList}">
+		<div class="row g-0 border rounded overflow-hidden flex-row mb-4 shadow-sm h-250 position-relative"  style="position: relative;">
+			<c:if test="${GDTO.gbuy_count == 0 }"><div class="LK_end"></div></c:if>
+			<div class="col-6 p-4 d-flex flex-column position-static"  id="ba">
+				<div class="col-12" >
+					<strong class="d-inline-block mb-2 text-success" id="tx1">목표수 : <fmt:formatNumber value="${GDTO.gbuy_tcount}"  pattern="#,###" /> </strong>
+					<h3 class="tx2">${GDTO.gbuy_subject}</h3>
+					<p class="tx1">가격 : <fmt:formatNumber value="${GDTO.gbuy_price}"  pattern="#,###" /></p>
+					<p class="tx1">재고수량 : <fmt:formatNumber value="${GDTO.gbuy_count}"  pattern="#,###" /></p>
+					<br>
+					<p>
+						<button class="btn btn-primary btn-lg" type="button" 
+								onclick="location.href='${pageContext.request.contextPath }/pay/product_details?gbuy_num=${GDTO.gbuy_num}'">
+								상세정보</button>
+					</p>
+				</div>
+				<br>
+				<div class="col-12">
+					<div class="LK_ba">
+						<c:if test="${(GDTO.gbuy_count/GDTO.gbuy_tcount)-1!=0}">
+						<div class="progress-bar" id="LK_ba" role="progressbar "
+							style="width: ${((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100)}%" aria-valuenow="100" aria-valuemin="0"
+							aria-valuemax="100"><fmt:formatNumber value="${(((GDTO.gbuy_count/GDTO.gbuy_tcount)-1)*(-100))}"  pattern="#,###" /> %
+						</div>
+						</c:if>
+						<c:if test="${(GDTO.gbuy_count/GDTO.gbuy_tcount)-1==0}">
+						<div class="pl">0%</div>
+						</c:if>
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-6 d-none d-lg-block" >
+				<img style="width:90%;
+    						height:100%;" 
+    						src="${pageContext.request.contextPath }/resources/upload/${GDTO.gbuy_file}" alt="">
+                
+			</div>
+		</div>
+ 	</c:forEach>
+ 	</div>
+    </div>
+    
+    
     </section>
     <!-- 공동구매 소개 종료 -->
 

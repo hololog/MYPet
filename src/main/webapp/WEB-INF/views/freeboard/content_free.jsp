@@ -228,7 +228,7 @@
 						
 <!-- // 					  alert("로그인해라"); -->
 						
-<%-- // 				  location.href = "${pageContext.request.contextPath }/main/main"; --%> --%>
+<%-- // 				  location.href = "${pageContext.request.contextPath }/main/main"; --%> 
 						
 <!-- // 						} -->
 						
@@ -512,6 +512,7 @@
 								
 									
 							
+						
 							<!-- <div class="d-flex" style="padding:10px 0 10px 10px">
 							<div class="flex-shrink-0">
 								<img class="rounded-circle"
@@ -528,6 +529,7 @@
 							</div>
 							</div>
 							</div>
+				</div>
 				</div>
 				</div>
 				</div>
@@ -583,7 +585,7 @@ function report() {
 <script>
 $(document).ready(function(){
 		$.ajax({
-		url:'${pageContext.request.contextPath}/free/ajaxcomments',
+		url:'${pageContext.request.contextPath}/freeboard/ajaxcomments',
 		data: 'free_board_num='+$('#num').val(),
 		dataType:'json',
 		success:function(rdata){
@@ -609,7 +611,7 @@ $(document).ready(function(){
  <script>
 $(document).ready(function(){
 	$.ajax({
-		url : '${pageContext.request.contextPath}/free/ajaxcommentsfCount',
+		url : '${pageContext.request.contextPath}/freeboard/ajaxcommentsfCount',
 		method:'post',
 		data : 'free_board_num='+$('#num').val(),
 		dataType:'json',

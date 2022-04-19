@@ -238,7 +238,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public int getreviewLike(BoardDTO boardDTO) {
 		return sqlSession.selectOne(namespace + ".getreviewLike", boardDTO);
 	}
-	
+	//free
 	@Override
 	public List<ReplyDTO> getfreecommentList(int bnum){
 		return sqlSession.selectList(namespace+".getfreecommentList", bnum);
@@ -260,8 +260,48 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	
+	//review
+	@Override
+	public List<ReplyDTO> getreviewcommentList(int bnum){
+		return sqlSession.selectList(namespace+".getreviewcommentList", bnum);
+	}
+	
+	@Override
+	public void reviewcommentIn(ReplyDTO replyDTO) {
+		sqlSession.insert(namespace+".reviewcommentIn", replyDTO);
+	}
+	
+	@Override
+	public Integer getRcommentMaxNum() {
+		return sqlSession.selectOne(namespace+".getRcommentMaxNum");
+	}
+	
+	@Override
+	public String getreviewcommentCount(int bnum) {
+		return sqlSession.selectOne(namespace+".getreviewcommentCount", bnum);
+	}
 	
 	
+	//notice
+	@Override
+	public List<ReplyDTO> getnoticecommentList(int bnum){
+		return sqlSession.selectList(namespace+".getnoticecommentList", bnum);
+	}
+	
+	@Override
+	public void noticecommentIn(ReplyDTO replyDTO) {
+		sqlSession.insert(namespace+".noticecommentIn", replyDTO);
+	}
+	
+	@Override
+	public Integer getNcommentMaxNum() {
+		return sqlSession.selectOne(namespace+".getNcommentMaxNum");
+	}
+	
+	@Override
+	public String getnoticecommentCount(int bnum) {
+		return sqlSession.selectOne(namespace+".getnoticecommentCount", bnum);
+	}
 
 	
 

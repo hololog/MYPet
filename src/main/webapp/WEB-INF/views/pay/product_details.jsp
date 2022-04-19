@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,7 +34,7 @@ var amount;
 function init () {
 			      sell_price = document.form.sell_price.value;
 			      amount = document.form.amount.value;
-			      document.form.sum.value = sell_price;
+			      document.form.sum.value = (parseInt(sell_price) + 3000);
 			      change();
 				 }
 function add () {
@@ -58,33 +59,23 @@ function change () {
 					if (hm.value >${boardDTO.gbuy_count}) {
 						hm.value =${boardDTO.gbuy_count};
 						}
-					sum.value = (parseInt(hm.value) * sell_price + 3000);
 					}  
 function xx() {
 			  	hm = document.form.amount;
 				sum = document.form.sum;
 				hm.value="1" ;
 				sum.value = (parseInt(hm.value) * sell_price + 3000);
+				sumview.value = (parseInt(hm.value) * sell_price + 3000);
 			   }
 </script>
       <!-- header 시작 -->
 	<jsp:include page="../inc/top.jsp"></jsp:include>
    	  <!-- header 종료 -->
       <!-- 제품이미지 -->
-<br>
-<div>
-	<div class="text-lg-end" style="padding-right:20%;">
-		<input type="button" 
-			   value="글수정" 
-			   class="btn_GB" 
-			   onclick="location.href='${pageContext.request.contextPath}/GB/GbuyUpdate?gbuy_num=${boardDTO.gbuy_num}'" >
-		<input type="button"
-		       value="글삭제" 
-		       class="btn_GB" 
-		       onclick="location.href='${pageContext.request.contextPath}/GB/GbuyDelete?gbuy_num=${boardDTO.gbuy_num}'" >	
-	</div>
+	<br>
+	<div>
 	<div style="font-family:fantasy; text-align: center; color: #3f51b5; ">
-	<br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
 	 <h2>공동구매 진행중! (${boardDTO.gbuy_count}/${boardDTO.gbuy_tcount})</h2>
 	</div>
 	<br>
@@ -113,7 +104,8 @@ function xx() {
                     	<div>
 							<form name="form" method="get">
 							<div>
-								수량 : <input type="hidden" 
+								&nbsp;수량&nbsp;:&nbsp; 
+									  <input type="hidden" 
 											 name="sell_price" 
 											 value="${boardDTO.gbuy_price}">
 									  <input type="text" 
@@ -122,7 +114,16 @@ function xx() {
 									  		 value="1" 
 									  		 size="3" 
 									  		 onchange="change();"
-									  		 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">개
+									  		 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+									  		 style="width:30px; 
+									         	    height:30px;
+									    	  		border:none;
+									  		  		border-right:0px; 
+									   		  		border-top:0px; 
+									  		  		boder-left:0px; 
+									   		  		boder-bottom:0px;
+									   		  		background-color:transparent;"
+									  		 readonly>개
 									  <input type="button" 
 									  		 value=" + "
 									  		 onclick="add();"
@@ -157,7 +158,8 @@ function xx() {
 							</div>
 							<br>        
 							<div>
-							    금액 : <input type="text" 
+							    금액 &nbsp;:&nbsp;
+							    	  <input type="text" 
 							    			 name="sum" 
 							    			 id="final_price" 
 							    			 size="11" 
@@ -169,9 +171,10 @@ function xx() {
 									   		  		border-top:0px; 
 									  		  		boder-left:0px; 
 									   		  		boder-bottom:0px;
-									   		  		background-color:transparent;" 
+									   		  		background-color:transparent;
+									   		  		outline:none;"
 							    			 readonly>원
-							    			 									   
+							    			 	       							   
 							</div>
 							</form>
                         </div>
@@ -185,7 +188,8 @@ function xx() {
              			 	    type="button" 
              			 	    value="구매하기" 
              			 	    class="w-btn w-btn-buy-green" 
-             			 	    onclick="move()"> 
+             			 	    onclick="move()">
+             			 	     
              		</div>
          		</div>
          		<script type="text/javascript">

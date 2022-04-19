@@ -128,6 +128,7 @@
                 vertical-align:top
             }
         </style>
+        <!-- file drag & drop js -->
         <script type="text/javascript">
             $(document).ready(function(){
                 var objDragAndDrop = $(".dragAndDropDiv");
@@ -163,15 +164,18 @@
                     e.stopPropagation();
                     e.preventDefault();
                 });
+                
                 //drag 영역 클릭시 파일 선택창
                 objDragAndDrop.on('click',function (e){
                     $('input[type=file]').trigger('click');
                 });
- 
+    
+				
                 $('input[type=file]').on('change', function(e) {
                     var files = e.originalEvent.target.files;
                     handleFileUpload(files,objDragAndDrop);
                 });
+                
 				function handleFileUpload(files,obj)
                 {
                    for (var i = 0; i < files.length; i++) 
@@ -273,52 +277,67 @@
                 
 
 	<!-- 유효성 검사 -->
-<!-- 
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+		var ptn_num = /[0-9]/;	// 숫자 
+// 	var ptn_eng = /[a-zA-Z]/;	// 문자 
+// 	var ptn_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+// 	var ptn_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+
  	$(document).ready(function(){
- 		$('#f_eh').submit(function(){				
-				if($('#animal_sort_eh').val()==""){
-					alert("동물 종류를 선택해 주세요");
+ 		$('#f_eh').submit(function(){
+				if($('#reward').val()==null || $('#reward').val()==""){
+					alert("사례금을 입력하세요");
 					return false;
-				}
-				if($('input[name=pet_name]').val()==""){
-					alert("동물 이름을 입력해 주세요");
-					$("input[name=content]").focus();
-					return false;
-				}
-// 				if($("input[name=pet_age]").val()==""){
-// 					alert("동물 나이를 입력해 주세요");
-// 					$('#pet_age').focus();
+				} 
+// 				if($('#animal_sort_eh').val()=="" || $('#animal_sort_eh').val()==null){
+// 					alert("동물 종류를 선택해 주세요");
 // 					return false;
 // 				}
-				if($("input:radio[name=pet_gender]").is('checked')==false){
+				if($('#pet_name').val()=="" || $('#pet_name').val()==null){
+					alert("동물 이름을 입력해 주세요");
+					$('#pet_name').focus();
+					return false;
+				}
+				if($("input[name=pet_gender]:radio:checked").length <1){
 					alert("동물 성별을 체크해 주세요");
 					return false;
 				}
-				if($("input[name=missing_date]").val()==""){
+				if($('#missing_date').val()=="" || $('#missing_date').val()==null){
 					alert("실종날짜를 선택해 주세요");
 					return false;
 				}
-				if(
-					$("input[name=address]").val() || 
-					$("input[name=address2]").val() || 
-					$("input[name=detail_address]").val()==""){
-					alert("실종지역을 기입해 주세요");
+				if($('#province').val()=="" || $('#province').val()==null){
+					alert("실종지역을 선택해 주세요");
 					return false;
-				}
-				if($("input[name=content]").val()==""){
+				} 
+				if($('#province').val()!="" && $('#city').val()==null){
+					alert("시를 선택해 주세요");
+					return false;
+				} 
+				if($('#town').val()=="" || $('#town').val()==null){
+					alert("동을 선택해 주세요");
+					return false;
+				} 
+				if($('#ta_eh').val()=="" || $('#ta_eh').val()==null){
 					alert("상세 설명을 추가해 주세요");
-					$("input[name=content]").focus();
+					$('#ta_eh').focus();
 					return false;
 				}
-				if($("input[name=contact]").val()==""){
+				if($('#contact').val()=="" || $('#contact').val()==null){
 					alert("연락수단을 추가해 주세요");
-					$("input[name=contact]").focus();
+					$('#contact').focus();
+					return false;
+				}
+				if($('.statusbar').length ==0){
+					alert("반려동물의 사진을 업로드 해주세요");
 					return false;
 				}
  			});//
- 		});//		
-	</script>
- -->
+ 		});//	
+ 		</script>
+		
  
 </head>
   <body class="bg-light">
@@ -335,7 +354,7 @@
 			<!-- 본문 시작 -->
             <div class="container p-5">
 
-                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/findboard/write_findPro" method="post" id="f_eh" enctype="multipart/form-data" onsubmit="submit">
                    <input type="hidden" value="${sessionScope.nickname}" name="nickname">
                    <input type="hidden" value="${sessionScope.email}" name="email">
                     <div class="row g-5">
@@ -352,31 +371,34 @@
                             <!--사례금 유무-->
                                 <div class="col input-group mb-3">
                                     <label class="input-group-text">사례금</label>
-                                    <input type="text" class="form-control" placeholder="만원" name="reward">
+                                    <input type="text" class="form-control check" placeholder="만원" name="reward" id="reward">
+                                	<p></p>
                                 </div>
                             </div>
                             <!--동물 종류 select -->
                             <div class="input-group mb-3">
-                                <label class="input-group-text" for="animal_sort_eh">동물 종류</label>
-                                    <select class="form-select" id="animal_sort_eh" name="pet_type">
+                                <label class="input-group-text" for="pet_type">동물 종류</label>
+                                    <select class="form-select check" id="pet_type" name="pet_type">
                                         <option value="" selected>선택해주세요</option>
                                         <option value="0">개</option>
                                         <option value="1">고양이</option>                
-                                        <option value="2">기타</option>                
+                                        <option value="2">기타</option>      
                                     </select>
+                                    <p></p>
                             </div>
                             <!--동물 이름, 동물 나이 text-->  
                             <div class="input-group mb-3">
                                 <label class="input-group-text"> 동물 이름 </label>
-                                <input type="text" class="form-control" placeholder="이름" name="pet_name">
+                                <input type="text" class="form-control" placeholder="이름" name="pet_name" id="pet_name">
                             </div>
                             <div class="input-group mb-3">
                                 <label class="input-group-text"> 동물 나이 </label>
-                                <input type="text" class="form-control" placeholder="숫자만 입력" name="pet_age">
+                                <input type="text" class="form-control" placeholder="숫자만 입력" name="pet_age" id="pet_age">
                                 <select class="form-select" name="pet_age2">
                                     <option value="개월">개월</option>
                                     <option value="살">살(년)</option>
                                 </select>
+                                <p></p>
                             </div>
                             <!--동물 성별 체크 radio-->
                             <div class="input-group mb-3"> 
@@ -399,7 +421,7 @@
                             <!--실종날짜-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">실종 날짜</label>
-                                <input type="date" class="form-control" name="missing_date">
+                                <input type="date" class="form-control" name="missing_date" id="missing_date">
                             </div>
                             <!--실종지역 selectbox -->
                             <div class="input-group">
@@ -419,7 +441,7 @@
                             <!--실종지역 상세 위치-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">상세 위치</label>
-                                <input type="text" class="form-control" placeholder="OO초등학교 인근" name="detail_address">
+                                <input type="text" class="form-control" placeholder="OO초등학교 인근" name="detail_address" id="detail_address">
                             </div>
                             <!--기타 특징-->
                             <div class="input-group mb-3">
@@ -430,25 +452,14 @@
                             <!--연락가능 수단-->
                             <div class="input-group mb-3">
                                 <label class="input-group-text">연락 가능 수단</label>
-                                <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact">
+                                <input type="text" class="form-control" placeholder="전화번호, 이메일, 카카오톡 아이디 등" name="contact" id="contact">
                             </div>
                             
-                            <!--(구현못함 ㅠㅠ) file 드래그앤드롭-->
-                            <!-- 
-								<div id="drop" style="border:1px solid black; width:100%; height:auto; padding:3px">
-								<p>
-									<small style="color: gray; font-size: 13px;">
-	                            	반려동물의 사진을 드래그하여 첨부해주세요<br>
-	                            	업로드 가능 이미지 확장자 ( gif, jpeg, jpg, png, bmp )</small>
-                            	</p>
-                            	<p style="background-color:lightgrey;"><i>첨부파일</i>
-                            	<button type="button" value="확인" id="save">저장</button></p>
-								</div>                            
-                             -->
+                           
                              
                              <!-- 기본 multiple file 전달 -->
-                             <div id="fileUpload" class="dragAndDropDiv">업로드할 이미지를 드래그하여 넣기 <br> (1장씩 첨부, 최대 3장)</div>
-        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
+                             <div id="fileUpload" class="dragAndDropDiv">업로드할 사진 드래그(최대1장)</div>
+        						<input type="file" name="fileUpload" id="fileUpload" style="display:none;" accept="image/jpg, image/gif, image/jpeg, image/png" multiple />
 
                             <!--submit 버튼-->
                             <div class="text-center p-2">
@@ -463,78 +474,6 @@
                 </form>
             </div>
 
-	 	 
-	    <!-- (구현못함ㅠㅠ)file drag & drop 스크립트 적용 
-	    
-   	 	var fileList = [];
-    	var $drop = $("#drop");
-    	
-	    $drop.on("dragenter", function(e) { //드래그 요소가 들어왔을떄
-	    $(this).addClass('drag-over');
-	    }).on("dragleave", function(e) { //드래그 요소가 나갔을때
-	    $(this).removeClass('drag-over');
-	    }).on("dragover", function(e) {
-	    e.stopPropagation();
-	    e.preventDefault();
-	    }).on('drop', function(e) { //드래그한 항목을 떨어뜨렸을때
-	    e.preventDefault();
-	    $(this).removeClass('drag-over');
-	    
-	    var files = e.originalEvent.dataTransfer.files; //드래그&드랍 항목
-	    //확장자 확인하기 
-	    if(files !=null && files !=undefined){
-		    	var tag="";	
-			    for(var i = 0; i < files.length; i++) {
-		    		var f = files[i];
-		    		var ext = f.name.split('.').pop().toLowerCase();
-		    		if(ext == 'png' || ext == 'jpeg' || ext == 'jpg' || ext == 'bmp' || ext == 'gif'){
-		    			fileList.push(f);
-		    			var fileName = f.name;
-		    			var fileSize = f.size /1024/1024;
-		    			fileSize = fileSize<1? fileSize.toFixed(3) : fileSize.toFixed(1);
-		    			tag += "<span>"+fileName+" "+fileSize+"MB </span><button type='button' class='deletefiles'>삭제</button><br>";
-		    		} else {
-		    			alert("지원하는 파일 확장자가 아닙니다");
-			    	}
-		    	$(this).append(tag);
-	    		}
-    		}
-	    }); // drop closed
-		  
-		   //저장하기
-	   $(document).on("click","#save", function(){
-		  var formData = new FormData();
-		  if(fileList.length > 0){
-			  fileList.forEach(function(f){
-				 formData.append("fileList",f); 
-			  });
-		  } 
-		  $.ajax({
-			url: "${pageContext.request.contextPath}/findboard/fileupload",
-			data: formData,
-			type:'POST',
-			enctype:'multipart/form-data',
-			processData:false,
-			contentType:false,
-			dataType:'json',
-			cache:false,
-			success:function(rdata){
-				 alert("저장되었습니다");
-			 	}, 
-		 	error:function(rdata){
-				 alert("오류발생");
-			 	}
-		  	}); // ajax closed
-	   	}); // document.on closed
-	
-    	$(document).on("click",".deletefiles", function(e) {
-    		alert("삭제 클릭시 파일 삭제 + 실제 업로드 파일도 제거 구현해야함");
-
-		});
-	   	
-    	(구현못함ㅠㅠ)file drag & drop 스크립트 적용 끝------------ -->  
-	    
-		  
             <!-- ------------------------------- -->
             <!-- 본문 종료-->
             <!-- ------------------------------- -->
