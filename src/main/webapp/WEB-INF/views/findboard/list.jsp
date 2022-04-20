@@ -654,9 +654,23 @@
 											<tr>
 												<td class="td113" height="auto"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">연락수단</td>
+												<c:if test="${sessionScope.email eq null}">
 												<td class="td114" valign="top"
 													style="line-height: 11pt; padding-left: 10px;"><br>
-													${fb.contact }<br> <br></td>
+													<a onclick='reqlogin()'>연락처 확인</a><br> <br></td>
+													<script>
+													function reqlogin(){
+														alert("로그인 후 확인 가능합니다");
+													}
+													</script>
+													</c:if>
+													
+													<c:if test="${sessionScope.email ne null}">
+												<td class="td114" valign="top"
+													style="line-height: 11pt; padding-left: 10px;"><br>
+													${fb.contact}<br> <br></td>
+													</c:if>
+													
 												<td class="td113"
 													style="background-color: #919ced; padding: 10px 10px 10px 10px; color: white; text-align: center;">나이</td>
 													<td class="td115">
@@ -683,6 +697,23 @@
 												data-test2="${mdloop.count}">수정하기</button>
 											<button type="button" class="btn btn-danger"
 												onclick='deletefind()'>삭제하기</button>
+													<script type="text/javascript">
+												function deletefind(){
+													if(confirm("게시글을 삭제하시겟습니까?") == true){
+														$.ajax({
+														url:"${pageContext.request.contextPath }/findboard/delete",
+														type:"get",
+														data : {"find_board_num" : ${fb.find_board_num}},
+														success: function(data){
+															location.reload();
+														alert("삭제가 완료되었습니다");
+														}
+														});
+       													}else{   
+        												return;
+       													} 
+														}
+														</script>
 
 											<button type="button" class="btn btn-danger"
 												data-bs-dismiss="modal">닫기</button>
