@@ -60,5 +60,9 @@ public interface FindboardService {
 
 	public List<FileDTO> getSearchFileList(PageDTO pageDTO);
 
+	public int getFindBoardSelectCount(int num);
+
+	public List<FindboardDTO> getFindSelectList(PageDTO pageDTO);
+
 //	public List<String> wordSearchShow(Map<String, String> paraMap);
 }

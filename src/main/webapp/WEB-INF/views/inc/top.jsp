@@ -524,7 +524,7 @@ function recheck() {
 	$('.dup2').click(function(){
 		$.ajax({
 			url:"${pageContext.request.contextPath }/member/userCheck",
-			data:{"nickname":$('#nickname').val()},
+			data:{"email":$('#email').val()},
 			success:function(rdata){
 				if(rdata=='idok2'){
 					rdata="사용가능한 이메일";

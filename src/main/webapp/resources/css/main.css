@@ -1,5 +1,7 @@
 @charset "utf-8";
-
+*{
+	font-family: 'Nanum Gothic', sans-serif;
+}
 /* 슬라이드 최대크기 설정 */
 .carousel-item {
     max-height: 40rem;
@@ -30,7 +32,7 @@
 }
 .s-box3 {
     text-align: center;
-    width: 50%;
+    width: 100%;
 }
 /* 검색창 내에 input박스 크기지정 */
 .search-box1,

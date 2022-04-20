@@ -23,16 +23,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/script/jquery-3.6.0.js"></script>
 <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/main.js"></script>
 <script type="text/javascript" defer src="${pageContext.request.contextPath }/resources/script/data.js"></script>
-<!-- CSS , JS -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 <script>
 $(document).ready(function(){
 	var email = '${sessionScope.email}';
 	if(email == "" || email == null){
 		$(window).scroll(function(){
-			if($(window).scrollTop()==900){
+			if($(window).scrollTop()<950 && $(window).scrollTop()>850 ) {
 				$("#login-modal").modal('show');
 			}
 		});
@@ -223,7 +223,7 @@ $(document).on('click', ".result", function(){
 <!--             </div> -->
 <!--             <div class="vr"></div> -->
             <div class="s-box3 p-2">
-              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="내 주변 검색" />
+              <input type="search" id="mainSearch" name="mainSearch" class="search-box3" placeholder="내 주변 검색" style="text-align: center"/>
             </div>
             <button type="submit" class="btn text-white" style="background-color: #3f51b5;">
               <i class="bi bi-search"></i>
@@ -258,7 +258,7 @@ $(document).on('click', ".result", function(){
          <c:forEach var="flist" items="${findboardListMain }">
           <div class="col">
             <div class="card">
-              <a href="${pageContext.request.contextPath }/findboard/list">
+              <a href="${pageContext.request.contextPath }/findboard/select?num=${flist.find_board_num}">
               	<img src="${pageContext.request.contextPath }/resources/upload/${flist.upload}" class="card-img-top" alt="실종동물사진" />
               </a>
               <c:if test="${!empty sessionScope.email }">
@@ -295,8 +295,8 @@ $(document).on('click', ".result", function(){
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <i class="bi bi-star-fill" style="color: rgb(245, 211, 22);"></i><span id="mark${flist.find_board_num }" class="star-ksk"> ${flist.bookmark_count }</span> 
-                    <i class="bi bi-chat-dots"></i> <span class="chat-ksk"> 0 </span> 
-                    <i class="bi bi-eye-fill"></i> <span class="eye-ksk"> ${flist.readcount }</span>
+<!--                     <i class="bi bi-chat-dots"></i> <span class="chat-ksk"> 0 </span>  -->
+<%--                     <i class="bi bi-eye-fill"></i> <span class="eye-ksk"> ${flist.readcount }</span> --%>
                   </div>
                 </div>
               </div>
@@ -390,6 +390,16 @@ $(document).on('click', ".result", function(){
         <div class="col-sm-8 p-3">
           <p>
             It is a long established fact that a reader will be distracted by the readable
+            content of a page when looking at its layout. The point of using Lorem Ipsum is
+            that it has a more-or-less normal distribution of letters
+            It is a long established fact that a reader will be distracted by the readable
+            content of a page when looking at its layout. The point of using Lorem Ipsum is
+            that it has a more-or-less normal distribution of letters
+            It is a long established fact that a reader will be distracted by the readable
+            content of a page when looking at its layout. The point of using Lorem Ipsum is
+            that it has a more-or-less normal distribution of lettersIt is a long established fact that a reader will be distracted by the readable
+            content of a page when looking at its layout. The point of using Lorem Ipsum is
+            that it has a more-or-less normal distribution of lettersIt is a long established fact that a reader will be distracted by the readable
             content of a page when looking at its layout. The point of using Lorem Ipsum is
             that it has a more-or-less normal distribution of letters
           </p>

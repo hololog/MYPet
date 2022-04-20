@@ -221,7 +221,7 @@
 
        <div class="col-12" id="editor">
         
-       <textarea name="content" id="summernote" placeholder="내용을 입력해주세요." >
+       <textarea name="content" id="summernote">
       
 
        </textarea>
