@@ -12,6 +12,14 @@
  		<property name="username" value="admin"></property>
  		<property name="password" value="itwillbs0420"></property>
  	</bean>
+
+		<!-- cafe24용 db -->
+<!--  	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--  		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property> -->
+<!--  		<property name="url" value="jdbc:mysql://localhost/itwillbs10"></property> -->
+<!--  		<property name="username" value="itwillbs10"></property> -->
+<!--  		<property name="password" value="itwillbs8030909"></property> -->
+<!--  	</bean> -->
  	
  	<!-- Mybatis 셋팅 -->
  	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
