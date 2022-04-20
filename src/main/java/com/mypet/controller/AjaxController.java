@@ -254,13 +254,14 @@ public class AjaxController {
 		System.out.println("AjaxController userCheck2() ");
 		String result="";
 		String nickname=request.getParameter("nickname");
+		System.out.println(nickname);
 		MemberDTO memberDTO =memberService.getMember2(nickname);
-		if(memberDTO!=null) {
+		if(memberDTO == null) {
 			//아이디 일치 => 아이디 중복
-			result="iddup";
+			result="idok";
 		}else {
 			//아이디 틀림 => 아이디 사용가능
-			result="idok";
+			result="iddup";
 		}
 		ResponseEntity<String> entity=new ResponseEntity<String>(result,HttpStatus.OK);
 		return entity;
