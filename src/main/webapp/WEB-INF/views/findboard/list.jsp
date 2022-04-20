@@ -1088,7 +1088,7 @@ $(document).ready(function(){
 	//북마트 클릭이벤트
 	$('.bookmark-click').click(function(){
 		let no = $(this).children('.fbnum-ksk').val();
-		alert(no);
+// 		alert(no);
 // 		console.log(no);
 		//빈별표 일때
 		if($(this).children('i').attr('class') === 'fa-regular fa-star fa-2x'){

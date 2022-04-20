@@ -32,7 +32,7 @@ public class MemberDAOImpl implements MemberDAO{
 	
 	@Override
 	public MemberDTO getMember2(String nickname) {
-		return sqlSession.selectOne(namespace + ".getMember", nickname); 
+		return sqlSession.selectOne(namespace + ".getMember2", nickname); 
 	}
 
 	@Override
